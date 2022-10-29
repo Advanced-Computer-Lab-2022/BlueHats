@@ -1,6 +1,32 @@
 import { Link } from 'react-router-dom'
+import { useState, useMemo, useEffect } from 'react'
+import Select from 'react-select'
+import countryList from 'react-select-country-list'
+
+export var countryValue = 'Egypt';
 
 const Navbar = () => {
+    const [value, setValue] = useState('')
+    const [label, setLabel] = useState('Egypt')
+    const options = useMemo(() => countryList().getData(), [])
+
+    useEffect(() => {
+        const data =JSON.parse(window.localStorage.getItem('countryChosen') ?? "[]");
+        if(data !== null) { 
+            setValue(data);
+            setLabel(data.label);
+        }
+    }, [])
+
+    const changeHandler = value => {
+        window.localStorage.setItem('countryChosen', JSON.stringify(value));
+        setValue(value);
+        setLabel(value.label);
+    }
+    
+    if(value) {
+        countryValue = value.label;
+    }
 
     return (
         <header>
@@ -8,7 +34,11 @@ const Navbar = () => {
                 <Link to="/">
                     <img src="../logo.png" alt="logo"/>
                 </Link>
-                <span class="material-symbols-outlined">currency_exchange</span>
+                <input className="searchbar" type="text" placeholder='Search for a course, instructor, subject...'/>
+                <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
+                <p>Log in</p>
+                <p>Sign up</p>
+                <span className="material-symbols-outlined">shopping_cart</span>
             </div>
         </header>
     )

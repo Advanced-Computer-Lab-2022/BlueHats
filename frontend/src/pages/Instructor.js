@@ -17,7 +17,7 @@ const Instructor = () => {
         dispatch({type: 'SET_COURSES', payload: json})
       }
     }
-
+      
     fetchCourses()
   }, [dispatch])
 

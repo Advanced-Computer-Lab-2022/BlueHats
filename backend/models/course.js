@@ -7,16 +7,12 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
-    numberOfSubtitles: {
-        type: Number,
-        required: true
-    },
-    subtitle: {
+    subject: {
         type: String,
         required: true
     },
-    subtitleHours: {
-        type: Number,
+    subtitle: {
+        type: [{Mysubtitle: {type: String}, MyHours: {type: Number}}],
         required: true
     },
     price: {
@@ -30,6 +26,10 @@ const courseSchema = new Schema({
     totalhours: {
         type: Number,
         required: true
+    },
+    instructor: {
+        type: mongoose.Types.ObjectId,
+        ref: 'instructor'
     }
 }, { timestamps: true });
 

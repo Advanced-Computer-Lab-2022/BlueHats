@@ -42,6 +42,19 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
+/* .instructor .create .side-by-side {
+  display: flex;
+  flex-direction: row;
+} */
+.instructor .create span{
+  position: absolute;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.instructor .create span.first{
+  position: absolute;
+  right: 65px;
+}
 .course-details {
   background: #fff;
   border-radius: 4px;
@@ -60,7 +73,7 @@ header a {
   font-size: 0.9em;
   color: #555;
 }
-.course-details span {
+.course-details span.first{
   position: absolute;
   top: 20px;
   right: 20px;
@@ -70,7 +83,17 @@ header a {
   border-radius: 50%;
   color: #333;
 }
-/* new workout form */
+.course-details span.second{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+/* new course form */
 label, input {
   display: block;
 }
@@ -102,4 +125,12 @@ div.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+header .container .CountrySelector {
+  min-width: 230px;
+}
+input.searchbar {
+  width: 650px;
+  border-radius: 19px;
+  margin-top: 18px;
 }

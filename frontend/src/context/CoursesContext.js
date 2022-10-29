@@ -16,6 +16,10 @@ export const coursesReducer = (state, action) => {
       return {
         courses: state.courses.filter((c) => c._id !== action.payload._id)
       }  
+    case 'UPDATE_COURSE': 
+      return {
+        courses: action.payload
+      } 
     default:
       return state
   }
