@@ -103,6 +103,19 @@ const updateCourse = async (req, res) => {
 }
 
 
+const getCoursesBySearch = async (req,res) => {
+    const key = req.params['name']
+    const titleRes = await course.find({title: key})
+    if(titleRes.length==0){
+        const subjRes = await course.find({subject: key})
+        res.json({subjRes})
+    }
+    else{
+        res.json({titleRes})
+    }
+  
+}
+
 
 module.exports = {
     createCourse,
