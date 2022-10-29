@@ -31,7 +31,8 @@ const Home = () => {
         </div>
       </div>
     </form>
+    
   )
 }
-
 export default Home
+

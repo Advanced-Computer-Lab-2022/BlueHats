@@ -100,7 +100,6 @@ const updateCourse = async (req, res) => {
 }
 
 
-
 module.exports = {
     createCourse,
     getCourses,
