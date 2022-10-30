@@ -12,7 +12,7 @@ const courseSchema = new Schema({
         required: true
     },
     subtitle: {
-        type: [{Mysubtitle: {type: String}, MyHours: {type: Number}}],
+        type: [{name: {type: String}, hours: {type: Number}}],
         required: true
     },
     price: {
@@ -21,10 +21,6 @@ const courseSchema = new Schema({
     },
     summary: {
         type: String,
-        required: true
-    },
-    totalhours: {
-        type: Number,
         required: true
     },
     instructor: {

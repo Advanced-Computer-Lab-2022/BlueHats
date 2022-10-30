@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
+import Preview from './pages/Preview';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+             <Route
+              path="/course/preview"
+              element={<Preview/>}
             />
           </Routes>
         </div>

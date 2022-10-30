@@ -28,7 +28,7 @@ const getCourse = async (req, res) => {
 
 // Create a new course
 const createCourse = async (req, res) => {
-    const {title, subject, subtitle, price, summary, totalhours} = req.body;
+    const {title, subject, subtitle, price, summary} = req.body;
 
     let emptyFields = [];
 
@@ -38,17 +38,17 @@ const createCourse = async (req, res) => {
     if(!subject) {
         emptyFields.push('subject')
     }
-    if(!subtitle) {
+    if(!(subtitle)) {
         emptyFields.push('subtitle')
     }
+    // if(!(subtitle.hours)) {
+    //     emptyFields.push('subtitle.hours')
+    // }
     if(!price) {
         emptyFields.push('price')
     }
     if(!summary) {
         emptyFields.push('summary')
-    }
-    if(!totalhours) {
-        emptyFields.push('totalhours')
     }
     if(emptyFields.length > 0) {
         return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
@@ -56,7 +56,7 @@ const createCourse = async (req, res) => {
 
     // Add doc to database
     try {
-        const Course = await course.create({title, subject, subtitle, price, summary, totalhours});
+        const Course = await course.create({title, subject, subtitle, price, summary});
         res.status(200).json(Course);
     } catch (error) {
         res.status(400).json({error: error.message});

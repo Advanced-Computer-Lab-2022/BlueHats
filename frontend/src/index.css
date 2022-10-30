@@ -134,3 +134,9 @@ input.searchbar {
   border-radius: 19px;
   margin-top: 18px;
 }
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}

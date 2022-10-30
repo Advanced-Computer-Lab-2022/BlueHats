@@ -6,7 +6,7 @@ export const coursesReducer = (state, action) => {
   switch (action.type) {
     case 'SET_COURSES':
       return { 
-        courses: action.payload 
+        courses: action.payload
       }
     case 'CREATE_COURSE':
       return { 
@@ -19,6 +19,10 @@ export const coursesReducer = (state, action) => {
     case 'UPDATE_COURSE': 
       return {
         courses: action.payload
+      } 
+    case 'GET_COURSE': 
+      return {
+        courses: state.courses.filter((c) => c._id === action.payload._id)
       } 
     default:
       return state
