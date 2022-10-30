@@ -40,7 +40,7 @@ const CourseForm = () => {
       setEmptyFields([])
       setError(null)
       setTitle('')
-      setSubtitle([])
+      setSubtitle([{ name: '', hours: '' },])
       setPrice('')
       setSummary('')
       setSubject('')
