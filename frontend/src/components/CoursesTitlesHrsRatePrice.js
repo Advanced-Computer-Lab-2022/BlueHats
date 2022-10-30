@@ -38,7 +38,7 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
 
   
     return (
-      <div className="course-details-s">
+      <div className="course-details">
         <h4>{course.title}</h4>
         <p><strong>Total Hours: </strong>{course.totalhours} <CheckNumber/> </p>
         <p><strong>Rating: </strong>{course.courseRating}</p>

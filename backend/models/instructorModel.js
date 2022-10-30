@@ -17,4 +17,4 @@ const instructorSchema = new Schema({
   }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Instructor', instructorSchema)
+module.exports = mongoose.model('InstructorModel', instructorSchema)

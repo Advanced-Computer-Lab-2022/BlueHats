@@ -3,8 +3,6 @@ import ViewCoursesBytitlesHrsRatePrice from '../components/CoursesTitlesHrsRateP
 import { useEffect } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 
-
-
 const Home = () => {
 
   const {courses, dispatch} = useCoursesContext()

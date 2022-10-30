@@ -20,7 +20,7 @@ export const instructorsReducer = (state, action) => {
       return state
   }
 }
-export const InstructorsContextProvider = ({ children }) => {
+export const InstContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(instructorsReducer, { 
     instructors: null
   })
