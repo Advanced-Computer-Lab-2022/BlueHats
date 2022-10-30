@@ -8,7 +8,6 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 //const ViewMyCourses = ({ Instructor, course }) => {
 
 const ViewMyCourses = ({course }) => {
- 
 
     return (
         <div className="my-courses-details">
@@ -16,6 +15,6 @@ const ViewMyCourses = ({course }) => {
           <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
         </div>
       )
-
+      
 }
 export default ViewMyCourses
