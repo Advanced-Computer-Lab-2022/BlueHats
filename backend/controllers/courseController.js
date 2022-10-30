@@ -28,7 +28,7 @@ const getCourse = async (req, res) => {
 
 // Create a new course
 const createCourse = async (req, res) => {
-    const {title, subject, subtitle, price, summary} = req.body;
+    const {title, subject, subtitle, price, summary, courseRating, instructor, instructorName} = req.body;
 
     let emptyFields = [];
 
@@ -56,12 +56,13 @@ const createCourse = async (req, res) => {
 
     // Add doc to database
     try {
-        const Course = await course.create({title, subject, subtitle, price, summary});
+        const Course = await course.create({title, subject, subtitle, price, summary, courseRating, instructor, instructorName});
         res.status(200).json(Course);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
 }
+
 
 // Delete a course
 const deleteCourse = async (req, res) => {
@@ -105,5 +106,5 @@ module.exports = {
     getCourses,
     getCourse,
     deleteCourse,
-    updateCourse
+    updateCourse,
 };

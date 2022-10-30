@@ -11,6 +11,7 @@ import { InputPrice } from './CourseForm'
 export var countryValue = 'Egypt';
 export var ViewCurrency = InputPrice;
 
+
 const Navbar = () => {
     const [value, setValue] = useState({value: 'EGY', label: 'Egypt'})
     const [label, setLabel] = useState('Egypt')
@@ -89,6 +90,7 @@ const Navbar = () => {
                 <p>Sign up</p>
                 <span className="material-symbols-outlined">shopping_cart</span>
             </div>
+            
         </header>
     )
 }

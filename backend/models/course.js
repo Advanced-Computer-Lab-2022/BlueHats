@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
@@ -23,10 +22,19 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
+    courseRating: {
+        type: Number,
+    },
     instructor: {
         type: mongoose.Types.ObjectId,
-        ref: 'instructor'
+        ref:'Instructor'
+    },
+    instructorName: {
+        type: String,
+        ref:'Instructor'
     }
+   
+    
 }, { timestamps: true });
 
 module.exports = mongoose.model('course', courseSchema);

@@ -7,6 +7,7 @@ import { AdminsContextProvider } from './context/AdminsContext';
 import { InstructorsContextProvider } from './context/InstructorsContext';
 import { CorporateTraineesContextProvider } from './context/CorporateTraineesContext';
 
+import { InstContextProvider } from './context/InstContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,7 +16,9 @@ root.render(
     <InstructorsContextProvider>
     <CoursesContextProvider>
     <AdminsContextProvider>
-      <App />
+      <InstContextProvider>
+        <App />
+      </InstContextProvider>
       </AdminsContextProvider>
     </CoursesContextProvider>
     </InstructorsContextProvider>
