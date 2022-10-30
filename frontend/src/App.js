@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
 import Preview from './pages/Preview';
+import Admin from './pages/Admin';
+import NewInstructor from './pages/NewInstructor';
+import NewCoTrainee from './pages/NewCoTrainee';
 
 function App() {
   return (
@@ -24,6 +27,18 @@ function App() {
              <Route
               path="/course/preview"
               element={<Preview/>}
+            />
+            <Route
+              path="/admin/addAdmin"
+              element={<Admin/>}
+            />
+            <Route
+              path="/admin/instructor"
+              element={<NewInstructor/>}
+            />
+            <Route
+              path="/admin/corporateTrainee"
+              element={<NewCoTrainee/>}
             />
           </Routes>
         </div>

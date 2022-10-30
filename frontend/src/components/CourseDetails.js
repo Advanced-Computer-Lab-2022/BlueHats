@@ -64,7 +64,6 @@ const CourseDetails = ({ course }) => {
       <div className="course-details">
         <Link to="/course/preview" onClick={ok}>  <h4>{course.title}</h4> </Link>
         <p><strong>Subject: </strong>{course.subject}</p>
-        <p><strong>Price: </strong> {currency} {course.price}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
