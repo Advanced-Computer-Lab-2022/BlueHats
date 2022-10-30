@@ -1,29 +1,11 @@
 import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from './Navbar'
-import { useEffect } from 'react'
-import { useCoursesContext } from "../hooks/useCoursesContext"
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const CoursePreview = ({course}) => {
-  // const { dispatch } = useCoursesContext()
-
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //       const response = await fetch('/api/courses/' + course._id, {
-  //           method: 'GET'
-  //         })
-  //         const json = await response.json();
-      
-  //         if(response.ok) {
-  //           dispatch({type: 'GET_COURSE', payload: json});
-  //         }
-  //   }
-      
-  //   fetchCourses()
-  // }, [dispatch])
-
+ 
     function CheckNumber() {
         if(result>1) {
           return 'hours';

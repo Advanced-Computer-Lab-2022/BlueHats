@@ -1,29 +1,31 @@
-import { useEffect } from "react"
+// import { useContext, useEffect, useState } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
+// import { useParams } from 'react-router-dom'
 
 // components
 import CoursePreview from "../components/CoursePreview"
 
 const Preview = () => {
-  const { courses, dispatch } = useCoursesContext()
+  // const params = useParams();
+  const { courses } = useCoursesContext()
 
-  useEffect((course) => {
-    const fetchCourses = async () => {
-        const response = await fetch('/api/courses/' + course._id, {
-            method: 'GET'
-          })
-          const json = await response.json();
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //       const response = await fetch('/api/courses/' + params, {
+  //           method: 'GET'
+  //         })
+  //         const json = await response.json();
       
-          if(response.ok) {
-            dispatch({type: 'GET_COURSE', payload: json});
-          }
-    }
+  //         if(response.ok) {
+  //           dispatch({type: 'GET_COURSE', payload: json});
+  //         }
+  //   }
       
-    fetchCourses()
-  }, [dispatch])
-  
+  //   fetchCourses()
+  // }, [params, dispatch])
+
   return (
-      <div className="choosen-course">
+      <div className="chosen-course">
         {courses && courses.map(course => (
           <CoursePreview course={course} key={course._id} />
         ))}

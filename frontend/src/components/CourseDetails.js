@@ -2,9 +2,7 @@ import { useCoursesContext } from '../hooks/useCoursesContext'
 import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from '../components/Navbar'
 
-import { ViewCurrency } from '../components/Navbar'
-
-import { Preview } from '../pages/Preview'
+// import { ViewCurrency } from '../components/Navbar'
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -24,7 +22,7 @@ const CourseDetails = ({ course }) => {
     }
   }
 
-  const ok = async () => {
+  const handleGetCourse = async () => {
     const response = await fetch('/api/courses/' + course._id, {
       method: 'GET'
     })
@@ -33,20 +31,18 @@ const CourseDetails = ({ course }) => {
     if(response.ok) {
       dispatch({type: 'GET_COURSE', payload: json});
     }
-
-    // Preview.useEffect(course);
   }
 
-  const handleTheClick = async () => {
-    const response = await fetch('/api/courses/' + course._id, {
-      method: 'PUT'
-    })
-    const json = await response.json();
+  // const handleTheClick = async () => {
+  //   const response = await fetch('/api/courses/' + course._id, {
+  //     method: 'PUT'
+  //   })
+  //   const json = await response.json();
 
-    if(response.ok) {
-      dispatch({type: 'UPDATE_COURSE', payload: json});
-    }
-  }
+  //   if(response.ok) {
+  //     dispatch({type: 'UPDATE_COURSE', payload: json});
+  //   }
+  // }
 
     function CheckNumber() {
       if(result>1) {
@@ -62,8 +58,9 @@ const CourseDetails = ({ course }) => {
   
     return (
       <div className="course-details">
-        <Link to="/course/preview" onClick={ok}>  <h4>{course.title}</h4> </Link>
+        <Link to='/course/preview/' onClick={handleGetCourse}>  <h4>{course.title}</h4> </Link>
         <p><strong>Subject: </strong>{course.subject}</p>
+        <p><strong>Price: </strong> {currency} {course.price}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>

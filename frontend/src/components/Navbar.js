@@ -22,7 +22,6 @@ const Navbar = () => {
         const data =JSON.parse(window.localStorage.getItem('countryChosen') ?? "[]");
         if(data !== null) { 
             setValue(data);
-            console.log(data)
             setLabel(data.label);
         }
     }, [])

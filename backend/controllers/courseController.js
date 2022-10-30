@@ -38,12 +38,12 @@ const createCourse = async (req, res) => {
     if(!subject) {
         emptyFields.push('subject')
     }
-    if(!(subtitle)) {
-        emptyFields.push('subtitle')
+    if(!(subtitle[0].name)) {
+        emptyFields.push('subtitle.name')
     }
-    // if(!(subtitle.hours)) {
-    //     emptyFields.push('subtitle.hours')
-    // }
+    if(!(subtitle[0].hours)) {
+        emptyFields.push('subtitle.hours')
+    }
     if(!price) {
         emptyFields.push('price')
     }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCoursesContext } from '../hooks/useCoursesContext'
 
 
-export var InputPrice ;
+export var InputPrice = 0;
 
 
 const CourseForm = () => {
@@ -20,6 +20,8 @@ const CourseForm = () => {
     e.preventDefault()
 
     const course = {title, subject, subtitle, price, summary}
+
+    // (InputPrice = price)
     
     const response = await fetch('/api/courses', {
       method: 'POST',
@@ -95,7 +97,7 @@ const CourseForm = () => {
             type="text"
             onChange={(e) => {handleChangeInput(index, e)}}
             value={subtitles.name}
-            className={emptyFields.includes('subtitle') ? 'error' : ''} 
+            className={emptyFields.includes('subtitle.name') ? 'error' : ''} 
           />
 
           <label>Subtitle Number of Hours:</label>
@@ -106,7 +108,7 @@ const CourseForm = () => {
             pattern="\d+"
             onChange={(e) => {handleChangeInput(index, e)}}
             value={subtitles.hours}
-            className={emptyFields.includes('subtitle') ? 'error': ''}
+            className={emptyFields.includes('subtitle.hours') ? 'error': ''}
           />
         </div>
       ))}
@@ -118,7 +120,7 @@ const CourseForm = () => {
       <input
         type="number" 
         prefix={'$'}
-        onChange={(e) => {setPrice(e.target.value); (InputPrice = e.target.value)}} 
+        onChange={(e) => setPrice(e.target.value)} 
         value={price} 
         className={emptyFields.includes('price') ? 'error': ''}
       />
