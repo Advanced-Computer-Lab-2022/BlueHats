@@ -25,7 +25,7 @@ const NewInstructor = () => {
 }, [dispatch])
 
   return (
-    <div className="instructor">
+    <div className="newInstructor">
       <div className="instructors">
         {instructors && instructors.map(instructor => (
           <AddInstructorDetails instructor={instructor} key={instructor._id} />

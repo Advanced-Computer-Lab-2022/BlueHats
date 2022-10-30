@@ -1,4 +1,7 @@
 import { useAdminsContext } from '../hooks/useAdminsContext'
+// date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const AdminDetails = ({ admin }) => {
 const { dispatch } = useAdminsContext(); /*commented*/
   const handleClick = async () => {
@@ -17,8 +20,8 @@ const { dispatch } = useAdminsContext(); /*commented*/
         <h4>{admin.name}</h4>
         <p><strong>Username: </strong>{admin.username}</p>
         <p><strong>Password: </strong>{admin.password}</p>
-        <p>{admin.createdAt}</p>
-        <span onClick={handleClick}>delete</span>
+        <p>Added {formatDistanceToNow(new Date(admin.createdAt), {addSuffix: true})}</p>
+        <span className = "material-symbols-outlined" onClick={handleClick}>delete</span>
       </div>
     )
   }

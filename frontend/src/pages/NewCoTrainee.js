@@ -35,4 +35,4 @@ const NewCoTrainee = () => {
     </div>
   )
 }
-export default NewCoTrainee
+export default NewCoTrainee 
