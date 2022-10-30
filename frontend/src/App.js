@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
+import Admin from './pages/Admin';
+import NewInstructor from './pages/NewInstructor';
+import NewCoTrainee from './pages/NewCoTrainee';
 
 function App() {
   return (
@@ -19,6 +22,18 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+            <Route
+              path="/admin/addAdmin"
+              element={<Admin/>}
+            />
+            <Route
+              path="/admin/instructor"
+              element={<NewInstructor/>}
+            />
+            <Route
+              path="/admin/corporateTrainee"
+              element={<NewCoTrainee/>}
             />
           </Routes>
         </div>
