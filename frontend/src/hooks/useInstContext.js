@@ -1,4 +1,4 @@
-import { InstructorsContext } from "../context/InstructorsContext"
+import { InstructorsContext } from "../context/InstContext"
 import { useContext } from "react"
 
 export const useInstructorsContext = () => {

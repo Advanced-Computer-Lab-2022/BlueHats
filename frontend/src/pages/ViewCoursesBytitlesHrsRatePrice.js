@@ -2,7 +2,7 @@
 import { useCoursesContext } from "../hooks/useCoursesContext"
 
 // components
-import Vcourses from "../components/CoursesTitlesHrsRatePrice"
+import ViewCoursesBytitlesHrsRatePrice from "../components/CoursesTitlesHrsRatePrice"
 
 
 
@@ -44,7 +44,7 @@ const ViewCoursesTitlesHrsRatePrice = () => {
       <div className="courses">
         <h3>Courses</h3>
         {courses && courses.map(course => (
-          <Vcourses course={course} key={course._id} />
+          <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />
         ))}
       </div>
     </div>

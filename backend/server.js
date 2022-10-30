@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const courseRoutes = require('./routes/courses');
-const instructorRoutes = require('./routes/instructors');
+const instructorRoutes = require('./routes/inst');
 
 // express app
 const app = express();

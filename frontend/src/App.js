@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
-import ViewCoursesTitlesHrsRatePrice from './pages/ViewCoursesBytitlesHrsRatePrice'
 import CourseForm from "./components/CourseForm"
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewMyCourses"
@@ -24,10 +23,6 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
-            />
-             <Route
-              path="/Courses"
-              element={<ViewCoursesTitlesHrsRatePrice/>}
             />
             <Route
               path="/createCourse"

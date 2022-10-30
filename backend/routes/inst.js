@@ -5,7 +5,7 @@ const {updateInstructor,
     createInstructor,
     getInstructors,
    // getInstructor,
-    filterCourses} = require('../controllers/instructorController');
+    filterCourses} = require('../controllers/instController');
 
 
 const router = express.Router();

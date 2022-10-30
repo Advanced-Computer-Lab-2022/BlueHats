@@ -5,7 +5,7 @@
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 
-const Vcourses = ({ course }) => { 
+const ViewCoursesBytitlesHrsRatePrice = ({ course }) => { 
 
  // const { dispatch } = useCoursesContext();
 
@@ -51,4 +51,4 @@ const Vcourses = ({ course }) => {
 }
   
   
-  export default Vcourses;
+  export default ViewCoursesBytitlesHrsRatePrice;

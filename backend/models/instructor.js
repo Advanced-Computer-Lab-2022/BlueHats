@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const {ObjectId} = mongoose.Schema;
 
-
+// Instructor's schema from the instructor's pov
 const instructorSchema = new Schema ({
     name: {
         type:String,

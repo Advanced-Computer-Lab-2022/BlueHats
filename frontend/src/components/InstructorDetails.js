@@ -1,4 +1,4 @@
-import { useInstructorsContext } from '../hooks/useInstructorsContext'
+import { useInstructorsContext } from '../hooks/useInstContext'
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'

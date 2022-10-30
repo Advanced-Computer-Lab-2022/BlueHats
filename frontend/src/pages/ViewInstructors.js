@@ -1,5 +1,5 @@
 //import { useEffect } from "react"
-import { useInstructorsContext } from "../hooks/useInstructorsContext"
+import { useInstructorsContext } from "../hooks/useInstContext"
 
 // components
 import InstructorDetails from "../components/InstructorDetails"
