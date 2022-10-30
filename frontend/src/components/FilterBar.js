@@ -9,7 +9,7 @@ const FilterBar = ({ course }) => {
   
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch('/sortBy/subject')
+      const response = await fetch('/sortBy/')
       const json = await response.json()
 
       if (response.ok) {
