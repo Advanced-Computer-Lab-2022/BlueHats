@@ -11,6 +11,10 @@ const courseSchema = new Schema({
         type: Number,
         required: true
     },
+    subject: {
+        type: String,
+        required: true
+    },
     subtitle: {
         type: String,
         required: true

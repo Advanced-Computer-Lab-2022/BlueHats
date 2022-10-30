@@ -32,6 +32,7 @@ const CourseDetails = ({ course }) => {
         <h4>{course.title}</h4>
         <p><strong>Subtitle: </strong>{course.subtitle}</p>
         <p><strong>Price: </strong>{course.price}</p>
+        <p><strong>Subject: </strong>{course.subject}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong>{course.totalhours} <CheckNumber/> </p>
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>

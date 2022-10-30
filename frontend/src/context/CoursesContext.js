@@ -16,6 +16,14 @@ export const coursesReducer = (state, action) => {
       return {
         courses: state.courses.filter((c) => c._id !== action.payload._id)
       }  
+      case 'FILTER_SUBJECT' : 
+      return{
+        courses: state.courses.value((c)=> c.Subjct === action.payload.Subjct)
+      }
+    case 'FILTER_PRICE' : 
+    return{
+      courses: state.courses.value((c)=> c.Price === action.payload.Price)
+    } 
     default:
       return state
   }
