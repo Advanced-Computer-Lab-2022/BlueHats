@@ -4,7 +4,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
+import ViewCoursesTitlesHrsRatePrice from './pages/ViewCoursesBytitlesHrsRatePrice'
+import CourseForm from "./components/CourseForm"
+import ViewInstructors from "./pages/ViewInstructors"
+import ViewInstructorCourses from "./pages/ViewMyCourses"
 
+ 
 function App() {
   return (
     <div className="App">
@@ -19,6 +24,22 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+             <Route
+              path="/Courses"
+              element={<ViewCoursesTitlesHrsRatePrice/>}
+            />
+            <Route
+              path="/createCourse"
+              element={<CourseForm/>}
+            />
+             <Route
+              path="/Instructors"
+              element={<ViewInstructors/>}
+            />
+            <Route
+              path="/Mycourses"
+              element={<ViewInstructorCourses/>}
             />
           </Routes>
         </div>

@@ -25,7 +25,8 @@ const CourseDetails = ({ course }) => {
       return 'hour';
     }
   }
-  
+  //        <p><strong>Instructor Name: </strong>{instructor.name} </p>
+
 
     return (
       <div className="course-details">

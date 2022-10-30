@@ -103,3 +103,126 @@ div.error {
 input.error {
   border: 1px solid var(--error);
 }
+
+
+
+.course-details-s {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.course-details-s h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.course-details-s p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.course-details-s span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #a256e0;
+  padding: 6px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+}
+
+.instructor button {
+  position: absolute;
+  top: 200px;
+  right: 120px;
+  cursor: pointer;
+  background: #a256e0;
+  padding: 50px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+}
+
+.view-price{
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  cursor: pointer;
+  background: #a256e0;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 15px;
+  border-radius: 80%;
+  color: rgb(255, 255, 255);
+  
+}
+
+.course-details-price p {
+  margin: 0;
+  font-size: 0.9em;
+  color: rgb(255, 255, 255);
+}
+
+/* view instructors */
+
+.instructor-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.instructor-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.instructor-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.instructor-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+
+/*View an instructor courses*/
+
+.my-courses-details{
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.my-courses-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.my-courses-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.my-courses-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
