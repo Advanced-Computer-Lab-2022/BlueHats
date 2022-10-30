@@ -1,29 +1,30 @@
 import { useCoursesContext } from '../hooks/useCoursesContext'
-// import { useEffect, /*setCounter*/ } from 'react'
+import { useEffect, useState /*setCounter*/ } from 'react'
 
 
 
 const FilterBar = ({ course }) => {
     const { dispatch } = useCoursesContext();
-      
-//   useEffect(() => {
-//     const fetchCourses = async () => {
-//       const response = await fetch('/sortBy')
-//       const json = await response.json()
+    const [subject, setSubject] = useState('')
+  
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const response = await fetch('/sortBy/subject')
+      const json = await response.json()
 
-//       if (response.ok) {
-//         dispatch({type: 'SET_COURSES', payload: json})
-//       }
-//     }
-//     fetchCourses()
-//   }, [dispatch])
+      if (response.ok) {
+        dispatch({type: 'FILTER_SUBJECT', payload: json})
+      }
+    }
+    fetchCourses()
+  }, [dispatch])
 
     const handleSubject = async (e) => {
         e.preventDefault()
-            
-        const response = await fetch('/sortBy' + course.subject, {
+        const course = {subject}
+        const response = await fetch('/sortBy/' + course.subject, {
           method: 'GET',
-          body: JSON.stringify(course.subject),
+          body: JSON.stringify(course),
           headers: {
             'Content-Type': 'application/json'
           }
@@ -40,7 +41,7 @@ const FilterBar = ({ course }) => {
       const handlePrice = async (e) => {
         e.preventDefault()
    
-        const response = await fetch('/sortBy' + course.price, {
+        const response = await fetch('/sortBy/' + course.price, {
           method: 'GET',
           body: JSON.stringify(course.price),
           headers: {
@@ -58,25 +59,38 @@ const FilterBar = ({ course }) => {
       }
 
   return (
-    <div>
-        <div className="dropdown">
-         <button onClick= "myFunction()" className="dropbtn">Subject</button>
-            <div id="myDropdown" className="dropdown-content">
-                <button href="CS" onClick={handleSubject}>CS</button>
-                <button href="English" onClick={handleSubject}>English</button>
-                <button href="Business" onClick={handleSubject}>Business</button>
-            </div>
-        </div> 
-        <div className="dropdown">
-            <button onClick= {handlePrice}  className="dropbtn">Price</button>
+    <div className='row'>
+      <div className= 'col-md-3 border - right'>
+        <div className = 'text-muted mb-2' >
+            Subject <i className="fa-solid fa-sliders"></i>
+        </div>
+        <nav className='navbar navbar-expand-lg navbar-light bg-light border-top p-3'>
+						<form className='form-inline my-2 my-lg-0' onSubmit={handleSubject} >
+            <input
+            type="text"
+            onChange={(e) => setSubject(e.target.value)}
+            value={subject}
+            />
+							<button
+								className='btn btn-outline-success my-2 my-sm-0'
+								type='submit'
+								disabled={true}
+                onClick={handleSubject}>
+							Search </button>
+						</form>
+            <br></br>
+            <div className="dropdown">
+                <button onClick="myFunction()" className="dropbtn">Price</button>
                 <div id="myDropdown" className="dropdown-content">
-                <button href="Price1" onClick={handlePrice}>50</button>
-                <button href="Price2" onClick={handlePrice}>90</button>
-                <button href="Price3" onClick={handlePrice}>70 </button>
+                  <a href="/instructor" onClick={handlePrice}>100$</a>
+                  <a href="/instructor">200$</a>
+                  <a href="/instructor">Free</a>
+                </div>
             </div>
+					</nav>  
       </div>
     </div>
-   
+  
   )
 }
 

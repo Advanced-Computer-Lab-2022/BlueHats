@@ -1,7 +1,7 @@
 const course = require('../models/course');
 const mongoose = require('mongoose');
 
-const sortByPrice = async (req, res) => {
+const filterByPrice = async (req, res) => {
 
     const price = req.body.price;
     
@@ -12,7 +12,7 @@ const sortByPrice = async (req, res) => {
         res.status(400).json({ error: `No courses found for this data` })
     }
 }
-const sortBySubject = async (req, res) => {
+const filterBySubject = async (req, res) => {
 
     const subject = req.body.subject;
     
@@ -25,6 +25,6 @@ const sortBySubject = async (req, res) => {
 }
 
 module.exports = {
-    sortByPrice,
-    sortBySubject
+    filterByPrice,
+    filterBySubject
 };

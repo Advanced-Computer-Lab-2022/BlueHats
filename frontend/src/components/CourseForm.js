@@ -14,7 +14,7 @@ const CourseForm = () => {
   const [totalhours, setTotalhours] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
 
