@@ -28,6 +28,7 @@ const ViewInstructorCourses = () => {
         fetchMyCourses();
       }, [dispatch])
   
+    
   return (
     <div className="ViewMyCourses">
       <div className="Mycourses">
