@@ -21,7 +21,7 @@ const FilterBar = ({ course }) => {
     const handleSubject = async (e) => {
         e.preventDefault()
             
-        const response = await fetch('/sortBy' + course.subject, {
+        const response = await fetch('/sortBy/' + course.subject, {
           method: 'GET',
           body: JSON.stringify(course.subject),
           headers: {
@@ -40,7 +40,7 @@ const FilterBar = ({ course }) => {
       const handlePrice = async (e) => {
         e.preventDefault()
    
-        const response = await fetch('/sortBy' + course.price, {
+        const response = await fetch('/sortBy/' + course.price, {
           method: 'GET',
           body: JSON.stringify(course.price),
           headers: {
