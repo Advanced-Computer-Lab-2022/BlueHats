@@ -7,6 +7,7 @@ const adminRoutes = require('./routes/admin');
 const instructorRoutes = require('./routes/instructor');
 const corporateTraineeRoutes = require('./routes/corporateTrainee'); 
 const instRoutes = require('./routes/inst');
+const filterRoutes = require('./routes/filters')
 
 // express app
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api/instructor', instructorRoutes);
 app.use('/api/corporateTrainee', corporateTraineeRoutes);
 
 app.use('/api/instructors', instRoutes);
+app.use('/sortBy', filterRoutes)
 
 // connect to database
 mongoose.connect(process.env.MONGO_URL)
