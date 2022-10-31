@@ -5,7 +5,7 @@ import { countryValue } from './Navbar'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const CoursePreview = ({course}) => {
- 
+
     function CheckNumber() {
         if(result>1) {
           return 'hours';

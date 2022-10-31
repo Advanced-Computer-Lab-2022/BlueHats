@@ -240,7 +240,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
-.my-courses-details{
+/* .my-courses-details{
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -257,8 +257,8 @@ a:hover {
   margin: 0;
   font-size: 0.9em;
   color: #555;
-}
-instructor-details.instructor-details {
+}*/
+ .instructor-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -285,4 +285,4 @@ instructor-details.instructor-details {
   padding: 6px;
   border-radius: 50%;
   color: #333;
-}
+} 

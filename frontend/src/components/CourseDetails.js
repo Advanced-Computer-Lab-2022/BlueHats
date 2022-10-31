@@ -59,7 +59,7 @@ const CourseDetails = ({ course }) => {
     return (
       <div className="course-details">
         <Link to='/course/preview/' onClick={handleGetCourse}>  <h4>{course.title}</h4> </Link> 
-        {/*to={`/course/preview/${course._id}}*/}
+        {/*to={`/course/preview/${course._id}`}*/}
         <p><strong>Subject: </strong>{course.subject}</p>
         <p><strong>Price: </strong> {currency} {course.price}</p>
         <p><strong>Summary: </strong>{course.summary}</p>

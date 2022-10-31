@@ -40,9 +40,8 @@ const ViewInstructors = () => {
     }, [dispatch])
   
   return (
-    <div className="ViewInstructors">
-      <div className="profiles">
-        <h3>Courses</h3>
+    <div className="instructor">
+      <div className="courses">
         {instructors && instructors.map(Instructor => (
           <InstructorDetails Instructor={Instructor} key={Instructor._id} />
         ))}

@@ -17,11 +17,6 @@ const InstructorDetails = ({ Instructor }) => {
     }
   }
 
-  
-  
-
-
-
     return (
       <div className="instructor-details">
         <h4>{Instructor.name}</h4>

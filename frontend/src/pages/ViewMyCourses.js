@@ -6,8 +6,6 @@ import { useCoursesContext } from "../hooks/useCoursesContext"
 // components
 import ViewMyCourses from "../components/Mycourses"
 
-
-
 const ViewInstructorCourses = () => {
  const {courses,dispatch} = useCoursesContext()
  //const {instructors,dispatch} = useInstructorsContext()
@@ -32,15 +30,13 @@ const ViewInstructorCourses = () => {
   return (
     <div className="ViewMyCourses">
       <div className="Mycourses">
-        <h3>Mycourses</h3>
+        <h3>My Courses</h3>
         {courses && courses.map((course) => (
           <ViewMyCourses course={course} key={course._id} />
         ))}
       </div>
     </div>
   )
-
-
 }
 
 export default ViewInstructorCourses

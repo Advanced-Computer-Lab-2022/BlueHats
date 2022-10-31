@@ -10,7 +10,6 @@ import Admin from './pages/Admin';
 import NewInstructor from './pages/NewInstructor';
 import NewCoTrainee from './pages/NewCoTrainee';
 
-import CourseForm from "./components/CourseForm"
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewMyCourses"
 
@@ -46,10 +45,6 @@ function App() {
             <Route
               path="/admin/corporateTrainee"
               element={<NewCoTrainee/>}
-            />
-            <Route
-              path="/createCourse"
-              element={<CourseForm/>}
             />
              <Route
               path="/Instructors"
