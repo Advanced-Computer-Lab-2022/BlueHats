@@ -1,62 +1,55 @@
 import { useCoursesContext } from '../hooks/useCoursesContext'
 import { useEffect, useState /*setCounter*/ } from 'react'
 
-
-
 const FilterBar = ({ course }) => {
     const { dispatch } = useCoursesContext();
     const [subject, setSubject] = useState('')
   
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const response = await fetch('/sortBy/')
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatch({type: 'FILTER_SUBJECT', payload: json})
-      }
-    }
-    fetchCourses()
-  }, [dispatch])
-
-    const handleSubject = async (e) => {
-        e.preventDefault()
-        const course = {subject}
-        const response = await fetch('/sortBy/' + course.subject, {
-          method: 'GET',
-          body: JSON.stringify(course),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+    useEffect(() => {
+      const fetchCourses = async () => {
+        const response = await fetch('/sortBy/')
         const json = await response.json()
-    
-        if (!response.ok) {          
-        }
-        else {
-    
+
+        if (response.ok) {
           dispatch({type: 'FILTER_SUBJECT', payload: json})
         }
       }
-      const handlePrice = async (e) => {
+      fetchCourses()
+    }, [dispatch])
+
+    const handleSubject = async (e) => {
         e.preventDefault()
-   
-        const response = await fetch('/sortBy/' + course.price, {
+            
+        const response = await fetch('/sortBy/subject' + course.subject, {
           method: 'GET',
-          body: JSON.stringify(course.price),
+          body: JSON.stringify(course.subject),
           headers: {
             'Content-Type': 'application/json'
           }
         })
         const json = await response.json()
     
-        if (!response.ok) {          
+        if (!response.ok) { 
+          dispatch({type: 'FILTER_SUBJECT', payload: json})         
         }
-        else {
-    
-          dispatch({type: 'FILTER_PRICE', payload: json})
+    }
+
+    const handlePrice = async (e) => {
+      e.preventDefault()
+  
+      const response = await fetch('/sortBy/price' + course.price, {
+        method: 'GET',
+        body: JSON.stringify(course.price),
+        headers: {
+          'Content-Type': 'application/json'
         }
+      })
+      const json = await response.json()
+  
+      if (!response.ok) { 
+        dispatch({type: 'FILTER_PRICE', payload: json})         
       }
+    }
 
   return (
     <div className='row'>
@@ -83,8 +76,8 @@ const FilterBar = ({ course }) => {
                 <button onClick="myFunction()" className="dropbtn">Price</button>
                 <div id="myDropdown" className="dropdown-content">
                   <a href="/instructor" onClick={handlePrice}>100$</a>
-                  <a href="/instructor">200$</a>
-                  <a href="/instructor">Free</a>
+                  <a href="/instructor" onClick={handlePrice}>200$</a>
+                  <a href="/instructor" onClick={handlePrice}>Free</a>
                 </div>
             </div>
 					</nav>  
