@@ -1,6 +1,6 @@
 const express = require('express');
 const { createCourse, getCourses, getCourse, deleteCourse, updateCourse } = require('../controllers/courseController');
-const {getCoursesBySearch,getInstructorCourses } = require('../controllers/search');
+const {getCoursesBySearch } = require('../controllers/search');
 
 const router = express.Router();
 
@@ -23,6 +23,5 @@ router.patch('/:id', updateCourse);
 //search a course 
 router.get('/search/:name', getCoursesBySearch) 
 
-router.get('/search/:name/:course', getInstructorCourses);
 
 module.exports = router;

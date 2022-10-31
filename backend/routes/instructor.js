@@ -7,6 +7,8 @@ const {
     updateInstructor
 } = require('../controllers/instructorController' )
 
+const {instructorSearch} = require('../controllers/search')
+
 const router = express.Router()
 
 router.get('/',getInstructors )
@@ -21,7 +23,10 @@ router.post('/',createInstructor)
 // DELETE an instructor
 router.delete('/:id',deleteInstructor)
 
-// UPDATE an insrtuctor
+// UPDATE an instructor
 router.patch('/:id', updateInstructor)
+
+// search in instructor courses
+router.get('/search/:id/:key', instructorSearch);
 
 module.exports = router
