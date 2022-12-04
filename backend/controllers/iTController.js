@@ -145,15 +145,15 @@ var accRate = 0;
         var prevRate= anInstructor[0].instructorRating;
         var lastCount=anInstructor[0].numberOfRates;
         const {userRate} = await req.body;
-        accumulatedRate += prevRate
-        averageRate = accumulatedRate + userRate
+        accRate += prevRate
+        avgRate = accRate + userRate
 
         lastCount++;
          var newCount= lastCount;
 
-        averageRate = averageRate/newCount
+        avgRate = avgRate/newCount
         const Instructor = await instructor.findOneAndUpdate({_id:instructorId},{
-            instructorRating:averageRate,
+            instructorRating:avgRate,
             numberOfRates:newCount
         })
     

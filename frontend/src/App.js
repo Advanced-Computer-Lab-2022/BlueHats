@@ -42,6 +42,10 @@ function App() {
               element={<Home/>}
             />
             <Route
+              path="/instructor"
+              element={<Instructor/>}
+            />
+            <Route
               path="/instructor/addCourse"
               element={<AddCourse/>}
             />
