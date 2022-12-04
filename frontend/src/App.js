@@ -12,6 +12,7 @@ import NewCoTrainee from './pages/NewCoTrainee';
 
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewMyCourses"
+import Contract from './components/Contract';
 
 
  
@@ -29,6 +30,10 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+                 <Route
+              path="/contract"
+              element={<Contract/>}
             />
              <Route
               path="/course/preview"

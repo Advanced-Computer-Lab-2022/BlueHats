@@ -12,6 +12,8 @@ const CourseForm = () => {
   const [subject, setSubject] = useState('')
   const [subtitle, setSubtitle] = useState([{ name: '', hours: '' },])
   const [price, setPrice] = useState('')
+  const [promotion, setPromotion] = useState('')
+  const [promotionDuration, setPromotionDuration] = useState('')
   const [summary, setSummary] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
@@ -19,7 +21,7 @@ const CourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const course = {title, subject, subtitle, price, summary}
+    const course = {title, subject, subtitle, price, promotion, promotionDuration, summary}
 
     // (InputPrice = price)
     
@@ -42,6 +44,8 @@ const CourseForm = () => {
       setTitle('')
       setSubtitle([{ name: '', hours: '' },])
       setPrice('')
+      setPromotion('')
+      setPromotionDuration('')
       setSummary('')
       setSubject('')
       dispatch({type: 'CREATE_COURSE', payload: json})
@@ -123,6 +127,23 @@ const CourseForm = () => {
         onChange={(e) => setPrice(e.target.value)} 
         value={price} 
         className={emptyFields.includes('price') ? 'error': ''}
+      />
+
+      <label>Promotion% : [Optional]</label>
+      <input
+        type="number" 
+        prefix={'%'}
+        onChange={(e) => setPromotion(e.target.value)} 
+        value={promotion} 
+        className={emptyFields.includes('promotion') ? 'error': ''}
+      />
+      
+      <label>Promotion is valid until: [Optional]</label>
+      <input
+        type="date" 
+        onChange={(e) => setPromotionDuration(e.target.value)} 
+        value={promotionDuration} 
+        className={emptyFields.includes('promotionDuration') ? 'error': ''}
       />
 
       <label>Summary:</label>

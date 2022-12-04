@@ -1,93 +1,122 @@
-import { useCoursesContext } from '../hooks/useCoursesContext'
-import { useEffect, useState /*setCounter*/ } from 'react'
+import { useState } from "react";
+import CourseDetails from "./CourseDetails";
+import axios from "axios";
+import "react-dropdown/style.css";
 
-import 'react-dropdown/style.css';
-
-const FilterBar = ({ course }) => {
-    const { dispatch } = useCoursesContext();
-    const [subject, setSubject] = useState('')
-  
-    useEffect(() => {
-      const fetchCourses = async () => {
-        const response = await fetch('/sortBy/' + course.price)
-        const json = await response.json()
-
-        if (response.ok) {
-          dispatch({type: 'FILTER_PRICE', payload: json})
-        }
+const FilterBar = () => {
+  const [courses, setCourses] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const handleSubject = async (subject) => {
+    await axios
+      .get(`http://localhost:4000/filterBy/subject?subject=${subject}`)
+      .then((res) => {
+        const courses = res.data;
+        setCourses(courses);
+      });
+  };
+  const getSubjects = async () => {
+    await axios.get(`http://localhost:4000/api/courses`).then((res) => {
+      const courses = res.data;
+      for (var i = 0; i < courses.length; i++) {
+        setSubjects(courses[i].subject);
       }
-      fetchCourses()
-    }, [dispatch])
-
-    const handleSubject = async (e) => {
-        e.preventDefault()
-            
-        const response = await fetch('/sortBy/' + course.subject, {
-          method: 'GET',
-          body: JSON.stringify(course.subject),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        const json = await response.json()
-    
-        if (!response.ok) { 
-          dispatch({type: 'FILTER_SUBJECT', payload: json})         
-        }
-    }
-
-    const handlePrice = async (e) => {
-      e.preventDefault()
-  
-      const response = await fetch('/sortBy/' + course.price, {
-        method: 'GET',
-        body: JSON.stringify(course.price),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const json = await response.json()
-  
-      if (!response.ok) { 
-        dispatch({type: 'FILTER_PRICE', payload: json})         
-      }
-    }
+      console.log(subjects);
+    });
+  };
+  const handlePrice = async (price) => {
+    await axios
+      .get(`http://localhost:4000/filterBy/price?price=${price}`)
+      .then((res) => {
+        const courses = res.data;
+        setCourses(courses);
+      });
+  };
 
   return (
-    <div className='row'>
-      <div className= 'col-md-3 border - right'>
-        <div className = 'text-muted mb-2' >
-            Subject <i className="fa-solid fa-sliders"></i>
-        </div>
-        <nav className='navbar navbar-expand-lg navbar-light bg-light border-top p-3'>
-						<form className='form-inline my-2 my-lg-0' onSubmit={handleSubject} >
-            <input
-            type="text"
-            onChange={(e) => setSubject(e.target.value)}
-            value={subject}
-            />
-							<button
-								className='btn btn-outline-success my-2 my-sm-0'
-								type='submit'
-								disabled={true}
-                onClick={handleSubject}>
-							Search </button>
-						</form>
-            <br></br>
-            <div className="dropdown">
-                <button onClick="myFunction()" className="dropbtn">Price</button>
-                <div id="myDropdown" className="dropdown-content">
-                  <a href="/instructor" onClick={handlePrice} >100$</a>
-                  <a href="/instructor" onClick={handlePrice} >200$</a>
-                  <a href="/instructor" onClick={handlePrice}>Free</a>
-                </div>
+    <div className="row">
+      <div className="col-md-3 border - right">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light border-top p-3">
+          <div className="dropdown">
+            <button className="dropbtn">Subject</button>
+            <div id="myDropdown" className="dropdown-content">
+              {/* <a
+                onClick={() => {
+                  handleSubject("AllSubjects");
+                }}
+              >
+                All Subjects
+              </a> */}
+              <a
+                className="hoveranchor"
+                onClick={() => {
+                  handleSubject("cs");
+                }}
+              >
+                CS
+              </a>
+              <a
+                onClick={() => {
+                  handleSubject("math");
+                }}
+              >
+                Maths
+              </a>
+              <a
+                onClick={() => {
+                  handleSubject("Management");
+                }}
+              >
+                Management
+              </a>
             </div>
-					</nav>  
+          </div>
+          <br></br>
+          <div className="dropdown">
+            <button className="dropbtn">Price</button>
+            <div id="myDropdown" className="dropdown-content">
+              <a
+                onClick={() => {
+                  handlePrice("50");
+                }}
+              >
+                50$
+              </a>
+              <a
+                onClick={() => {
+                  handlePrice("200");
+                }}
+              >
+                200$
+              </a>
+              <a
+                onClick={() => {
+                  handlePrice("500");
+                }}
+              >
+                500$
+              </a>
+              <a
+                onClick={() => {
+                  handlePrice("0");
+                }}
+              >
+                Free
+              </a>
+            </div>
+          </div>
+        </nav>
+        <h3>Filter Results:</h3>
       </div>
+      {courses.length != 0 &&
+        courses.map((course) => {
+          return (
+            <div>
+              <CourseDetails course={course} key={course.id} />
+            </div>
+          );
+        })}
     </div>
-  
-  )
-}
+  );
+};
 
-  
-  export default FilterBar;
+export default FilterBar;

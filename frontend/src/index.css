@@ -300,7 +300,15 @@ a:hover {
   position: relative;
   display: inline-block;
 }
-
+.hoveranchor:hover > .bar {
+  background-color: blue;
+}
+.box2 {
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;

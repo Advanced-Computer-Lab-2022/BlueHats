@@ -18,6 +18,12 @@ const courseSchema = new Schema({
         type: Number,
         required: true
     },
+    promotion: {
+        type: Number,
+    },
+    promotionDuration:{
+        type: Date,
+    },
     summary: {
         type: String,
         required: true
@@ -36,5 +42,7 @@ const courseSchema = new Schema({
    
     
 }, { timestamps: true });
+
+
 
 module.exports = mongoose.model('course', courseSchema);
