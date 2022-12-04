@@ -15,7 +15,7 @@ const CoursePreview = ({course}) => {
         }
       }
 
-    const currency = getParamByParam('countryName', countryValue, 'symbol');
+ //   const currency = getParamByParam('countryName', countryValue, 'symbol');
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
 
 
@@ -24,7 +24,7 @@ const CoursePreview = ({course}) => {
             <h1>{course.title}</h1>
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
-            <p><strong>Price: </strong> {currency} {course.price}</p>
+            {/* <p><strong>Price: </strong> {currency} {course.price}</p> */}
             <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
             <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             <h4>Course Content</h4>
