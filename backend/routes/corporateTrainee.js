@@ -4,7 +4,8 @@ const {
     getCorporateTrainees,
     getCorporateTrainee,
     deleteCorporateTrainee,
-    updateCorporateTrainee
+    updateCorporateTrainee,
+    viewSolution
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -23,5 +24,7 @@ router.delete('/:id',deleteCorporateTrainee)
 
 // UPDATE a CorporateTrainee
 router.patch('/:id', updateCorporateTrainee)
+
+router.get('/viewSolution/:id',viewSolution)
 
 module.exports = router

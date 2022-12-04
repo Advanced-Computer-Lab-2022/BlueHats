@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const Course = require('../models/course');
 const corporateTraineeModel = require('../models/corporateTraineeModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 
@@ -80,5 +80,19 @@ const updateCorporateTrainee=async (req,res) => {
     }
     res.status(200).json(corporateTrainee)
 }
+const viewSolution = async(req,res) => {
+  const { id } = req.params;
 
-module.exports={getCorporateTrainee,getCorporateTrainees,createCorporateTrainee,deleteCorporateTrainee,updateCorporateTrainee}
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'No such course'})
+  }
+  const crs = await Course.findOne({_id: id});
+  const exam = crs.finalExam;
+
+  if(exam) {
+      return res.status(200).json(exam);
+  }
+  return res.status(404).json({error: 'This Course does not have an exam'});
+}
+
+module.exports={getCorporateTrainee,getCorporateTrainees,createCorporateTrainee,deleteCorporateTrainee,updateCorporateTrainee,viewSolution}

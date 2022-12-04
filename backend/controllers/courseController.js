@@ -28,7 +28,7 @@ const getCourse = async (req, res) => {
 
 // Create a new course
 const createCourse = async (req, res) => {
-    const {title, subject, subtitle, price, summary, courseRating, instructor, instructorName} = req.body;
+    const {title, subject, previewLink, subtitle, price, summary, courseRating, finalExam, instructor, instructorName} = req.body;
 
     let emptyFields = [];
 
@@ -38,11 +38,38 @@ const createCourse = async (req, res) => {
     if(!subject) {
         emptyFields.push('subject')
     }
+    if(!previewLink) {
+        emptyFields.push('previewLink')
+    }
     if(!(subtitle[0].name)) {
         emptyFields.push('subtitle.name')
     }
     if(!(subtitle[0].hours)) {
         emptyFields.push('subtitle.hours')
+    }
+    if(!(subtitle[0].link)) {
+        emptyFields.push('subtitle.link')
+    }
+    if(!(subtitle[0].linkDescription)) {
+        emptyFields.push('subtitle.linkDescription')
+    }
+    if(!(subtitle[0].question)) {
+        emptyFields.push('subtitle.quiz.question')
+    }
+    if(!(subtitle[0].firstChoice)) {
+        emptyFields.push('subtitle.quiz.firstChoice')
+    }
+    if(!(subtitle[0].secondChoice)) {
+        emptyFields.push('subtitle.quiz.secondChoice')
+    }
+    if(!(subtitle[0].thirdChoice)) {
+        emptyFields.push('subtitle.quiz.thirdChoice')
+    }
+    if(!(subtitle[0].fourthChoice)) {
+        emptyFields.push('subtitle.quiz.fourthChoice')
+    }
+    if(!(subtitle[0].answer)) {
+        emptyFields.push('subtitle.quiz.answer')
     }
     if(!price) {
         emptyFields.push('price')
@@ -50,13 +77,31 @@ const createCourse = async (req, res) => {
     if(!summary) {
         emptyFields.push('summary')
     }
+    if(!finalExam[0].question) {
+        emptyFields.push('finalExam.question')
+    }
+    if(!finalExam[0].answer) {
+        emptyFields.push('finalExam.answer')
+    }
+    if(!finalExam[0].firstChoice) {
+        emptyFields.push('finalExam.firstChoice')
+    }
+    if(!finalExam[0].secondChoice) {
+        emptyFields.push('finalExam.secondChoice')
+    }
+    if(!finalExam[0].thirdChoice) {
+        emptyFields.push('finalExam.thirdChoice')
+    }
+    if(!finalExam[0].fourthChoice) {
+        emptyFields.push('finalExam.fourthChoice')
+    }
     if(emptyFields.length > 0) {
         return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
     }
 
     // Add doc to database
     try {
-        const Course = await course.create({title, subject, subtitle, price, summary, courseRating, instructor, instructorName});
+        const Course = await course.create({title, subject, previewLink, subtitle, price, summary, courseRating, finalExam, instructor, instructorName});
         res.status(200).json(Course);
     } catch (error) {
         res.status(400).json({error: error.message});

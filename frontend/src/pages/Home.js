@@ -2,7 +2,6 @@ import ViewCoursesBytitlesHrsRatePrice from '../components/CoursesTitlesHrsRateP
 
 import { useEffect } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
-import FilterBar from "../components/FilterBar"
 
 const Home = () => {
 
@@ -25,8 +24,6 @@ const Home = () => {
     <form>
       <div className="home">
         <div className="courses">
-        <h3>Filter By:</h3>
-        <FilterBar />
         {courses && courses.map(course => (
           <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />
         ))}

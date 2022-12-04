@@ -18,7 +18,6 @@ const AddInstructorDetails = ({ instructor }) => {
         <h4>{instructor.name}</h4>
         <p><strong>Username: </strong>{instructor.username}</p>
         <p><strong>Password: </strong>{instructor.password}</p>
-        <p>{instructor.createdAt}</p>
         <p>Added {formatDistanceToNow(new Date(instructor.createdAt), {addSuffix: true})}</p>
         <span className = "material-symbols-outlined" onClick={handleClick}>delete</span>
       </div>

@@ -42,6 +42,36 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
+.instructor button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  right:150px;
+  top:150px;
+}
+.instructorAddCourse {
+  padding: 200px;
+  padding-top: 0%;
+}
+.instructorAddCourse .create span{
+  position: absolute;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.instructorAddCourse .create .box span{
+  position: relative;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.instructorAddCourse .create span.first{
+  position: absolute;
+  padding-left: 10px;
+}
 /* .instructor .create .side-by-side {
   display: flex;
   flex-direction: row;
@@ -386,4 +416,48 @@ a:hover {
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 30%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  /* left: 0; */
+  top: 0;
+  /* height: 100%;
+  width: 50%; */
+  position: absolute;
+}
+.sidebar11 span{
+  font-size: inherit;
+}
+.course-view {
+  display: flex;
+}
+.course-view-sidebar {
+  height: fit-content;
+}
+.course-view-video {
+  width: 100%;
+  padding-left: 100px;
+}
+header .container .inputWithButton {
+  position: relative;
+}
+header .container .inputWithButton input {
+  padding-right: 60px;
+}
+header .container .inputWithButton button {
+  position: absolute;
+  right: 11px;
+  top: 20px;
+  bottom: 21px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
 }

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 // components
-import CoursePreview from "../components/CoursePreview"
+import CourseFullView from "../components/CourseFullView"
 
-const Preview = () => {
+function CourseView () {
   const [course,setCourse] = useState([]);
 
   const params = new URLSearchParams(window.location.search);
@@ -30,9 +30,9 @@ const Preview = () => {
 
   return (
       <div className="chosen-course">
-       { !loading && <CoursePreview course={course} key={id} />}
+        {!loading &&  <CourseFullView course={course} key={id} />}
       </div>
   )
 }
 
-export default Preview
+export default CourseView

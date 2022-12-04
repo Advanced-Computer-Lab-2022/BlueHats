@@ -12,19 +12,6 @@ import { useEffect } from "react"
 const ViewCoursesTitlesHrsRatePrice = () => {
  const {courses, dispatch} = useCoursesContext()
 
- /* useEffect(() => {
-    const fetchCourses = async () => {
-      const response = await fetch('/api/courses')
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatch({type: 'SET_COURSES', payload: json})
-      }
-    }
-
-    fetchCourses()
-  }, [dispatch])*/
-
     // fetch all courses
     useEffect(() => {
       const fetchCourses = async () => {

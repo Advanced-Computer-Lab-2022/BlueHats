@@ -18,7 +18,6 @@ const CorporateTraineeDetails = ({ corporateTrainee }) => {
         <h4>{corporateTrainee.name}</h4>
         <p><strong>Username: </strong>{corporateTrainee.username}</p>
         <p><strong>Password: </strong>{corporateTrainee.password}</p>
-        <p>{corporateTrainee.createdAt}</p>
         <p>Added {formatDistanceToNow(new Date(corporateTrainee.createdAt), {addSuffix: true})}</p>
         <span className = "material-symbols-outlined" onClick={handleClick}>delete</span>
       </div>

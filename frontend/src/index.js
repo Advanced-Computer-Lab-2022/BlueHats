@@ -9,9 +9,13 @@ import { CorporateTraineesContextProvider } from './context/CorporateTraineesCon
 
 import { InstContextProvider } from './context/InstContext';
 
+import { ProSidebarProvider } from 'react-pro-sidebar';
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ProSidebarProvider>
     <CorporateTraineesContextProvider>
     <InstructorsContextProvider>
     <CoursesContextProvider>
@@ -23,5 +27,6 @@ root.render(
     </CoursesContextProvider>
     </InstructorsContextProvider>
     </CorporateTraineesContextProvider>
+    </ProSidebarProvider>
   </React.StrictMode>
 );

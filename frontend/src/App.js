@@ -4,14 +4,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
+import AddCourse from './pages/AddCourse';
+import CourseView from './pages/CourseView';
 
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
 import NewInstructor from './pages/NewInstructor';
 import NewCoTrainee from './pages/NewCoTrainee';
 
-import ViewInstructors from "./pages/ViewInstructors"
-import ViewInstructorCourses from "./pages/ViewMyCourses"
+import ViewInstructors from "./pages/ViewInstructors";
+import ViewInstructorCourses from "./pages/ViewMyCourses";
 
 
  
@@ -30,9 +32,17 @@ function App() {
               path="/instructor"
               element={<Instructor/>}
             />
+            <Route
+              path="/instructor/addCourse"
+              element={<AddCourse/>}
+            />
              <Route
               path="/course/preview"
               element={<Preview/>}
+            />
+             <Route
+              path="/course/view"
+              element={<CourseView/>}
             />
             <Route
               path="/admin/addAdmin"

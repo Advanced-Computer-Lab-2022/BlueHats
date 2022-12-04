@@ -1,13 +1,11 @@
 import { useEffect } from "react"
+import { useNavigate } from 'react-router-dom';
 import { useCoursesContext } from "../hooks/useCoursesContext"
 
 // components
 import CourseDetails from "../components/CourseDetails"
-import CourseForm from "../components/CourseForm"
-import FilterBar from "../components/FilterBar"
 
 const Instructor = () => {
-  // const[text,setText] = useState('');
 
   const { courses, dispatch } = useCoursesContext()
 
@@ -24,19 +22,21 @@ const Instructor = () => {
     fetchCourses()
   }, [dispatch])
 
+  const navigate = useNavigate();
+  const navigateAddCourse = () => {
+    navigate('/instructor/addCourse');
+  };
 
   return (
 
     <div className="instructor">
       <div className="courses">
         <h3>My Courses</h3> 
-        <h3>Filter By:</h3>
-        <FilterBar />
         {courses && courses.map(course => (
           <CourseDetails course={course} key={course._id} />
         ))}
       </div>
-      <CourseForm />      
+      <button onClick={navigateAddCourse}>Add Course</button>    
     </div>
   )
 }

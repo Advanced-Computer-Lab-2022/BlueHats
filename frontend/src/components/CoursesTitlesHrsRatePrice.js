@@ -1,14 +1,13 @@
-import { useCoursesContext } from '../hooks/useCoursesContext'
+import React, { useState, useEffect } from "react";
 import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from '../components/Navbar'
 import { Link } from 'react-router-dom'
-
+import Axios from "axios";
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 
 const ViewCoursesBytitlesHrsRatePrice = ({ course }) => { 
-  const { dispatch } = useCoursesContext();
 
   function CheckNumber() {
     if (course.totalhours>1) {
@@ -19,27 +18,48 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
     }
   }
 
-  const handleGetCourse = async () => {
-    const response = await fetch('/api/courses/' + course._id, {
-      method: 'GET'
-    })
-    const json = await response.json();
+    const currency = getParamByParam('countryName', countryValue, 'symbol');
+    const toCurrency = getParamByParam('countryName', countryValue, 'currency');
+    const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
 
-    if(response.ok) {
-      dispatch({type: 'GET_COURSE', payload: json});
+
+    // Initializing all the state variables
+    const [info, setInfo] = useState([]);
+    const [from, setFrom] = useState("usd");
+    const [to, setTo] = useState("egp");
+    const [output, setOutput] = useState(0);
+
+
+    // Calling the api whenever the dependency changes
+    useEffect(() => {
+      Axios.get(
+    `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`)
+    .then((res) => {
+      setInfo(res.data[from]);
+      })
+    }, [from]);
+
+    useEffect(() => {
+      convert();
+      set();
+    }, [info])
+
+    function set() {
+      if(toCurrency !== NaN)
+        setTo((toCurrency.toLowerCase()));
     }
-  }
-
-  const currency = getParamByParam('countryName', countryValue, 'symbol');
-  const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
-  
+      
+    function convert() {
+      var rate = info[to];
+      setOutput(Math.round(course.price * rate));
+    }
     return (
       <div className="course-details">
-         <Link to='/course/preview/' onClick={handleGetCourse}>  <h4>{course.title}</h4> </Link> 
+         <Link onClick={() => window.location.href=`/course/preview?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
         <p><strong>Total Hours: </strong>{result} <CheckNumber/> </p>
         <p><strong>Rating: </strong>{course.courseRating}</p>
         <div  className="course-details-price">
-        <p><strong>Price: </strong> {currency} {course.price}</p>
+        <p><strong>Price: </strong> {currency} {output}</p>
         </div>
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
       </div>

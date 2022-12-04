@@ -40,9 +40,9 @@ const CorporateTraineeForm = () => {
 
   return (
     <form className="create" onSubmit={handleSubmit}> 
-      <h3>Add a New CorporateTrainee</h3>
+      <h3>Add a New Corporate Trainee</h3>
 
-      <label>CorporateTrainee Name:</label>
+      <label>Corporate Trainee Name:</label>
       <input 
         type="text" 
         onChange={(e) => setName(e.target.value)} 
@@ -60,7 +60,7 @@ const CorporateTraineeForm = () => {
 
       <label>Password:</label>
       <input 
-        type="text" 
+        type="password" 
         onChange={(e) => setPassword(e.target.value)} 
         value={password} 
         className={emptyFields.includes('password') ? 'error' : ''} /*commented*/
