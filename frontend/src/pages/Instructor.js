@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import CourseDetails from "../components/CourseDetails";
 import CourseForm from "../components/CourseForm";
 import { Link } from "react-router-dom";
-import FilterBar from "../components/FilterBar";
+import InstructorFilters from "../components/InstructorFilters";
 
 const Instructor = () => {
   // const[text,setText] = useState('');
@@ -32,7 +32,7 @@ const Instructor = () => {
         <Link to="/contract">Contracts</Link>
         <h3>My Courses</h3>
         <h3>Filter By:</h3>
-        <FilterBar key={uuidv4()} />
+        <InstructorFilters key={uuidv4()} />
         <h3>All Courses</h3>
         {courses &&
           courses.map((course) => (

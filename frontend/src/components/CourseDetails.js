@@ -67,7 +67,7 @@ const CourseDetails = ({ course }) => {
         <p><strong>Subject: </strong>{course.subject}</p>
         <p><strong>Price: </strong> {currency} {course.price}</p>
         <p><strong>Promotion: </strong> {course.promotion} % Valid Until {course.promotionDuration}</p>
-        <p><strong>Price After Discount: </strong> {currency} {priceAfter(course.price,course.promotion)}</p>
+        <p><strong>Price After Discount:[if applicable] </strong> {currency} {priceAfter(course.price,course.promotion)}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>

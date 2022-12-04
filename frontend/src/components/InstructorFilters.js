@@ -3,7 +3,7 @@ import CourseDetails from "./CourseDetails";
 import axios from "axios";
 import "react-dropdown/style.css";
 
-const FilterBar = () => {
+const InstructorFilters = () => {
   const [courses, setCourses] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const handleSubject = async (subject) => {
@@ -39,20 +39,21 @@ const FilterBar = () => {
           <div className="dropdown">
             <button className="dropbtn">Subject</button>
             <div id="myDropdown" className="dropdown-content">
-              {/* <a
+              <a
                 onClick={() => {
-                  handleSubject("AllSubjects");
+                  handleSubject("pppppp");
                 }}
               >
                 All Subjects
-              </a> */}
+              </a> 
+              
               <a
                 className="hoveranchor"
                 onClick={() => {
-                  handleSubject("cs");
+                  handleSubject("CSEN");
                 }}
               >
-                CS
+                CSEN
               </a>
               <a
                 onClick={() => {
@@ -74,6 +75,13 @@ const FilterBar = () => {
           <div className="dropdown">
             <button className="dropbtn">Price</button>
             <div id="myDropdown" className="dropdown-content">
+            <a
+                onClick={() => {
+                  handlePrice("1223210");
+                }}
+              >
+                All
+              </a>
               <a
                 onClick={() => {
                   handlePrice("50");
@@ -119,4 +127,4 @@ const FilterBar = () => {
   );
 };
 
-export default FilterBar;
+export default InstructorFilters;
