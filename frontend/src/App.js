@@ -7,6 +7,12 @@ import Instructor from './pages/Instructor';
 import AddCourse from './pages/AddCourse';
 import CourseView from './pages/CourseView';
 
+import Search from './pages/Search';
+import ExamTrainee from './pages/ExamTrainee';
+import Grade from './pages/Grade';
+import ExamInd from './pages/ExamInd';
+import GradeInd from './pages/GradeInd';
+
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
 import NewInstructor from './pages/NewInstructor';
@@ -29,8 +35,11 @@ import ReviewCourse from './components/CoursesTitleRatingReviews';
 
 
 
+
  
 function App() {
+
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -40,6 +49,26 @@ function App() {
             <Route
               path="/"
               element={<Home/>}
+            />
+            <Route
+              path="/search/"
+              element={<Search/>}
+            />
+            <Route
+              path="/examTrainee/"
+              element={<ExamTrainee/>}
+            />
+            <Route
+              path="/gradeExam/"
+              element={<Grade/>}
+            />
+             <Route
+              path="/examInd/"
+              element={<ExamInd/>}
+            />
+            <Route
+              path="/gradeInd/"
+              element={<GradeInd/>}
             />
             <Route
               path="/instructor"

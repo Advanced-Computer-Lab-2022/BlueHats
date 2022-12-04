@@ -35,6 +35,12 @@ const indTraineeSchema = new Schema({
   {
     type:String ,
     required: true
+  },
+  grade: 
+   [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, num: {type: Number}}]
+  ,
+  answers: {
+    type: [String]
   }
 }, { timestamps: true })
 

@@ -9,7 +9,9 @@ const
     changeEmailCorporateTrainee,
     changePasswordCorporateTrainee,
     forgotPasswordCorporateTrainee,
-    viewSolution
+    viewSolution,
+    gradeExam,
+    setAnswer
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -34,7 +36,11 @@ router.patch('/updateProfile',updateCorporateTraineeProfile)
 // forgot password
  router.post("/forgotPassword",forgotPasswordCorporateTrainee)
 
-router.get('/viewSolution/:id',viewSolution)
 
+router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 
+
+router.get('/viewSolution/:idCourse',viewSolution)
+
+router.put('/setAnswer/:id/:answer',setAnswer)
 
 module.exports = router
