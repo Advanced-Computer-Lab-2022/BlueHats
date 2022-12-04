@@ -5,10 +5,11 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
 
-//import SearchResults from './pages/SearchResults'
 import Search from './pages/Search';
 import ExamTrainee from './pages/ExamTrainee';
 import Grade from './pages/Grade';
+import ExamInd from './pages/ExamInd';
+import GradeInd from './pages/GradeInd';
 
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
@@ -17,7 +18,7 @@ import NewCoTrainee from './pages/NewCoTrainee';
 
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewMyCourses"
-//import ExamTrainee from './pages/ExamTrainee';
+
 
 
  
@@ -45,6 +46,14 @@ function App() {
             <Route
               path="/gradeExam/"
               element={<Grade/>}
+            />
+             <Route
+              path="/examInd/"
+              element={<ExamInd/>}
+            />
+            <Route
+              path="/gradeInd/"
+              element={<GradeInd/>}
             />
             <Route
               path="/instructor"
