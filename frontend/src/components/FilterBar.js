@@ -2,7 +2,7 @@ import { useCoursesContext } from '../hooks/useCoursesContext'
 import { useEffect, useState /*setCounter*/ } from 'react'
 
 import 'react-dropdown/style.css';
-
+/*
 const FilterBar = ({ course }) => {
     const { dispatch } = useCoursesContext();
     const [subject, setSubject] = useState('')
@@ -91,3 +91,4 @@ const FilterBar = ({ course }) => {
 
   
   export default FilterBar;
+  */

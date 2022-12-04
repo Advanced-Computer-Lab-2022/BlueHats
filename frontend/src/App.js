@@ -5,6 +5,11 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
 
+//import SearchResults from './pages/SearchResults'
+import Search from './pages/Search';
+import ExamTrainee from './pages/ExamTrainee';
+import Grade from './pages/Grade';
+
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
 import NewInstructor from './pages/NewInstructor';
@@ -12,10 +17,13 @@ import NewCoTrainee from './pages/NewCoTrainee';
 
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewMyCourses"
+//import ExamTrainee from './pages/ExamTrainee';
 
 
  
 function App() {
+
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,6 +33,18 @@ function App() {
             <Route
               path="/"
               element={<Home/>}
+            />
+            <Route
+              path="/search/"
+              element={<Search/>}
+            />
+            <Route
+              path="/examTrainee/"
+              element={<ExamTrainee/>}
+            />
+            <Route
+              path="/gradeExam/"
+              element={<Grade/>}
             />
             <Route
               path="/instructor"

@@ -9,6 +9,8 @@ import { CorporateTraineesContextProvider } from './context/CorporateTraineesCon
 
 import { InstContextProvider } from './context/InstContext';
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

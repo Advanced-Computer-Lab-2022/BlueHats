@@ -1,6 +1,6 @@
 import { useCoursesContext } from '../hooks/useCoursesContext'
 import { getParamByParam } from 'iso-country-currency'
-import { countryValue } from '../components/Navbar'
+//import { countryValue } from '../components/Navbar'
 import { Link } from 'react-router-dom'
 
 // date fns
@@ -30,7 +30,7 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
     }
   }
 
-  const currency = getParamByParam('countryName', countryValue, 'symbol');
+  //const currency = getParamByParam('countryName', countryValue, 'symbol');
   const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
   
     return (
@@ -39,7 +39,8 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
         <p><strong>Total Hours: </strong>{result} <CheckNumber/> </p>
         <p><strong>Rating: </strong>{course.courseRating}</p>
         <div  className="course-details-price">
-        <p><strong>Price: </strong> {currency} {course.price}</p>
+        {//<p><strong>Price: </strong> {currency} {course.price}</p>
+}
         </div>
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
       </div>

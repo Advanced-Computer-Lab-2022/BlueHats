@@ -21,7 +21,8 @@ router.patch('/:id', updateCourse);
 
 
 //search a course 
-router.get('/search/:name', getCoursesBySearch) 
+router.get('/search/:key', getCoursesBySearch) 
+
 
 
 module.exports = router;

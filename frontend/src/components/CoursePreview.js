@@ -24,8 +24,8 @@ const CoursePreview = ({course}) => {
             <h1>{course.title}</h1>
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
-            <p><strong>Price: </strong> {currency} {course.price}</p>
-            <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
+            {//<p><strong>Price: </strong> {currency} {course.price}</p>
+}           <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
             <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             <h4>Course Content</h4>
             <ol>{(course.subtitle).map((mycourse)=> <li mycourse={mycourse} key={course._id}>  {mycourse.name} is {mycourse.hours} hours </li>)}</ol>

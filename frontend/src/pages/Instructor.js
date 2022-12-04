@@ -4,11 +4,9 @@ import { useCoursesContext } from "../hooks/useCoursesContext"
 // components
 import CourseDetails from "../components/CourseDetails"
 import CourseForm from "../components/CourseForm"
-import FilterBar from "../components/FilterBar"
 
 const Instructor = () => {
-  // const[text,setText] = useState('');
-
+  
   const { courses, dispatch } = useCoursesContext()
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const Instructor = () => {
       <div className="courses">
         <h3>My Courses</h3> 
         <h3>Filter By:</h3>
-        <FilterBar />
+      
         {courses && courses.map(course => (
           <CourseDetails course={course} key={course._id} />
         ))}

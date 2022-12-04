@@ -1,6 +1,6 @@
 import { useCoursesContext } from '../hooks/useCoursesContext'
 import { getParamByParam } from 'iso-country-currency'
-import { countryValue } from '../components/Navbar'
+//import { countryValue } from '../components/Navbar'
 
 // import { ViewCurrency } from '../components/Navbar'
 
@@ -53,7 +53,7 @@ const CourseDetails = ({ course }) => {
       }
     }
 
-    const currency = getParamByParam('countryName', countryValue, 'symbol');
+    //const currency = getParamByParam('countryName', countryValue, 'symbol');
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
   
     return (
@@ -61,7 +61,8 @@ const CourseDetails = ({ course }) => {
         <Link to='/course/preview/' onClick={handleGetCourse}>  <h4>{course.title}</h4> </Link> 
         {/*to={`/course/preview/${course._id}`}*/}
         <p><strong>Subject: </strong>{course.subject}</p>
-        <p><strong>Price: </strong> {currency} {course.price}</p>
+        {//<p><strong>Price: </strong> {currency} {course.price}</p>
+}
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>

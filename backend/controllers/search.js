@@ -4,7 +4,8 @@ const Instructor = require('../models/instructorModel')
 const mongoose = require('mongoose');
 
 const getCoursesBySearch = async (req,res) => {
-    const key = req.params['name']
+    const key = req.params.key
+    console.log(key)
     const titleRes = await course.find({title: key})
     if(titleRes.length==0){
         const subjRes = await course.find({subject: key})
@@ -13,18 +14,23 @@ const getCoursesBySearch = async (req,res) => {
             if(instRes.length==0)
             res.json("This course doesn't exist")
             else{
-                res.json({instRes})
+                res.json(instRes)
             }
 
         }
         else{
-            res.json({subjRes})
+            res.json(subjRes)
         }
         
     }
-    else{
-        res.json({titleRes})
+    else if (titleRes.length!=0){
+        res.json(titleRes)
     }
+    else{
+        res.status(400).json({})
+    }
+
+
   
 }
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const exercise = require('./exercise');
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
@@ -10,8 +11,12 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
+    previewLink: {
+        type: String,
+        required: true
+    },
     subtitle: {
-        type: [{name: {type: String}, hours: {type: Number}}],
+        type: [{name: {type: String}, hours: {type: Number} }],
         required: true
     },
     price: {
@@ -25,6 +30,7 @@ const courseSchema = new Schema({
     courseRating: {
         type: Number,
     },
+    finalExam: [exercise.schema],
     instructor: {
         type: mongoose.Types.ObjectId,
         ref:'Instructor'
@@ -33,7 +39,6 @@ const courseSchema = new Schema({
         type: String,
         ref:'Instructor'
     }
-   
     
 }, { timestamps: true });
 

@@ -1,23 +1,20 @@
 import { Link } from 'react-router-dom'
-import { useState, useMemo, useEffect } from 'react'
+import { React, useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
-import { getParamByParam } from 'iso-country-currency'
-
-import axios from 'axios'
-
-import { InputPrice } from './CourseForm'
+import axios from 'axios';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';  
 
 export var countryValue = 'Egypt';
-export var ViewCurrency = InputPrice;
-
 
 const Navbar = () => {
     const [value, setValue] = useState({value: 'EGY', label: 'Egypt'})
     const [label, setLabel] = useState('Egypt')
     const options = useMemo(() => countryList().getData(), [])
 
-    var currency = getParamByParam('countryName', label, 'currency');
+    const [title,setTitle] = useState(''); 
+    
 
     useEffect(() => {
         const data =JSON.parse(window.localStorage.getItem('countryChosen') ?? "[]");
@@ -31,52 +28,11 @@ const Navbar = () => {
         window.localStorage.setItem('countryChosen', JSON.stringify(value));
         setValue(value);
         setLabel(value.label);
-        currency = getParamByParam('countryName', value.label, 'currency');
-        setSourceCurrency(InputPrice);
-        console.log(InputPrice)
-        setSelectToCurrency(currency);
-        selectTargetCurrency(currency);
-        convertRate();
     }
     
     if(value) {
         countryValue = value.label;
-        
     }
-
-    const [sourceCurrency, setSourceCurrency] = useState("");
-    const [targetCurrency, setTargetCurrency] = useState("");
-    const [ratesList, setRatesList] = useState(null);
-    const [selectFromCurrency, setFromSourceCurrency] = useState("USD");
-    const [selectToCurrency, setSelectToCurrency] = useState("NZD");
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const data = await axios.get("https://api.exchangeratesapi.io/latest");
-            setRatesList(data.data.rates);
-        } catch (e) {
-            console.log(e);
-        }
-        };
-        fetchData();
-    }, []);
-
-    const selectTargetCurrency = (targetCurr) => {
-        setSelectToCurrency(targetCurr);
-    };
-
-    const convertRate = () => {
-        if (isNaN(sourceCurrency) || !ratesList) return;
-
-        setTargetCurrency(
-        (ratesList[selectToCurrency] / ratesList[selectFromCurrency]) *
-            sourceCurrency
-        );
-
-        ViewCurrency =  ((ratesList[selectToCurrency] / ratesList[selectFromCurrency]) *sourceCurrency);
-    };
 
     return (
         <header>
@@ -84,7 +40,25 @@ const Navbar = () => {
                 <Link to="/">
                     <img src="../logo.png" alt="logo"/>
                 </Link>
-                <input className="searchbar" type="text" placeholder='Search for a course, instructor, subject...'/>
+                {//<input className="searchbar" type="text" placeholder='Search for a course, instructor, subject...'/>
+}
+              <form>
+              <label>Search</label><input
+               type="text"
+               required
+               value={title}
+               onChange={(e) => setTitle(e.target.value)} />
+               </form>
+
+               <Box sx={{marginBottom: 2}}>
+               <Button variant="contained"
+               onClick={() => window.location.href=`/search?key=${title}`}
+               margin="normal"
+               padding="normal"
+               >Load Courses</Button>
+               {/* margin */}
+               </Box>
+
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
                 <p>Log in</p>
                 <p>Sign up</p>
