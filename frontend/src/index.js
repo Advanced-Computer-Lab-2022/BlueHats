@@ -6,6 +6,7 @@ import { CoursesContextProvider } from './context/CoursesContext';
 import { AdminsContextProvider } from './context/AdminsContext';
 import { InstructorsContextProvider } from './context/InstructorsContext';
 import { CorporateTraineesContextProvider } from './context/CorporateTraineesContext';
+import { IndTraineesContextProvider } from './context/IndTraineesContext';
 
 import { InstContextProvider } from './context/InstContext';
 
@@ -15,6 +16,8 @@ import { ProSidebarProvider } from 'react-pro-sidebar';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+  
+    <IndTraineesContextProvider>
     <ProSidebarProvider>
     <CorporateTraineesContextProvider>
     <InstructorsContextProvider>
@@ -28,5 +31,6 @@ root.render(
     </InstructorsContextProvider>
     </CorporateTraineesContextProvider>
     </ProSidebarProvider>
+    </IndTraineesContextProvider>
   </React.StrictMode>
 );

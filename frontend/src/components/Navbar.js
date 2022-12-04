@@ -39,8 +39,14 @@ const Navbar = () => {
                 <button><span className="material-symbols-outlined"> search </span></button>
                 </div>
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
-                <p>Log in</p>
-                <p>Sign up</p>
+                {/* <p>Log in</p>
+                <p>Sign up</p> */}
+                <a className = "Login" href = "/login">
+                    login
+                </a>
+                <a className = "Register" href = "/signup">
+                    signup
+                </a>
                 <span className="material-symbols-outlined">shopping_cart</span>
             </div>
             

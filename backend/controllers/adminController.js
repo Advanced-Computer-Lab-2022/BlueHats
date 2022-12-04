@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-const adminModel = require('../models/adminModel')
 const Admin = require('../models/adminModel')
 
 //get all admins
