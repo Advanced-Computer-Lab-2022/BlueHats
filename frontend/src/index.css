@@ -421,6 +421,7 @@ a:hover {
 .video-responsive {
   overflow: hidden;
   padding-bottom: 30%;
+  padding-top: 30%;
   position: relative;
   height: 0;
 }

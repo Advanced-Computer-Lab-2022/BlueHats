@@ -213,19 +213,5 @@ const viewSolution = async(req,res) => {
   }
   return res.status(404).json({error: 'This Course does not have an exam'});
 }
-const viewSolution = async(req,res) => {
-  const { id } = req.params;
 
-  if(!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'No such course'})
-  }
-  const crs = await Course.findOne({_id: id});
-  const exam = crs.finalExam;
-
-  if(exam) {
-      return res.status(200).json(exam);
-  }
-  return res.status(404).json({error: 'This Course does not have an exam'});
-}
-
-module.exports={getCorporateTrainee,getCorporateTrainees,createCorporateTrainee,deleteCorporateTrainee,forgotPasswordCorporateTrainee,updateCorporateTrainee,viewSolutionProfile,changeEmailCorporateTrainee,changePasswordCorporateTrainee}
+module.exports={getCorporateTrainee,getCorporateTrainees,createCorporateTrainee,deleteCorporateTrainee,forgotPasswordCorporateTrainee,updateCorporateTraineeProfile,changeEmailCorporateTrainee,changePasswordCorporateTrainee,viewSolution}

@@ -28,12 +28,9 @@
     "react-search-box": "^2.3.0",
     "react-select": "^5.5.4",
     "react-select-country-list": "^2.2.3",
-<<<<<<< HEAD
     "rsuite": "^5.23.0",
     "vcl-form-control-label": "^0.1.0",
-=======
     "use": "^3.1.1",
->>>>>>> Mariam/dina
     "web-vitals": "^2.1.4"
   },
   "scripts": {
