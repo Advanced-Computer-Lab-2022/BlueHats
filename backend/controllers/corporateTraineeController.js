@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const nodemailer = require("nodemailer")
 
 const CorporateTrainee = require('../models/corporateTraineeModel')
-const Course = require('../models/course')
 
 //get all corporateTrainees
 const getCorporateTrainees=async (req,res)=> 
@@ -203,20 +202,6 @@ const forgotPasswordCorporateTrainee = async (req,res) =>
     res.status(404).json(error)
   }
 }
-const viewSolution = async(req,res) => {
-  const { id } = req.params;
-
-  if(!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'No such course'})
-  }
-  const crs = await Course.findOne({_id: id});
-  const exam = crs.finalExam;
-
-  if(exam) {
-      return res.status(200).json(exam);
-  }
-  return res.status(404).json({error: 'This Course does not have an exam'});
-}
 
 const gradeExam = async(req,res) => {
   const idCourse = req.params.idCourse
@@ -310,7 +295,10 @@ module.exports={getCorporateTrainee,
                 getCorporateTrainees,
                 createCorporateTrainee,
                 deleteCorporateTrainee,
-                updateCorporateTrainee,
+                updateCorporateTraineeProfile,
+                changeEmailCorporateTrainee,
+                forgotPasswordCorporateTrainee,
+                changePasswordCorporateTrainee,
                 gradeExam,
                 viewSolution,
                 setAnswer

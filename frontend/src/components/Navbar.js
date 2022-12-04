@@ -2,9 +2,6 @@ import { Link } from 'react-router-dom'
 import { React, useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
-import axios from 'axios';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';  
 
 export var countryValue = 'Egypt';
 
@@ -31,34 +28,24 @@ const Navbar = () => {
         countryValue = value.label;
     }
 
+    const [title,setTitle] = useState('');
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+         window.location.href=`/search?key=${title}`
+        }
+      };
+
     return (
         <header>
             <div className="container">
                 <Link to="/">
                     <img src="../logo.png" alt="logo"/>
                 </Link>
-                {/* <div className='inputWithButton'>
-                <input className="searchbar" type="text" placeholder='Search for a course, instructor, subject...' />
-                <button><span className="material-symbols-outlined"> search </span></button>
-                </div> */}
-}
-              <form>
-              <label>Search</label><input
-               type="text"
-               required
-               value={title}
-               onChange={(e) => setTitle(e.target.value)} />
-               </form>
-
-               <Box sx={{marginBottom: 2}}>
-               <Button variant="contained"
-               onClick={() => window.location.href=`/search?key=${title}`}
-               margin="normal"
-               padding="normal"
-               >Load Courses</Button>
-               {/* margin */}
-               </Box>
-
+                <div className='inputWithButton'>
+                <input className="searchbar" type="text" value={title} onChange={(e) => setTitle(e.target.value)}  onKeyDown={handleKeyDown} placeholder='Search for a course, instructor, subject...' />
+                <button  onClick={() => window.location.href=`/search?key=${title}`}><span className="material-symbols-outlined"> search </span></button>
+                </div>
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
                 <a className = "Login" href = "/login">
                     Log in

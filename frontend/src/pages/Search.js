@@ -1,6 +1,6 @@
 import {React, useState , useEffect} from "react"
 import axios from 'axios';
-import CourseDetails from "../components/CourseDetails";
+import ViewCoursesBytitlesHrsRatePrice from '../components/CoursesTitlesHrsRatePrice'
 
 
 function Search () { 
@@ -32,9 +32,10 @@ function Search () {
    console.log(loading)
     return(
       <div className="courses">
-      {courses.length == 0? <h1>This Course Doesn't Exist.</h1>: null }
+      {/* {courses.length == 0? <h1>This Course Doesn't Exist.</h1>: null } */}
+      <h3>Filtered Courses by {title}</h3>
         {!loading && courses.length!=0 && (courses.map(course => {
-          return <CourseDetails course={course} key={course._id} />
+          return <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />
         }))}
         
       </div>  
