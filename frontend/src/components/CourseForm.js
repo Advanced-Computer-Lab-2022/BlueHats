@@ -17,6 +17,8 @@ const CourseForm = () => {
   const [previewLink, setPreviewLink] = useState('')
   const [subtitle, setSubtitle] = useState([{ name: '', hours: '', link: '', linkDescription: '', question: '', firstChoice: '', secondChoice: '', thirdChoice: '', fourthChoice: '', answer: '' }])
   const [price, setPrice] = useState('')
+  const [promotion, setPromotion] = useState('')
+  const [promotionDuration, setPromotionDuration] = useState('')
   const [summary, setSummary] = useState('')
   const [finalExam, setFinalExam] = useState([{ question: '', firstChoice: '', secondChoice: '', thirdChoice: '', fourthChoice: '', answer: '' }])
   const [error, setError] = useState(null)
@@ -25,7 +27,7 @@ const CourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const course = {title, subject, previewLink, subtitle, price, summary, finalExam}
+    const course = {title, subject, previewLink, subtitle, price, promotion, promotionDuration, summary, finalExam}
     
     const response = await fetch('/api/courses', {
       method: 'POST',
@@ -46,6 +48,8 @@ const CourseForm = () => {
       setTitle('')
       setSubtitle([{ name: '', hours: '', link: '', linkDescription: '', question: '', firstChoice: '', secondChoice: '', thirdChoice: '', fourthChoice: '', answer: '' }])
       setPrice('')
+      setPromotion('')
+      setPromotionDuration('')
       setSummary('')
       setSubject('')
       setPreviewLink('')
@@ -268,7 +272,22 @@ const CourseForm = () => {
           onChange={(e) => setPrice(e.target.value)}
           value={price}
           className={emptyFields.includes('price') ? 'error' : ''} />
-
+       <label>Promotion% : [Optional]</label>
+      <input
+        type="number" 
+        prefix={'%'}
+        onChange={(e) => setPromotion(e.target.value)} 
+        value={promotion} 
+        className={emptyFields.includes('promotion') ? 'error': ''}
+      />
+      
+      <label>Promotion is valid until: [Optional]</label>
+      <input
+        type="date" 
+        onChange={(e) => setPromotionDuration(e.target.value)} 
+        value={promotionDuration} 
+        className={emptyFields.includes('promotionDuration') ? 'error': ''}
+      />
         <label>Summary:</label>
         <input
           type="text"

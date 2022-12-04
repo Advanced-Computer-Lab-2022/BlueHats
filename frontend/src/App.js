@@ -21,8 +21,9 @@ import InstructorProfile from './pages/instructorProfile';
 import CoTraineeProfile from './pages/coTraineeProfile';
 import Biography from './pages/biography';
 
-import ViewInstructors from "./pages/ViewInstructors";
-import ViewInstructorCourses from "./pages/ViewMyCourses";
+import ViewInstructors from "./pages/ViewInstructors"
+import ViewInstructorCourses from "./pages/ViewMyCourses"
+import Contract from './components/Contract';
 
 
  
@@ -44,6 +45,10 @@ function App() {
             <Route
               path="/instructor/addCourse"
               element={<AddCourse/>}
+            />
+                 <Route
+              path="/contract"
+              element={<Contract/>}
             />
              <Route
               path="/course/preview"

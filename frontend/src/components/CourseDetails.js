@@ -52,6 +52,10 @@ const CourseDetails = ({ course }) => {
         return 'hour';
       }
     }
+    function priceAfter(price,promotion){
+      const priceAfter = price * (1-(promotion/100))
+      return priceAfter;
+    }
 
     const [currency, setCurrency] = useState('');
     const [toCurrency, setToCurrency] = useState('');
@@ -99,6 +103,8 @@ const CourseDetails = ({ course }) => {
         <Link onClick={() => window.location.href=`/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
         <p><strong>Subject: </strong>{course.subject}</p>
         <p><strong>Price: </strong> {currency} {output}</p>
+        <p><strong>Promotion: </strong> {course.promotion} % Valid Until {course.promotionDuration}</p>
+        <p><strong>Price After Discount:[if applicable] </strong> {currency} {priceAfter(course.price,course.promotion)}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
