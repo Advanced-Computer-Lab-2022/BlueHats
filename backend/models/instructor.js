@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const {ObjectId} = mongoose.Schema;
 
+
 // Instructor's schema from the instructor's pov
 const instructorSchema = new Schema ({
     name: {
@@ -19,10 +20,20 @@ const instructorSchema = new Schema ({
     telephoneNumber: {
         type: String,
         required: true
-    }
+    },
+    instructorRating:
+    {
+        type: Number,
+        default: 0
+    },
+    numberOfRates:{
+        type: Number,
+        default:0
+    } 
 },
 {
     timestamps: true
 })
-const Instructor = mongoose.model('Instructor', instructorSchema)
-module.exports = Instructor
+
+module.exports = mongoose.model('instructor', instructorSchema)
+

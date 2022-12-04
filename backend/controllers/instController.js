@@ -1,5 +1,5 @@
 const course = require('../models/course');
-const instructor = require('../models/Instructor')
+const instructor = require('../models/instructor')
 //const mongoose = require('mongoose');
 const { default: mongoose } = require('mongoose');
 
@@ -9,33 +9,13 @@ const { default: mongoose } = require('mongoose');
 const filterCourses = async(req,res) => {
   
     const instructorId = req.query.instructorId;
-    const instructorName = req.query;
-    // check if instructorId is not empty
     if(instructorId){
     const result = await course.find({instructor:mongoose.Types.ObjectId(instructorId)});
     res.status(200).json(result)
     }else{
         res.status(400).json({error:"instructorId  is required"})
     }
-    /*
-
-        try {
-            if (instructorName)
-            {
-                const result = await course.find({instructor : name});
-                res.status(200).json(result)
-        
-            }
-
-            
-        } catch (error) {
-            console.log("instructorName is required")
-            res.status(400).json({error:"instructorId  is required"})
-
-        }
-    */
 }
-
 
 // get all instructors
 const getInstructors = async (req, res) => {
@@ -44,30 +24,9 @@ const getInstructors = async (req, res) => {
     res.status(200).json(instructors);
 }
 
-// get an instructor
-/*
-const getInstructor = async (req, res) => {
-    const { id } = req.params;
-
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-        console.log('an ins1')
-        return res.status(404).json({error: 'No such instructor exists'})
-    }
-
-    const instructor = await instructor.findById(id);
-
-    if(!instructor) {
-        console.log('an ins2')
-        return res.status(404).json({error: 'No such instructor exists'})
-    }
-
-    res.status(200).json(instructor);
-}
-*/
-
 // create an instructor account
 const createInstructor = async (req, res) => {
-    const {name, email, password, telephoneNumber} = req.body;
+    const {name, email, password, telephoneNumber,instructorRating,numberOfRates} = req.body;
 
     let emptyFields = [];
 
@@ -89,12 +48,13 @@ const createInstructor = async (req, res) => {
 
     // Add doc to database
     try {
-        const Instructor = await instructor.create({name, email, password, telephoneNumber} );
+        const Instructor = await instructor.create({name, email, password, telephoneNumber,instructorRating,numberOfRates} );
         res.status(200).json(Instructor);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
 }
+
 
 // delete an instructor account
 const deleteInstructor = async (req, res) => {
@@ -113,8 +73,8 @@ const deleteInstructor = async (req, res) => {
     res.status(200).json(Instructor);
 }
 
-// update an instructor account
 
+// update an instructor account
 const updateInstructor = async (req, res) => {
     const { id } = req.params;
 
@@ -132,10 +92,6 @@ const updateInstructor = async (req, res) => {
 
     res.status(200).json(Instructor);
 }
-
-
-
-
 
 
 

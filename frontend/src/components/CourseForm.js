@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { useCoursesContext } from '../hooks/useCoursesContext'
 
-
 export var InputPrice = 0;
-
 
 const CourseForm = () => {
   const { dispatch } = useCoursesContext()

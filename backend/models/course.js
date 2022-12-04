@@ -10,6 +10,10 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
+    numberOfSubtitles:{
+        type: Number,
+        required: true
+    },
     subtitle: {
         type: [{name: {type: String}, hours: {type: Number}}],
         required: true
@@ -22,16 +26,27 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
-    courseRating: {
-        type: Number,
-    },
     instructor: {
         type: mongoose.Types.ObjectId,
         ref:'Instructor'
     },
-    instructorName: {
-        type: String,
-        ref:'Instructor'
+    individualTrainee: {
+        type: mongoose.Types.ObjectId,
+        ref:'IndividualTrainee'
+    },
+    courseRating:
+    {
+        type: Number,
+        default: 0
+    },
+    numberOfRates:{
+        type: Number,
+        default:0
+    },
+    reviews:
+    {
+        type:Array,
+        default: []
     }
    
     

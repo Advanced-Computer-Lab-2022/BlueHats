@@ -9,9 +9,12 @@ import Preview from './pages/Preview';
 import Admin from './pages/Admin';
 import NewInstructor from './pages/NewInstructor';
 import NewCoTrainee from './pages/NewCoTrainee';
-
+import CourseForm from "./components/CourseForm"
 import ViewInstructors from "./pages/ViewInstructors"
-import ViewInstructorCourses from "./pages/ViewMyCourses"
+import ViewInstructorCourses from "./pages/ViewInstructorCourses"
+import EnrolledCourses from './pages/ViewIndividualUserCourses';
+import ReviewCourse from './components/CoursesTitleRatingReviews';
+
 
 
  
@@ -25,10 +28,6 @@ function App() {
             <Route
               path="/"
               element={<Home/>}
-            />
-            <Route
-              path="/instructor"
-              element={<Instructor/>}
             />
              <Route
               path="/course/preview"
@@ -46,6 +45,10 @@ function App() {
               path="/admin/corporateTrainee"
               element={<NewCoTrainee/>}
             />
+            <Route
+              path="/createCourse"
+              element={<CourseForm/>}
+            />
              <Route
               path="/Instructors"
               element={<ViewInstructors/>}
@@ -54,6 +57,16 @@ function App() {
               path="/Mycourses"
               element={<ViewInstructorCourses/>}
             />
+            <Route
+              path="/EnrolledCourses"
+              element={<EnrolledCourses/>}
+            />
+          
+            <Route
+              path="/review"
+              element={<ReviewCourse/>}
+            />
+            
           </Routes>
         </div>
       </BrowserRouter>

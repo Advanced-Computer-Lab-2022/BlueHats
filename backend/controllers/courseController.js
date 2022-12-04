@@ -1,7 +1,9 @@
 const course = require('../models/course');
+
 const mongoose = require('mongoose');
 
 // Get all courses 
+
 const getCourses = async (req, res) => {
     const courses = await course.find({}).sort({createdAt: -1});
 
@@ -10,6 +12,7 @@ const getCourses = async (req, res) => {
 
 
 // Get a single course
+
 const getCourse = async (req, res) => {
     const { id } = req.params;
 
@@ -27,22 +30,17 @@ const getCourse = async (req, res) => {
 }
 
 // Create a new course
+
 const createCourse = async (req, res) => {
-    const {title, subject, subtitle, price, summary, courseRating, instructor, instructorName} = req.body;
+    const {title,subject, numberOfSubtitles, subtitle, price, summary, totalhours,instructor,individualTrainee,courseRating,numberOfRates,reviews} = req.body;
 
     let emptyFields = [];
 
     if(!title) {
         emptyFields.push('title')
     }
-    if(!subject) {
-        emptyFields.push('subject')
-    }
-    if(!(subtitle[0].name)) {
-        emptyFields.push('subtitle.name')
-    }
-    if(!(subtitle[0].hours)) {
-        emptyFields.push('subtitle.hours')
+    if(!subtitle) {
+        emptyFields.push('subtitle')
     }
     if(!price) {
         emptyFields.push('price')
@@ -50,13 +48,23 @@ const createCourse = async (req, res) => {
     if(!summary) {
         emptyFields.push('summary')
     }
+    if(!totalhours) {
+        emptyFields.push('totalhours')
+    }
+    if(!numberOfSubtitles) {
+        emptyFields.push('numberOfSubtitles')
+    }
+    if(!instructor) {
+        emptyFields.push('instructor')
+    }
+
     if(emptyFields.length > 0) {
         return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
     }
 
     // Add doc to database
     try {
-        const Course = await course.create({title, subject, subtitle, price, summary, courseRating, instructor, instructorName});
+        const Course = await course.create({title,subject, numberOfSubtitles, subtitle, price, summary, totalhours,instructor,individualTrainee,courseRating,numberOfRates,reviews});
         res.status(200).json(Course);
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -80,6 +88,7 @@ const deleteCourse = async (req, res) => {
 
     res.status(200).json(Course);
 }
+
 
 // Update a course
 const updateCourse = async (req, res) => {
@@ -106,5 +115,5 @@ module.exports = {
     getCourses,
     getCourse,
     deleteCourse,
-    updateCourse,
+    updateCourse
 };
