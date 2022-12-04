@@ -1,10 +1,14 @@
 const express = require('express')
-const {
+const 
+{
     createCorporateTrainee,
     getCorporateTrainees,
     getCorporateTrainee,
     deleteCorporateTrainee,
-    updateCorporateTrainee
+    updateCorporateTraineeProfile,
+    changeEmailCorporateTrainee,
+    changePasswordCorporateTrainee,
+    forgotPasswordCorporateTrainee
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -21,7 +25,12 @@ router.post('/',createCorporateTrainee)
 // DELETE a CorporateTrainee
 router.delete('/:id',deleteCorporateTrainee)
 
-// UPDATE a CorporateTrainee
-router.patch('/:id', updateCorporateTrainee)
+// UPDATE an IndTrainee
+router.patch('/changePassword', changePasswordCorporateTrainee)
+router.patch('/changeEmail', changeEmailCorporateTrainee)
+router.patch('/updateProfile',updateCorporateTraineeProfile)
+
+// forgot password
+ router.post("/forgotPassword",forgotPasswordCorporateTrainee)
 
 module.exports = router

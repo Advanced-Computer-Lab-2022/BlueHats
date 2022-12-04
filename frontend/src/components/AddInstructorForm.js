@@ -5,6 +5,7 @@ const AddInstructorForm = () => {
   const { dispatch } = useInstructorsContext() //commented
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
@@ -12,7 +13,7 @@ const AddInstructorForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const instructor = {name , username, password}
+    const instructor = {name , username, email, password}
 
     const response = await fetch('/api/instructor', {
       method: 'POST',
@@ -56,6 +57,14 @@ const AddInstructorForm = () => {
         onChange={(e) => setUsername(e.target.value)} 
         value={username}
         className={emptyFields.includes('username') ? 'error' : ''} /*commented*/
+      />
+
+      <label> Email :</label>
+      <input 
+        type="text" 
+        onChange={(e) => setEmail(e.target.value)} 
+        value={email}
+        className={emptyFields.includes('email') ? 'error' : ''} /*commented*/
       />
 
       <label>Password:</label>
