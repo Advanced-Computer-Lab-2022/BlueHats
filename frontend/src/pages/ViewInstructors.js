@@ -5,25 +5,12 @@ import { useInstructorsContext } from "../hooks/useInstContext"
 import InstructorDetails from "../components/InstructorDetails"
 
 
-
 import { useEffect } from "react"
-
+import { useCoursesContext } from "../hooks/useCoursesContext"
 
 const ViewInstructors = () => {
  const {instructors, dispatch} = useInstructorsContext()
-
- /* useEffect(() => {
-    const fetchCourses = async () => {
-      const response = await fetch('/api/courses')
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatch({type: 'SET_COURSES', payload: json})
-      }
-    }
-
-    fetchCourses()
-  }, [dispatch])*/
+ const {courses} = useCoursesContext()
 
     // fetch all courses
     useEffect(() => {
@@ -38,15 +25,17 @@ const ViewInstructors = () => {
   
       fetchInstructors()
     }, [dispatch])
+
   
   return (
-    <div className="instructor">
-      <div className="courses">
+      <div >
+        <div>
         {instructors && instructors.map(Instructor => (
           <InstructorDetails Instructor={Instructor} key={Instructor._id} />
         ))}
       </div>
-    </div>
+      </div>
+      
   )
 
 }

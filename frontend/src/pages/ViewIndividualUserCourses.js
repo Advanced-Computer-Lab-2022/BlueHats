@@ -2,20 +2,17 @@ import { useEffect } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 //import { useInstructorsContext } from "../hooks/useInstructorsContext"
 
-
 // components
-import ViewMyCourses from "../components/Mycourses"
+import ViewEnrolledCourses from "../components/EnrolledCourses"
+//import axios from "axios"
 
-const ViewInstructorCourses = () => {
+
+
+const EnrolledCourses = () => {
  const {courses,dispatch} = useCoursesContext()
- //const {instructors,dispatch} = useInstructorsContext()
-
-    // Get an instructor courses
-
-    //http://localhost:4000/api/instructors/myCourses?instructorId=635d4fb217e8af8f38df9019
     useEffect(() => {
         const fetchMyCourses = async () => {
-            const response = await fetch('/api/instructors/myCourses?instructorId=635d4fb217e8af8f38df9019')
+            const response = await fetch('/api/nUsers/filter?individualTraineeId=6386253315707335be9141b4')
             const json = await response.json();
     
             if(response.ok) {
@@ -25,18 +22,20 @@ const ViewInstructorCourses = () => {
     
         fetchMyCourses();
       }, [dispatch])
-  
-    
+      
+   
   return (
     <div className="ViewMyCourses">
       <div className="Mycourses">
-        <h3>My Courses</h3>
+        <h3>Mycourses</h3>
         {courses && courses.map((course) => (
-          <ViewMyCourses course={course} key={course._id} />
+          <ViewEnrolledCourses course={course} key={course._id} />
         ))}
       </div>
     </div>
   )
+
+
 }
 
-export default ViewInstructorCourses
+export default EnrolledCourses

@@ -25,7 +25,7 @@ const ViewCoursesTitlesHrsRatePrice = () => {
   
       fetchCourses()
     }, [dispatch])
-  
+
   return (
     <div className="ViewCourses">
       <div className="courses">

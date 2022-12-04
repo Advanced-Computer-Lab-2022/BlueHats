@@ -270,7 +270,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
-/* .my-courses-details{
+
+.course-details-ss {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -278,16 +279,28 @@ a:hover {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
-.my-courses-details h4 {
+.course-details-ss h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
-.my-courses-details p {
+.course-details-ss p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
-}*/
+}
+.course-details-ss span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+}
+
+
+
  .instructor-details {
   background: #fff;
   border-radius: 4px;

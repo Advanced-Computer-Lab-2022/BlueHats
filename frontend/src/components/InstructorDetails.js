@@ -21,6 +21,7 @@ const InstructorDetails = ({ Instructor }) => {
       <div className="instructor-details">
         <h4>{Instructor.name}</h4>
         <p><strong>Email: </strong>{Instructor.email}</p>
+        <p><strong>Rate: </strong>{Instructor.instructorRating}</p>
         <p><strong>Telephone Number: </strong>{Instructor.telephoneNumber}</p>
         <p>Added {formatDistanceToNow(new Date(Instructor.createdAt), {addSuffix: true})}</p>
         <span className="material-symbols-outlined" onClick={handleClick}>delete</span>

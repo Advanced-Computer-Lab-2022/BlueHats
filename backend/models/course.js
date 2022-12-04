@@ -41,9 +41,23 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref:'Instructor'
     },
-    instructorName: {
-        type: String,
-        ref:'Instructor'
+    individualTrainee: {
+        type: mongoose.Types.ObjectId,
+        ref:'IndividualTrainee'
+    },
+    courseRating:
+    {
+        type: Number,
+        default: 0
+    },
+    numberOfRates:{
+        type: Number,
+        default:0
+    },
+    reviews:
+    {
+        type:Array,
+        default: []
     }
     
 }, { timestamps: true });

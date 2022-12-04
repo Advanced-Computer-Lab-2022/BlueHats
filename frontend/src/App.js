@@ -20,10 +20,13 @@ import IndTrainee from './pages/indTrainees';
 import InstructorProfile from './pages/instructorProfile';
 import CoTraineeProfile from './pages/coTraineeProfile';
 import Biography from './pages/biography';
-
+import CourseForm from "./components/CourseForm"
 import ViewInstructors from "./pages/ViewInstructors"
-import ViewInstructorCourses from "./pages/ViewMyCourses"
+import ViewInstructorCourses from "./pages/ViewInstructorCourses"
 import Contract from './components/Contract';
+import EnrolledCourses from './pages/ViewIndividualUserCourses';
+import ReviewCourse from './components/CoursesTitleRatingReviews';
+
 
 
  
@@ -37,10 +40,6 @@ function App() {
             <Route
               path="/"
               element={<Home/>}
-            />
-            <Route
-              path="/instructor"
-              element={<Instructor/>}
             />
             <Route
               path="/instructor/addCourse"
@@ -69,6 +68,10 @@ function App() {
             <Route
               path="/admin/corporateTrainee"
               element={<NewCoTrainee/>}
+            />
+            <Route
+              path="/createCourse"
+              element={<CourseForm/>}
             />
              <Route
               path="/Instructors"
@@ -126,6 +129,16 @@ function App() {
               path="/instructor/editBiography"
               element={<Biography/>}
             />
+            <Route
+              path="/EnrolledCourses"
+              element={<EnrolledCourses/>}
+            />
+          
+            <Route
+              path="/review"
+              element={<ReviewCourse/>}
+            />
+            
           </Routes>
         </div>
       </BrowserRouter>
