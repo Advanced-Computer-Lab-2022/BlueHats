@@ -37,7 +37,9 @@ const Instructor = () => {
       <Link to="/contract">Contracts</Link>
         <h3>My Courses</h3>
         <h3>Filter By:</h3>
-        <InstructorFilters key={uuidv4()} />
+        <div className="filter-inst">
+          <InstructorFilters key={uuidv4()} />
+        </div>
         <h3>All Courses</h3>
         {courses && courses.map((course) => (
             <CourseDetails course={course} key={course._id} />

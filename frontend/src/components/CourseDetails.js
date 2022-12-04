@@ -52,6 +52,7 @@ const CourseDetails = ({ course }) => {
         return 'hour';
       }
     }
+    
     function priceAfter(price,promotion){
       const priceAfter = price * (1-(promotion/100))
       return priceAfter;

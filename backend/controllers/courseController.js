@@ -102,7 +102,7 @@ const createCourse = async (req, res) => {
     // Add doc to database
     try {
        
-    const Course = await course.create({title, subject, previewLink, subtitle, price,promotion,promotionDuration, summary, courseRating, finalExam, instructor, instructorName});
+    const Course = await course.create({title, subject, previewLink, subtitle, price, promotion, promotionDuration, summary, courseRating, finalExam, instructor, instructorName});
        
     res.status(200).json(Course);
     } catch (error) {

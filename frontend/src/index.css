@@ -506,3 +506,13 @@ form.signup, form.login , form.forgotPassword , form.resetPassword , form.change
   border-radius: 50%;
   color: #333;
 }
+.instructor .filter-inst button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+ position: initial;
+}

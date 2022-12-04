@@ -272,22 +272,24 @@ const CourseForm = () => {
           onChange={(e) => setPrice(e.target.value)}
           value={price}
           className={emptyFields.includes('price') ? 'error' : ''} />
-       <label>Promotion% : [Optional]</label>
-      <input
-        type="number" 
-        prefix={'%'}
-        onChange={(e) => setPromotion(e.target.value)} 
-        value={promotion} 
-        className={emptyFields.includes('promotion') ? 'error': ''}
-      />
-      
-      <label>Promotion is valid until: [Optional]</label>
-      <input
-        type="date" 
-        onChange={(e) => setPromotionDuration(e.target.value)} 
-        value={promotionDuration} 
-        className={emptyFields.includes('promotionDuration') ? 'error': ''}
-      />
+
+        <label>Promotion% : [Optional]</label>
+        <input
+          type="number" 
+          prefix={'%'}
+          onChange={(e) => setPromotion(e.target.value)} 
+          value={promotion} 
+          className={emptyFields.includes('promotion') ? 'error': ''}
+        />
+        
+        <label>Promotion is valid until: [Optional]</label>
+        <input
+          type="date" 
+          onChange={(e) => setPromotionDuration(e.target.value)} 
+          value={promotionDuration} 
+          className={emptyFields.includes('promotionDuration') ? 'error': ''}
+        />
+        
         <label>Summary:</label>
         <input
           type="text"
