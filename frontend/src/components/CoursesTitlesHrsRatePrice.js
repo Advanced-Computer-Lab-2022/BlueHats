@@ -18,8 +18,11 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
     }
   }
 
-    const currency = getParamByParam('countryName', countryValue, 'symbol');
-    const toCurrency = getParamByParam('countryName', countryValue, 'currency');
+    const [currency, setCurrency] = useState('');
+    const [toCurrency, setToCurrency] = useState('');
+
+    //const currency = getParamByParam('countryName', countryValue, 'symbol');
+    //const toCurrency = getParamByParam('countryName', countryValue, 'currency');
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
 
 
@@ -41,6 +44,8 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
 
     useEffect(() => {
       convert();
+      setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+      setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
       set();
     }, [info])
 
