@@ -22,7 +22,7 @@ const ViewEnrolledCourses = ({ course }) => {
         <div  className="course-details-price">
         <p className="view-price" ><strong ></strong>{course.price}</p>
         </div>
-        <p><strong>Rating: </strong>{course.courseRating} / 5 <strong className='sta'>★</strong> </p>
+        <p><strong>Rating: </strong>{course.courseRating} / 5 <strong className='sta'>⭐</strong> </p>
         <div>
         <p><strong>Reviews: </strong>{ JSON.stringify(course.reviews)}</p>
         </div>

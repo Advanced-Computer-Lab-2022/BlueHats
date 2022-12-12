@@ -7,7 +7,10 @@ const ViewMyCourses = ({course }) => {
     return (
         <div className="course-details-ss">
           <h4>{course.title}</h4>
-          <p><strong>Rate:</strong>{course.instructorRate} / 5 <strong className='sta'>★</strong> </p>
+          <p><strong>Rate:</strong>{course.instructorRate} / 5 <strong className='sta'>⭐</strong> </p>
+          <div>
+        <p><strong>Reviews: </strong>{ JSON.stringify(course.reviews)}</p>
+        </div>
           <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
         </div>
       )
