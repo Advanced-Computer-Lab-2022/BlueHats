@@ -32,7 +32,7 @@ const ReviewCourse = ({course}) => {
         setLoading(false)
 })
 
-   data= {userRate:instructorRate}
+   data= {uRate:instructorRate}
     setLoading(true)
   axios({
     method:'PATCH',

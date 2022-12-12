@@ -91,30 +91,30 @@ const updateIndividualTrainee = async (req, res) => {
 
 
 // add a new rate to the course and calculate the new overall course rate
-//(no. of reviews x rating) + (no. of reviews x rating) + ... / total no. of reviews
 
 var averageRate = 0;
-var accumulatedRate = 0;
+var accumlatedRate = 0;
 const rateCourse = async (req, res) => {
+    console.log(averageRate)
+    console.log(accumlatedRate)
     const courseId= req.query.courseId;
     if(!mongoose.Types.ObjectId.isValid(courseId)){
         return res.status(404).json({error: 'No such course'})
     }
+
     const aCourse = await course.find({_id:courseId});
-    var prevRate= aCourse[0].courseRating;
-
     var lastCount=aCourse[0].numberOfRates;
-    const {userRate} = await req.body;
+
+    var {userRate} = await req.body;
 
 
-    accumulatedRate += prevRate
-    averageRate = accumulatedRate + userRate
-
+    accumlatedRate =  accumlatedRate + parseInt(userRate)
     lastCount++;
     var newCount= lastCount;
+    averageRate = accumlatedRate/newCount
 
-     averageRate = averageRate/newCount
-    
+    console.log(averageRate)
+    console.log(accumlatedRate)
     const Course = await course.findOneAndUpdate({_id:courseId},{
         courseRating:averageRate,
         numberOfRates:newCount
@@ -127,11 +127,14 @@ const rateCourse = async (req, res) => {
     res.status(200).json(Course);       
     }
 
+
     
 //// add a new rate to the instructor and calculate the new overall instructor rate
 var avgRate = 0;
 var accRate = 0;
     const rateInstructor = async (req, res) => {
+        console.log(avgRate)
+        console.log(accRate)
         const courseId= req.query.courseId;
         if(!mongoose.Types.ObjectId.isValid(courseId)){
             return res.status(404).json({error: 'No such Instructor'})
@@ -140,28 +143,34 @@ var accRate = 0;
             _id:courseId,
         });
        
-        var instructorId = aCourse[0].instructor
-        const anInstructor = await instructor.find({_id:instructorId})
-        var prevRate= anInstructor[0].instructorRating;
-        var lastCount=anInstructor[0].numberOfRates;
-        const {userRate} = await req.body;
-        accRate += prevRate
-        avgRate = accRate + userRate
+   //     var instructorId = aCourse[0].instructor
 
-        lastCount++;
-         var newCount= lastCount;
+   //     const anInstructor = await instructor.find({_id:instructorId})
 
-        avgRate = avgRate/newCount
-        const Instructor = await instructor.findOneAndUpdate({_id:instructorId},{
-            instructorRating:avgRate,
-            numberOfRates:newCount
+       var lCount=aCourse[0].numOfRates;
+       var {uRate} = await req.body;
+       
+       
+       accRate = accRate +  parseInt(uRate)
+      
+        lCount++;
+        var nCount= lCount;
+
+         avgRate = accRate/nCount
+
+         console.log(avgRate)
+         console.log(accRate)
+
+        const CourseInstructor = await course.findOneAndUpdate({_id:courseId},{
+            instructorRate:avgRate,
+            numOfRates:nCount
         })
     
-        if(!Instructor){
+        if(!CourseInstructor){
             return res.status(400).json({error:'No such Instructor'})
     
         }
-        res.status(200).json(Instructor);       
+        res.status(200).json(CourseInstructor);       
         }
 
   
@@ -172,11 +181,11 @@ var accRate = 0;
         }
         const aCourse = await course.find({_id:courseId});
         var prevReviewsList= aCourse[0].reviews;
-      //  console.log(prevReviewsList)
+    
        // Enter your review
         var userReview = await req.body;
         const  newReviewsList = prevReviewsList.concat(userReview)
-       // console.log(prevReviewsList)
+     
         const Course = await course.findOneAndUpdate({_id:courseId},{
             reviews:newReviewsList
         })

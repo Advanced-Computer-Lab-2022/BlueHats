@@ -58,6 +58,14 @@ const courseSchema = new Schema({
     {
         type:Array,
         default: []
+    },
+    instructorRate:{
+        type:Number,
+        default: 0
+    },
+    numOfRates:{
+        type:Number,
+        default:0
     }
     
 }, { timestamps: true });

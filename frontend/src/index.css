@@ -529,3 +529,12 @@ form.signup, form.login , form.forgotPassword , form.resetPassword , form.change
   cursor: pointer;
  position: initial;
 }
+
+.sta {
+  display: inline-block;
+   font-size: 20px; 
+   color: #ffd700; 
+   background: #ffffff; 
+   border-radius: 0px; 
+   padding: 10px 10px;
+  }
