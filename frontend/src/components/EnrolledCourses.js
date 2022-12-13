@@ -13,6 +13,30 @@ const ViewEnrolledCourses = ({ course }) => {
       return 'hour';
     }
   }
+  function Stars(){
+    if (course.courseRating >= 1 && course.courseRating<=1.5){
+         return "⭐";
+         }
+    if (course.courseRating > 1.5 && course.courseRating<=2.5)
+       {
+         return "⭐⭐"
+     }
+     if (course.courseRating > 2.5 && course.courseRating<=3.5)
+       {
+         return "⭐⭐⭐"
+          
+     }
+     if (course.courseRating > 3.5 && course.courseRating<=4.5)
+       {
+         return "⭐⭐⭐⭐"
+         
+     }
+     if (course.courseRating > 4.5 && course.courseRating<=5)
+       {
+         return "⭐⭐⭐⭐⭐";
+         
+     }
+   }
 
   
     return (
@@ -22,7 +46,7 @@ const ViewEnrolledCourses = ({ course }) => {
         <div  className="course-details-price">
         <p className="view-price" ><strong ></strong>{course.price}</p>
         </div>
-        <p><strong>Rating: </strong>{course.courseRating} / 5 <strong className='sta'>⭐</strong> </p>
+        <p><strong>Rating: </strong>{course.courseRating} / 5 <strong> <Stars/></strong> </p>
         <div>
         <p><strong>Reviews: </strong>{ JSON.stringify(course.reviews)}</p>
         </div>
