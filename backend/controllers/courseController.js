@@ -152,7 +152,6 @@ const updateCourse = async (req, res) => {
     res.status(200).json(Course);
 }
 
-
 module.exports = {
     createCourse,
     getCourses,

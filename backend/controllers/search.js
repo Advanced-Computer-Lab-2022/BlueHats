@@ -7,12 +7,15 @@ const getCoursesBySearch = async (req,res) => {
     const key = req.params.key
     console.log(key)
     const titleRes = await course.find({title: key})
+    console.log(titleRes)
     if(titleRes.length==0){
         const subjRes = await course.find({subject: key})
+        console.log(subjRes)
         if(subjRes.length==0){
             const instRes = await course.find({instructorName: key})
+            console.log(instRes)
             if(instRes.length==0)
-            res.json("This course doesn't exist")
+                res.json([])
             else{
                 res.json(instRes)
             }
@@ -27,7 +30,7 @@ const getCoursesBySearch = async (req,res) => {
         res.json(titleRes)
     }
     else{
-        res.status(400).json({})
+        res.status(400).json("This course doesn't exist")
     }
 
 

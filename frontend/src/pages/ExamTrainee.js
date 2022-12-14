@@ -1,20 +1,8 @@
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';  
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import React, {useState, useEffect, useRef} from 'react';
 import 'react-dropdown/style.css';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
 
   const ExamTrainee = () => {
 
@@ -90,19 +78,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     setActive4(false);
     axios({
       method: "PUT",
-      url : `/api/corporateTrainee/setAnswer/${idTrainee}/${ans}`
+      url : `/api/corporateTrainee/setAnswer/${idCourse}/${idTrainee}/${ans}`
     })
+    setAns('');
    
 
   }
-  const handleNextQuestion = () => {
-    setActive1(false);
-    setActive2(false);
-    setActive3(false);
-    setActive4(false);
-    setAns('');
-  }
-  //get the final exam
     return(
      
         <div className="exam">
@@ -148,10 +129,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
             margin="normal"
             padding="normal">Submit Answer</Button>
             </Box>
-
-            {handleNextQuestion}
-            
-
             </li>
        
       ))} </ol>

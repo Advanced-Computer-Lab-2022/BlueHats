@@ -8,11 +8,13 @@ function Search () {
   const params = new URLSearchParams(window.location.search);
   const title = params.get('key');
     const [courses, setCourses] = useState([]);
-    const [loading,setLoading] = useState(true)
-    
+    const [loading,setLoading] = useState(true);
+    const [flag,setFlag] = useState(false);
+
     useEffect(() =>  {
       setLoading(true)
-      if(title.length==0){
+      setFlag(false)
+      if(title==''){
         return
       }
          axios({
@@ -24,17 +26,22 @@ function Search () {
           const courses = res.data
           console.log(courses)
           setCourses(courses)  
+          if(courses!=[])
+            {
+              console.log(courses)
+              setFlag(true)
+            }
        }
-        );
+        );    
+
       
    },[title])
    
-   console.log(loading)
+   //console.log(flag)
     return(
       <div className="courses">
-      {/* {courses.length == 0? <h1>This Course Doesn't Exist.</h1>: null } */}
-      <h3>Filtered Courses by {title}</h3>
-        {!loading && courses.length!=0 && (courses.map(course => {
+      {courses.length==0? <h1>This Course Doesn't Exist.</h1> : <h3>Search Results:</h3> } 
+        {!loading && flag==true && courses.length!=0 && (courses.map(course => {
           return <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />
         }))}
         

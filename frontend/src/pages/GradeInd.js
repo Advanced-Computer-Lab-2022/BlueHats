@@ -8,28 +8,25 @@ const GradeInd = () =>{
   const [grade,setGrade] = useState(0)
   const [loading,setLoading] = useState(true)
   const [exam,setExam] = useState([])
-  const [flag,setFlag] = useState(true)
+  // const [flag,setFlag] = useState(true)
   useEffect(() =>  {
     setLoading(true)
-    if(flag)
-       {axios({
+   
+       axios({
         method: "GET",
-        url : `/api/indTrainee
-        /gradeExam/${idCourse}/${idTrainee}`
+        url : `/api/indTrainee/gradeExam/${idCourse}/${idTrainee}`
       }).then(
      (res) => { 
         setLoading(false)
         const grade = res.data
         console.log(grade)
         setGrade(grade)  
-        setFlag(false)
      }
-      );}
+      );
       setLoading(true)
       axios({
         method: "GET",
-        url : `/api/indTrainee
-        /viewSolution/${idCourse}`
+        url : `/api/indTrainee/viewSolution/${idCourse}`
       }).then(
      (res) => { 
       setLoading(false)

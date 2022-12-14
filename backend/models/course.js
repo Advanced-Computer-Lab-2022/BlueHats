@@ -41,6 +41,10 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref:'Instructor'
     },
+    // instructorName: {
+    //     type: String,
+    //     required: true
+    // },
     individualTrainee: {
         type: mongoose.Types.ObjectId,
         ref:'IndividualTrainee'
