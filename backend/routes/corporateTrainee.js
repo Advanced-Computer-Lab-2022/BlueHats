@@ -11,7 +11,8 @@ const
     forgotPasswordCorporateTrainee,
     viewSolution,
     gradeExam,
-    setAnswer
+    setAnswer,
+    compareAnswers
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -41,6 +42,8 @@ router.get('/gradeExam/:idCourse/:idTrainee',gradeExam)
 
 router.get('/viewSolution/:idCourse',viewSolution)
 
-router.put('/setAnswer/:id/:answer',setAnswer)
+router.put('/setAnswer/:idCourse/:id/:answer',setAnswer)
+
+router.get('/compareAnswers/:solution/:answer',compareAnswers)
 
 module.exports = router

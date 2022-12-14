@@ -203,6 +203,7 @@ const forgotPasswordCorporateTrainee = async (req,res) =>
   }
 }
 
+
 const gradeExam = async(req,res) => {
   const idCourse = req.params.idCourse
   const idTrainee = req.params.idTrainee
@@ -216,45 +217,59 @@ const gradeExam = async(req,res) => {
   }
   const trainee = await CorporateTrainee.findOne({_id: idTrainee})
   const crs = await Course.findOne({_id: idCourse})
-  console.log(trainee,crs)
   let i =0;
   let sum=0;
-  while(i<crs.finalExam.length){
+  while(i<crs.finalExam.length && trainee.answers.length!=0){
     const first = crs.finalExam[i].answer
     const second = trainee.answers[i]
     console.log(first,second)
     i++;
-    if(first === second)
+    if(first == second)
       sum++;
   }
-  const temp =[{idCourse,sum}]
-    console.log(temp)
-    const arr = trainee.grade
+    
+    const gradeArr = trainee.grade
+    let k = 0
+    let flag = false
+    let gradeTrainee = sum;
+    while(k<gradeArr.length){
+      if(gradeArr[k].course == idCourse){
+        flag = true;
+        if(gradeTrainee<gradeArr[k].num)
+           gradeTrainee=gradeArr[k].num
+        else{
+          flag=false
+          gradeArr.splice(k, 1);
+        }
+           
+      }
+      k++;
+    }
     const obj = {
       course: idCourse,
-      num: sum
+      num: gradeTrainee
     };
-    const ans = arr.concat([obj])
-    const updatedTrainee = await CorporateTrainee.findOneAndUpdate( {_id: idTrainee} , {grade: ans});
-    console.log(updatedTrainee)
-
-    if(!updatedTrainee) {
+    const ans = gradeArr.concat([obj])  
+   
+    if(flag==false)
+    {  const updatedTrainee = await CorporateTrainee.findOneAndUpdate({_id: idTrainee} , {grade: ans});
+      console.log(updatedTrainee)
+      updated = true
+      if(!updatedTrainee) {
         return res.status(404).json({error: 'No such Corporate Trainee'})
-    }
-
-    return res.status(200).json(sum);
+    }}
+       await CorporateTrainee.findOneAndUpdate({_id: idTrainee} , {answers: []});
+   
+    return res.status(200).json(gradeTrainee);
 }
 
 const viewSolution = async(req,res) => {
   const { idCourse } = req.params;
-  //console.log(idCourse)
-
     if(!mongoose.Types.ObjectId.isValid(idCourse)) {
         return res.status(404).json({error: 'No such course'})
     }
 
     const crs = await Course.findOne({_id: idCourse});
-    //console.log(crs)
     const exam = crs.finalExam;
     console.log(exam)
 
@@ -265,29 +280,54 @@ const viewSolution = async(req,res) => {
 }
 
 const setAnswer = async(req,res) => {
+  const idCourse = req.params.idCourse;
   const id = req.params.id;
   const answer = req.params.answer;
-  console.log(id,answer)
   if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such Corporate Trainee'})
     }
+  if(!mongoose.Types.ObjectId.isValid(idCourse)) {
+      return res.status(404).json({error: 'No such Course'})
+  }
 
     const trainee = await CorporateTrainee.findById({_id: id })
-    console.log(trainee)
-    const temp =[answer]
-    console.log(temp)
+    const course = await Course.findOne({_id: idCourse})
+    const examT = course.finalExam
+    const index = trainee.answers.length ;
+    const exercise = examT[index];
+    console.log(examT,index)
+    let ansr = ''
+    if(answer=='1'){
+       ansr = exercise.firstChoice 
+    }
+    else if (answer=='2'){
+       ansr = exercise.secondChoice
+    }
+    else if (answer=='3'){
+       ansr = exercise.thirdChoice
+    }
+    else if (answer =='4'){
+       ansr = exercise.fourthChoice
+    }
+    const temp =[ansr]
     const ans = trainee.answers.concat(temp)
-    console.log(ans)
     const finalT = await CorporateTrainee.findOneAndUpdate({_id: id }, {answers : ans})
     console.log(finalT)
 
     if(!trainee) {
         return res.status(404).json({error: 'No such Corporate Trainee'})
     }
-    
-
     res.status(200).json(trainee);
-
+}
+const compareAnswers = async(req,res) => {
+  const solution = req.params.solution;
+  const answer = req.params.answer;
+  console.log(solution,answer)
+  if(solution == answer)
+    return res.json(true)
+  else 
+    return res.json(false)
+    
 
 }
 
@@ -301,5 +341,6 @@ module.exports={getCorporateTrainee,
                 changePasswordCorporateTrainee,
                 gradeExam,
                 viewSolution,
-                setAnswer
+                setAnswer,
+                compareAnswers
                 }

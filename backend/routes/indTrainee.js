@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const{getIndTrainees,getIndTrainee,signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer} = require('../controllers/indTraineeController')
+const{getIndTrainees,getIndTrainee,signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers} = require('../controllers/indTraineeController')
 
 //login route
 router.post('/login',loginIndTrainee)
@@ -31,5 +31,8 @@ router.patch('/updateProfile',updateIndTraineeProfile)
  router.get('/viewSolution/:idCourse',viewSolution)
  
  router.put('/setAnswer/:id/:answer',setAnswer)
+ 
+router.get('/compareAnswers/:solution/:answer',compareAnswers)
+
 
 module.exports = router
