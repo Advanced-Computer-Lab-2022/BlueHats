@@ -12,7 +12,9 @@ import NewCoTrainee from './pages/NewCoTrainee';
 
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewMyCourses"
-import Contract from './components/Contract';
+import ContractForm from './components/ContractForm';
+import HomeFilter from './pages/HomeFilter';
+import InstructorFilter from './pages/InstructorFilter';
 
 
  
@@ -31,9 +33,17 @@ function App() {
               path="/instructor"
               element={<Instructor/>}
             />
+            <Route
+              path="/HFilter"
+              element={<HomeFilter/>}
+            />
+               <Route
+              path="/IFilter"
+              element={<InstructorFilter/>}
+            />
                  <Route
               path="/contract"
-              element={<Contract/>}
+              element={<ContractForm/>}
             />
              <Route
               path="/course/preview"

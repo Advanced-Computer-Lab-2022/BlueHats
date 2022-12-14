@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
-const Contract = ({ history }) => {
+const ContractForm = () => {
   const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
 
-  const navigateToContacts = () => {
+  const location = useLocation();
+  const accepted  = location.state;
+  // console.log(accepted);
+
+  const navigateToInstructor = () => {
+    accepted.push('true')
     navigate("/instructor");
   };
 
@@ -14,8 +20,8 @@ const Contract = ({ history }) => {
   };
 
   return (
-    <div classNameName="Contract">
-      <div classNameName="container">
+    <div className="Contract">
+      <div className="container">
         <div className="container mt-3">
           <h2> Instructor Terms</h2>
 
@@ -170,11 +176,7 @@ const Contract = ({ history }) => {
             <input type="checkbox" id="agree" onChange={checkboxHandler} />
           </label>
         </div>
-        <button
-          disabled={!agree}
-          classNameName="btn"
-          onClick={navigateToContacts}
-        >
+        <button disabled={!agree} className="btn" onClick={navigateToInstructor}>
           Accept
         </button>
       </div>
@@ -182,4 +184,4 @@ const Contract = ({ history }) => {
   );
 };
 
-export default Contract;
+export default ContractForm;

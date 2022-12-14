@@ -58,9 +58,7 @@ const createCourse = async (req, res) => {
     try {
        
     const Course = await course.create({title, subject, subtitle, price,promotion,promotionDuration, summary, courseRating, instructor, instructorName});
-        // if(Course.promotion !== 0){
-        //     Course.update({price}, {$mul: {price: {$sub:1:{$div:{$promotion:100}}}}})
-        // }
+
     res.status(200).json(Course);
     } catch (error) {
         res.status(400).json({error: error.message});

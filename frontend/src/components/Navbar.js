@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
@@ -84,6 +86,14 @@ const Navbar = () => {
                 <Link to="/">
                     <img src="../logo.png" alt="logo"/>
                 </Link>
+                <Box sx={{marginBottom: 2}}>
+               <Button variant="contained"
+            //    onClick={() => window.location.href=`/search?key=${title}`}
+               margin="normal"
+               padding="normal"
+               >Load Courses</Button>
+               {/* margin */}
+               </Box>
                 <input className="searchbar" type="text" placeholder='Search for a course, instructor, subject...'/>
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
                 <p>Log in</p>

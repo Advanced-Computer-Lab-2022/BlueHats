@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCoursesContext } from "../hooks/useCoursesContext";
-import { v4 as uuidv4 } from 'uuid';
 
 // components
 import CourseDetails from "../components/CourseDetails";
 import CourseForm from "../components/CourseForm";
 import { Link } from "react-router-dom";
-import InstructorFilters from "../components/InstructorFilters";
+import IFilterBar from "../components/IFilterBar";
 
 const Instructor = () => {
   // const[text,setText] = useState('');
 
   const { courses, dispatch } = useCoursesContext();
+  const [accepted,setAccepted] = useState([])
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -29,17 +29,19 @@ const Instructor = () => {
   return (
     <div className="instructor">
       <div className="courses">
-        <Link to="/contract">Contracts</Link>
+      <Link to="/contract" state={accepted}>
+          Contract
+        </Link> 
+        {/* how to add the retured new state from contract in setAccepted? */}
         <h3>My Courses</h3>
-        <h3>Filter By:</h3>
-        <InstructorFilters key={uuidv4()} />
+        <IFilterBar />
         <h3>All Courses</h3>
         {courses &&
           courses.map((course) => (
             <CourseDetails course={course} key={course._id} />
           ))}
       </div>
-      <CourseForm />
+      {accepted.length!==0 ? <div> You cannot create courses yet </div> : <CourseForm /> }
     </div>
   );
 };

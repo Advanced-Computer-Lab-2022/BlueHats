@@ -1,12 +1,12 @@
 const express = require('express');
-const { filterByPrice, filterBySubject,getSubjects } = require('../controllers/filterController');
+const { filterByPrice, filterBySubject,getSubjects} = require('../controllers/filterController');
 
 const router = express.Router();
 
-router.get('/subject', filterBySubject)
+router.get('/subject/:subject', filterBySubject)
 
-router.get('/price', filterByPrice)
+router.get('/price/:price', filterByPrice)
 
-router.get('/subjects',getSubjects)
+router.get('/subject/:subject/price/:price', filterByPrice)
 
 module.exports = router;
