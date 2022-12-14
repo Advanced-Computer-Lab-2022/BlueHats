@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
+
 const ContractForm = () => {
   const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
-
+  
   const location = useLocation();
   const accepted  = location.state;
+
+  
   // console.log(accepted);
 
   const navigateToInstructor = () => {
     accepted.push('true')
     navigate("/instructor");
   };
+
 
   const checkboxHandler = () => {
     setAgree(!agree);

@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import IFilterBar from "../components/IFilterBar";
 
 const Instructor = () => {
-  // const[text,setText] = useState('');
 
   const { courses, dispatch } = useCoursesContext();
   const [accepted,setAccepted] = useState([])
@@ -32,7 +31,8 @@ const Instructor = () => {
       <Link to="/contract" state={accepted}>
           Contract
         </Link> 
-        {/* how to add the retured new state from contract in setAccepted? */}
+        {/* how to get the retured new state from contract page and edit the current one using setAccepted? */}
+        
         <h3>My Courses</h3>
         <IFilterBar />
         <h3>All Courses</h3>

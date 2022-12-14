@@ -13,7 +13,8 @@ const CourseForm = () => {
   const [subtitle, setSubtitle] = useState([{ name: '', hours: '' },])
   const [price, setPrice] = useState('')
   const [promotion, setPromotion] = useState('')
-  const [promotionDuration, setPromotionDuration] = useState('')
+  const [promotionStart, setPromotionStart] = useState('')
+  const [promotionEnd, setPromotionEnd] = useState('')
   const [summary, setSummary] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
@@ -21,7 +22,7 @@ const CourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const course = {title, subject, subtitle, price, promotion, promotionDuration, summary}
+    const course = {title, subject, subtitle, price, promotion, promotionStart,promotionEnd, summary}
 
     // (InputPrice = price)
     
@@ -45,7 +46,8 @@ const CourseForm = () => {
       setSubtitle([{ name: '', hours: '' },])
       setPrice('')
       setPromotion('')
-      setPromotionDuration('')
+      setPromotionStart('')
+      setPromotionEnd('')
       setSummary('')
       setSubject('')
       dispatch({type: 'CREATE_COURSE', payload: json})
@@ -138,12 +140,20 @@ const CourseForm = () => {
         className={emptyFields.includes('promotion') ? 'error': ''}
       />
       
-      <label>Promotion is valid until: [Optional]</label>
+      <label>Promotion starts on: [Optional]</label>
       <input
         type="date" 
-        onChange={(e) => setPromotionDuration(e.target.value)} 
-        value={promotionDuration} 
-        className={emptyFields.includes('promotionDuration') ? 'error': ''}
+        onChange={(e) => setPromotionStart(e.target.value)} 
+        value={promotionStart} 
+        className={emptyFields.includes('promotionStart') ? 'error': ''}
+      />
+      
+      <label>Promotion ends on: [Optional]</label>
+      <input
+        type="date" 
+        onChange={(e) => setPromotionEnd(e.target.value)} 
+        value={promotionEnd} 
+        className={emptyFields.includes('promotionEnd') ? 'error': ''}
       />
 
       <label>Summary:</label>
