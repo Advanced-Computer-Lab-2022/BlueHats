@@ -13,13 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "crypt": "^0.0.2",
     "cors": "^2.8.5",
+    "crypt": "^0.0.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.0",
     "nodemailer": "^6.8.0",
+    "nopt": "^7.0.0",
+    "stripe": "^11.3.0",
     "validator": "^13.7.0"
   }
 }

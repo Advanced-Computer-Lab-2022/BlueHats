@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Instructor from './pages/Instructor';
 import AddCourse from './pages/AddCourse';
 import CourseView from './pages/CourseView';
+import Payment from './pages/Payment';
 
 import Search from './pages/Search';
 import ExamTrainee from './pages/ExamTrainee';
@@ -170,6 +171,11 @@ function App() {
             <Route
               path="/review"
               element={<ReviewCourse/>}
+            />
+
+             <Route
+              path="/payment"
+              element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}
             />
             
           </Routes>

@@ -53,6 +53,20 @@ header a {
   position: absolute;
   right:150px;
   top:150px;
+  min-width: 100px;
+}
+.instructor .instructor-wallet button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  right:150px;
+  top:200px;
+  min-width: 100px;
 }
 .instructorAddCourse {
   padding: 200px;
@@ -244,6 +258,15 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+}
+form button:disabled {
+  background: #b487da;
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: not-allowed;
 }
 div.error {
   padding: 10px;

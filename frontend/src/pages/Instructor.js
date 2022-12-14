@@ -46,6 +46,9 @@ const Instructor = () => {
           ))}
       </div>
       <button onClick={navigateAddCourse}>Add Course</button>    
+      <div className="instructor-wallet">
+        <button>My Wallet</button>    
+      </div>
     </div>
   );
 };
