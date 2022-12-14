@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+export var acceptedX = [];
+
 const ContractForm = () => {
   const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
   
   const location = useLocation();
-  const accepted  = location.state;
+  const accepted= location.state;
 
   
-  // console.log(accepted);
 
   const navigateToInstructor = () => {
-    accepted.push('true')
+    console.log(accepted);
+
+    const x = accepted.push('true')
     navigate("/instructor");
+    acceptedX = x;
   };
 
 

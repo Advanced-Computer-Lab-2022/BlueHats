@@ -6,6 +6,7 @@ import CourseDetails from "../components/CourseDetails";
 import CourseForm from "../components/CourseForm";
 import { Link } from "react-router-dom";
 import IFilterBar from "../components/IFilterBar";
+import { acceptedX } from '../components/ContractForm';
 
 const Instructor = () => {
 
@@ -31,7 +32,6 @@ const Instructor = () => {
       <Link to="/contract" state={accepted}>
           Contract
         </Link> 
-        {/* how to get the retured new state from contract page and edit the current one using setAccepted? */}
         
         <h3>My Courses</h3>
         <IFilterBar />
@@ -41,7 +41,7 @@ const Instructor = () => {
             <CourseDetails course={course} key={course._id} />
           ))}
       </div>
-      {accepted.length!==0 ? <div> You cannot create courses yet </div> : <CourseForm /> }
+      {acceptedX.length === 0 ? <div> You cannot create courses yet </div> : <CourseForm /> }
     </div>
   );
 };

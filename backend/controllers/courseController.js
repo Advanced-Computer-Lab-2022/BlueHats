@@ -88,7 +88,6 @@ const createCourse = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
 // Delete a course
 const deleteCourse = async (req, res) => {
   const { id } = req.params;

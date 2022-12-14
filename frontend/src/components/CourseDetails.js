@@ -77,6 +77,14 @@ const CourseDetails = ({ course }) => {
       return priceAfter;
     }
 
+    function disableDates (){
+        const today = new Date();
+        const dd = today.getDate() + 1;
+        const mm = today.getMonth() + 1;
+        const yyyy = today.getFullYear();
+        return yyyy+"-"+mm+"-"+dd; 
+    }
+
 
     const currency = getParamByParam('countryName', countryValue, 'symbol');
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
@@ -111,6 +119,7 @@ const CourseDetails = ({ course }) => {
                 id="startDate"
                 value= {promotionStartEdited}
                 type="date" 
+                min = {disableDates}
                 onChange={(e) => setPromotionStartEdited(e.target.value)} 
                 variant="outlined"
               />
