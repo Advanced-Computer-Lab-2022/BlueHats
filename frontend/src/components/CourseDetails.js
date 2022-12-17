@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useCoursesContext } from '../hooks/useCoursesContext'
 import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from '../components/Navbar'
-import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -45,28 +44,6 @@ const CourseDetails = ({ course }) => {
     }
   }
 
-  // const handleGetCourse = async () => {
-  //   const response = await fetch('/api/courses/' + course._id, {
-  //     method: 'GET'
-  //   })
-  //   const json = await response.json();
-
-  //   if(response.ok) {
-  //     dispatch({type: 'GET_COURSE', payload: json});
-  //   }
-  // }
-
-  const handleTheClick = async () => {
-    const response = await fetch('/api/courses/' + course._id, {
-      method: 'PUT'
-    })
-    const json = await response.json();
-
-    if(response.ok) {
-      dispatch({type: 'UPDATE_COURSE', payload: json});
-    }
-  }
-
     function CheckNumber() {
       if(result>1) {
         return 'hours';
@@ -75,22 +52,18 @@ const CourseDetails = ({ course }) => {
         return 'hour';
       }
     }
-    function priceAfterDiscount(price,promotion){
-      const priceAfter = price * (1-(promotion/100))
-      return priceAfter;
+    function priceAfterDiscount(price,promotion)
+    {
+      if(promotion != NaN)
+      {
+        const priceAfter = price * (1-(promotion/100))
+        return priceAfter;
+      }
+     else 
+     {
+      return price;
+     }
     }
-
-    function disableDates (){
-        const today = new Date();
-        const dd = today.getDate() ;
-        const mm = today.getMonth() + 1;
-        const yyyy = today.getFullYear();
-        return yyyy+"-"+mm+"-"+dd; 
-    }
-    const handleDateChangeRaw = (e) => {
-      e.preventDefault();
-    }
-    
 
     function disableDates (){
         const today = new Date();
@@ -107,8 +80,6 @@ const CourseDetails = ({ course }) => {
     const [currency, setCurrency] = useState('');
     const [toCurrency, setToCurrency] = useState('');
 
-    //const currency = getParamByParam('countryName', countryValue, 'symbol');
-    //const toCurrency = getParamByParam('countryName', countryValue, 'currency');
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
 
 
@@ -132,13 +103,6 @@ const CourseDetails = ({ course }) => {
     set();
     }, [from, info]);
 
-    // useEffect(() => {
-    //   convert();
-    //   setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-    //   setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
-    //   set();
-    // }, [info])
-
     function set() {
       if(toCurrency !== NaN)
         setTo((toCurrency.toLowerCase()));
@@ -156,9 +120,9 @@ const CourseDetails = ({ course }) => {
         <p><strong>Price: </strong> {currency} {priceAfterDiscount(output,course.promotion)}</p>
         <p><strong>Promotion: </strong> {course.promotion} % Valid Until {course.promotionEnd}</p> 
         <div float='left'>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          {/* <Button variant="outlined" onClick={handleClickOpen}>
           Edit
-          </Button>
+          </Button> */}
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Edit/Add a Promotion</DialogTitle>
             <DialogContent>
@@ -202,12 +166,12 @@ const CourseDetails = ({ course }) => {
             </DialogActions>
           </Dialog>
     </div>
-        <p><strong>Price Before Discount: </strong> {currency} {course.price}</p>
+        <p><strong>Price Before Discount: </strong> {currency} {output}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
         <span className="material-symbols-outlined first" onClick={handleClick}>delete</span>
-        <span className="material-symbols-outlined second" onClick={handleTheClick}>edit</span>
+        <span className="material-symbols-outlined second" onClick={handleClickOpen}>edit</span>
       </div>
     )
   }

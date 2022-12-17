@@ -51,7 +51,7 @@ const getCourse = async (req, res) => {
 // Create a new course
 
 const createCourse = async (req, res) => {
-    const {title,subject, previewLink, subtitle, price, promotion, promotionDuration, summary,finalExam, instructor,individualTrainee,courseRating,numberOfRates,reviews} = req.body;
+    const {title,subject, previewLink, subtitle, price, promotion, promotionStart, promotionEnd, summary,finalExam, instructor,individualTrainee,courseRating,numberOfRates,reviews} = req.body;
 
   let emptyFields = [];
 
@@ -125,7 +125,7 @@ const createCourse = async (req, res) => {
     // Add doc to database
     try {
        
-    const Course = await course.create({title,subject, previewLink, subtitle, price, promotion, promotionDuration, summary,finalExam, instructor,individualTrainee,courseRating,numberOfRates,reviews});
+    const Course = await course.create({title,subject, previewLink, subtitle, price, promotion, promotionStart, promotionEnd, summary,finalExam, instructor,individualTrainee,courseRating,numberOfRates,reviews});
     // if(Course.promotion !== 0){
     // Course.update({price}, {$mul: {price: {$sub:1:{$div:{$promotion:100}}}}}) //price = price * (1-(promotion/100))
     // }

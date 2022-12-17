@@ -11,7 +11,7 @@ function IFilterBar() {
   return (
     <div>
       <h3>Filter By:</h3>
-      <div className="row">
+      <div className="row filter-inst">
         <div className="col-md-3 border - right">
           <nav className="navbar navbar-expand-lg navbar-light bg-light border-top p-3">
             <div className="dropdown">

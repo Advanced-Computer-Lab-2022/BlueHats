@@ -4,7 +4,7 @@ import { useCoursesContext } from "../hooks/useCoursesContext"
 
 import { Link } from "react-router-dom";
 import IFilterBar from "../components/IFilterBar";
-import { acceptedX } from '../components/ContractForm';
+// import { acceptedX } from '../components/ContractForm';
 
 // components
 import CourseDetails from "../components/CourseDetails"
@@ -48,6 +48,7 @@ const Instructor = () => {
       <button onClick={navigateAddCourse}>Add Course</button>    
       <div className="instructor-wallet">
         <button>My Wallet</button>    
+        {/* {acceptedX.length === 0 ? <div> You cannot create courses yet </div> : <CourseForm /> } */}
       </div>
     </div>
   );

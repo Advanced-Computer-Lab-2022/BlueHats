@@ -28,7 +28,7 @@ const CourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const course = {title, subject, previewLink, subtitle, price, promotion, promotionDuration, summary, finalExam}
+    const course = {title, subject, previewLink, subtitle, price, promotion, promotionStart,promotionEnd, summary, finalExam}
     
     const response = await fetch('/api/courses', {
       method: 'POST',
@@ -142,6 +142,14 @@ const CourseForm = () => {
 
   const { option1, option2, option3, option4 } = state;
   const error1 = [ option1, option2, option3, option4].filter((v) => v).length !== 1;
+
+  function disableDates (){
+    const today = new Date();
+    const dd = today.getDate() ;
+    const mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    return yyyy+"-"+mm+"-"+dd; 
+}
 
   return (
    
@@ -279,19 +287,24 @@ const CourseForm = () => {
         <label>Promotion% : [Optional]</label>
         <input
           type="number" 
+          min="0"
           prefix={'%'}
           onChange={(e) => setPromotion(e.target.value)} 
-          value={promotion} 
-          className={emptyFields.includes('promotion') ? 'error': ''}
-        />
-        
-        <label>Promotion is valid until: [Optional]</label>
+          value={promotion} />
+
+        <label>Promotion starts on: [Optional]</label>
         <input
           type="date" 
-          onChange={(e) => setPromotionDuration(e.target.value)} 
-          value={promotionDuration} 
-          className={emptyFields.includes('promotionDuration') ? 'error': ''}
-        />
+          min = {disableDates()}
+          onChange={(e) => setPromotionStart(e.target.value)} 
+          value={promotionStart} />
+        
+        <label>Promotion ends on: [Optional]</label>
+        <input
+          type="date" 
+          min = {disableDates()}
+          onChange={(e) => setPromotionEnd(e.target.value)} 
+          value={promotionEnd} />
         
         <label>Summary:</label>
         <input
