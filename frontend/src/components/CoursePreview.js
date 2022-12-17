@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getParamByParam } from 'iso-country-currency'
-import { countryValue } from './Navbar'
+import { countryValue } from '../components/Navbar'
 import YoutubeEmbed from "./YoutubeEmbed";
 import Axios from "axios";
 
@@ -40,14 +40,18 @@ const CoursePreview = ({course}) => {
       .then((res) => {
         setInfo(res.data[from]);
         })
-      }, [from]);
+      convert();
+      setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+      setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+      set();
+      }, [from, info]);
   
-      useEffect(() => {
-        convert();
-        setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-        setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
-        set();
-      }, [info])
+      // useEffect(() => {
+      //   convert();
+      //   setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+      //   setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+      //   set();
+      // }, [info])
   
       function set() {
         if(toCurrency !== NaN)
@@ -65,17 +69,18 @@ const CoursePreview = ({course}) => {
 
     return (
         <div className="course-preview">
-          <div> <YoutubeEmbed embedId={myembedID} /></div>
           <div>
             <h1>{course.title.toUpperCase()}</h1>
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <p><strong>Price: </strong> {currency} {output}</p>
+            <button onClick={() => window.location.href=`/payment?id=${course._id}`}>Enroll Now</button>
             <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
             <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             <h4>Course Content</h4>
             <ol>{(course.subtitle).map((mycourse)=> <li mycourse={mycourse} key={course._id}>  {mycourse.name} is {mycourse.hours} hours </li>)}</ol>
           </div>
+          <div className="course-preview-video"> <YoutubeEmbed embedId={myembedID} /></div>
         </div>
         
     )

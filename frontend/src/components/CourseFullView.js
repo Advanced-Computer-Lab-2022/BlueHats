@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import YoutubeEmbed from "./YoutubeEmbed";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import Exam from "./Exam";
+import ProgressBar from "./ProgressBar";
 
 const CourseFullView = ({ course }) => {
 
@@ -19,7 +20,26 @@ const CourseFullView = ({ course }) => {
     const myembed1 = mylink1.split('=');
     const myembedID1 = myembed1[1];
 
+    const add = Math.round(100/((course.subtitle).length*2));
+    const [value, setValue] = useState(0);
+
+    const handleClick = () => {
+      setValue(oldValue => {
+        const newValue = oldValue + add;
+
+        if (newValue === 100) {
+          return 100;
+        }
+
+        return newValue;
+      });
+    };
+
     return (
+      <div>
+        <div className="progress">
+        <ProgressBar key={course._id} bgcolor={"#2bb638"} completed={value} />
+        </div>
         <div className="course-view">
         <Sidebar className="course-view-sidebar">
             <Menu className="sidebar11">
@@ -50,8 +70,11 @@ const CourseFullView = ({ course }) => {
             {active === "video" &&  <YoutubeEmbed embedId={ myembedID}/>}
             {active === "question" &&  <Exam question={quest} firstO={first} secondO={second} thirdO={third} fourthO={fourth} answer={ans} />}
         </div>
-       
+        <div className="done-button">
+          {(active === "question" || active === "video" ) && <button onClick={handleClick}>Done</button>}
+        </div>
        </div>
+      </div>
     )
       
 }

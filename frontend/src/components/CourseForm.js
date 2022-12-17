@@ -63,7 +63,6 @@ const CourseForm = () => {
     const values = [...subtitle];
     values[index][event.target.name] = event.target.value;
     setSubtitle(values);
-    console.log(subtitle)
   }
 
   const handleAddFields = () => {
@@ -185,6 +184,7 @@ const CourseForm = () => {
             <input
               name="hours"
               type="number"
+              min="0"
               step="1"
               pattern="\d+"
               onChange={(e) => { handleChangeInput(index, e); } }
@@ -267,6 +267,7 @@ const CourseForm = () => {
         <label>Price:</label>
         <input
           type="number"
+          min="0"
           placeholder="Please enter price in USD $"
           prefix={'$'}
           onChange={(e) => setPrice(e.target.value)}

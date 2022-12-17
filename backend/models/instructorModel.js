@@ -26,6 +26,10 @@ const instructorSchema = new Schema({
   {
     type:String ,
     required: false
+  },
+  wallet: 
+  {
+    type: Number
   }
 }, { timestamps: true })
 

@@ -463,7 +463,7 @@ a:hover {
 }
 
 .video-responsive {
-  overflow: hidden;
+  /* overflow: hidden; */
   padding-bottom: 30%;
   padding-top: 30%;
   position: relative;
@@ -488,7 +488,20 @@ a:hover {
 }
 .course-view-video {
   width: 100%;
-  padding-left: 100px;
+  padding-left: 177px;
+}
+.done-button button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  min-width: 100px;
+  top: 569px;
+  right: 650px;
 }
 header .container .inputWithButton {
   position: relative;
@@ -550,5 +563,28 @@ form.signup, form.login , form.forgotPassword , form.resetPassword , form.change
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
- position: initial;
+  position: initial;
+}
+
+.progress {
+  margin-left: 350px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.course-preview {
+  display: flex;
+}
+.course-preview button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  position: initial;
+  min-width: 100px;
+}
+.course-preview .course-preview-video {
+  padding-left: 150px;
 }

@@ -9,7 +9,6 @@ function CourseView () {
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-  console.log(id);
 
   const [loading, setLoading ] = useState(true);
 
@@ -22,7 +21,6 @@ function CourseView () {
       (res) => {
         setLoading(false)
         const course = res.data
-        console.log(course)
         setCourse(course)
       }
     )

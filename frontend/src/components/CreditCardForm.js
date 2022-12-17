@@ -3,18 +3,22 @@ import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/rea
 import axios from 'axios';
 
 const CreditCardForm = ({ course }) => {
- 
+
     const stripe = useStripe();
     const element = useElements();
-  
-    const {credentials, setCredentials} = useState({name: '', email: '', phone: '', address: ''});
-    const {isProcessing, setProcessing} = useState(false);
-    const {error, setError} = useState('');
-    const {status, setStatus} = useState('Pay');
 
+    const [credentials, setCred] = useState({name: '', email: '', phone: ''});
+    const [isProcessing, setProcessing] = useState(false);
+    const [error, setError] = useState('');
+    const [status, setStatus] = useState('Pay');
+
+    const data = {amount: (course.price * 100)}
+
+  
+    
     const handleChange = (e) => {
         const { value, name } = e.target;
-        setCredentials({...credentials, [name]: value });
+        setCred({...credentials, [name]: value});
     }
 
     const handleCardChange = (e) => {
@@ -29,20 +33,22 @@ const CreditCardForm = ({ course }) => {
         setStatus('Processing...');
 
         const cardElement = element.getElement('card');
-        const {name, email, phone, address} = credentials;
+        const {name, email, phone} = credentials;
         const billinginfo = {
             name,
             phone,
-            email,
-            address: {
-                line1: address,
-            },
+            email
         };
 
+       
+       
         try {
-            const paymentIntent = await axios.post('/api/courses/payment', {
-                amount: course.price * 100,
-            });
+             const paymentIntent = await  axios({
+                method: "POST",
+                url: `/api/courses/payment`,
+                data: data,
+                headers: {'Content-Type': 'application/json'}
+              });
 
             const paymentMethodObj = await stripe.createPaymentMethod({
                 type: 'card',
@@ -74,7 +80,7 @@ const CreditCardForm = ({ course }) => {
             setTimeout(() => {
                 setStatus('Pay');
                 setProcessing(false);
-                setCredentials({ name: '', email: '', phone: '', address: '' });
+                setCred({ name: '', email: '', phone: '', address: '' });
 
             }, 2000);
 
@@ -85,6 +91,7 @@ const CreditCardForm = ({ course }) => {
             setProcessing(false);
             setStatus('Pay');
         }
+        
     }
   
     return (
@@ -96,7 +103,7 @@ const CreditCardForm = ({ course }) => {
                     type="text" 
                     placeholder="Full Name"
                     required
-                    //value={credentials.name}
+                    value={credentials.name}
                     onChange={handleChange}
                 />
                 <label> Phone Number </label>
@@ -106,7 +113,7 @@ const CreditCardForm = ({ course }) => {
                     type="number" 
                     placeholder="Phone Number"
                     required
-                    //value={credentials.phone}
+                    value={credentials.phone}
                     onChange={handleChange}
                 />
                 <label> Email </label>
@@ -116,16 +123,7 @@ const CreditCardForm = ({ course }) => {
                     type="email" 
                     placeholder="name@example.com"
                     required
-                   // value={credentials.email}
-                    onChange={handleChange}
-                />
-                <label> Address </label>
-                <input 
-                    name="address"
-                    type="text" 
-                    placeholder="123 street"
-                    required
-                    //value={credentials.address}
+                    value={credentials.email}
                     onChange={handleChange}
                 />
                 <p>{error}</p>
@@ -147,7 +145,7 @@ const CreditCardForm = ({ course }) => {
                 />
                 {/* <PaymentElement/> */}
                 <br/>
-                <button disabled={isProcessing} type="submit"> Pay </button>
+                <button disabled={isProcessing} type="submit"> {status} </button>
             </form>
         </div>
     )

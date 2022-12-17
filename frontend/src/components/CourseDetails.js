@@ -80,14 +80,18 @@ const CourseDetails = ({ course }) => {
     .then((res) => {
       setInfo(res.data[from]);
       })
-    }, [from]);
+    convert();
+    setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+    setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+    set();
+    }, [from, info]);
 
-    useEffect(() => {
-      convert();
-      setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-      setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
-      set();
-    }, [info])
+    // useEffect(() => {
+    //   convert();
+    //   setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+    //   setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+    //   set();
+    // }, [info])
 
     function set() {
       if(toCurrency !== NaN)

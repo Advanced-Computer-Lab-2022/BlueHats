@@ -1,6 +1,7 @@
 const express = require('express');
 const { createCourse, getCourses, getCourse, deleteCourse, updateCourse } = require('../controllers/courseController');
-const {getCoursesBySearch } = require('../controllers/search');
+const { getCoursesBySearch } = require('../controllers/search');
+const { coursePayment } = require('../controllers/payment');
 
 const router = express.Router();
 
@@ -19,10 +20,10 @@ router.delete('/:id', deleteCourse);
 // Update a course
 router.patch('/:id', updateCourse);
 
+// Search a course 
+router.get('/search/:key', getCoursesBySearch); 
 
-//search a course 
-router.get('/search/:key', getCoursesBySearch) 
-
-
+// Pay for a course
+router.post('/payment', coursePayment); 
 
 module.exports = router;

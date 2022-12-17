@@ -41,6 +41,10 @@ const indTraineeSchema = new Schema({
   ,
   answers: {
     type: [String]
+  },
+  wallet: 
+  {
+    type: Number
   }
 }, { timestamps: true })
 
