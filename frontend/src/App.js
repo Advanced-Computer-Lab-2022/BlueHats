@@ -30,7 +30,9 @@ import Biography from './pages/biography';
 import CourseForm from "./components/CourseForm"
 import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewInstructorCourses"
-import Contract from './components/Contract';
+import ContractForm from './components/ContractForm';
+import HomeFilter from './pages/HomeFilter';
+import InstructorFilter from './pages/InstructorFilter';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
 import ReviewCourse from './components/CoursesTitleRatingReviews';
 
@@ -79,9 +81,17 @@ function App() {
               path="/instructor/addCourse"
               element={<AddCourse/>}
             />
+            <Route
+              path="/HFilter"
+              element={<HomeFilter/>}
+            />
+               <Route
+              path="/IFilter"
+              element={<InstructorFilter/>}
+            />
                  <Route
               path="/contract"
-              element={<Contract/>}
+              element={<ContractForm/>}
             />
              <Route
               path="/course/preview"

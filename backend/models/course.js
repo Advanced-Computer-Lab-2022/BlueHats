@@ -26,7 +26,10 @@ const courseSchema = new Schema({
     promotion: {
         type: Number,
     },
-    promotionDuration:{
+    promotionStart:{
+        type: Date,
+    },
+    promotionEnd:{
         type: Date,
     },
     summary: {

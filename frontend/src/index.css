@@ -1,5 +1,5 @@
 /* google font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
 
 /* layout */
 :root {
@@ -26,7 +26,7 @@ header a {
   color: #333;
   text-decoration: none;
 }
-.pages{
+.pages {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
@@ -90,12 +90,12 @@ header a {
   display: flex;
   flex-direction: row;
 } */
-.instructor .create span{
+.instructor .create span {
   position: absolute;
   padding-left: 10px;
   cursor: pointer;
 }
-.instructor .create span.first{
+.instructor .create span.first {
   position: absolute;
   right: 65px;
 }
@@ -105,7 +105,7 @@ header a {
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .course-details h4 {
   margin: 0 0 10px 0;
@@ -117,7 +117,7 @@ header a {
   font-size: 0.9em;
   color: #555;
 }
-.course-details span.first{
+.course-details span.first {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -127,7 +127,7 @@ header a {
   border-radius: 50%;
   color: #333;
 }
-.course-details span.second{
+.course-details span.second {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -148,7 +148,7 @@ header a {
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .admin-details h4 {
   margin: 0 0 10px 0;
@@ -170,7 +170,7 @@ header a {
   border-radius: 50%;
   color: #333;
 }
-.newInstructor {  
+.newInstructor {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
@@ -181,7 +181,7 @@ header a {
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .addInstructor-details h4 {
   margin: 0 0 10px 0;
@@ -214,7 +214,7 @@ header a {
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .corporateTrainee-details h4 {
   margin: 0 0 10px 0;
@@ -238,7 +238,8 @@ header a {
 }
 
 /* new course form */
-label, input {
+label,
+input {
   display: block;
 }
 input {
@@ -330,7 +331,7 @@ a:hover {
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .instructor-details h4 {
   margin: 0 0 10px 0;
@@ -351,7 +352,7 @@ a:hover {
   padding: 6px;
   border-radius: 50%;
   color: #333;
-} 
+}
 /* Dropdown Button */
 .dropbtn {
   background-color: #a256e0;
@@ -381,7 +382,7 @@ a:hover {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -394,13 +395,19 @@ a:hover {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 
 /* The container must be positioned relative: */
 .custom-select {
@@ -435,7 +442,8 @@ a:hover {
 }
 
 /* style the items (options), including the selected item: */
-.select-items div,.select-selected {
+.select-items div,
+.select-selected {
   color: #ffffff;
   padding: 8px 16px;
   border: 1px solid transparent;
@@ -458,7 +466,8 @@ a:hover {
   display: none;
 }
 
-.select-items div:hover, .same-as-selected {
+.select-items div:hover,
+.same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -587,4 +596,31 @@ form.signup, form.login , form.forgotPassword , form.resetPassword , form.change
 }
 .course-preview .course-preview-video {
   padding-left: 150px;
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.note-form textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid lightgrey;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100px;
+  padding: 10px;
+  outline: none;
+}
+.note-form button {
+  width: 100%;
+  background-color: #fff27f;
+  cursor: pointer;
+  padding: 10px;
+  border: 0;
+  outline: none;
+}
+.note-form button:hover {
+  background-color: tomato;
+  color: white;
 }
