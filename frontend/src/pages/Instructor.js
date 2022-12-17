@@ -32,7 +32,6 @@ const Instructor = () => {
       <Link to="/contract" state={accepted}>
           Contract
         </Link> 
-        
         <h3>My Courses</h3>
         <IFilterBar />
         <h3>All Courses</h3>

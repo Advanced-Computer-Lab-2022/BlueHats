@@ -9,4 +9,7 @@ router.get('/price/:price', filterByPrice)
 
 router.get('/subject/:subject/price/:price', filterByPrice)
 
+router.get('/subjects', getSubjects)
+
+
 module.exports = router;

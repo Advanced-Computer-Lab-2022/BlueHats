@@ -4,9 +4,29 @@ const mongoose = require("mongoose");
 // Get all courses
 const getCourses = async (req, res) => {
   const courses = await course.find({}).sort({ createdAt: -1 });
-
+  const currentDate = new Date();
+  if(currentDate >= courses.promotionEnd) {
+    courses.updateMany({ $set: {promotion: 0} });
+  }
   res.status(200).json(courses);
+
 };
+
+// const currentDate = new Date();
+// if (currentDate >= courses.promotionEnd) {
+//   course.updateOne({ $set: {promotion: 0} });
+// }
+// if (isItToday(courses.promotionEnd)) {
+//   course.updateOne({ $set: {promotion: 0} });
+// }
+
+const isItToday = (date)=> {
+  const today = new Date();
+  if(today.getDate() >= date){ 
+    return true
+  }else 
+    return false;
+}
 
 // Get a single course
 const getCourse = async (req, res) => {
@@ -82,6 +102,9 @@ const createCourse = async (req, res) => {
       instructor,
       instructorName,
     });
+    // if(Course.promotion !== 0){
+    // Course.update({price}, {$mul: {price: {$sub:1:{$div:{$promotion:100}}}}}) //price = price * (1-(promotion/100))
+    // }
 
     res.status(200).json(Course);
   } catch (error) {

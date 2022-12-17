@@ -31,9 +31,7 @@ const filterBySubject = async (req, res) => {
 
 
 const getSubjects = async (req, res) => {
-  const subjects = await course
-    .find({}, { subject: 1 })
-    .sort({ createdAt: -1 });
+  const subjects = await course.find({}, { subject: 1 }).sort({ createdAt: -1 });
   res.status(200).json(subjects);
   console.log(subjects);
 };

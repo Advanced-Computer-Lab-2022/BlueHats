@@ -14,8 +14,6 @@ const ContractForm = () => {
   
 
   const navigateToInstructor = () => {
-    console.log(accepted);
-
     const x = accepted.push('true')
     navigate("/instructor");
     acceptedX = x;
