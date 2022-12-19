@@ -40,7 +40,6 @@ const Instructor = () => {
         </Link> 
         <h3>My Courses</h3>
         <IFilterBar />
-        <h3>All Courses</h3>
         {courses && courses.map((course) => (
             <CourseDetails course={course} key={course._id} />
           ))}

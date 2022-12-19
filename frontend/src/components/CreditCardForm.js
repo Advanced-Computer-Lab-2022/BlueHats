@@ -76,6 +76,7 @@ const CreditCardForm = ({ course }) => {
             }
 
             setStatus('Success! Payment is complete.');
+            window.location.href=`/`
 
             setTimeout(() => {
                 setStatus('Pay');
@@ -126,7 +127,7 @@ const CreditCardForm = ({ course }) => {
                     value={credentials.email}
                     onChange={handleChange}
                 />
-                <p>{error}</p>
+                
                 <CardElement 
                 options={{
                     hidePostalCode: true,
@@ -143,9 +144,9 @@ const CreditCardForm = ({ course }) => {
                 }} 
                 onChange={handleCardChange}
                 />
-                {/* <PaymentElement/> */}
                 <br/>
                 <button disabled={isProcessing} type="submit"> {status} </button>
+                <p>{error}</p>
             </form>
         </div>
     )

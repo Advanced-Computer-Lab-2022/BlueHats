@@ -19,4 +19,19 @@ const coursePayment = async (req, res) => {
     }
 }
 
-module.exports = { coursePayment };
+const courseRefund = async (req, res) => {
+    const { pi_id } = req.body;
+
+    try {
+        const refund = await stripe.refunds.create({
+            payment_intent: pi_id,
+        })
+        //res.status(200).send(paymentIntent.client_secret);
+    } 
+    catch (error) {
+        res.status(500).json({message: error.message});
+        console.log(error)
+    }
+}
+
+module.exports = { coursePayment, courseRefund };

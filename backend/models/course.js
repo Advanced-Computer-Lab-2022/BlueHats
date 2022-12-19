@@ -65,6 +65,10 @@ const courseSchema = new Schema({
     {
         type:Array,
         default: []
+    },
+    enrolled: 
+    {
+        type: Number
     }
     
 }, { timestamps: true });

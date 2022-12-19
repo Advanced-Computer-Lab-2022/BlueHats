@@ -118,7 +118,7 @@ const CourseDetails = ({ course }) => {
         <Link onClick={() => window.location.href=`/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
         <p><strong>Subject: </strong>{course.subject}</p>
         <p><strong>Price: </strong> {currency} {priceAfterDiscount(output,course.promotion)}</p>
-        <p><strong>Promotion: </strong> {course.promotion} % Valid Until {course.promotionEnd}</p> 
+        {course.promotion>0 && <p><strong>Promotion: </strong> {course.promotion} % &nbsp; Valid Until {course.promotionEnd}</p>  }
         <div float='left'>
           {/* <Button variant="outlined" onClick={handleClickOpen}>
           Edit
@@ -166,7 +166,7 @@ const CourseDetails = ({ course }) => {
             </DialogActions>
           </Dialog>
     </div>
-        <p><strong>Price Before Discount: </strong> {currency} {output}</p>
+        { course.promotion>0 && <p><strong>Price Before Discount: </strong> {currency} {output}</p>}
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
