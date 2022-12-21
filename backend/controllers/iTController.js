@@ -95,8 +95,9 @@ const updateIndividualTrainee = async (req, res) => {
 var averageRate = 0;
 var accumlatedRate = 0;
 const rateCourse = async (req, res) => {
-    console.log(averageRate)
-    console.log(accumlatedRate)
+    // console.log(averageRate)
+    // console.log(accumlatedRate)
+
     const courseId= req.query.courseId;
     if(!mongoose.Types.ObjectId.isValid(courseId)){
         return res.status(404).json({error: 'No such course'})
@@ -108,16 +109,21 @@ const rateCourse = async (req, res) => {
     var {userRate} = await req.body;
 
 
-    accumlatedRate =  accumlatedRate + parseInt(userRate)
+     accumlatedRate =  aCourse[0].accumlatedRates + parseInt(userRate)
+    var lastCount = aCourse[0].numberOfRates;
     lastCount++;
     var newCount= lastCount;
-    averageRate = accumlatedRate/newCount
+ 
 
-    console.log(averageRate)
-    console.log(accumlatedRate)
+    averageRate =  accumlatedRate /  newCount
+
+    // console.log(averageRate)
+    // console.log(accumlatedRate)
+
     const Course = await course.findOneAndUpdate({_id:courseId},{
         courseRating:averageRate,
-        numberOfRates:newCount
+        numberOfRates:newCount,
+        accumlatedRates:accumlatedRate
     })
 
     if(!Course){
@@ -133,8 +139,8 @@ const rateCourse = async (req, res) => {
 var avgRate = 0;
 var accRate = 0;
     const rateInstructor = async (req, res) => {
-        console.log(avgRate)
-        console.log(accRate)
+        // console.log(avgRate)
+        // console.log(accRate)
         const courseId= req.query.courseId;
         if(!mongoose.Types.ObjectId.isValid(courseId)){
             return res.status(404).json({error: 'No such Instructor'})
@@ -142,28 +148,31 @@ var accRate = 0;
         const aCourse = await course.find({
             _id:courseId,
         });
-       
-   //     var instructorId = aCourse[0].instructor
+     
+        // console.log(aCourse[0].accRates)
+        // console.log(aCourse[0].numOfRates)
 
+   //     var instructorId = aCourse[0].instructor
    //     const anInstructor = await instructor.find({_id:instructorId})
 
-       var lCount=aCourse[0].numOfRates;
        var {uRate} = await req.body;
        
        
-       accRate = accRate +  parseInt(uRate)
-      
+    //    accRate = accRate +  parseInt(uRate)
+        accRate = aCourse[0].accRates + parseInt(uRate)
+        var lCount=aCourse[0].numOfRates;
         lCount++;
         var nCount= lCount;
 
-         avgRate = accRate/nCount
+        avgRate = accRate/nCount
 
-         console.log(avgRate)
-         console.log(accRate)
+        // console.log(avgRate)
+        // console.log(accRate)
 
         const CourseInstructor = await course.findOneAndUpdate({_id:courseId},{
             instructorRate:avgRate,
-            numOfRates:nCount
+            numOfRates:nCount,
+            accRates: accRate
         })
     
         if(!CourseInstructor){

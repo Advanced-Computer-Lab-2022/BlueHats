@@ -49,9 +49,9 @@ const ReviewCourse = ({course}) => {
 }
    return (
 
-    <form className="create" onSubmit={handleSubmit}> 
+    <form className ="review-form" onSubmit={handleSubmit}> 
       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
-        <h3>Review your course</h3>
+        <h2>Review your course</h2>
           <label>Enter a rate</label>
               <div class="stars">
                   <form action="">
@@ -90,11 +90,11 @@ const ReviewCourse = ({course}) => {
       value={courseReviews}
     />
 
-     <h3>Review your instructor</h3>
+     <h2>Review your instructor</h2>
 
 <label>Enter a rate</label>
 <div class="stars">
-                  <form action="">
+                  <form   action="">
                     <input class="star star-5" id="starr-5" type="radio" name="star"
                         onChange={(e) => setInstructorRate(e.target.value)} 
                         value={5} />

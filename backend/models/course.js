@@ -66,7 +66,20 @@ const courseSchema = new Schema({
     numOfRates:{
         type:Number,
         default:0
-    }
+    },
+    accumlatedRates:{
+        type:Number,
+        default:0
+    },
+    accRates:{
+        type:Number,
+        default:0
+    },
+    corporateTrainee: {
+        type: Array,
+        ref:'CorporateTrainee',
+        default: []
+    },
     
 }, { timestamps: true });
 

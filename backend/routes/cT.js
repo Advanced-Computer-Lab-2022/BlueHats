@@ -4,7 +4,9 @@ const {//updateIndividualTrainee,
     deleteCorporateTrainee,
     createCorporateTrainee,
     getCorporateTrainees,
-    filterCourses, rateCourse, rateInstructor,addReview} = require('../controllers/cTController');
+    filterCourses, 
+    rateCourse, rateInstructor,
+    addReview,requestCourse} = require('../controllers/cTController');
 
 
 const router = express.Router();
@@ -25,9 +27,9 @@ router.delete('/:id', deleteCorporateTrainee);
 //router.patch('/:id', updateIndividualTrainee);
 
 // get all courses created by an user's id
-router.get('/filter', filterCourses);
+router.get('/filter/:id', filterCourses);
 
-// rate a course
+// // rate a course
 router.patch('/rateCourse', rateCourse);
 
 // rate an instructor
@@ -35,5 +37,9 @@ router.patch('/rateInstructor', rateInstructor);
 
 // review a course
 router.patch('/addRev', addReview);
+
+// request a course
+router.post('/requestCourse', requestCourse);
+
 
 module.exports = router;

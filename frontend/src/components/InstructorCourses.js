@@ -27,13 +27,22 @@ const ViewMyCourses = ({course }) => {
          
      }
    }
+   function Reviews(){
+    var res = ""
+    var c = 1
+    for (let i =0 ; i<course.reviews.length;i++){
+      res += '-Review ' + c + ": " + course.reviews[i].reviews  + " \n "
+      c++;
+    }
+        return res;
+   }
     return (
         <div className="course-details-ss">
           <h4>{course.title}</h4>
           <p><strong>Rate:</strong>{course.instructorRate} / 5 <strong> <Stars/> </strong> </p>
           <div>
-        <p><strong>Reviews: </strong>{ JSON.stringify(course.reviews)}</p>
-        </div>
+          <p><strong>Reviews: </strong> <Reviews/></p>
+          </div>
           <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
         </div>
       )

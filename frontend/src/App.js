@@ -35,6 +35,11 @@ import ReviewCourse from './components/CoursesTitleRatingReviews';
 
 
 
+import ViewAvailableCourses from './pages/ViewAllCourses';
+import RequestCourse from './components/RequestCourse';
+import ViewRequests from './pages/ViewRequests';
+import ViewCoTrainees from './pages/ViewCoTrainees';
+import MyCourses from './pages/ViewCorporateUserCourses'
 
  
 function App() {
@@ -170,6 +175,26 @@ function App() {
             <Route
               path="/review"
               element={<ReviewCourse/>}
+            />
+             <Route
+              path= "/availableCourses"
+              element={<ViewAvailableCourses/>}
+            />
+            <Route
+              path="/requestCourse"
+              element={<RequestCourse/>}
+            />
+            <Route
+              path="/requests"
+              element={<ViewRequests/>}
+            />
+             <Route
+              path="/cusers"
+              element={<ViewCoTrainees/>}
+            />
+            <Route
+              path="/subcourses"
+              element={<MyCourses/>}
             />
             
           </Routes>

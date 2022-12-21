@@ -19,5 +19,4 @@ const corporateTraineeSchema = new Schema ({
 {
     timestamps: true
 })
-const corporateTrainee = mongoose.model('CorporateTrainee', corporateTraineeSchema)
-module.exports = corporateTrainee
+module.exports = mongoose.model('CoTrainee', corporateTraineeSchema)

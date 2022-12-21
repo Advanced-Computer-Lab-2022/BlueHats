@@ -11,6 +11,8 @@ import { IndTraineesContextProvider } from './context/IndTraineesContext';
 import { InstContextProvider } from './context/InstContext';
 
 import { ProSidebarProvider } from 'react-pro-sidebar';
+import { RequestsContextProvider } from './context/RequestsContext';
+import { CoTraineesContextProvider } from './context/CoTraineesContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,10 +24,14 @@ root.render(
     <InstructorsContextProvider>
     <CoursesContextProvider>
     <AdminsContextProvider>
-      <InstContextProvider>
+    <InstContextProvider>
+    <RequestsContextProvider>
+    <CoTraineesContextProvider>
         <App />
-      </InstContextProvider>
-      </AdminsContextProvider>
+    </CoTraineesContextProvider>
+    </RequestsContextProvider>
+    </InstContextProvider>
+    </AdminsContextProvider>
     </CoursesContextProvider>
     </InstructorsContextProvider>
     </CorporateTraineesContextProvider>

@@ -1,6 +1,5 @@
 const course = require('../models/course');
 const instructor = require('../models/instructor')
-//const mongoose = require('mongoose');
 const { default: mongoose } = require('mongoose');
 
 
@@ -91,6 +90,10 @@ const updateInstructor = async (req, res) => {
     }
 
     res.status(200).json(Instructor);
+}
+
+// Get the overall rate from all of my courses
+const overallRate = async (req,res)=>{
 }
 
 

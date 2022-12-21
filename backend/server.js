@@ -12,7 +12,8 @@ const indTraineeRoutes = require('./routes/indTrainee');
 const instRoutes = require('./routes/inst');
 const filterRoutes = require('./routes/filters')
 const individualTraineeRoutes = require('./routes/iT');
-const cOTraineeRoutes = require('./routes/cT');
+const CoTraineeRoutes = require('./routes/cT');
+const requestedCoursesRoutes = require('./routes/requestedCourses')
 
 
 // express app
@@ -37,10 +38,11 @@ app.use('/api/corporateTrainee', corporateTraineeRoutes);
 app.use('/api/indTrainee', indTraineeRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/nUsers', individualTraineeRoutes);
-app.use('/api/cUsers', cOTraineeRoutes);
+app.use('/api/cUsers', CoTraineeRoutes);
 
 app.use('/api/instructors', instRoutes);
 app.use('/filterBy', filterRoutes)
+app.use('/api/requestCourse',requestedCoursesRoutes)
 
 
 // connect to database
