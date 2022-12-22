@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const jwt=require('jsonwebtoken')
+const validator = require('validator')
 // const generateToken =require ( "../utils/generateToken")
 const nodemailer = require("nodemailer")
 require('dotenv').config();
@@ -30,8 +31,8 @@ let transporter = nodemailer.createTransport
 
 //signUp method
 const signupIndTrainee = async (req, res) => {
-    const { firstName,lastName,username, email, password,gender,type } = req.body;
-    if(!email || !password || !username || !type || !firstName || !lastName || !gender)
+    const { firstName,lastName,username, email, password,gender} = req.body;
+    if(!email || !password || !username || !firstName || !lastName || !gender)
     {
         return res.status(404).send({error:"please fill in all fields"})
     }
@@ -63,7 +64,7 @@ const signupIndTrainee = async (req, res) => {
     {
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
-        const user = await IndTrainee.create({ firstName:firstName ,lastName:lastName,username:username, email: email, password: hashedPassword ,gender:gender , type:type});
+        const user = await IndTrainee.create({ firstName:firstName ,lastName:lastName,username:username, email: email, password: hashedPassword ,gender:gender });
         const token = createToken(user.userName);
 
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });

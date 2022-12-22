@@ -60,7 +60,9 @@ const createInstructor =async (req,res) =>
 
   try 
   {
-    const instructor = await Instructor.create({name, username ,email , password})
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const instructor = await Instructor.create({name, username ,email , password:hashedPassword})
     res.status(200).json(instructor)
   }
   
@@ -84,6 +86,44 @@ const deleteInstructor =async (req,res) =>
         return res.status(400).json({error:'No such instructor'})
     }
     res.status(200).json(instructor)
+}
+
+//uodate biography
+const updateBiography =async (req,res) => 
+{
+  const {username}=req.body
+  const {biography}=req.body
+
+  const instructor = await Instructor.findOneAndUpdate({username:username},{biography:biography})
+  if(!instructor)
+  {
+      return res.status(400).json({error:'No such instructor'})
+  }
+  res.status(200).json(instructor)
+}
+
+const changeEmail = async (req,res) => 
+{
+  const {email} = req.body
+  const {username} = req.body
+  
+  if( !username || !email)
+  {
+    return res.status(400).json({ error: 'Please fill in all fields'})
+  }
+  
+  const instructor = await Instructor.findOne({username});
+  
+  if(instructor)
+  {
+    const instructor = await Instructor.findOneAndUpdate({username:username},{email:email})
+    res.status(200).json({instructor})
+  }
+  
+  if(!instructor)
+  {
+    return res.status(404).json({error: 'No such instructor'})
+  }
 }
 
 //update an instructor
@@ -149,23 +189,6 @@ const changeEmailInstructor = async (req,res) =>
   }
 }
 
-const updateBiography =async (req,res) => 
-{
-  //const {id}=req.body
-  const {biography}=req.body
-
-  // if(!mongoose.Types.ObjectId.isValid(id))
-  // {
-  //     return res.status(404).json({error:'No such instructor'})
-  // }
-
-  const instructor = await Instructor.findOneAndUpdate({_id:"638b4508ecdf4b2561760c25"},{biography:biography})
-  if(!instructor)
-  {
-      return res.status(400).json({error:'No such instructor'})
-  }
-  res.status(200).json(instructor)
-}
 
 let transporter = nodemailer.createTransport
 ({
@@ -218,4 +241,6 @@ const forgotPasswordInstructor = async (req,res) =>
   }
 }
 
-module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor}
+
+
+module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmail,changePasswordInstructor}

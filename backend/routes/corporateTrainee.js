@@ -7,7 +7,6 @@ const
     deleteCorporateTrainee,
     updateCorporateTraineeProfile,
     changeEmailCorporateTrainee,
-    changePasswordCorporateTrainee,
     forgotPasswordCorporateTrainee,
     viewSolution,
     gradeExam,
@@ -29,7 +28,7 @@ router.post('/',createCorporateTrainee)
 router.delete('/:id',deleteCorporateTrainee)
 
 // UPDATE an IndTrainee
-router.patch('/changePassword', changePasswordCorporateTrainee)
+// router.patch('/changePassword', changePasswordCorporateTrainee)
 router.patch('/changeEmail', changeEmailCorporateTrainee)
 router.patch('/updateProfile',updateCorporateTraineeProfile)
 

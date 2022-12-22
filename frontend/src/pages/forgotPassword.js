@@ -17,21 +17,40 @@ const ForgotPassword = () => {
 
   const handleClick = async () =>
   {
-    const data={email:email}
-    axios({
-      method:"POST",
-      url:'/api/indTrainee/forgotPassword',
-      data:data,
-      headers:{'Content-Type':'application/json'}
-    })
-    .then(() =>{
-      setLoading(false)
-      alert("Check your email to reset your password");
-    })
-    .catch(error => 
-          {
-          console.log(error)
-          })
+    // const data={email:email}
+    // axios({
+    //   method:"POST",
+    //   url:'/api/indTrainee/forgotPassword',
+    //   data:data,
+    //   headers:{'Content-Type':'application/json'}
+    // })
+    // .then(() =>{
+    //   setLoading(false)
+    //   alert("Check your email to reset your password");
+    // })
+    // .catch(error => 
+    //       {
+    //       console.log(error)
+    //       })
+
+    const response =await fetch('/api/user/forgotPassword',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email})
+      })
+  
+      const json= await response.json()
+  
+      if(!response.ok){
+          setLoading(false)
+          setError(json.error)
+      }
+      if(response.ok){
+          localStorage.setItem('email', JSON.stringify(json))
+          setLoading(false)
+          alert("Email is sent successfully")
+      }
+
   }
 
 

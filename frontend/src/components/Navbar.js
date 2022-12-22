@@ -2,10 +2,14 @@ import { Link } from 'react-router-dom'
 import { React, useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export var countryValue = 'Egypt';
 
 const Navbar = () => {
+    const { user } = useAuthContext()
+    const { logout } = useLogout()
     const [value, setValue] = useState({value: 'EGY', label: 'Egypt'})
     const [label, setLabel] = useState('Egypt')
     const options = useMemo(() => countryList().getData(), [])
@@ -24,9 +28,9 @@ const Navbar = () => {
         setLabel(value.label);
     }
     
-    if(value) {
-        countryValue = value.label;
-    }
+    // if(value) {
+    //     countryValue = value.label;
+    // }
 
     const [title,setTitle] = useState('');
 
@@ -36,6 +40,10 @@ const Navbar = () => {
         }
       };
 
+      const handleClick = () => 
+      {
+        logout()
+      }
     return (
         <header>
             <div className="container">
@@ -47,12 +55,21 @@ const Navbar = () => {
                 <button  onClick={() => window.location.href=`/search?key=${title}`}><span className="material-symbols-outlined"> search </span></button>
                 </div>
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
-                <a className = "Login" href = "/login">
-                    Log in
-                </a>
-                <a className = "Register" href = "/signup">
-                    Sign up
-                </a>
+                
+                <nav>
+                {user && (
+                 <div>
+                    <span>{user.username}</span>
+                    <button onClick={handleClick}>Log out</button>
+                </div>
+                )}
+                {!user && (
+                <div>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Signup</Link>
+                </div>
+                )}
+                </nav>
                 <span className="material-symbols-outlined">shopping_cart</span>
             </div>
             

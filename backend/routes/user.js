@@ -5,7 +5,10 @@ const
 {
    signUp,
    login,
-   logout
+   logout,
+   forgotPassword,
+   changePassword,
+   resetPassword
 } = require('../controllers/registerController' )
 
 //SignUp
@@ -16,5 +19,14 @@ router.post('/login', login)
 
 //LogOut
 router.get('/logout', logout);
+
+//forgot password
+router.post("/forgotPassword",forgotPassword)
+
+//change password
+router.patch('/changePassword', changePassword)
+
+//change password
+router.patch('/resetPassword', resetPassword)
 
 module.exports = router

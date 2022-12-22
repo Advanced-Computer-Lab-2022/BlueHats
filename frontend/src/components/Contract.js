@@ -14,8 +14,8 @@ const Contract = ({ history }) => {
   };
 
   return (
-    <div classNameName="Contract">
-      <div classNameName="container">
+    <div className="Contract">
+      <div className="container">
         <div className="container mt-3">
           <h2> Instructor Terms</h2>
 
@@ -172,7 +172,7 @@ const Contract = ({ history }) => {
         </div>
         <button
           disabled={!agree}
-          classNameName="btn"
+          className="btn"
           onClick={navigateToContacts}
         >
           Accept

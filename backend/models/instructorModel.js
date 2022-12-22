@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
-
 const Schema = mongoose.Schema
+const bcrypt = require('bcrypt')
+
+const CorporateTrainee = require('../models/corporateTraineeModel')
 
 const instructorSchema = new Schema({
   name: {
@@ -28,5 +30,29 @@ const instructorSchema = new Schema({
     required: false
   }
 }, { timestamps: true })
+
+// instructorSchema.statics.login = async function(username, password) {
+
+//   if (!username || !password) {
+//     throw Error('All fields must be filled')
+//   }
+
+//   const user = await this.findOne({ username })
+//   if (!user) 
+//   {
+//     // throw Error('Incorrect email')
+//     const trainee = await CorporateTrainee.login(username, password)
+//   }
+//   else
+//   {
+//     const match = await bcrypt.compare(password, user.password)
+//     if (!match) 
+//     {
+//     throw Error('Incorrect password')
+//     }
+//     return user
+//  }
+
+// }
 
 module.exports = mongoose.model('InstructorModel', instructorSchema)

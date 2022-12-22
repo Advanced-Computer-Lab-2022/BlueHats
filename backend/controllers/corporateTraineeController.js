@@ -53,7 +53,9 @@ const createCorporateTrainee=async (req,res) =>
       return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
     }
   try {
-    const corporateTrainee = await CorporateTrainee.create({name, username ,email , password})
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const corporateTrainee = await CorporateTrainee.create({name, username ,email , password:hashedPassword})
     res.status(200).json(corporateTrainee)
   } catch (error) {
     res.status(400).json({error: error.message})
@@ -77,36 +79,36 @@ const deleteCorporateTrainee =async (req,res) =>
 }
 
 //update an corporateTrainee
-const changePasswordCorporateTrainee = async (req,res) => 
-{
-  //const {id}=req.body
-  const {password}=req.body
-  // const{confirmPassword}=req.body
+// const changePasswordCorporateTrainee = async (req,res) => 
+// {
+//   //const {id}=req.body
+//   const {password}=req.body
+//   // const{confirmPassword}=req.body
   
-  if( !password )
-  {
-    return res.status(400).json({ error: 'Please fill in all fields'})
-  }
-  // const pass = await bcrypt.compare(password, confirmPassword);
-  // if(!password === confirmPassword)
-  // {
-  //   return res.status(400).json({ error: 'Password is  not confirmed'})
-  // }
+//   if( !password )
+//   {
+//     return res.status(400).json({ error: 'Please fill in all fields'})
+//   }
+//   // const pass = await bcrypt.compare(password, confirmPassword);
+//   // if(!password === confirmPassword)
+//   // {
+//   //   return res.status(400).json({ error: 'Password is  not confirmed'})
+//   // }
   
-  // if(!mongoose.Types.ObjectId.isValid(id))
-  // {
-  //     return res.status(404).json({error:'No such CoTrainee'})
-  // }
-  const salt = await bcrypt.genSalt();
-  const hashedPassword = await bcrypt.hash(password, salt);
+//   // if(!mongoose.Types.ObjectId.isValid(id))
+//   // {
+//   //     return res.status(404).json({error:'No such CoTrainee'})
+//   // }
+//   const salt = await bcrypt.genSalt();
+//   const hashedPassword = await bcrypt.hash(password, salt);
 
-  const corporateTrainee = await CorporateTrainee.findOneAndUpdate({_id:"638b99a29e29c8411f27a292"},{password:hashedPassword})
-  if(!corporateTrainee)
-  {
-      return res.status(400).json({error:'No such corporate trainee'})
-  }
-  res.status(200).json(corporateTrainee)
-}
+//   const corporateTrainee = await CorporateTrainee.findOneAndUpdate({_id:"638b99a29e29c8411f27a292"},{password:hashedPassword})
+//   if(!corporateTrainee)
+//   {
+//       return res.status(400).json({error:'No such corporate trainee'})
+//   }
+//   res.status(200).json(corporateTrainee)
+// }
 
 const changeEmailCorporateTrainee = async (req,res) => 
 {
@@ -298,7 +300,6 @@ module.exports={getCorporateTrainee,
                 updateCorporateTraineeProfile,
                 changeEmailCorporateTrainee,
                 forgotPasswordCorporateTrainee,
-                changePasswordCorporateTrainee,
                 gradeExam,
                 viewSolution,
                 setAnswer
