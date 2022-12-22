@@ -27,7 +27,7 @@ const CourseFullView = ({ course }) => {
       setValue(oldValue => {
         const newValue = oldValue + add;
 
-        if (newValue === 100) {
+        if (newValue >= 100) {
           return 100;
         }
 

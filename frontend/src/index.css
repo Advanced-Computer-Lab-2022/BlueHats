@@ -609,14 +609,14 @@ form.signup .title
   padding-left: 10px;
   margin: 20px 20px 20px 0;
 }
-nav {
+/* nav {
   display: flex;
   align-items: center;
 }
 nav a, nav button {
   margin-left: 10px;
-}
-nav button {
+} */
+.nav button {
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);

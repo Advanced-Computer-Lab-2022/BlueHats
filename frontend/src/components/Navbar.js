@@ -28,9 +28,9 @@ const Navbar = () => {
         setLabel(value.label);
     }
     
-    // if(value) {
-    //     countryValue = value.label;
-    // }
+    if(value) {
+        countryValue = value.label;
+    }
 
     const [title,setTitle] = useState('');
 
@@ -56,20 +56,21 @@ const Navbar = () => {
                 </div>
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
                 
-                <nav>
+                {/* <nav> */}
                 {user && (
-                 <div>
+                 <div className='nav'>
                     <span>{user.username}</span>
                     <button onClick={handleClick}>Log out</button>
                 </div>
                 )}
                 {!user && (
-                <div>
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Signup</Link>
-                </div>
+                <><div>
+                        <Link to="/login">Login</Link>
+                    </div><div>
+                            <Link to="/signup">Signup</Link>
+                        </div></>
                 )}
-                </nav>
+                {/* </nav> */}
                 <span className="material-symbols-outlined">shopping_cart</span>
             </div>
             
