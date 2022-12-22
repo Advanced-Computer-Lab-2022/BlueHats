@@ -15,7 +15,13 @@ export const adminsReducer = (state, action) => {
     case 'DELETE_ADMIN': 
       return {
         admins: state.admins.filter((a) => a._id !== action.payload._id)
-      }  
+      } 
+    case 'LOGIN':
+      return {admins: action.payload} 
+
+    case 'LOGOUT':
+      return {admins: null } 
+ 
     default:
       return state
   }

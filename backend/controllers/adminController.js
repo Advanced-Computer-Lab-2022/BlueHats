@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcrypt')
 const Admin = require('../models/adminModel')
 
 //get all admins
@@ -41,7 +41,9 @@ const createAdmin=async (req,res) =>{
       return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
     }
   try {
-    const admin = await Admin.create({name, username , password})
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const admin = await Admin.create({name, username , password:hashedPassword})
     res.status(200).json(admin)
   } catch (error) {
     res.status(400).json({error: error.message})

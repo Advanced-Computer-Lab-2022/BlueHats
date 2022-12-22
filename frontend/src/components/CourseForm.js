@@ -24,6 +24,11 @@ const CourseForm = () => {
   const [finalExam, setFinalExam] = useState([{ question: '', firstChoice: '', secondChoice: '', thirdChoice: '', fourthChoice: '', answer: '' }])
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
+
+  // to get id of current user
+  // var loggedinUser = JSON.parse(localStorage.getItem('id'));
+  // const savedID = loggedinUser.id;
+  // const data={id:savedID};
   
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -60,6 +65,8 @@ const CourseForm = () => {
     }
 
   }
+
+ 
 
   const handleChangeInput = (index, event) => {
     const values = [...subtitle];

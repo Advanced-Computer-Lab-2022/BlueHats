@@ -3,25 +3,26 @@ import { useLogin } from "../hooks/useLogin"
 import {Navigate} from 'react-router-dom'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const {login,isLoading,error} = useLogin()
 
   const handleSubmit = async (e) => 
   {
     e.preventDefault()
-    await login(email,password)
+    await login(username,password)
+    window.location.href=`/`
   }
 
   return (
     <form className="login" onSubmit={handleSubmit}>
       <h3>Log in</h3>
 
-      <label>Email:</label>
+      <label>Username:</label>
       <input
        type ="text"
-       onChange={(e) => setEmail(e.target.value)}
-       value={email}
+       onChange={(e) => setUsername(e.target.value)}
+       value={username}
       />
 
       <label>Password:</label>
@@ -31,7 +32,7 @@ const Login = () => {
        value={password}
       />
 
-      <button disabled={isLoading}>Log in</button>
+      <button disabled={isLoading} >Log in</button>
       {error && <div className = "error">{error}</div>}
        
       <br />

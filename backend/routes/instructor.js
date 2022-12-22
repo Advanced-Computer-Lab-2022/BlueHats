@@ -6,7 +6,7 @@ const {
     getInstructor,
     deleteInstructor,
     updateBiography,
-    changeEmailInstructor,
+    changeEmail,
     changePasswordInstructor,
     forgotPasswordInstructor
 } = require('../controllers/instructorController' )
@@ -29,7 +29,7 @@ router.delete('/:id',deleteInstructor)
 
 // UPDATE an IndTrainee
 router.patch('/changePassword', changePasswordInstructor)
-router.patch('/changeEmail', changeEmailInstructor)
+router.patch('/changeEmail', changeEmail)
 router.patch('/updateProfile',updateBiography)
 
 // forgot password

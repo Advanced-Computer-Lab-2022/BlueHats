@@ -15,7 +15,13 @@ export const corporateTraineesReducer = (state, action) => {
     case 'DELETE_CORPORATETRAINEE': 
       return {
         corporateTrainees: state.corporateTrainees.filter((c) => c._id !== action.payload._id)
-      }  
+      }
+    case 'LOGIN':
+      return {corporateTrainees: action.payload} 
+
+    case 'LOGOUT':
+      return {corporateTrainees: null } 
+  
     default:
       return state
   }

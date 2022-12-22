@@ -22,6 +22,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ForgotPassword from './pages/forgotPassword';
 import ResetPassword from './pages/resetPassword';
+import ChangePassword from './pages/changePassword';
 import ChangeEmail from './pages/changeEmail';
 import IndTrainee from './pages/indTrainees';
 import InstructorProfile from './pages/instructorProfile';
@@ -140,6 +141,10 @@ function App() {
             <Route
               path="/resetPassword"
               element={<ResetPassword/>}
+            />
+            <Route
+              path="/changePassword"
+              element={<ChangePassword/>}
             />
             <Route
               path="/instructor/changeEmail"
