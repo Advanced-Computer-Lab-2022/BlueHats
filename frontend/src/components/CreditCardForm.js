@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from 'axios';
 
 const CreditCardForm = ({ course }) => {
@@ -12,7 +12,7 @@ const CreditCardForm = ({ course }) => {
     const [error, setError] = useState('');
     const [status, setStatus] = useState('Pay');
 
-    const data = {amount: (course.price * 100)}
+    const data = {amount: (course.price * 100), courseID: course._id}
 
   
     

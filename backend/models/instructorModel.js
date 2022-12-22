@@ -29,7 +29,12 @@ const instructorSchema = new Schema({
   },
   wallet: 
   {
-    type: Number
+    type: Number,
+    default: 0
+  },
+  courses: 
+  {
+    type: [{type: mongoose.Types.ObjectId , ref:'Course'}]
   }
 }, { timestamps: true })
 

@@ -42,7 +42,7 @@ const courseSchema = new Schema({
     finalExam: [exercise.schema],
     instructor: {
         type: mongoose.Types.ObjectId,
-        ref:'Instructor'
+        ref:'InstructorModel'
     },
     // instructorName: {
     //     type: String,
