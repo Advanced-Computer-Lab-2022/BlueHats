@@ -417,6 +417,109 @@ const compareAnswers = async(req,res) => {
     
 
 }
+
+const updateProgress = async(req, res) => {
+  const { progress } = req.body;
+  const { courseID } = req.body;
+  const { userID } = req.body;
+
+  const trainee = await IndTrainee.findById(userID);
+
+  const array = trainee.courses;
+
+  const object = { course: courseID, progress: progress };
+  
+  let i = 0;
+  let newCourses = [];
+
+  while(i < array.length)
+  {
+    const currentID = array[i].course;
+    if( currentID == courseID )
+    {
+      newCourses = newCourses.concat([object]);
+    }
+    else 
+    {
+      newCourses = newCourses.concat([array[i]]);
+    }
+    i++;
+  }
+
+  const updatedTrainee = await IndTrainee.findOneAndUpdate({_id: userID} , {courses: newCourses});
+
+  if(!trainee) 
+  {
+    return res.status(404).json({error: 'No such Individual Trainee'})
+  }
+  res.status(200).json(updatedTrainee);
+}
+
+const getProgress = async(req, res) => {
+  const { courseID } = req.body;
+  const { userID } = req.body;
+
+  const trainee = await IndTrainee.findById(userID);
+
+  const array = trainee.courses;
+
+  let i = 0;
+  let myProgress = 0;
+  while(i < array.length)
+  {
+    const currentID = array[i].course;
+    if( currentID == courseID )
+    {
+      myProgress = array[i].progress;
+    }
+    i++;
+  }
+  if(!trainee) 
+  {
+    return res.status(404).json({error: 'No such Individual Trainee'})
+  }
+  res.status(200).json(myProgress);
+
+}
+
+const getMyCourses = async(req, res) => {
+  const { userID } = req.body;
+
+  const trainee = await IndTrainee.findById(userID);
+
+  const array = trainee.courses;
+
+  let myCourses = [];
+  let i = 0;
+  while(i < array.length)
+  {
+    const currentCourse = await Course.findById(array[i].course)
+    myCourses = myCourses.concat(currentCourse);
+    i++;
+  }
+
+  if(!trainee) 
+  {
+    return res.status(404).json({error: 'No such Individual Trainee'})
+  }
+  res.status(200).json(myCourses);
+}
   
 
-module.exports={getIndTrainees,getIndTrainee,signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers}
+module.exports={
+  getIndTrainees,
+  getIndTrainee,
+  signupIndTrainee,
+  deleteIndTrainee,
+  changePasswordIndTrainee,
+  loginIndTrainee,
+  forgotPasswordIndTrainee,
+  updateIndTraineeProfile,
+  gradeExam,
+  viewSolution,
+  setAnswer,
+  compareAnswers,
+  updateProgress,
+  getProgress,
+  getMyCourses
+}

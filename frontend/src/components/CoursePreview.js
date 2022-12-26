@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from '../components/Navbar'
 import YoutubeEmbed from "./YoutubeEmbed";
+import { useAuthContext } from '../hooks/useAuthContext'
 import Axios from "axios";
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const CoursePreview = ({course}) => {
+
+    const { user } = useAuthContext();
 
     function CheckNumber() {
         if(result>1) {
@@ -21,8 +24,6 @@ const CoursePreview = ({course}) => {
       const [currency, setCurrency] = useState('');
       const [toCurrency, setToCurrency] = useState('');
 
-      //const currency = getParamByParam('countryName', countryValue, 'symbol');
-      //const toCurrency = getParamByParam('countryName', countryValue, 'currency');
       const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
   
   
@@ -41,17 +42,14 @@ const CoursePreview = ({course}) => {
         setInfo(res.data[from]);
         })
       convert();
-      setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-      setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+      if(countryValue != undefined)
+      {
+        setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+        setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+      }
       set();
       }, [from, info]);
   
-      // useEffect(() => {
-      //   convert();
-      //   setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-      //   setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
-      //   set();
-      // }, [info])
   
       function set() {
         if(toCurrency !== NaN)
@@ -74,7 +72,8 @@ const CoursePreview = ({course}) => {
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <p><strong>Price: </strong> {currency} {output}</p>
-            <button onClick={() => window.location.href=`/payment?id=${course._id}`}>Enroll Now</button>
+            { user &&  <button onClick={() => window.location.href=`/payment?id=${course._id}`}>Enroll Now</button>}
+            { !user &&  <button onClick={() => window.location.href=`/login`}>Enroll Now</button>}
             <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
             <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             <h4>Course Content</h4>

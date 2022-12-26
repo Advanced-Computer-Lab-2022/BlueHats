@@ -12,7 +12,10 @@ const CreditCardForm = ({ course }) => {
     const [error, setError] = useState('');
     const [status, setStatus] = useState('Pay');
 
-    const data = {amount: (course.price * 100), courseID: course._id}
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const userID = loggedinUser.id;
+
+    const data = {amount: (course.price * 100), courseID: course._id, userID: userID}
 
   
     

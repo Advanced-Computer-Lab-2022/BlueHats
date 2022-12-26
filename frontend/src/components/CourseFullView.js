@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YoutubeEmbed from "./YoutubeEmbed";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import Exam from "./Exam";
 import ProgressBar from "./ProgressBar";
+import axios from "axios";
 
 const CourseFullView = ({ course }) => {
 
@@ -23,6 +24,26 @@ const CourseFullView = ({ course }) => {
     const add = Math.round(100/((course.subtitle).length*2));
     const [value, setValue] = useState(0);
 
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const userID = loggedinUser.id;
+
+    const [progress, setProgress] = useState(0); 
+
+    useEffect(() =>  {
+      const data1={courseID: course._id, userID: userID};
+      axios({
+        method: "PUT",
+        url : `/api/indTrainee/getProgress`,
+        data:data1,
+        headers:{'Content-Type':'application/json'}
+      })
+      .then( (res) => { 
+        const progress = res.data
+        console.log(progress)
+        setProgress(progress)  
+      });
+    },[course._id, userID])
+
     const handleClick = () => {
       setValue(oldValue => {
         const newValue = oldValue + add;
@@ -30,7 +51,14 @@ const CourseFullView = ({ course }) => {
         if (newValue >= 100) {
           return 100;
         }
-
+        const data={progress: newValue, courseID: course._id, userID: userID};
+        console.log("progress value: "+ newValue);
+        axios({
+          method:"PATCH",
+          url:`/api/indTrainee/progress`,
+          data:data,
+          headers:{'Content-Type':'application/json'}
+        })
         return newValue;
       });
     };
@@ -38,7 +66,7 @@ const CourseFullView = ({ course }) => {
     return (
       <div>
         <div className="progress">
-        <ProgressBar key={course._id} bgcolor={"#2bb638"} completed={value} />
+        <ProgressBar key={course._id} bgcolor={"#2bb638"} completed={progress} /> 
         </div>
         <div className="course-view">
         <Sidebar className="course-view-sidebar">

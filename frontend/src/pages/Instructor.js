@@ -1,31 +1,41 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
-import { useCoursesContext } from "../hooks/useCoursesContext"
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { Link } from "react-router-dom";
 import IFilterBar from "../components/IFilterBar";
 // import { acceptedX } from '../components/ContractForm';
+import axios from 'axios';
 
 // components
 import CourseDetails from "../components/CourseDetails"
 
 const Instructor = () => {
 
-  const { courses, dispatch } = useCoursesContext();
   const [accepted,setAccepted] = useState([])
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const response = await fetch("/api/courses");
-      const json = await response.json();
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading ] = useState(true);
 
-      if (response.ok) {
-        dispatch({ type: "SET_COURSES", payload: json });
+  var loggedinUser = JSON.parse(localStorage.getItem('user'));
+  const instID = loggedinUser.id;
+
+  useEffect(() => {
+    const data = {id: instID};
+    setLoading(true)
+    axios({
+      method: "PUT",
+      url: `api/instructors/myCourses`,
+      data: data,
+      headers: {'Content-Type': 'application/json'}
+    }).then(
+      (res) => {
+        setLoading(false)
+        const courses = res.data
+        setCourses(courses)
       }
-    }
-      
-    fetchCourses()
-  }, [dispatch])
+    )
+  },[instID])
 
   const navigate = useNavigate();
   const navigateAddCourse = () => {
@@ -40,15 +50,11 @@ const Instructor = () => {
         </Link> 
         <h3>My Courses</h3>
         <IFilterBar />
-        {courses && courses.map((course) => (
+        {!loading && courses && courses.map((course) => (
             <CourseDetails course={course} key={course._id} />
           ))}
       </div>
-      <button onClick={navigateAddCourse}>Add Course</button>    
-      <div className="instructor-wallet">
-        <button>My Wallet</button>    
-        {/* {acceptedX.length === 0 ? <div> You cannot create courses yet </div> : <CourseForm /> } */}
-      </div>
+      <button onClick={navigateAddCourse}>  <AddCircleIcon sx={{ color: "#ffff" }} /><p>Add Course</p> </button>
     </div>
   );
 };

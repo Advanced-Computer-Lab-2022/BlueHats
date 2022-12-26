@@ -18,11 +18,9 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
     }
   }
 
-    const [currency, setCurrency] = useState('');
-    const [toCurrency, setToCurrency] = useState('');
+    const [currency, setCurrency] = useState('EGP');
+    const [toCurrency, setToCurrency] = useState('EGP');
 
-    //const currency = getParamByParam('countryName', countryValue, 'symbol');
-    //const toCurrency = getParamByParam('countryName', countryValue, 'currency');
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
 
 
@@ -41,17 +39,13 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
       setInfo(res.data[from]);
       })
     convert();
-    setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-    setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+    if(countryValue != undefined)
+    {
+      setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+      setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+    }
     set();
     }, [from, info]);
-
-    // useEffect(() => {
-    //   convert();
-    //   setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-    //   setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
-    //   set();
-    // }, [info])
 
     function set() {
       if(toCurrency !== NaN)

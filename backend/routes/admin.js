@@ -6,6 +6,7 @@ const {
     deleteAdmin,
     updateAdmin
 } = require('../controllers/adminController' )
+const {courseRefund} = require('../controllers/payment');
 
 const router = express.Router()
 
@@ -23,5 +24,8 @@ router.delete('/:id',deleteAdmin)
 
 // UPDATE an admin
 router.patch('/:id', updateAdmin)
+
+// Refund a course payment
+router.put('/refund', courseRefund); 
 
 module.exports = router

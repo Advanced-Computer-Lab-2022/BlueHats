@@ -687,3 +687,21 @@ button[disabled]{
   font-family: "Poppins";
   border-radius: 4px;
 }
+.enrolled-outer-progress {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  width: 7%;
+}
+.enrolled-menu {
+  position: absolute;
+  top: 10px;
+  right: 7px;
+}
+.Norefund {
+  padding-left: 550px;
+  padding-top: 129px;
+}
+.refund {
+  padding-left: 550px;
+}

@@ -134,12 +134,13 @@ const login = async (req, res) =>
     {
       const pass = await bcrypt.compare(password, indTrainee.password);
       const id = indTrainee.id;
+      const type = "indTrainee";
       if (pass) 
       {
         // res.send("Auth Successful");
         const token = createToken(indTrainee.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token})
+        return res.status(200).json({id, username , token, type})
 
       } 
       else 
@@ -154,12 +155,13 @@ const login = async (req, res) =>
     {
       const passw = await bcrypt.compare(password, coTrainee.password);
       const id = coTrainee.id;
+      const type = "coTrainee";
       if (passw) 
       {
         // res.send("Auth Successful");
         const token = createToken(coTrainee.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token})
+        return res.status(200).json({id, username , token, type})
       } 
       else 
       {
@@ -172,12 +174,13 @@ const login = async (req, res) =>
     {
       const pass = await bcrypt.compare(password, instructor.password);
       const id = instructor.id;
+      const type = "instructor";
       if (pass) 
       {
         // res.send("Auth Successful");
         const token = createToken(instructor.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token})
+        return res.status(200).json({id, username , token, type})
         
       } 
       else 

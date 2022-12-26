@@ -13,6 +13,8 @@ import ExamTrainee from './pages/ExamTrainee';
 import Grade from './pages/Grade';
 import ExamInd from './pages/ExamInd';
 import GradeInd from './pages/GradeInd';
+import IndTraineeCourses from './pages/IndTraineeCourses';
+import RefundRequests from './pages/RefundRequests';
 
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
@@ -188,9 +190,19 @@ function App() {
               element={<ReviewCourse/>}
             />
 
-             <Route
+            <Route
               path="/payment"
               element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}
+            />
+
+            <Route
+              path="/MyEnrolledCourses"
+              element={<IndTraineeCourses/>}
+            />
+
+            <Route
+              path="/admin/refund-requests"
+              element={<RefundRequests/>}
             />
             
           </Routes>

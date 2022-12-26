@@ -25,15 +25,13 @@ const CourseForm = () => {
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
-  // to get id of current user
-  // var loggedinUser = JSON.parse(localStorage.getItem('id'));
-  // const savedID = loggedinUser.id;
-  // const data={id:savedID};
+  var loggedinUser = JSON.parse(localStorage.getItem('user'));
+  const instructor = loggedinUser.id;
   
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const course = {title, subject, previewLink, subtitle, price, promotion, promotionStart,promotionEnd, summary, finalExam}
+    const course = {title, subject, previewLink, subtitle, price, promotion, promotionStart,promotionEnd, summary, finalExam, instructor}
     
     const response = await fetch('/api/courses', {
       method: 'POST',
@@ -62,6 +60,7 @@ const CourseForm = () => {
       setPreviewLink('')
       setFinalExam([{ question: '', firstChoice: '', secondChoice: '', thirdChoice: '', fourthChoice: '', answer: '' }])
       dispatch({type: 'CREATE_COURSE', payload: json})
+      window.location.href=`/instructor`
     }
 
   }

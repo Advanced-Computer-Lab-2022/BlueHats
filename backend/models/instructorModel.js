@@ -33,10 +33,6 @@ const instructorSchema = new Schema({
   {
     type: Number,
     default: 0
-  },
-  courses: 
-  {
-    type: [{type: mongoose.Types.ObjectId , ref:'Course'}]
   }
 }, { timestamps: true })
 

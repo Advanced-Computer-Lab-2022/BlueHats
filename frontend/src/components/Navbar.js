@@ -2,14 +2,13 @@ import { Link } from 'react-router-dom'
 import { React, useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
-import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import AccountMenu from './Menu'
 
 export var countryValue = 'Egypt';
 
 const Navbar = () => {
     const { user } = useAuthContext()
-    const { logout } = useLogout()
     const [value, setValue] = useState({value: 'EGY', label: 'Egypt'})
     const [label, setLabel] = useState('Egypt')
     const options = useMemo(() => countryList().getData(), [])
@@ -40,10 +39,6 @@ const Navbar = () => {
         }
       };
 
-      const handleClick = () => 
-      {
-        logout()
-      }
     return (
         <header>
             <div className="container">
@@ -56,13 +51,7 @@ const Navbar = () => {
                 </div>
                 <Select className="CountrySelector" options={options} value={value} onChange={changeHandler} placeholder='Select a Country...'/>
                 
-                {/* <nav> */}
-                {user && (
-                 <div className='nav'>
-                    <span>{user.username}</span>
-                    <button onClick={handleClick}>Log out</button>
-                </div>
-                )}
+                {user && ( <AccountMenu/> )}
                 {!user && (
                 <><div>
                         <Link to="/login">Login</Link>
@@ -70,8 +59,7 @@ const Navbar = () => {
                             <Link to="/signup">Signup</Link>
                         </div></>
                 )}
-                {/* </nav> */}
-                <span className="material-symbols-outlined">shopping_cart</span>
+                {/* <span className="material-symbols-outlined">shopping_cart</span> */}
             </div>
             
         </header>

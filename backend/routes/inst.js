@@ -26,7 +26,7 @@ router.delete('/:id', deleteInstructor);
 router.patch('/:id', updateInstructor);
 
 // get all courses created by an instructor
-router.get('/myCourses', filterCourses);
+router.put('/myCourses', filterCourses);
 
 
 module.exports = router;

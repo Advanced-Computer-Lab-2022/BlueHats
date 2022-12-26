@@ -1,6 +1,5 @@
 const course = require('../models/course');
 const instructor = require('../models/instructor')
-//const mongoose = require('mongoose');
 const { default: mongoose } = require('mongoose');
 
 
@@ -8,12 +7,16 @@ const { default: mongoose } = require('mongoose');
 // filter courses by instructor
 const filterCourses = async(req,res) => {
   
-    const instructorId = req.query.instructorId;
-    if(instructorId){
-    const result = await course.find({instructor:mongoose.Types.ObjectId(instructorId)});
-    res.status(200).json(result)
-    }else{
-        res.status(400).json({error:"instructorId  is required"})
+    //const instructorId = req.query.instructorId;
+    const {id}= req.body;
+    if(id)
+    {
+        const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
+        res.status(200).json(result)
+    }
+    else
+    {
+        res.status(400).json({error:"instructor ID  is required"});
     }
 }
 

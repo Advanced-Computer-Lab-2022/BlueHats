@@ -36,9 +36,6 @@ const courseSchema = new Schema({
         type: String,
         required: true
     },
-    courseRating: {
-        type: Number,
-    },
     finalExam: [exercise.schema],
     instructor: {
         type: mongoose.Types.ObjectId,

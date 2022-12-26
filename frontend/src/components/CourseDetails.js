@@ -98,8 +98,11 @@ const CourseDetails = ({ course }) => {
       setInfo(res.data[from]);
       })
     convert();
-    setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
-    setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+    if(countryValue != undefined)
+    {
+      setCurrency(getParamByParam('countryName', countryValue, 'symbol'));
+      setToCurrency(getParamByParam('countryName', countryValue, 'currency'));
+    }
     set();
     }, [from, info]);
 
@@ -115,14 +118,11 @@ const CourseDetails = ({ course }) => {
   
     return (
       <div className="course-details">
-        <Link onClick={() => window.location.href=`/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
+        <Link>  <h4>{course.title}</h4> </Link> 
         <p><strong>Subject: </strong>{course.subject}</p>
-        <p><strong>Price: </strong> {currency} {priceAfterDiscount(output,course.promotion)}</p>
+        {course.promotion>0 && <p><strong>Price After Discount: </strong> {currency} {priceAfterDiscount(output,course.promotion)}</p>}
         {course.promotion>0 && <p><strong>Promotion: </strong> {course.promotion} % &nbsp; Valid Until {course.promotionEnd}</p>  }
         <div float='left'>
-          {/* <Button variant="outlined" onClick={handleClickOpen}>
-          Edit
-          </Button> */}
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Edit/Add a Promotion</DialogTitle>
             <DialogContent>
@@ -166,7 +166,7 @@ const CourseDetails = ({ course }) => {
             </DialogActions>
           </Dialog>
     </div>
-        { course.promotion>0 && <p><strong>Price Before Discount: </strong> {currency} {output}</p>}
+        <p><strong>Price: </strong> {currency} {output}</p>
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
