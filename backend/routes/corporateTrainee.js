@@ -12,7 +12,10 @@ const
     viewSolution,
     gradeExam,
     setAnswer,
-    compareAnswers
+    compareAnswers,
+    addProblem,
+    viewProblem,
+    getEx
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -35,15 +38,20 @@ router.patch('/changeEmail', changeEmailCorporateTrainee)
 router.patch('/updateProfile',updateCorporateTraineeProfile)
 
 // forgot password
- router.post("/forgotPassword",forgotPasswordCorporateTrainee)
+router.post("/forgotPassword",forgotPasswordCorporateTrainee)
 
-
-router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 
+router.get('/gradeExam/:idTrainee/:idCourse',gradeExam) 
 
 router.get('/viewSolution/:idCourse',viewSolution)
 
-router.put('/setAnswer/:idCourse/:id/:answer',setAnswer)
+router.put('/setAnswer/:id/:idCourse/:idEx/:answer',setAnswer)
 
-router.get('/compareAnswers/:solution/:answer',compareAnswers)
+router.put('/compareAnswers/:solution/:answer',compareAnswers)
+
+router.post('/addProblem/:id/:problem',addProblem)
+
+router.get('/viewProblem/:id',viewProblem)
+
+router.get('/getEx/:idCourse/:idEx', getEx)
 
 module.exports = router

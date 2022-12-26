@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fontsource/roboto": "^4.5.8",
+    "@material-ui/core": "^4.12.4",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "crypt": "^0.0.2",
@@ -21,6 +23,7 @@
     "mongoose": "^6.7.0",
     "nodemailer": "^6.8.0",
     "nopt": "^7.0.0",
+    "react-multiple-choice": "^2.0.2",
     "stripe": "^11.3.0",
     "validator": "^13.7.0"
   }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const reportedProblem = require('./reportedProblem')
 
 const Schema = mongoose.Schema
 
@@ -26,8 +27,9 @@ const corporateTraineeSchema = new Schema({
    [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, num: {type: Number}}]
   ,
   answers: {
-    type: [String]
-  }
+    type: [Object]
+  },
+  problem: [reportedProblem.schema]
 }, { timestamps: true })
 
 module.exports = mongoose.model('CorporateTrainee', corporateTraineeSchema)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { Fragment }from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -7,13 +7,21 @@ import { AdminsContextProvider } from './context/AdminsContext';
 import { InstructorsContextProvider } from './context/InstructorsContext';
 import { CorporateTraineesContextProvider } from './context/CorporateTraineesContext';
 import { IndTraineesContextProvider } from './context/IndTraineesContext';
+import { render } from "react-dom";
+// import { QuestionGroup } from "../src/components";
+// import { Question } from "../src/components";
+// import { Option } from "../src/components";
+// import { MultipleQuestions } from "../src/components";
+// import { Test } from "../src/components";
 
 import { InstContextProvider } from './context/InstContext';
 
 import { ProSidebarProvider } from 'react-pro-sidebar';
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <IndTraineesContextProvider>

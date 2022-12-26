@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const courseRoutes = require('./routes/courses');
+const problemRoutes = require('./routes/problem');
 const adminRoutes = require('./routes/admin'); 
 const instructorRoutes = require('./routes/instructor');
 const corporateTraineeRoutes = require('./routes/corporateTrainee'); 
@@ -37,6 +38,7 @@ app.use('/api/instructor', instructorRoutes);
 app.use('/api/corporateTrainee', corporateTraineeRoutes);
 app.use('/api/indTrainee', indTraineeRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/problem', problemRoutes);
 app.use('/api/nUsers', individualTraineeRoutes);
 app.use('/api/cUsers', cOTraineeRoutes);
 

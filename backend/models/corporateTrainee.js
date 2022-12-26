@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const course = require('./course');
 const Schema = mongoose.Schema
 const {ObjectId} = mongoose.Schema;
 

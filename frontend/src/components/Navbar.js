@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { React, useState, useMemo, useEffect } from 'react'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
+import ReportMenu from "./ReportMenu";
+
 
 export var countryValue = 'Egypt';
 
@@ -54,6 +56,7 @@ const Navbar = () => {
                     Sign up
                 </a>
                 <span className="material-symbols-outlined">shopping_cart</span>
+                <ReportMenu />
             </div>
             
         </header>

@@ -13,7 +13,7 @@ function Search () {
 
     useEffect(() =>  {
       setLoading(true)
-      setFlag(false)
+      
       if(title==''){
         return
       }
@@ -31,6 +31,8 @@ function Search () {
               console.log(courses)
               setFlag(true)
             }
+          else if (courses==[])
+            setFlag(false)
        }
         );    
 
@@ -40,7 +42,7 @@ function Search () {
    //console.log(flag)
     return(
       <div className="courses">
-      {courses.length==0? <h1>This Course Doesn't Exist.</h1> : <h3>Search Results:</h3> } 
+      {flag==false? <h1>This Course Doesn't Exist.</h1> : <h3>Search Results:</h3> } 
         {!loading && flag==true && courses.length!=0 && (courses.map(course => {
           return <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />
         }))}

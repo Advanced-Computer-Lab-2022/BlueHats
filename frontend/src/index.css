@@ -549,6 +549,78 @@ form.signup, form.login , form.forgotPassword , form.resetPassword , form.change
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
-  cursor: pointer;
+ cursor: pointer;
  position: initial;
+}
+
+.exam button {
+  background:var(--primary);
+  opacity: 0.7;
+  border:5;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+   right:150px;
+  top:150px;
+  min-width: 100px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+}
+
+.exam button:hover {
+  background: var(--primary);
+  opacity: 1;
+}
+
+
+
+
+
+
+.submit button {
+  background:var(--primary) ;
+  border: 1;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+ right:150px;
+  top:150px;
+  min-width: 100px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+  opacity:1;
+}
+
+.submit button:hover{
+  background:#8949bd;
+  border: 1;
+  opacity:1;
+
+}
+
+.submit button:active{
+  background:#696869;
+  border: 1;
+  opacity:1;
+
+}
+
+.reportMenu button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+   right:150px;
+  top:150px;
+  min-width: 100px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+  
 }

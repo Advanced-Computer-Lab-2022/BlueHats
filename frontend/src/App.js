@@ -34,7 +34,8 @@ import Contract from './components/Contract';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
 import ReviewCourse from './components/CoursesTitleRatingReviews';
 
-
+import Report from './pages/ViewProblem';
+import AdminPage from './pages/AdminPage';
 
 
  
@@ -74,6 +75,10 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+             <Route
+              path="/adminPage"
+              element={<AdminPage/>}
             />
             <Route
               path="/instructor/addCourse"
@@ -178,6 +183,11 @@ function App() {
               element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}
             />
             
+            <Route
+              path="/viewProblem/"
+              element={<Report/>}
+            />
+
           </Routes>
         </div>
       </BrowserRouter>
