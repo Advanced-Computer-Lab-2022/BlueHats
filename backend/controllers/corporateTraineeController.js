@@ -437,8 +437,6 @@ const addProblem = async(req,res) => {
 res.status(200).json(trainee);
 }
 
-}
-
 
 
 //// add a new rate to the instructor and calculate the new overall instructor rate
@@ -570,6 +568,7 @@ const availableCourses = async(req,res) => {
     else{
         res.status(400).json({error:"corporateTraineeId  is required"})
     }
+}
     
 const viewProblem = async(req,res) => {
   const id = req.params.id;
@@ -693,10 +692,10 @@ module.exports={getCorporateTrainee,
                 addReview,
                 requestCourse,
                 availableCourses,
-                filter,
+                filterCourses,
                 compareAnswers,
                 addProblem,
                 viewProblem,
-                getExCourses,
-                reviewCourse
+                getEx,
+                reviewCourse,
                 }

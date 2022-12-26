@@ -41,10 +41,10 @@ const courseSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref:'InstructorModel'
     },
-    // instructorName: {
-    //     type: String,
-    //     required: true
-    // },
+    instructorName: {
+        type: String,
+        required: true
+    },
     individualTrainee: {
         type: mongoose.Types.ObjectId,
         ref:'IndividualTrainee'

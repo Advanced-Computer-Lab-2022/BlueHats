@@ -261,17 +261,6 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-  width: 100%;
-
-}
-form button:disabled {
-  background: #b487da;
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: not-allowed;
 }
 form button:disabled {
   background: #b487da;
@@ -388,7 +377,15 @@ a:hover {
   position: relative;
   display: inline-block;
 }
-
+.hoveranchor:hover > .bar {
+  background-color: blue;
+}
+.box2 {
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
@@ -483,63 +480,34 @@ a:hover {
 .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
-/* display rate*/
-div.stars {
-  width: 270px;
-  display: inline-block;
-  background: #fff;
-  border-radius: 100px;
-  margin: 20px auto;
-  /* padding: 20px; */
 
 .video-responsive {
   /* overflow: hidden; */
   padding-bottom: 30%;
   padding-top: 30%;
   position: relative;
-  box-shadow: 10px 5px 5px #a256e0;
-}
- 
-/*    rate course     */
-input.star { display: none; }
- 
-label.star {
-  float: right;
-  padding: 10px;
-  font-size: 36px;
-  color: #444;
-  transition: all .2s;
-}
- 
-input.star:checked ~ label.star:before {
-  content: '\f005';
-  color: #FD4;
-  transition: all .25s;
-}
- 
-input.star-5:checked ~ label.star:before {
-  color: #FE7;
-  text-shadow: 0 0 20px #952;
-}
- 
-input.star-1:checked ~ label.star:before { color: #F62; }
- 
-label.star:hover { transform: rotate(-15deg) scale(1.3); }
- 
-label.star:before {
-  content: '\f006';
-  font-family: FontAwesome;
+  height: 0;
 }
 
-
-
-
-/*    rate instructor     */
-  input.starr { display: none; }
- 
-  label.starr {
-    float: right;
-    padding: 177px;
+.video-responsive iframe {
+  /* left: 0; */
+  top: 0;
+  /* height: 100%;
+  width: 50%; */
+  position: absolute;
+}
+.sidebar11 span{
+  font-size: inherit;
+}
+.course-view {
+  display: flex;
+}
+.course-view-sidebar {
+  height: fit-content;
+}
+.course-view-video {
+  width: 100%;
+  padding-left: 177px;
 }
 .done-button button{
   background: var(--primary);
@@ -550,36 +518,34 @@ label.star:before {
   border-radius: 4px;
   cursor: pointer;
   position: absolute;
-  min-width: 10px;
-    font-size: 36px;
+  min-width: 100px;
   top: 569px;
   right: 650px;
-    color: #444;
-    transition: all .2s;
-  }
-   
-  input.starr:checked ~ label.starr:before {
-    content: '\f005';
-    color: #FD4;
-    transition: all .25s;
-  }
-   
-  input.starr-5:checked ~ label.starr:before {
-    color: #FE7;
-    text-shadow: 0 0 20px #952;
-  }
-   
-  input.starr-1:checked ~ label.starr:before { color: #F62; }
-   
-  label.starr:hover { transform: rotate(-15deg) scale(1.3); }
-   
-  label.starr:before {
-    content: '\f006';
-    font-family: FontAwesome;
-  }
-
-  
-/* request */
+}
+header .container .inputWithButton {
+  position: relative;
+}
+header .container .inputWithButton input {
+  padding-right: 60px;
+}
+header .container .inputWithButton button {
+  position: absolute;
+  right: 11px;
+  top: 20px;
+  bottom: 21px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+/*auth forms*/
+form.signup, form.login , form.forgotPassword , form.resetPassword , form.changeEmail , form.changePassword , form.EditBiography{
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+}
 form.signup .title
 {
   text-align: center;
@@ -587,6 +553,232 @@ form.signup .title
   text-decoration: underline;
   font-size: 1.4em;
 }
+.indTrainee-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.indTrainee-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.indTrainee-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.indTrainee-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+.instructor .filter-inst button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+ cursor: pointer;
+ position: initial;
+}
+.checkbox input {
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  /* //outline: 1px solid #24ba9f; */
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.checkbox label {
+  font-size: 16px;
+  text-align: left;
+  color: #000000;
+  text-align: left;
+  line-height: normal;
+  padding-left: 10px;
+  margin: 20px 20px 20px 0;
+}
+/* nav {
+  display: flex;
+  align-items: center;
+}
+nav a, nav button {
+  margin-left: 10px;
+} */
+.nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.progress {
+  margin-left: 350px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.course-preview {
+  display: flex;
+}
+.course-preview button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  position: initial;
+  min-width: 100px;
+}
+.course-preview .course-preview-video {
+  padding-left: 150px;
+}
+
+.exam button {
+  background:var(--primary);
+  opacity: 0.7;
+  border:5;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+   right:150px;
+  top:150px;
+  min-width: 100px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+}
+
+.exam button:hover {
+  background: var(--primary);
+  opacity: 1;
+}
+
+
+
+
+
+
+.submit button {
+  background:var(--primary) ;
+  border: 1;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+ right:150px;
+  top:150px;
+  min-width: 100px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+  opacity:1;
+}
+
+.submit button:hover{
+  background:#8949bd;
+  border: 1;
+  opacity:1;
+
+}
+
+.submit button:active{
+  background:#696869;
+  border: 1;
+  opacity:1;
+
+}
+
+.reportMenu button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+   right:150px;
+  top:150px;
+  min-width: 100px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+  
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+.note-form textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid lightgrey;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100px;
+  padding: 10px;
+  outline: none;
+}
+.note-form button {
+  width: 100%;
+  background-color: #fff27f;
+  cursor: pointer;
+  padding: 10px;
+  border: 0;
+  outline: none;
+}
+.note-form button:hover {
+  background-color: tomato;
+  color: white;
+}
+button:disabled,
+button[disabled]{
+  color: #666666;
+  background:  #deb3ff;
+  border: 0;
+  color: #fff;
+  cursor:not-allowed;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+}
+.enrolled-outer-progress {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  width: 7%;
+}
+.enrolled-menu {
+  position: absolute;
+  top: 10px;
+  right: 7px;
+}
+.Norefund {
+  padding-left: 550px;
+  padding-top: 129px;
+}
+.refund {
+  padding-left: 550px;
+}
+
+/* request */
 .request-details {
   background: #fff;
   border-radius: 4px;
@@ -639,22 +831,12 @@ box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 margin: 0 0 10px 0;
 color: var(--primary);
 }
-
-
 .policy input{
 width: 2%;
 position: relative;
 bottom: 27px;
 right: 5px;
 }
-
-
-
-
-
-
-
-
 /* Request form */
 
 .form-control {
@@ -794,264 +976,75 @@ right: 5px;
   outline: max(2px, 0.15em) solid currentColor;
   outline-offset: max(2px, 0.15em);
 }
-
-button {
-  font-size: 1.1em;
-  background-color: #EBF5FF;
-  color: #4312AE;
-  border: 2px solid black;
-  box-shadow: 4px 4px 4px #999999;
-}
-button:hover, button:focus, button:active {
-  /* swap colors */
-  color: #EBF5FF;
-  background-color: #4312AE;
-  cursor: pointer; /* displays a hand */
-}
-
 .review-form {
-background: #fff;
-border-radius: 4px;
-margin: 20px auto;
-padding: 20px;
-position: relative;
-box-shadow: 2px 2px 5px rgb(0 0 0 / 5%);
-}
-.review-form h2 {
-  margin: 0 0 10px 0;
-  color: var(--primary);
-}
-
-.rate-button Button{
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.post-review{
-  position:static;
-  font-size: 1.1em;
-  background-color: #a256e0;
-  border: 2px solid black;
-  box-shadow: 4px 4px 4px #999999;
-}
-
-.edit-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
- cursor: pointer;
- position: initial;
-}
-.checkbox input {
-  width: 15px;
-  height: 15px;
-  background-color: #ffffff;
-  /* //outline: 1px solid #24ba9f; */
-  float: left;
-  margin-right: 5px;
-  margin-top: 5px;
-}
-.checkbox label {
-  font-size: 16px;
-  text-align: left;
-  color: #000000;
-  text-align: left;
-  line-height: normal;
-  padding-left: 10px;
-  margin: 20px 20px 20px 0;
-}
-/* nav {
-  display: flex;
-  align-items: center;
-}
-nav a, nav button {
-  margin-left: 10px;
-} */
-.nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins";
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.progress {
-  margin-left: 350px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-.course-preview {
-  display: flex;
-}
-.course-preview button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-  position: initial;
-  min-width: 100px;
-}
-.course-preview .course-preview-video {
-  padding-left: 150px;
-}
-
-.exam button {
-  background:var(--primary);
-  opacity: 0.7;
-  border:5;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-   right:150px;
-  top:150px;
-  min-width: 100px;
-  box-shadow: 0px 2px 2px lightgray;
-  transition: ease background-color 250ms;
-}
-
-.exam button:hover {
-  background: var(--primary);
-  opacity: 1;
-}
-
-
-
-
-
-
-.submit button {
-  background:var(--primary) ;
-  border: 1;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
- right:150px;
-  top:150px;
-  min-width: 100px;
-  box-shadow: 0px 2px 2px lightgray;
-  transition: ease background-color 250ms;
-  opacity:1;
-}
-
-.submit button:hover{
-  background:#8949bd;
-  border: 1;
-  opacity:1;
-
-}
-
-.submit button:active{
-  background:#696869;
-  border: 1;
-  opacity:1;
-
-}
-
-.reportMenu button{
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-   right:150px;
-  top:150px;
-  min-width: 100px;
-  box-shadow: 0px 2px 2px lightgray;
-  transition: ease background-color 250ms;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 5%);
+  }
+  .review-form h2 {
+    margin: 0 0 10px 0;
+    color: var(--primary);
+  }
   
+  .rate-button Button{
+    background: var(--primary);
+    border: 0;
+    color: #fff;
+    padding: 10px;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .post-review{
+    position:static;
+    font-size: 1.1em;
+    background-color: #a256e0;
+    border: 2px solid black;
+    box-shadow: 4px 4px 4px #999999;
+  }
+  
+  .edit-details {
+    background: #fff;
+    border-radius: 4px;
+    margin: 20px auto;
+  }
+  
+  .edit-details h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: var(--primary);
+  }
+  .edit-details p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+  }
+  .edit-details span {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    background: #f1f1f1;
+    padding: 6px;
+    border-radius: 50%;
+    color: #333;
+  }
 
-}
-
-.note-form {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-}
-.note-form textarea {
-  font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid lightgrey;
-  min-width: 100%;
-  max-width: 100%;
-  height: 100px;
-  padding: 10px;
-  outline: none;
-}
-.note-form button {
-  width: 100%;
-  background-color: #fff27f;
-  cursor: pointer;
-  padding: 10px;
-  border: 0;
-  outline: none;
-}
-.note-form button:hover {
-  background-color: tomato;
-  color: white;
-}
-button:disabled,
-button[disabled]{
-  color: #666666;
-  background:  #deb3ff;
-  border: 0;
-  color: #fff;
-  cursor:not-allowed;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-}
-.enrolled-outer-progress {
-  position: absolute;
-  top: 20px;
-  right: 60px;
-  width: 7%;
-}
-.enrolled-menu {
-  position: absolute;
-  top: 10px;
-  right: 7px;
-}
-.Norefund {
-  padding-left: 550px;
-  padding-top: 129px;
-}
-.refund {
-  padding-left: 550px;
-}
-.edit-details h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
-}
-.edit-details p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
-}
-.edit-details span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
-} 
+  /* button { 
+    font-size: 1.1em;
+    background-color: #EBF5FF;
+    color: #4312AE;
+    border: 2px solid black;
+    box-shadow: 4px 4px 4px #999999;
+  }
+  button:hover, button:focus, button:active {
+    color: #EBF5FF;
+    background-color: #4312AE;
+    cursor: pointer; 
+  } 
+  */

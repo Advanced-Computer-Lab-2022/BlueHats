@@ -162,7 +162,7 @@ export default function AccountMenu() {
           <ListItemIcon>
             <ReportProblemIcon />
           </ListItemIcon>
-          Report a Problem <ReportMenu/>
+          Report a Problem
         </MenuItem>
         <Divider />
         <MenuItem>

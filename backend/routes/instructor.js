@@ -6,7 +6,7 @@ const {
    getInstructor,
     deleteInstructor,
     updateBiography,
-    changeEmail,
+    changeEmailInstructor,
     changePasswordInstructor,
     forgotPasswordInstructor,
     filterCourses
@@ -30,7 +30,7 @@ router.delete('/:id',deleteInstructor)
 
 // UPDATE an IndTrainee
 router.patch('/changePassword', changePasswordInstructor)
-router.patch('/changeEmail', changeEmail)
+router.patch('/changeEmail', changeEmailInstructor)
 router.patch('/updateProfile',updateBiography)
 
 // forgot password

@@ -37,10 +37,8 @@ app.use('/api/corporateTrainee', corporateTraineeRoutes);
 app.use('/api/indTrainee', indTraineeRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/problem', problemRoutes);
-app.use('/api/nUsers', individualTraineeRoutes);
-app.use('/api/cUsers', cOTraineeRoutes);
 
-app.use('/api/instructors', instRoutes);
+//app.use('/api/instructors', instRoutes); 
 app.use('/filterBy', filterRoutes)
 app.use('/api/requestCourse',requestedCoursesRoutes)
 app.use('/api/reviews',reviewsRoutes)

@@ -41,12 +41,12 @@ const acceptRequest = async (req, res) => {
     const findCourse = await course.find({_id:cId})
 
     var cT = findCourse[0].corporateTrainee
-    var es = findCourse[0].enrolledStudents
+    var es = findCourse[0].enrolled
     es++;
     cT.push(coTId)
     const addCourse = await course.findOneAndUpdate({_id:cId},{
         corporateTrainee: cT,
-        enrolledStudents:es
+        enrolled:es
         
     })
     // const addCourse = await course.findOneAndUpdate({_id:cId},{
