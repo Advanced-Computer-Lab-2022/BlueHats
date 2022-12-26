@@ -102,7 +102,8 @@ const handleSubmit = async()=>{
         <h4>{course.title}</h4>
         <p><strong>Total Hours: </strong>{course.totalhours} <CheckNumber/> </p>
         {/* <p className="view-price" ><strong ></strong>{course.price}</p> */}
-        <p><strong>Rating: </strong>{course.courseRating} / 5 <strong> <Stars></Stars></strong> </p>
+        <p><strong>Rating: </strong>{Number.parseFloat(course.courseRating).toFixed(2)} / 5 <strong> <Stars></Stars></strong> </p>
+        
 
         <div>
         <Rating
@@ -111,9 +112,9 @@ const handleSubmit = async()=>{
         />
         </div>
 
-        <div>
+        {/* <div>
           <p><strong>Reviews: </strong> <Reviews/></p>
-        </div>
+        </div> */}
 
         <Box className='rate-button'sx={{marginBottom:2}}>
           <Button variant= "contained"

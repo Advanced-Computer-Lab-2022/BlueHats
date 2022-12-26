@@ -55,7 +55,7 @@ const ViewEnrolledCourses = ({ course }) => {
         <div  className="course-details-price">
         <p className="view-price" ><strong ></strong>{course.price}</p>
         </div>
-        <p><strong>Rating: </strong>{course.courseRating} / 5 <strong> <Stars/></strong> </p>
+        <p><strong>Rating: </strong>{Number.parseFloat(course.courseRating).toFixed(2)} / 5 <strong> <Stars/></strong> </p>
         
         {/* <div>
           <p><strong>Reviews: </strong> <Reviews/></p>

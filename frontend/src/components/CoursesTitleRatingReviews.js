@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { useState, /*setCounter*/ } from 'react'
+import * as React from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const ReviewCourse = ({course}) => {
 
@@ -127,7 +130,11 @@ const ReviewCourse = ({course}) => {
                   </form>
                 </div>
 
-   <button>Submit</button>   
+   <button onClick={<Stack sx={{ width: '100%' }} spacing={2}>
+     
+     <Alert severity="success">This is a success alert — check it out!</Alert>
+   </Stack> }>Submit</button>  
+   
     
    </form>
    )
