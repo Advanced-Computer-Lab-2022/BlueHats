@@ -80,9 +80,15 @@ const editReview = async (req, res) => {
         return res.status(404).json({error: 'No such review'})
     }
 
+    const {userReview} = req.body;
+
     const Review = await review.findOneAndUpdate({_id: id}, {
-        ...req.body
+        userReview:userReview
     });
+
+    // const Review = await review.findOneAndUpdate({_id: id}, {
+    //     ...req.body
+    // });
 
     if(!Review) {
         return res.status(404).json({error: 'No such review'})
@@ -90,6 +96,7 @@ const editReview = async (req, res) => {
 
     res.status(200).json(Review);
 }
+
 
 const viewCourseReviews = async (req,res) => {
     const { id } = req.params;
@@ -103,6 +110,29 @@ const viewCourseReviews = async (req,res) => {
     
 } 
 
+const viewCorporateReviews = async (req, res)=> {
+    const {id} = req.params
+
+    const result = await review.find({corporateTraineeId:mongoose.Types.ObjectId(id)});
+    res.status(200).json(result);
+
+    if(!result) {
+        return res.status(404).json({error: 'No such review'})
+    }
+}
+
+const viewIndividualReviews = async (req, res)=>{
+    const {id} = req.params
+
+    const result = await review.find({individualTraineeId:mongoose.Types.ObjectId(id)});
+    res.status(200).json(result);
+
+    if(!result) {
+        return res.status(404).json({error: 'No such review'})
+    }
+}
+
+
 
 
 module.exports = {
@@ -111,5 +141,7 @@ module.exports = {
   //  addReview,
     deleteReview,
     editReview,
-    viewCourseReviews
+    viewCourseReviews,
+    viewCorporateReviews,
+    viewIndividualReviews
 };

@@ -482,13 +482,19 @@ const rateCourse = async (req, res) => {
   }
     const user = await CorporateTrainee.find({_id:corporateTraineeId});
 
-  
+    const aCourse = await Course.find({_id:courseId})
+
   const {userReview} = req.body;
   const userName = user[0].username
+  const courseName = aCourse[0].title
+
   let emptyFields = [];
   
   if(!userName) {
     emptyFields.push('userName')
+} 
+if(!courseName) {
+  emptyFields.push('courseName')
 } 
   if(!userReview) {
       emptyFields.push('userReview')
@@ -506,7 +512,7 @@ const rateCourse = async (req, res) => {
 
   // Add doc to database
   try {
-      const Review = await review.create({userName, userReview,courseId,corporateTraineeId});
+      const Review = await review.create({userName, userReview,courseName,courseId,corporateTraineeId});
       res.status(200).json(Review);
   } catch (error) {
       res.status(400).json({error: error.message});

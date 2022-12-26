@@ -31,6 +31,7 @@ import ViewInstructors from "./pages/ViewInstructors"
 import ViewInstructorCourses from "./pages/ViewInstructorCourses"
 import Contract from './components/Contract';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
+
 import ReviewCourse from './components/CoursesTitleRatingReviews';
 
 import RevCourse from './components/CorporateTraineeRateCourse'
@@ -38,11 +39,16 @@ import RevCourse from './components/CorporateTraineeRateCourse'
 import ViewAvailableCourses from './pages/ViewAllCourses';
 import RequestCourse from './components/RequestCourse';
 import ViewRequests from './pages/ViewRequests';
+
 import MyCourses from './pages/ViewCorporateUserCourses'
 import ViewReviewsByUsers from './pages/ViewReviewsByIndUsers'
 import ViewReviewsByInstructors from './pages/ViewReviewsByInstructor'
 
 import ViewReviewsByCorUsers from './pages/ViewReviewsByCorUsers'
+import ViewAllCoReviews from './pages/ViewAllCoReviews';
+import ViewAllIndReviews from './pages/ViewAllIndividualUserReviews';
+
+import EditReview from './components/EditReview'
 function App() {
 
 
@@ -214,6 +220,19 @@ function App() {
             <Route
               path="/creviews"
               element={<ViewReviewsByCorUsers/>}
+            />
+
+             <Route
+              path="/vaireviews"
+              element={<ViewAllIndReviews/>}
+            />
+             <Route
+              path="/vacreviews"
+              element={<ViewAllCoReviews/>}
+            />
+            <Route
+              path="/edit"
+              element={<EditReview/>}
             />
             
             

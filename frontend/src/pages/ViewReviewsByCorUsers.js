@@ -10,7 +10,7 @@ import ReviewDetails from "../components/ReviewDetails"
 
 const ViewReviewsByCorUsers = () => {
 
-    const [courseReview, setCourseReview] = useState()
+    const [courseReview, setCourseReview] = useState('');
     const [loading, setLoading] = useState(true) 
     const params = new URLSearchParams(window.location.search);
   const courseId = params.get('courseId');
@@ -40,7 +40,7 @@ const ViewReviewsByCorUsers = () => {
      var data= {userReview:courseReview}
       axios({
         method:'POST',
-        url: `/api/indTrainee/addreview/?courseId=${courseId}&corporateTraineeId=63a756e189cc94e7139e239c`,
+        url: `/api/corporateTrainee/addreview/?courseId=${courseId}&corporateTraineeId=63a756e189cc94e7139e239c`,
         //url: `/api/indTrainee/addreview/?courseId=${courseId}&corporateTraineeId=${savedID}`,
         data:data,
         headers:{'Content-Type':'application/json'}
@@ -64,7 +64,6 @@ const ViewReviewsByCorUsers = () => {
         onChange={(e) => setCourseReview(e.target.value)} 
           value={courseReview}>
           
-       
         </textarea>
         
         <button className="post-review"onClick={handleSubmit}> POST</button> 

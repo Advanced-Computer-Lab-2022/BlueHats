@@ -12,6 +12,10 @@ const reviewsSchema = new Schema ({
         type: String,
         required: true
     },
+    courseName:{
+        type: String,
+        required: true
+    },
     corporateTraineeId: {
         type: mongoose.Types.ObjectId,
         ref:'CorTrainee'

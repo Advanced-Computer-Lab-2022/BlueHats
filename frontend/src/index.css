@@ -734,3 +734,30 @@ box-shadow: 2px 2px 5px rgb(0 0 0 / 5%);
   border: 2px solid black;
   box-shadow: 4px 4px 4px #999999;
 }
+
+.edit-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+}
+
+.edit-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.edit-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.edit-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+} 

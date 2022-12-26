@@ -486,15 +486,21 @@ const rateCourse = async (req, res) => {
         return res.status(404).json({error: 'No such user'})
     }
       const user = await IndTrainee.find({_id:individualTraineeId});
-  
+
+      const aCourse = await Course.find({_id:courseId})
     
     const {userReview} = req.body;
     const userName = user[0].username
+    const courseName = aCourse[0].title
+
     let emptyFields = [];
     
     if(!userName) {
       emptyFields.push('userName')
   } 
+  if(!courseName) {
+    emptyFields.push('courseName')
+} 
     if(!userReview) {
         emptyFields.push('userReview')
     } 
@@ -511,7 +517,7 @@ const rateCourse = async (req, res) => {
   
     // Add doc to database
     try {
-        const Review = await review.create({userName, userReview,courseId,individualTraineeId});
+        const Review = await review.create({userName,courseName, userReview,courseId,individualTraineeId});
         res.status(200).json(Review);
     } catch (error) {
         res.status(400).json({error: error.message});

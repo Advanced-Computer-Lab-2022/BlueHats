@@ -5,7 +5,9 @@ const {  getReviews,
   //  addReview,
     deleteReview,
     editReview,
-    viewCourseReviews
+    viewCourseReviews,
+    viewCorporateReviews,
+    viewIndividualReviews
   } = require('../controllers/reviewsController')
     
 
@@ -25,6 +27,9 @@ router.delete('/:id', deleteReview);
 
 router.patch('/:id', editReview);
 
+
+router.get('/viewcReviews/:id', viewCorporateReviews);
+router.get('/viewiReviews/:id', viewIndividualReviews);
 
 
 router.get('/viewall/:id', viewCourseReviews);

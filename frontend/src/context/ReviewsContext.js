@@ -10,11 +10,11 @@ export const reviewsReducer = (state, action) => {
       }
     case 'CREATE_REVIEW':
       return { 
-        reviews: [action.payload, ...state.admins] 
+        reviews: [action.payload, ...state.reviews] 
       }
     case 'DELETE_REVIEW': 
       return {
-        reviews: state.admins.filter((a) => a._id !== action.payload._id)
+        reviews: state.reviews.filter((a) => a._id !== action.payload._id)
       }  
     default:
       return state
