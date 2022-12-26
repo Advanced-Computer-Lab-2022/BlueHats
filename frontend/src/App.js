@@ -39,7 +39,8 @@ import InstructorFilter from './pages/InstructorFilter';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
 import ReviewCourse from './components/CoursesTitleRatingReviews';
 
-
+import Report from './pages/ViewProblem';
+import AdminPage from './pages/AdminPage';
 
 
  
@@ -79,6 +80,10 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+             <Route
+              path="/adminPage"
+              element={<AdminPage/>}
             />
             <Route
               path="/instructor/addCourse"
@@ -205,6 +210,11 @@ function App() {
               element={<RefundRequests/>}
             />
             
+            <Route
+              path="/viewProblem/"
+              element={<Report/>}
+            />
+
           </Routes>
         </div>
       </BrowserRouter>

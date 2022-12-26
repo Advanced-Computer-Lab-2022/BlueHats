@@ -4,6 +4,8 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import { useAuthContext } from '../hooks/useAuthContext'
 import AccountMenu from './Menu'
+import ReportMenu from "./ReportMenu";
+
 
 export var countryValue = 'Egypt';
 
@@ -60,6 +62,7 @@ const Navbar = () => {
                         </div></>
                 )}
                 {/* <span className="material-symbols-outlined">shopping_cart</span> */}
+                <ReportMenu />
             </div>
             
         </header>

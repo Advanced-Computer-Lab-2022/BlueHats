@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const reportedProblem = require('./reportedProblem')
+
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
@@ -28,8 +30,9 @@ const corporateTraineeSchema = new Schema({
    [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, num: {type: Number}}]
   ,
   answers: {
-    type: [String]
-  }
+    type: [Object]
+  },
+  problem: [reportedProblem.schema]
 }, { timestamps: true })
 
 // corporateTraineeSchema.statics.login = async function(username, password) {

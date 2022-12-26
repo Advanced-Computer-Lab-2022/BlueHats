@@ -3,7 +3,8 @@ const Course = require('../models/course');
 const bcrypt = require('bcrypt')
 const nodemailer = require("nodemailer")
 
-const CorporateTrainee = require('../models/corporateTraineeModel')
+const CorporateTrainee = require('../models/corporateTraineeModel');
+const exercise = require('../models/exercise');
 
 //get all corporateTrainees
 const getCorporateTrainees=async (req,res)=> 
@@ -219,50 +220,60 @@ const gradeExam = async(req,res) => {
   }
   const trainee = await CorporateTrainee.findOne({_id: idTrainee})
   const crs = await Course.findOne({_id: idCourse})
+  const exam = crs.finalExam
+  const temp = trainee.answers
   let i =0;
   let sum=0;
-  while(i<crs.finalExam.length && trainee.answers.length!=0){
-    const first = crs.finalExam[i].answer
-    const second = trainee.answers[i]
-    console.log(first,second)
-    i++;
-    if(first == second)
-      sum++;
-  }
-    
-    const gradeArr = trainee.grade
-    let k = 0
-    let flag = false
-    let gradeTrainee = sum;
-    while(k<gradeArr.length){
-      if(gradeArr[k].course == idCourse){
-        flag = true;
-        if(gradeTrainee<gradeArr[k].num)
-           gradeTrainee=gradeArr[k].num
-        else{
-          flag=false
-          gradeArr.splice(k, 1);
-        }
-           
+  while(i<exam.length && temp.length!=0){
+    let idTemp = exam[i]._id
+    let j=0;
+    while(j<temp.length){
+      if((temp[j].exercise == exam[i]._id) && (temp[j].answer == exam[i].answer)){
+        sum++;
+        console.log("answer array: ", temp[j].answer , "solution: ", exam[i].answer)
       }
-      k++;
+      j++;
     }
+    console.log(idTemp)
+    i++;
+    
+  }
+    const gradeArr = trainee.grade
+    //getting the higher grade
+    // let k = 0
+    // let flag = false
+    // let gradeTrainee = sum;
+    // while(k<gradeArr.length){
+    //   if(gradeArr[k].course == idCourse){
+    //     flag = true;
+    //     if(gradeTrainee<gradeArr[k].num)
+    //        gradeTrainee=gradeArr[k].num
+    //     else{
+    //       flag=false
+    //       gradeArr.splice(k, 1);
+    //     }
+           
+    //   }
+    //   k++;
+    // }
     const obj = {
       course: idCourse,
-      num: gradeTrainee
+      num: sum
     };
     const ans = gradeArr.concat([obj])  
    
-    if(flag==false)
-    {  const updatedTrainee = await CorporateTrainee.findOneAndUpdate({_id: idTrainee} , {grade: ans});
+    // if(flag==false)
+    // { 
+       const updatedTrainee = await CorporateTrainee.findOneAndUpdate({_id: idTrainee} , {grade: ans});
       console.log(updatedTrainee)
       updated = true
       if(!updatedTrainee) {
         return res.status(404).json({error: 'No such Corporate Trainee'})
-    }}
+    }
+  //}
        await CorporateTrainee.findOneAndUpdate({_id: idTrainee} , {answers: []});
    
-    return res.status(200).json(gradeTrainee);
+    return res.status(200).json(sum);
 }
 
 const viewSolution = async(req,res) => {
@@ -272,7 +283,11 @@ const viewSolution = async(req,res) => {
     }
 
     const crs = await Course.findOne({_id: idCourse});
+    
     const exam = crs.finalExam;
+    if(exam == null) {
+      return res.status(404).json({error: 'No Exam'})
+  }
     console.log(exam)
 
     if(exam) {
@@ -284,6 +299,7 @@ const viewSolution = async(req,res) => {
 const setAnswer = async(req,res) => {
   const idCourse = req.params.idCourse;
   const id = req.params.id;
+  const idEx = req.params.idEx;
   const answer = req.params.answer;
   if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such Corporate Trainee'})
@@ -293,12 +309,18 @@ const setAnswer = async(req,res) => {
   }
 
     const trainee = await CorporateTrainee.findById({_id: id })
-    const course = await Course.findOne({_id: idCourse})
-    const examT = course.finalExam
-    const index = trainee.answers.length ;
-    const exercise = examT[index];
-    console.log(examT,index)
-    let ansr = ''
+    const crs = await Course.findOne({_id: idCourse})
+    const examT = crs.finalExam
+    console.log(examT)
+    let i =0;
+    let exercise = null;
+    while(i < examT.length){
+      if(examT[i]._id == idEx)
+         exercise =examT[i]
+      i++
+    }
+    console.log(examT,exercise)
+    let ansr = '';
     if(answer=='1'){
        ansr = exercise.firstChoice 
     }
@@ -311,8 +333,11 @@ const setAnswer = async(req,res) => {
     else if (answer =='4'){
        ansr = exercise.fourthChoice
     }
-    const temp =[ansr]
-    const ans = trainee.answers.concat(temp)
+    const obj ={
+      exercise: idEx,
+      answer: ansr
+    }
+    const ans = trainee.answers.concat([obj])
     const finalT = await CorporateTrainee.findOneAndUpdate({_id: id }, {answers : ans})
     console.log(finalT)
 
@@ -321,16 +346,108 @@ const setAnswer = async(req,res) => {
     }
     res.status(200).json(trainee);
 }
+// const getNumber = async (req,res) => {
+//   const idCourse = req.params.idCourse;
+//   const idEx = req.params.idEx;
+//   console.log(idCourse,idEx)
+//   if(!mongoose.Types.ObjectId.isValid(idCourse)) {
+//     return res.status(404).json({error: 'No such Course'})
+// }
+
+//   const course = await Course.findOne({_id: idCourse})
+//   const examT = course.finalExam
+//   console.log(examT)
+//   let i = 0; 
+//   let temp = null;
+//   while(i<examT.length){
+//     if(examT[i]._id == idEx)
+//       temp = examT[i];
+//     i++;
+//   }
+//   let c =0;
+//   if(answer==firstChoice)
+//     c=1;
+//   else if (answer == secondChoice)
+//     c=2;
+//   else if (answer == thirdChoice)
+//     c=3;
+//   else 
+//     c=4;
+//   console.log(c)
+//   res.status(200).json(c);
+
+// }
+
+const getEx = async (req,res) => {
+    const idCourse = req.params.idCourse;
+    const idEx = req.params.idEx;
+    console.log(idCourse,idEx)
+    if(!mongoose.Types.ObjectId.isValid(idCourse)) {
+      return res.status(404).json({error: 'No such Course'})
+  }
+  
+    const course = await Course.findOne({_id: idCourse})
+    const examT = course.finalExam
+    console.log(examT)
+    let i = 0; 
+    let ex = null;
+    while(i<examT.length){
+      if(examT[i]._id == idEx)
+        ex= examT[i]
+      i++;
+    }
+    res.status(200).json(ex);
+}
+
+
 const compareAnswers = async(req,res) => {
   const solution = req.params.solution;
   const answer = req.params.answer;
   console.log(solution,answer)
   if(solution == answer)
     return res.json(true)
-  else 
+  else if(solution != answer)
     return res.json(false)
-    
+}
 
+const addProblem = async(req,res) => {
+  const id = req.params.id;
+  const problem = req.params.problem;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+}
+  const trainee = await CorporateTrainee.findById({_id: id })
+  console.log(id,problem)
+  const obj = {
+    problem: problem,
+    status: 'Pending',
+    response: 'No Response'
+  };
+  const problemTemp = trainee.problem.concat([obj])
+  console.log(problemTemp)  
+  const finalT = await CorporateTrainee.findOneAndUpdate({_id: id }, {problem : problemTemp})
+  console.log(finalT)
+  if(!trainee) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+}
+res.status(200).json(trainee);
+}
+
+const viewProblem = async(req,res) => {
+  const id = req.params.id;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+}
+  const trainee = await CorporateTrainee.findById({_id: id })
+  console.log(id)
+  const problem = trainee.problem
+  if(!trainee) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+}
+if(problem==[]){
+  res.status(200).json([]);
+}
+res.status(200).json(problem);
 }
 
 module.exports={getCorporateTrainee,
@@ -343,5 +460,8 @@ module.exports={getCorporateTrainee,
                 gradeExam,
                 viewSolution,
                 setAnswer,
-                compareAnswers
+                compareAnswers,
+                addProblem,
+                viewProblem,
+                getEx
                 }

@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 
-// components
 import AdminDetails from "../components/AdminDetails"
 import AdminForm from "../components/AdminForm"
 

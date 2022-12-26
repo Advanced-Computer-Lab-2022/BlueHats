@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Admin = require('../models/adminModel')
+const CorporateTrainee = require('../models/corporateTraineeModel')
+const Problem = require('../models/reportedProblem')
 
 //get all admins
 const getAdmins=async (req,res)=> {
@@ -81,5 +83,6 @@ const updateAdmin =async (req,res) => {
     }
     res.status(200).json(admin)
 }
+
 
 module.exports={getAdmin,getAdmins,createAdmin,deleteAdmin,updateAdmin}

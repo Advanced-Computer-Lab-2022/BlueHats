@@ -15,22 +15,22 @@ const getCoursesBySearch = async (req,res) => {
             const instRes = await course.find({instructorName: key})
             console.log(instRes)
             if(instRes.length==0)
-                res.json([])
+               return res.json([])
             else{
-                res.json(instRes)
+                return res.json(instRes)
             }
 
         }
         else{
-            res.json(subjRes)
+           return res.json(subjRes)
         }
         
     }
     else if (titleRes.length!=0){
-        res.json(titleRes)
+        return res.json(titleRes)
     }
     else{
-        res.status(400).json("This course doesn't exist")
+        return res.json([])
     }
 
 

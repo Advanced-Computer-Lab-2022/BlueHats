@@ -4,7 +4,7 @@ const {
     getAdmins,
     getAdmin,
     deleteAdmin,
-    updateAdmin
+    updateAdmin,
 } = require('../controllers/adminController' )
 const {courseRefund} = require('../controllers/payment');
 
