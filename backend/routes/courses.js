@@ -41,8 +41,6 @@ router.put('/getTraineeName', getTraineeName);
 // Get refund course price
 router.put('/getCoursePrice', getCoursePrice);
 
-
-
 // Get user wallet
 router.put('/wallet', getWallet);
 

@@ -174,4 +174,18 @@ const getCoursePrice = async (req, res) => {
     res.status(200).json(price);
 }
 
-module.exports = { coursePayment, requestRefund, getRefundRequests, courseRefund, getWallet, getCourseName, getTraineeName, getCoursePrice };
+const payWithWallet = async (req, res) => {
+    const { userID } = req.body;
+    const { price } = req.body;
+
+    const trainee = await indTrainee.findById(userID);
+    console.log(trainee);
+
+    const traineeWallet = trainee.wallet - price; 
+    console.log(trainee.wallet);
+
+    const updateTraineeWallet = await indTrainee.findOneAndUpdate({_id: userID}, {wallet: traineeWallet});
+    console.log(updateTraineeWallet);
+}
+
+module.exports = { coursePayment, requestRefund, getRefundRequests, courseRefund, getWallet, getCourseName, getTraineeName, getCoursePrice, payWithWallet };

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const{getIndTrainees,getIndTrainee,signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses} = require('../controllers/indTraineeController')
+const {payWithWallet} = require('../controllers/payment');
 
 //login route
 router.post('/login',loginIndTrainee)
@@ -43,6 +44,9 @@ router.put('/getProgress', getProgress);
 
 // Get an indTrainee Courses
 router.put('/getMyCourses', getMyCourses);
+
+// Pay for a course with wallet
+router.put('payWithWallet', payWithWallet);
 
 
 module.exports = router

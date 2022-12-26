@@ -3,7 +3,15 @@ import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from '../components/Navbar'
 import YoutubeEmbed from "./YoutubeEmbed";
 import { useAuthContext } from '../hooks/useAuthContext'
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
 import Axios from "axios";
+import axios from "axios";
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -65,6 +73,46 @@ const CoursePreview = ({course}) => {
       const myembed = mylink.split('=');
       const myembedID = myembed[1];
 
+      var loggedinUser = JSON.parse(localStorage.getItem('user'));
+      const userID = loggedinUser.id;
+      const type = loggedinUser.type;
+      const [wallet, setWallet] = useState(0); 
+
+      useEffect(() =>  {
+        const data={type: type, userID: userID};
+        axios({
+          method: "PUT",
+          url : `/api/courses/wallet`,
+          data:data,
+          headers:{'Content-Type':'application/json'}
+        })
+        .then( (res) => { 
+          const wallet = res.data
+         
+          setWallet(wallet)  
+        });
+      },[type, userID])
+
+      const [open1, setOpen1] = useState(false);
+
+      const handleClickOpen = () => {
+        setOpen1(true);
+      };
+
+      const handleCloseD = () => {
+        setOpen1(false);
+      };
+
+      const Pay = () => {
+        const data={price: course.price, userID: userID};
+        axios({
+          method: "PUT",
+          url : `/api/indTrainee/payWithWallet`,
+          data:data,
+          headers:{'Content-Type':'application/json'}
+        })
+      }
+
     return (
         <div className="course-preview">
           <div>
@@ -72,7 +120,8 @@ const CoursePreview = ({course}) => {
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <p><strong>Price: </strong> {currency} {output}</p>
-            { user &&  <button onClick={() => window.location.href=`/payment?id=${course._id}`}>Enroll Now</button>}
+            { user &&  wallet<course.price && <button onClick={() => window.location.href=`/payment?id=${course._id}`}>Enroll Now</button>}
+            { user &&  wallet>=course.price && <button onClick={handleClickOpen}>Enroll Now</button>}
             { !user &&  <button onClick={() => window.location.href=`/login`}>Enroll Now</button>}
             <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
             <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
@@ -80,6 +129,18 @@ const CoursePreview = ({course}) => {
             <ol>{(course.subtitle).map((mycourse)=> <li mycourse={mycourse} key={course._id}>  {mycourse.name} is {mycourse.hours} hours </li>)}</ol>
           </div>
           <div className="course-preview-video"> <YoutubeEmbed embedId={myembedID} /></div>
+          <div float='left'>
+          <Dialog open={open1} onClose={handleCloseD}>
+            <DialogTitle>Current Wallet Balance: ${wallet}</DialogTitle>
+            <DialogContent>
+              <p>Your current balance balance allows to pay using your wallet.</p>  
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={Pay}>Pay with Wallet</Button>
+              <Button  onClick={() => window.location.href=`/payment?id=${course._id}`}>Proceed to pay with Credit Card</Button>
+            </DialogActions>
+          </Dialog>
+          </div>
         </div>
         
     )
