@@ -494,7 +494,7 @@ const ReportMenu = () =>  {
         </BootstrapDialogTitle>
         
         <DialogContent>
-          BITCH
+          
           </DialogContent>  
           <DialogActions>
           <Button autoFocus onClick={handleCloseTransfer}>

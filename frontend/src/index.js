@@ -9,7 +9,6 @@ import { AdminsContextProvider } from './context/AdminsContext';
 import { InstructorsContextProvider } from './context/InstructorsContext';
 import { CorporateTraineesContextProvider } from './context/CorporateTraineesContext';
 import { IndTraineesContextProvider } from './context/IndTraineesContext';
-import { render } from "react-dom";
 
 
 import { InstContextProvider } from './context/InstContext';
@@ -21,6 +20,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <IndTraineesContextProvider>
     <AuthContextProvider>
     <ProSidebarProvider>
     <CorporateTraineesContextProvider>
@@ -36,5 +36,6 @@ root.render(
     </CorporateTraineesContextProvider>
     </ProSidebarProvider>
     </AuthContextProvider>
+    </IndTraineesContextProvider>
   </React.StrictMode>
 );

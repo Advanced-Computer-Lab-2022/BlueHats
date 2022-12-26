@@ -12,7 +12,7 @@
     "@mui/material": "^5.11.0",
     "@stripe/react-stripe-js": "^1.16.1",
     "@stripe/stripe-js": "^1.46.0",
-    "@szhsin/react-menu": "^3.3.0",
+    "@szhsin/react-menu": "^3.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

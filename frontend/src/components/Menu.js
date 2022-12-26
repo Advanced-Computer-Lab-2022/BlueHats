@@ -22,6 +22,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
+import ReportMenu from './ReportMenu';
+
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 import axios from "axios";
@@ -160,7 +162,7 @@ export default function AccountMenu() {
           <ListItemIcon>
             <ReportProblemIcon />
           </ListItemIcon>
-          Report a Problem
+          Report a Problem <ReportMenu/>
         </MenuItem>
         <Divider />
         <MenuItem>
