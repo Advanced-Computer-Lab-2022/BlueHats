@@ -4,6 +4,10 @@ const nodemailer = require("nodemailer")
 
 const Instructor = require('../models/instructorModel')
 
+//////////////////
+const course = require('../models/course');
+
+
 //get all instructors
 const getInstructors=async (req,res)=>
 {
@@ -240,7 +244,19 @@ const forgotPasswordInstructor = async (req,res) =>
     res.status(404).json(error)
   }
 }
+//////////////////////////////////////////////////////////////////
 
 
+const filterCourses = async(req,res) => {
+  const { id } = req.params;
 
-module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmail,changePasswordInstructor}
+  const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
+  res.status(200).json(result)
+
+  if(!result) {
+      res.status(400).json({error:"No such instructor"})
+  }
+
+}
+
+module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses}

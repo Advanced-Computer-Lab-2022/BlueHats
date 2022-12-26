@@ -14,7 +14,14 @@ const
     compareAnswers,
     addProblem,
     viewProblem,
-    getEx
+    getEx,
+    rateCourse,
+    rateInstructor,
+    addReview,
+    requestCourse,
+    availableCourses,
+    filterCourses,
+    reviewCourse
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -43,7 +50,7 @@ router.get('/gradeExam/:idTrainee/:idCourse',gradeExam)
 
 router.get('/viewSolution/:idCourse',viewSolution)
 
-router.put('/setAnswer/:id/:idCourse/:idEx/:answer',setAnswer)
+// router.put('/setAnswer/:id/:idCourse/:idEx/:answer',setAnswer)
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 
@@ -52,5 +59,28 @@ router.post('/addProblem/:id/:problem',addProblem)
 router.get('/viewProblem/:id',viewProblem)
 
 router.get('/getEx/:idCourse/:idEx', getEx)
+
+
+////////////////////
+
+// get all courses created by the user's id
+router.get('/filter/:id', filterCourses);
+
+// // rate a course
+router.patch('/rateCourse', rateCourse);
+
+// rate an instructor
+router.patch('/rateInstructor', rateInstructor);
+
+// review a course
+router.patch('/addRev', addReview);
+
+// request a course
+router.post('/requestCourse', requestCourse);
+
+router.get('/availableCourses/:id', availableCourses);
+
+router.post('/addreview', reviewCourse);
+
 
 module.exports = router

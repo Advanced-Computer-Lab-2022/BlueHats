@@ -10,10 +10,9 @@ const adminRoutes = require('./routes/admin');
 const instructorRoutes = require('./routes/instructor');
 const corporateTraineeRoutes = require('./routes/corporateTrainee'); 
 const indTraineeRoutes = require('./routes/indTrainee'); 
-const instRoutes = require('./routes/inst');
 const filterRoutes = require('./routes/filters')
-const individualTraineeRoutes = require('./routes/iT');
-const cOTraineeRoutes = require('./routes/cT');
+const requestedCoursesRoutes = require('./routes/requestedCourses')
+const reviewsRoutes = require('./routes/reviews')
 
 
 // express app
@@ -43,7 +42,8 @@ app.use('/api/cUsers', cOTraineeRoutes);
 
 app.use('/api/instructors', instRoutes);
 app.use('/filterBy', filterRoutes)
-
+app.use('/api/requestCourse',requestedCoursesRoutes)
+app.use('/api/reviews',reviewsRoutes)
 
 // connect to database
 mongoose.connect(process.env.MONGO_URL)

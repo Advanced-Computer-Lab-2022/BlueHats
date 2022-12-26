@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const{getIndTrainees,getIndTrainee,signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses} = require('../controllers/indTraineeController')
+const{getIndTrainees,getIndTrainee,
+    signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses,rateCourse,addReview,rateInstructor,filterCourses,reviewCourse} = require('../controllers/indTraineeController')
 const {payWithWallet} = require('../controllers/payment');
 
 //login route
@@ -47,6 +48,22 @@ router.put('/getMyCourses', getMyCourses);
 
 // Pay for a course with wallet
 router.put('payWithWallet', payWithWallet);
+
+
+
+ // get all courses created by an user's id
+router.get('/filter/:id', filterCourses);
+
+// rate an instructor
+router.patch('/rateInstructor', rateInstructor);
+
+// review a course
+router.patch('/addRev', addReview);
+
+// rate a course
+router.patch('/rateCourse', rateCourse);
+
+router.post('/addReview', reviewCourse);
 
 
 module.exports = router

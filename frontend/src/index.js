@@ -15,6 +15,9 @@ import { InstContextProvider } from './context/InstContext';
 import { AuthContextProvider } from './context/AuthContext';
 
 
+import { RequestsContextProvider } from './context/RequestsContext';
+import { ReviewsContextProvider } from './context/ReviewsContext';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -27,10 +30,14 @@ root.render(
     <InstructorsContextProvider>
     <CoursesContextProvider>
     <AdminsContextProvider>
-      <InstContextProvider>
+    <InstContextProvider>
+    <RequestsContextProvider>
+    <ReviewsContextProvider>
         <App />
-      </InstContextProvider>
-      </AdminsContextProvider>
+    </ReviewsContextProvider>
+    </RequestsContextProvider>
+    </InstContextProvider>
+    </AdminsContextProvider>
     </CoursesContextProvider>
     </InstructorsContextProvider>
     </CorporateTraineesContextProvider>

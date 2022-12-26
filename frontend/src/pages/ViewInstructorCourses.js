@@ -7,8 +7,16 @@ const ViewInstructorCourses = () => {
 
     useEffect(() => {
         const fetchMyCourses = async () => {
+        
+        // this needs to be dynamic
+        // var loggedinUser = JSON.parse(localStorage.getItem('user'));
+        // const savedID = loggedinUser.id
 
-        const response = await fetch('/api/instructors/myCourses?instructorId=638ce1c9e2b0e642f47d7081')
+           //     const response = await fetch('/api/instructor/myCourses/' + savedID, {
+//             method: 'GET'
+   //     }
+
+        const response = await fetch('/api/instructor/myCourses/63a63952d3f9a62c95ff1de1')
         const json = await response.json();
         if(response.ok) {
             dispatch({type: 'SET_COURSES', payload: json});

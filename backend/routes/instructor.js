@@ -3,12 +3,13 @@ const { updateCorporateTraineeProfile } = require('../controllers/corporateTrain
 const {
     createInstructor,
     getInstructors,
-    getInstructor,
+   getInstructor,
     deleteInstructor,
     updateBiography,
     changeEmail,
     changePasswordInstructor,
-    forgotPasswordInstructor
+    forgotPasswordInstructor,
+    filterCourses
 } = require('../controllers/instructorController' )
 
 const {instructorSearch} = require('../controllers/search')
@@ -37,5 +38,9 @@ router.patch('/updateProfile',updateBiography)
 
 // search in instructor courses
 router.get('/search/:id/:key', instructorSearch);
+
+
+// get all courses created by an instructor
+router.get('/myCourses/:id', filterCourses);
 
 module.exports = router

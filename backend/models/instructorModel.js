@@ -33,7 +33,16 @@ const instructorSchema = new Schema({
   {
     type: Number,
     default: 0
-  }
+  },
+  instructorRating:
+    {
+        type: Number,
+        default: 0
+    },
+    numberOfRates:{
+        type: Number,
+        default:0
+    } 
 }, { timestamps: true })
 
 // instructorSchema.statics.login = async function(username, password) {

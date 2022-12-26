@@ -37,13 +37,26 @@ import ContractForm from './components/ContractForm';
 import HomeFilter from './pages/HomeFilter';
 import InstructorFilter from './pages/InstructorFilter';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
+
 import ReviewCourse from './components/CoursesTitleRatingReviews';
 
 import Report from './pages/ViewProblem';
 import AdminPage from './pages/AdminPage';
+import RevCourse from './components/CorporateTraineeRateCourse'
 
+import ViewAvailableCourses from './pages/ViewAllCourses';
+import RequestCourse from './components/RequestCourse';
+import ViewRequests from './pages/ViewRequests';
 
- 
+import MyCourses from './pages/ViewCorporateUserCourses'
+import ViewReviewsByUsers from './pages/ViewReviewsByIndUsers'
+import ViewReviewsByInstructors from './pages/ViewReviewsByInstructor'
+
+import ViewReviewsByCorUsers from './pages/ViewReviewsByCorUsers'
+import ViewAllCoReviews from './pages/ViewAllCoReviews';
+import ViewAllIndReviews from './pages/ViewAllIndividualUserReviews';
+
+import EditReview from './components/EditReview'
 function App() {
 
 
@@ -130,10 +143,6 @@ function App() {
               element={<ViewInstructors/>}
             />
             <Route
-              path="/Mycourses"
-              element={<ViewInstructorCourses/>}
-            />
-            <Route
               path="/signup"
               element={<Signup/>}
             />
@@ -185,6 +194,15 @@ function App() {
               path="/instructor/editBiography"
               element={<Biography/>}
             />
+
+
+
+
+
+            <Route
+              path="/Mycourses"
+              element={<ViewInstructorCourses/>}
+            />
             <Route
               path="/EnrolledCourses"
               element={<EnrolledCourses/>}
@@ -194,6 +212,53 @@ function App() {
               path="/review"
               element={<ReviewCourse/>}
             />
+             <Route
+              path= "/availableCourses"
+              element={<ViewAvailableCourses/>}
+            />
+            <Route
+              path="/requestCourse"
+              element={<RequestCourse/>}
+            />
+            <Route
+              path="/requests"
+              element={<ViewRequests/>}
+            />
+            <Route
+              path="/subcourses"
+              element={<MyCourses/>}
+            />
+             <Route
+              path="/rev"
+              element={<RevCourse/>}
+            />
+             <Route
+              path="/ureviews"
+              element={<ViewReviewsByUsers/>}
+            />
+             <Route
+              path="/ireviews"
+              element={<ViewReviewsByInstructors/>}
+            />
+            
+            <Route
+              path="/creviews"
+              element={<ViewReviewsByCorUsers/>}
+            />
+
+             <Route
+              path="/vaireviews"
+              element={<ViewAllIndReviews/>}
+            />
+             <Route
+              path="/vacreviews"
+              element={<ViewAllCoReviews/>}
+            />
+            <Route
+              path="/edit"
+              element={<EditReview/>}
+            />
+            
 
             <Route
               path="/payment"

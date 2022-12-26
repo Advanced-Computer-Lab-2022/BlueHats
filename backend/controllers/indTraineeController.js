@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
  
 const IndTrainee = require('../models/indTraineeModel')
 const Course = require('../models/course')
-
+const review = require ('../models/reviewsModel')
 
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -148,6 +148,7 @@ const getIndTrainee = async (req,res) => {
   }
   res.status(200).json(indTrainee)
 }
+
 
 //get all individualTrainees
 const getIndTrainees=async (req,res)=> {
@@ -504,6 +505,156 @@ const getMyCourses = async(req, res) => {
   }
   res.status(200).json(myCourses);
 }
+
+
+//////////////////////////////////////////////////////////////
+
+//// add a new rate to the instructor and calculate the new overall instructor rate
+var avgRate =0;
+var accRate = 0;
+const rateInstructor = async (req, res) => {
+    const courseId= req.query.courseId;
+    if(!mongoose.Types.ObjectId.isValid(courseId)){
+        return res.status(404).json({error: 'No such Instructor'})
+    }
+    const aCourse = await Course.find({
+        _id:courseId,
+    });
+
+    var {uRate} = await req.body;
+    accRate = aCourse[0].accRates + parseInt(uRate)
+    var lCount=aCourse[0].numOfRates;
+    lCount++;
+    var nCount= lCount;
+    avgRate = accRate/nCount
+    const CourseInstructor = await Course.findOneAndUpdate({_id:courseId},{
+        instructorRate:avgRate,
+        numOfRates:nCount,
+        accRates: accRate
+    })
+
+    if(!CourseInstructor){
+        return res.status(400).json({error:'No such Course'})
+
+    }
+    res.status(200).json(CourseInstructor);       
+    }
+
+  const addReview = async (req, res) => {
+    const courseId= req.query.courseId;
+    if(!mongoose.Types.ObjectId.isValid(courseId)){
+        return res.status(404).json({error: 'No such course'})
+    }
+    const aCourse = await Course.find({_id:courseId});
+    var prevReviewsList= aCourse[0].reviews;
+
+   // Enter your review
+    var userReview = await req.body;
+    const  newReviewsList = prevReviewsList.concat(userReview)
+ 
+    const C = await Course.findOneAndUpdate({_id:courseId},{
+        reviews:newReviewsList
+    })
+
+    if(!C){
+        return res.status(400).json({error:'No such course'})
+
+    }
+    res.status(200).json(C);       
+    }
+
+ // View only the users courses by filtering the courses by the user's id
+  const filterCourses = async(req,res) => {
+    const { id } = req.params;
+
+    const result = await Course.find({individualTrainee:mongoose.Types.ObjectId(id)});
+    res.status(200).json(result)
+
+    if(!result) {
+        res.status(400).json({error:"No such user"})
+    }
+
+  }
+
+// add a new rate to the course and calculate the new overall course rate
+var averageRate = 0;
+var accumlatedRate = 0;
+const rateCourse = async (req, res) => {
+    const courseId= req.query.courseId;
+    
+    if(!mongoose.Types.ObjectId.isValid(courseId)){
+        return res.status(404).json({error: 'No such course'})
+    }
+    const aCourse = await Course.find({_id:courseId});
+    var {userRate} = await req.body;
+    
+    var lastCount=aCourse[0].numberOfRates;
+    accumlatedRate =  aCourse[0].accumlatedRates + parseInt(userRate)
+    var lastCount = aCourse[0].numberOfRates;
+    lastCount++;
+    var newCount= lastCount;
+    averageRate =  accumlatedRate /  newCount
+    const C = await Course.findOneAndUpdate({_id:courseId},{
+        courseRating:averageRate,
+        numberOfRates:newCount,
+        accumlatedRates:accumlatedRate
+    })
+
+    if(!C){
+        return res.status(400).json({error:'No such course'})
+
+    }
+    res.status(200).json(C);       
+    }
+
+    const reviewCourse = async (req,res)=>{
+      const courseId= req.query.courseId;
+      if(!mongoose.Types.ObjectId.isValid(courseId)){
+          return res.status(404).json({error: 'No such course'})
+      }
+      const individualTraineeId = req.query.individualTraineeId;
+      if(!mongoose.Types.ObjectId.isValid(individualTraineeId)){
+        return res.status(404).json({error: 'No such user'})
+    }
+      const user = await IndTrainee.find({_id:individualTraineeId});
+
+      const aCourse = await Course.find({_id:courseId})
+    
+    const {userReview} = req.body;
+    const userName = user[0].username
+    const courseName = aCourse[0].title
+
+    let emptyFields = [];
+    
+    if(!userName) {
+      emptyFields.push('userName')
+  } 
+  if(!courseName) {
+    emptyFields.push('courseName')
+} 
+    if(!userReview) {
+        emptyFields.push('userReview')
+    } 
+    if(!courseId) {
+        emptyFields.push('courseId')
+    }
+    if(!individualTraineeId) {
+      emptyFields.push('corporateTraineeId')
+  }
+  
+    if(emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    }
+  
+    // Add doc to database
+    try {
+        const Review = await review.create({userName,courseName, userReview,courseId,individualTraineeId});
+        res.status(200).json(Review);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+  
+    }
   
 
 module.exports={
@@ -521,5 +672,10 @@ module.exports={
   compareAnswers,
   updateProgress,
   getProgress,
-  getMyCourses
+  getMyCourses,
+  rateInstructor,
+  rateCourse,
+  addReview,
+  filterCourses,
+  reviewCourse
 }

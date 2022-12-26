@@ -10,9 +10,17 @@ import ViewEnrolledCourses from "../components/EnrolledCourses"
 
 const EnrolledCourses = () => {
  const {courses,dispatch} = useCoursesContext()
+ 
     useEffect(() => {
         const fetchMyCourses = async () => {
-            const response = await fetch('/api/nUsers/filter?individualTraineeId=6386253315707335be9141b4')
+
+          // var loggedinUser = JSON.parse(localStorage.getItem('user'));
+          // const savedID = loggedinUser.id
+          
+          //     const response = await fetch('/api/indTrainee/filter/' + savedID, {
+//             method: 'GET'
+   //     }
+            const response = await fetch('/api/indTrainee/filter/6386253315707335be9141b4')
             const json = await response.json();
     
             if(response.ok) {

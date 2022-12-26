@@ -1,16 +1,13 @@
 import axios from 'axios'
 import { useState, /*setCounter*/ } from 'react'
-import * as React from 'react';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 
-const ReviewCourse = ({course}) => {
+const RevCourse = ({course}) => {
 
   const params = new URLSearchParams(window.location.search)
   const courseId = params.get('courseId')
   const [loading, setLoading] = useState(true) 
   const [courseRate, setCourseRate] = useState()
-  // const [courseReviews, setCourseReviews] = useState([]) 
+  const [courseReviews, setCourseReviews] = useState([]) 
   var [instructorRate, setInstructorRate] = useState()
   const handleSubmit = async()=>{
 
@@ -18,29 +15,28 @@ const ReviewCourse = ({course}) => {
      var data= {userRate:courseRate}
       axios({
         method:'PATCH',
-        url: `/api/indTrainee/rateCourse/?courseId=${courseId}`,
+        url: `/api/corporateTrainee/rateCourse/?courseId=${courseId}`,
         data:data,
         headers:{'Content-Type':'application/json'}
       }).then(()=>{
           setLoading(false)
   })
-
-//      data= {reviews:courseReviews}
-//      setLoading(true)
-//       axios({
-//         method:'PATCH',
-//         url: `/api/indTrainee/addRev/?courseId=${courseId}`,
-//         data:data,
-//         headers:{'Content-Type':'application/json'}
-//       }).then(()=>{
-//         setLoading(false)
-// })
+     data= {reviews:courseReviews}
+     setLoading(true)
+      axios({
+        method:'PATCH',
+        url: `/api/corporateTrainee/addRev/?courseId=${courseId}`,
+        data:data,
+        headers:{'Content-Type':'application/json'}
+      }).then(()=>{
+        setLoading(false)
+})
 
    data= {uRate:instructorRate}
     setLoading(true)
   axios({
     method:'PATCH',
-    url: `/api/indTrainee/rateInstructor/?courseId=${courseId}`,
+    url: `/api/corporateTrainee/rateInstructor/?courseId=${courseId}`,
     data:data,
     headers:{'Content-Type':'application/json'}
   }).then(
@@ -57,7 +53,6 @@ const ReviewCourse = ({course}) => {
         <h2>Review your course</h2>
               <div class="stars">
                   <form action="">
-                  
                     <input class="star star-5" id="star-5" type="radio" name="star"
                         onChange={(e) => setCourseRate(e.target.value)} 
                         value={5} />
@@ -130,14 +125,10 @@ const ReviewCourse = ({course}) => {
                   </form>
                 </div>
 
-   <button onClick={<Stack sx={{ width: '100%' }} spacing={2}>
-     
-     <Alert severity="success">This is a success alert — check it out!</Alert>
-   </Stack> }>Submit</button>  
-   
+   <button>Submit</button>   
     
    </form>
    )
 
    }
-export default ReviewCourse
+export default RevCourse

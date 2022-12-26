@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const reportedProblem = require('./reportedProblem')
+const course = require('./course')
 
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')

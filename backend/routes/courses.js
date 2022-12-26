@@ -5,6 +5,7 @@ const { coursePayment, requestRefund, getRefundRequests, getWallet, getCourseNam
 
 const router = express.Router();
 
+
 // Get all courses 
 router.get('/', getCourses);
 

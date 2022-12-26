@@ -66,7 +66,38 @@ const courseSchema = new Schema({
     enrolled: 
     {
         type: Number
-    }
+    },
+    instructorRate:{
+        type:Number,
+        default: 0
+    },
+    numOfRates:{
+        type:Number,
+        default:0
+    },
+    accumlatedRates:{
+        type:Number,
+        default:0
+    },
+    accRates:{
+        type:Number,
+        default:0
+    },
+    individualTrainee: {
+        type: Array,
+        ref:'IndTraineeModel',
+        default:[]
+    },
+    corporateTrainee: {
+        type: Array,
+        ref:'corporateTrainee',
+        default: []
+    },
+    enrolledStudents: {
+        type:Number,
+        default:0
+    },
+    
     
 }, { timestamps: true });
 

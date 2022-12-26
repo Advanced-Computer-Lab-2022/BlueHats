@@ -6,6 +6,10 @@ const nodemailer = require("nodemailer")
 const CorporateTrainee = require('../models/corporateTraineeModel');
 const exercise = require('../models/exercise');
 
+const review = require ('../models/reviewsModel')
+///////////////
+const RequestCourse = require ('../models/requestCourse')
+
 //get all corporateTrainees
 const getCorporateTrainees=async (req,res)=> 
 {
@@ -433,6 +437,140 @@ const addProblem = async(req,res) => {
 res.status(200).json(trainee);
 }
 
+}
+
+
+
+//// add a new rate to the instructor and calculate the new overall instructor rate
+const rateInstructor = async (req, res) => {
+    const courseId= req.query.courseId;
+    if(!mongoose.Types.ObjectId.isValid(courseId)){
+        return res.status(404).json({error: 'No such Instructor'})
+    }
+    const aCourse = await Course.find({
+        _id:courseId,
+    });
+    var {uRate} = await req.body;
+    var accRate = aCourse[0].accRates + parseInt(uRate)
+    var lCount=aCourse[0].numOfRates;
+    lCount++;
+    var nCount= lCount;
+    var avgRate = accRate/nCount
+    const CourseInstructor = await Course.findOneAndUpdate({_id:courseId},{
+        instructorRate:avgRate,
+        numOfRates:nCount,
+        accRates: accRate
+    })
+
+    if(!CourseInstructor){
+        return res.status(400).json({error:'No such Instructor'})
+
+    }
+    res.status(200).json(CourseInstructor);       
+    }
+
+  
+    const addReview = async (req, res) => {
+        const courseId= req.query.courseId;
+        if(!mongoose.Types.ObjectId.isValid(courseId)){
+            return res.status(404).json({error: 'No such course'})
+        }
+        const aCourse = await Course.find({_id:courseId});
+        var prevReviewsList= aCourse[0].reviews;
+      
+       // Enter your review
+        var userReview = await req.body;
+        const  newReviewsList = prevReviewsList.concat((userReview))
+      
+        const C = await Course.findOneAndUpdate({_id:courseId},{
+            reviews:newReviewsList
+        })
+    
+        if(!C){
+            return res.status(400).json({error:'No such course'})
+    
+        }
+        res.status(200).json(C);       
+        }
+
+    
+    const requestCourse = async (req, res) => {
+
+            const courseId = req.query.courseId;
+            if(!mongoose.Types.ObjectId.isValid(courseId)){
+                return res.status(404).json({error: 'No such course'})
+            }
+            const requestedCourse = await Course.find({_id:courseId});
+
+            const courseName = requestedCourse[0].title;
+
+            const corporateTraineeId = req.query.corporateTraineeId;
+
+            if(!mongoose.Types.ObjectId.isValid(corporateTraineeId)){
+                return res.status(404).json({error: 'No such user exists'})
+            }
+            const UserWhoApplied = await CorporateTrainee.find({_id:corporateTraineeId});
+
+            const corporateTraineeName = UserWhoApplied[0].username;
+            
+            // create request
+            const {reason , highestLevelOfEducation ,employmentStatus,agreedToPolicy} = await req.body
+            let emptyFields = []
+
+            if (!reason) {
+                emptyFields.push('reason')
+            }
+            if (!highestLevelOfEducation) {
+                emptyFields.push('highestLevelOfEducation')
+            }
+            if (!employmentStatus) {
+                emptyFields.push('employmentStatus')
+            }
+            if (!agreedToPolicy) {
+                emptyFields.push('agreedToPolicy')
+            }
+
+            if (emptyFields.length > 0) {
+                return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+            }
+            try {
+                const requestCourse = await RequestCourse.create({courseName, corporateTraineeName, reason , highestLevelOfEducation,employmentStatus,agreedToPolicy,corporateTraineeId,courseId})
+                res.status(200).json(requestCourse)
+              } catch (error) {
+                res.status(400).json({error: error.message})
+              }
+        }
+
+
+// View only the users courses by filtering the courses by the user's id
+var availableC = [];
+var flag = 0;
+var j;
+const availableCourses = async(req,res) => { 
+    // const corporateTraineeId = req.query.corporateTraineeId;
+    const { id } = req.params;
+    if(id){
+        const courses = await Course.find({}).sort({createdAt: -1});
+        for (let i = 0 ; i<courses.length; i++){
+            for(j = 0; j<(courses[i].corporateTrainee).length; j++){}
+                if ((courses[i].corporateTrainee)[j] === id){
+                    flag = 1;
+                    break;
+                }
+            if (flag == 1)
+            {
+                continue;
+            }
+            else {
+                 availableC.push(courses[i]);
+            }
+            }        
+        res.status(200).json(availableC)
+    }
+    else{
+        res.status(400).json({error:"corporateTraineeId  is required"})
+    }
+    
 const viewProblem = async(req,res) => {
   const id = req.params.id;
   if(!mongoose.Types.ObjectId.isValid(id)) {
@@ -450,6 +588,97 @@ if(problem==[]){
 res.status(200).json(problem);
 }
 
+// View only the user courses by filtering the courses by the user's id
+const filterCourses = async(req,res) => { 
+  // const corporateTraineeId = req.query.corporateTraineeId;
+  const { id } = req.params;
+  if(id){
+  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(id)});
+  res.status(200).json(result)
+  }else{
+      res.status(400).json({error:"corporateTraineeId  is required"})
+  }
+}
+
+//////////////////////////////////////////////////
+
+const rateCourse = async (req, res) => {
+  const courseId= req.query.courseId;
+  if(!mongoose.Types.ObjectId.isValid(courseId)){
+      return res.status(404).json({error: 'No such course'})
+  }
+  const aCourse = await Course.find({_id:courseId});
+
+
+  var lastCount=aCourse[0].numberOfRates;
+  var {userRate} = await req.body;
+  var accumlatedRate =  aCourse[0].accumlatedRates + parseInt(userRate)
+  var lastCount = aCourse[0].numberOfRates;
+  lastCount++;
+  var newCount= lastCount;
+  var averageRate =  accumlatedRate /  newCount
+  const C = await Course.findOneAndUpdate({_id:courseId},{
+      courseRating:averageRate,
+      numberOfRates:newCount,
+      accumlatedRates:accumlatedRate
+  })
+
+  if(!C){
+      return res.status(400).json({error:'No such course'})
+
+  }
+  res.status(200).json(C);       
+  }
+
+  const reviewCourse = async (req,res)=>{
+    const courseId= req.query.courseId;
+    if(!mongoose.Types.ObjectId.isValid(courseId)){
+        return res.status(404).json({error: 'No such course'})
+    }
+    const corporateTraineeId = req.query.corporateTraineeId;
+    if(!mongoose.Types.ObjectId.isValid(corporateTraineeId)){
+      return res.status(404).json({error: 'No such user'})
+  }
+    const user = await CorporateTrainee.find({_id:corporateTraineeId});
+
+    const aCourse = await Course.find({_id:courseId})
+
+  const {userReview} = req.body;
+  const userName = user[0].username
+  const courseName = aCourse[0].title
+
+  let emptyFields = [];
+  
+  if(!userName) {
+    emptyFields.push('userName')
+} 
+if(!courseName) {
+  emptyFields.push('courseName')
+} 
+  if(!userReview) {
+      emptyFields.push('userReview')
+  } 
+  if(!courseId) {
+      emptyFields.push('courseId')
+  }
+  if(!corporateTraineeId) {
+    emptyFields.push('corporateTraineeId')
+}
+
+  if(emptyFields.length > 0) {
+      return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+  }
+
+  // Add doc to database
+  try {
+      const Review = await review.create({userName, userReview,courseName,courseId,corporateTraineeId});
+      res.status(200).json(Review);
+  } catch (error) {
+      res.status(400).json({error: error.message});
+  }
+
+  }
+
 module.exports={getCorporateTrainee,
                 getCorporateTrainees,
                 createCorporateTrainee,
@@ -459,9 +688,15 @@ module.exports={getCorporateTrainee,
                 forgotPasswordCorporateTrainee,
                 gradeExam,
                 viewSolution,
-                setAnswer,
+                rateCourse,
+                rateInstructor,
+                addReview,
+                requestCourse,
+                availableCourses,
+                filter,
                 compareAnswers,
                 addProblem,
                 viewProblem,
-                getEx
+                getExCourses,
+                reviewCourse
                 }
