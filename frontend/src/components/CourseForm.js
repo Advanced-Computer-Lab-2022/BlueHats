@@ -5,6 +5,9 @@ import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
 import { useState } from 'react'
 import { useCoursesContext } from '../hooks/useCoursesContext'
 
@@ -167,22 +170,38 @@ const CourseForm = () => {
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          className={emptyFields.includes('title') ? 'error' : ''} />
-
+          className={emptyFields?.includes('title') ? 'error' : ''} />
+        <div className='subject-fill'>
         <label>Subject:</label>
-        <input
+        {/* <input
           type="text"
           onChange={(e) => setSubject(e.target.value)}
           value={subject}
-          className={emptyFields.includes('subject') ? 'error' : ''} />
-
+          className={emptyFields.includes('subject') ? 'error' : ''} /> */}
+           <br/>
+          <Box sx={{ minWidth: 155 }}>
+                <FormControl fullWidth>
+                  <Select
+                    value={subject}
+                    label="Subject"
+                    onChange={(e) => setSubject(e.target.value)}
+                    className={emptyFields?.includes('subject') ? 'error' : ''}
+                  >
+                    <MenuItem value={"cs"}>cs</MenuItem>
+                    <MenuItem value={"math"}>math</MenuItem>
+                    <MenuItem value={"management"}>management</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              </div>
+          <br/>
         <label>Course Preview Youtube Link:</label>
         <input
           type="url"
           placeholder="https://www.youtube.com/watch?v=EXAMPLE"
           onChange={(e) => setPreviewLink(e.target.value)}
           value={previewLink}
-          className={emptyFields.includes('previewLink') ? 'error' : ''} />
+          className={emptyFields?.includes('previewLink') ? 'error' : ''} />
 
         {subtitle.map((subtitles, index) => (
           <div key={index}>
@@ -194,7 +213,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               value={subtitles.name}
-              className={emptyFields.includes('subtitle.name') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.name') ? 'error' : ''} />
 
             <label>Subtitle Number of Hours:</label>
             <input
@@ -205,7 +224,7 @@ const CourseForm = () => {
               pattern="\d+"
               onChange={(e) => { handleChangeInput(index, e); } }
               value={subtitles.hours}
-              className={emptyFields.includes('subtitle.hours') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.hours') ? 'error' : ''} />
 
             <label>Subtitle Youtube Link:</label>
             <input
@@ -214,7 +233,7 @@ const CourseForm = () => {
               placeholder="https://www.youtube.com/watch?v=EXAMPLE"
               onChange={(e) => { handleChangeInput(index, e); } }
               value={subtitles.link}
-              className={emptyFields.includes('subtitle.link') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.link') ? 'error' : ''} />
 
             <label>Short description of the Youtube link provided above:</label>
             <input
@@ -222,7 +241,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               value={subtitles.linkDescription}
-              className={emptyFields.includes('subtitle.linkDescription') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.linkDescription') ? 'error' : ''} />
 
             <label><strong>Create a quiz for this subtitle:</strong></label> <br />
 
@@ -232,7 +251,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               defaultValue={subtitles.question}
-              className={emptyFields.includes('subtitle.quiz.question') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.quiz.question') ? 'error' : ''} />
 
             <label>Option 1:</label>
             <input
@@ -240,7 +259,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               defaultValue={subtitles.firstChoice}
-              className={emptyFields.includes('subtitle.quiz.firstChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.quiz.firstChoice') ? 'error' : ''} />
 
             <label>Option 2:</label>
             <input
@@ -248,7 +267,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               defaultValue={subtitles.secondChoice}
-              className={emptyFields.includes('subtitle.quiz.secondChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.quiz.secondChoice') ? 'error' : ''} />
 
             <label>Option 3:</label>
             <input
@@ -256,7 +275,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               defaultValue={subtitles.thirdChoice}
-              className={emptyFields.includes('subtitle.quiz.thirdChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.quiz.thirdChoice') ? 'error' : ''} />
 
             <label>Option 4:</label>
             <input
@@ -264,7 +283,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               defaultValue={subtitles.fourthChoice}
-              className={emptyFields.includes('subtitle.quiz.fourthChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.quiz.fourthChoice') ? 'error' : ''} />
 
             <label>Correct Answer:</label>
             <input
@@ -272,7 +291,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput(index, e); } }
               defaultValue={subtitles.answer}
-              className={emptyFields.includes('subtitle.quiz.answer') ? 'error' : ''} />
+              className={emptyFields?.includes('subtitle.quiz.answer') ? 'error' : ''} />
 
           </div>
         ))}
@@ -288,7 +307,7 @@ const CourseForm = () => {
           prefix={'$'}
           onChange={(e) => setPrice(e.target.value)}
           value={price}
-          className={emptyFields.includes('price') ? 'error' : ''} />
+          className={emptyFields?.includes('price') ? 'error' : ''} />
 
         <label>Promotion% : [Optional]</label>
         <input
@@ -317,7 +336,7 @@ const CourseForm = () => {
           type="text"
           onChange={(e) => setSummary(e.target.value)}
           value={summary}
-          className={emptyFields.includes('summary') ? 'error' : ''} />
+          className={emptyFields?.includes('summary') ? 'error' : ''} />
 
         <label><strong>Create Course Final Exam:</strong></label> <br />
         {finalExam.map((exercises, index) => (
@@ -330,7 +349,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput2(index, e); } }
               value={exercises.question}
-              className={emptyFields.includes('finalExam.question') ? 'error' : ''} />
+              className={emptyFields?.includes('finalExam.question') ? 'error' : ''} />
             {/* <label><i>Enter the options then click on the checkbox to select the correct answer:</i></label> <br />
             <>
                 <Box className="box" sx={{ display: 'flex'}}>
@@ -390,7 +409,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput2(index, e); } }
               value={exercises.firstChoice}
-              className={emptyFields.includes('finalExam.firstChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('finalExam.firstChoice') ? 'error' : ''} />
 
             <label>Option 2:</label>
             <input
@@ -398,7 +417,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput2(index, e); } }
               value={exercises.secondChoice}
-              className={emptyFields.includes('finalExam.secondChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('finalExam.secondChoice') ? 'error' : ''} />
 
             <label>Option 3:</label>
             <input
@@ -406,7 +425,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput2(index, e); } }
               value={exercises.thirdChoice}
-              className={emptyFields.includes('finalExam.thirdChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('finalExam.thirdChoice') ? 'error' : ''} />
 
             <label>Option 4:</label>
             <input
@@ -414,7 +433,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput2(index, e); } }
               value={exercises.fourthChoice}
-              className={emptyFields.includes('finalExam.fourthChoice') ? 'error' : ''} />
+              className={emptyFields?.includes('finalExam.fourthChoice') ? 'error' : ''} />
 
             <label>Correct Answer:</label>
             <input
@@ -422,7 +441,7 @@ const CourseForm = () => {
               type="text"
               onChange={(e) => { handleChangeInput2(index, e); } }
               value={exercises.answer}
-              className={emptyFields.includes('finalExam.answer') ? 'error' : ''} />
+              className={emptyFields?.includes('finalExam.answer') ? 'error' : ''} />
           </div>
         ))}
 

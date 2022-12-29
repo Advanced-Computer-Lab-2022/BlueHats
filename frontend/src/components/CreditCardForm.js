@@ -79,7 +79,7 @@ const CreditCardForm = ({ course }) => {
             }
 
             setStatus('Success! Payment is complete.');
-            window.location.href=`/`
+            window.location.href=`/MyEnrolledCourses`
 
             setTimeout(() => {
                 setStatus('Pay');
@@ -100,8 +100,10 @@ const CreditCardForm = ({ course }) => {
   
     return (
         <div className="payment-form">
+             <strong>Course Name: {course.title}</strong>
+             <strong>Payment Amount: $ {course.price}</strong>
             <form className="card-form" onSubmit={handlePayment}>
-                <label> Full Name </label>
+                <label>Card Name</label>
                 <input 
                     name="name"
                     type="text" 

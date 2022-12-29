@@ -4,7 +4,7 @@ const Instructor = require('../models/instructorModel')
 const mongoose = require('mongoose');
 
 const getCoursesBySearch = async (req,res) => {
-    const key = req.params.key
+    const key = req.params.key;
     console.log(key)
     const titleRes = await course.find({title: key})
     console.log(titleRes)

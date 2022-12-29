@@ -2,9 +2,10 @@ import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import ViewCoursesBytitlesHrsRatePrice from "../components/CoursesTitlesHrsRatePrice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCoursesContext } from "../hooks/useCoursesContext";
 import HFilterBar from "../components/HFilterBar";
+import Loader from "../components/Loader"
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -16,13 +17,18 @@ const items = [
 
 const Home = () => {
   const { courses, dispatch } = useCoursesContext();
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCourses = async () => {
+      setLoading(true)
       const response = await fetch("/api/courses");
       const json = await response.json();
 
       if (response.ok) {
+        setTimeout(()=>{
+          setLoading(false)
+        }, 1000)
         dispatch({ type: "SET_COURSES", payload: json });
       }
     };
@@ -31,6 +37,8 @@ const Home = () => {
   }, [dispatch]);
 
   return (
+    <>
+    {loading && <Loader/>}
     <form>
       <div className="home">
         <div className="courses">
@@ -55,6 +63,7 @@ const Home = () => {
         </div>
       </div>
     </form>
+    </>
   );
 };
 export default Home;

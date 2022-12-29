@@ -42,7 +42,6 @@ const coursePayment = async (req, res) => {
 
         const updatedTrainee = await indTrainee.findOneAndUpdate({_id: userID} , {courses: newCourses});
 
-        // also check if the wallet of the trainee is greater than or equal the course price in order to decrease the their wallet value
 
         res.status(200).send(paymentIntent.client_secret);
     } 
@@ -177,6 +176,7 @@ const getCoursePrice = async (req, res) => {
 const payWithWallet = async (req, res) => {
     const { userID } = req.body;
     const { price } = req.body;
+    const { courseID } = req.body;
 
     const trainee = await indTrainee.findById(userID);
     console.log(trainee);
@@ -186,6 +186,18 @@ const payWithWallet = async (req, res) => {
 
     const updateTraineeWallet = await indTrainee.findOneAndUpdate({_id: userID}, {wallet: traineeWallet});
     console.log(updateTraineeWallet);
+
+    const mycourse = await course.findById(courseID);
+
+    const enrolled = mycourse.enrolled + 1;
+
+    const updateCourse = await course.findOneAndUpdate({_id: courseID}, {enrolled : enrolled});
+
+    const object = { course: courseID, progress: 0 };
+
+    const newCourses = trainee.courses.concat([object]);  
+
+    const updatedTrainee = await indTrainee.findOneAndUpdate({_id: userID} , {courses: newCourses});
 }
 
 module.exports = { coursePayment, requestRefund, getRefundRequests, courseRefund, getWallet, getCourseName, getTraineeName, getCoursePrice, payWithWallet };

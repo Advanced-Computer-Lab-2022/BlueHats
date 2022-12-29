@@ -120,7 +120,7 @@ const CourseDetails = ({ course }) => {
       <div className="course-details">
         <Link>  <h4>{course.title}</h4> </Link> 
         <p><strong>Subject: </strong>{course.subject}</p>
-        {course.promotion>0 && <p><strong>Price After Discount: </strong> {currency} {priceAfterDiscount(output,course.promotion)}</p>}
+        {course.promotion>0 && <p>Price: <span style={{textDecoration: 'line-through'}}>{currency} {output}</span><strong> {currency} {priceAfterDiscount(output,course.promotion)}</strong></p>}
         {course.promotion>0 && <p><strong>Promotion: </strong> {course.promotion} % &nbsp; Valid Until {course.promotionEnd}</p>  }
         <div float='left'>
           <Dialog open={open} onClose={handleClose}>
@@ -166,7 +166,7 @@ const CourseDetails = ({ course }) => {
             </DialogActions>
           </Dialog>
     </div>
-        <p><strong>Price: </strong> {currency} {output}</p>
+        {course.promotion<=0 &&  <p><strong>Price: </strong> {currency} {output}</p>}
         <p><strong>Summary: </strong>{course.summary}</p>
         <p><strong>Total Hours: </strong> {result} <CheckNumber/> </p> 
         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>

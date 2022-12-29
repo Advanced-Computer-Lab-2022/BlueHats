@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // pages and components
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Instructor from './pages/Instructor';
-import AddCourse from './pages/AddCourse';
 import CourseView from './pages/CourseView';
 import Payment from './pages/Payment';
 
@@ -57,15 +57,74 @@ import ViewAllCoReviews from './pages/ViewAllCoReviews';
 import ViewAllIndReviews from './pages/ViewAllIndividualUserReviews';
 
 import EditReview from './components/EditReview'
+
+//Routes
+import PrivateRoutes from './utils/PrivateRoutes';
+import AdminRoutes from './utils/AdminRoutes';
+import InstructorRoutes from './utils/InstructorRoutes';
+import CorporateTraineeRoutes from './utils/CorporateTraineeRoutes';
+import IndividualTraineeRoutes from './utils/IndividualTraineeRoutes';
+
+
 function App() {
 
 
   return (
     <div className="App">
       <BrowserRouter>
-       <Navbar></Navbar>
+       <Navbar/>
         <div className='pages'>
           <Routes>
+            <Route element={<PrivateRoutes />}>
+                <Route path="/createCourse" element={<CourseForm/>}/>
+                <Route path="/instructor" element={<Instructor/>}/>
+                <Route path="/course/view" element={<CourseView/>} />
+                <Route path="/contract" element={<ContractForm/>}/>
+                <Route path="/payment" element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}/>
+                <Route path="/MyEnrolledCourses" element={<IndTraineeCourses/>}/>
+                <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
+                <Route path="/admin/addAdmin" element={<Admin/>} />
+                <Route path="/admin/instructor" element={<NewInstructor/>}/>
+                <Route path="/admin/corporateTrainee" element={<NewCoTrainee/>}/>
+                <Route path="/instructor/changeEmail" element={<ChangeEmail/>} />
+                <Route path="/indTrainee/changePassword" element={<ResetPassword/>} />
+                <Route path="/instructor/changePassword" element={<ResetPassword/>} />
+                <Route path="/corporateTrainee/changePassword" element={<ResetPassword/>}/>
+                <Route path="/indTrainee/profile" element={<IndTrainee/>}/>
+                <Route path="/instructor/profile" element={<InstructorProfile/>}/>
+                <Route path="/instructor/editBiography" element={<Biography/>} />
+                <Route path="/adminPage" element={<AdminPage/>} />
+            </Route>
+
+            <Route element={<AdminRoutes />}>
+              <Route path="/admin/addAdmin" element={<Admin/>} />
+              <Route path="/admin/instructor" element={<NewInstructor/>}/>
+              <Route path="/admin/corporateTrainee" element={<NewCoTrainee/>}/>
+              <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
+              <Route path="/adminPage" element={<AdminPage/>} />
+            </Route>
+
+            <Route element={<InstructorRoutes />}>
+              <Route path="/instructor" element={<Instructor/>}/>
+              <Route path="/contract" element={<ContractForm/>}/>
+              <Route path="/createCourse" element={<CourseForm/>}/>
+              <Route path="/instructor/changeEmail" element={<ChangeEmail/>} />
+              <Route path="/instructor/changePassword" element={<ResetPassword/>} />
+              <Route path="/instructor/profile" element={<InstructorProfile/>}/>
+              <Route path="/instructor/editBiography" element={<Biography/>} />
+            </Route>
+
+            <Route element={<CorporateTraineeRoutes />}>
+              <Route path="/corporateTrainee/changePassword" element={<ResetPassword/>}/>
+              <Route path="/corporateTrainee/profile" element={<CoTraineeProfile/>} />
+            </Route>
+
+            <Route element={<IndividualTraineeRoutes />}>
+              <Route path="/payment" element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}/>
+              <Route path="/indTrainee/changePassword" element={<ResetPassword/>} />
+              <Route path="/indTrainee/profile" element={<IndTrainee/>}/>
+            </Route>
+
             <Route
               path="/"
               element={<Home/>}
@@ -90,18 +149,8 @@ function App() {
               path="/gradeInd/"
               element={<GradeInd/>}
             />
-            <Route
-              path="/instructor"
-              element={<Instructor/>}
-            />
-             <Route
-              path="/adminPage"
-              element={<AdminPage/>}
-            />
-            <Route
-              path="/instructor/addCourse"
-              element={<AddCourse/>}
-            />
+           
+           
             <Route
               path="/HFilter"
               element={<HomeFilter/>}
@@ -110,34 +159,11 @@ function App() {
               path="/IFilter"
               element={<InstructorFilter/>}
             />
-                 <Route
-              path="/contract"
-              element={<ContractForm/>}
-            />
              <Route
               path="/course/preview"
               element={<Preview/>}
             />
-             <Route
-              path="/course/view"
-              element={<CourseView/>}
-            />
-            <Route
-              path="/admin/addAdmin"
-              element={<Admin/>}
-            />
-            <Route
-              path="/admin/instructor"
-              element={<NewInstructor/>}
-            />
-            <Route
-              path="/admin/corporateTrainee"
-              element={<NewCoTrainee/>}
-            />
-            <Route
-              path="/createCourse"
-              element={<CourseForm/>}
-            />
+            
              <Route
               path="/Instructors"
               element={<ViewInstructors/>}
@@ -162,42 +188,6 @@ function App() {
               path="/changePassword"
               element={<ChangePassword/>}
             />
-            <Route
-              path="/instructor/changeEmail"
-              element={<ChangeEmail/>}
-            />
-            <Route
-              path="/indTrainee/changePassword"
-              element={<ResetPassword/>}
-            />
-            <Route
-              path="/instructor/changePassword"
-              element={<ResetPassword/>}
-            />
-            <Route
-              path="/corporateTrainee/changePassword"
-              element={<ResetPassword/>}
-            />
-            <Route
-              path="/indTrainee/profile"
-              element={<IndTrainee/>}
-            />
-             <Route
-              path="/instructor/profile"
-              element={<InstructorProfile/>}
-            />
-            <Route
-              path="/corporateTrainee/profile"
-              element={<CoTraineeProfile/>}
-            />
-            <Route
-              path="/instructor/editBiography"
-              element={<Biography/>}
-            />
-
-
-
-
 
             <Route
               path="/Mycourses"
@@ -259,22 +249,6 @@ function App() {
               element={<EditReview/>}
             />
             
-
-            <Route
-              path="/payment"
-              element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}
-            />
-
-            <Route
-              path="/MyEnrolledCourses"
-              element={<IndTraineeCourses/>}
-            />
-
-            <Route
-              path="/admin/refund-requests"
-              element={<RefundRequests/>}
-            />
-            
             <Route
               path="/viewProblem/"
               element={<Report/>}
@@ -282,6 +256,7 @@ function App() {
 
           </Routes>
         </div>
+        <Footer/>
       </BrowserRouter>
     </div>
   );

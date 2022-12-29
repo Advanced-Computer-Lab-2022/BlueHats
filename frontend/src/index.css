@@ -4,6 +4,7 @@
 /* layout */
 :root {
   --primary: #a256e0;
+  --hover: #810CA8;
   --error: #e7195a;
   --msg: #4bffba;
 }
@@ -44,18 +45,11 @@ header a
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
-.instructor button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
+.instructor .add-course-button {
   cursor: pointer;
-  position: absolute;
-  right:150px;
-  top:150px;
-  min-width: 100px;
+  position: relative;
+  right: -98px;
+  top: 38px;
 }
 .instructor .instructor-wallet button {
   background: var(--primary);
@@ -70,7 +64,7 @@ header a
   top:200px;
   min-width: 100px;
 }
-.instructorAddCourse {
+/* .instructorAddCourse {
   padding: 200px;
   padding-top: 0%;
 }
@@ -87,7 +81,7 @@ header a
 .instructorAddCourse .create span.first{
   position: absolute;
   padding-left: 10px;
-}
+} */
 /* .instructor .create .side-by-side {
   display: flex;
   flex-direction: row;
@@ -416,7 +410,7 @@ a:hover {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  background-color:  var(--hover);
 }
 
 /* The container must be positioned relative: */
@@ -508,6 +502,7 @@ a:hover {
 .course-view-video {
   width: 100%;
   padding-left: 177px;
+  padding-bottom: 10rem;
 }
 .done-button button{
   background: var(--primary);
@@ -634,8 +629,9 @@ nav a, nav button {
 }
 .course-preview {
   display: flex;
+  margin-bottom: 25rem;
 }
-.course-preview button {
+/* .course-preview button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -645,7 +641,7 @@ nav a, nav button {
   cursor: pointer;
   position: initial;
   min-width: 100px;
-}
+} */
 .course-preview .course-preview-video {
   padding-left: 150px;
 }
@@ -1048,3 +1044,70 @@ right: 5px;
     cursor: pointer; 
   } 
   */
+.main-footer {
+  color: black;
+  background-color: white;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+.main-footer .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  align-items: center;
+}
+.main-footer .container .row{
+  display: flex;
+  justify-content: space-between;
+}
+.main-footer .container .row .linkk{
+ padding-top: 2.5rem;
+}
+.main-footer .container .row li{
+  list-style: none;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.main-footer .container .row li:hover{
+  color: var(--primary);
+}
+.loader {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #f1f1f1;
+  width: 100%;
+  height: 100vh;
+}
+.payment-form {
+  padding-right: 30rem;
+  padding-left: 30rem;
+  padding-bottom: 10rem;
+}
+.payment-form strong{
+  padding-right: 3.7rem;
+}
+.payment-form input {
+  max-width: 30rem; 
+}
+.payment-form .card-form{
+  padding-top: 3rem;
+}
+.payment-form button{
+  margin-left: 11rem;
+  min-width: 100px;
+}
+.create button {
+  margin-left: 56rem;
+}
+.create .subject-fill {
+  display: flex;
+  align-items: center;
+}
+.create .subject-fill label {
+  padding-right: 3rem;
+}

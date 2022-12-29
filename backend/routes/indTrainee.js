@@ -38,7 +38,7 @@ router.put('/setAnswer/:id/:answer',setAnswer)
 router.get('/compareAnswers/:solution/:answer',compareAnswers)
 
 // Update Course Progress
-router.patch('/progress', updateProgress)
+router.put('/progress', updateProgress)
 
 //Get an indTrainee Progress
 router.put('/getProgress', getProgress);
@@ -47,7 +47,7 @@ router.put('/getProgress', getProgress);
 router.put('/getMyCourses', getMyCourses);
 
 // Pay for a course with wallet
-router.put('payWithWallet', payWithWallet);
+router.put('/payWithWallet', payWithWallet);
 
 
 

@@ -10,15 +10,43 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import Axios from "axios";
 import axios from "axios";
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 const CoursePreview = ({course}) => {
+  
+  const [expanded, setExpanded] = React.useState(true);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
     const { user } = useAuthContext();
+
 
     function CheckNumber() {
         if(result>1) {
@@ -104,18 +132,64 @@ const CoursePreview = ({course}) => {
       };
 
       const Pay = () => {
-        const data={price: course.price, userID: userID};
+        const data={price: course.price, userID: userID, courseID: course._id};
         axios({
           method: "PUT",
           url : `/api/indTrainee/payWithWallet`,
           data:data,
           headers:{'Content-Type':'application/json'}
         })
+        window.location.href=`/MyEnrolledCourses`
       }
 
     return (
         <div className="course-preview">
-          <div>
+           <Card sx={{ minWidth: 380 }}>
+           {user &&  wallet<course.price && <CardHeader
+            action={<Button onClick={() => window.location.href=`/payment?id=${course._id}`} size="large" color="secondary">Enroll Now</Button>}
+            title={course.title.toUpperCase()}
+            subheader= {"Subject: "+course.subject.toUpperCase()}
+          />}
+           {user &&  wallet>=course.price &&<CardHeader
+            action={<Button onClick={handleClickOpen} size="large" color="secondary">Enroll Now</Button>}
+            title={course.title.toUpperCase()}
+            subheader= {"Subject: "+course.subject.toUpperCase()}
+          />}
+          {!user && <CardHeader
+            action={<Button onClick={() => window.location.href=`/login`} size="large" color="secondary">Enroll Now</Button>}
+            title={course.title.toUpperCase()}
+            subheader= {"Subject: "+course.subject.toUpperCase()}
+          />}
+          <CardHeader
+            title= {currency + output}
+            subheader= {"Added " + formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}
+          />
+          <CardContent>
+            <Typography variant="body2" color="text.secondary"> {course.summary}</Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+          <CardContent>
+            <Typography color="text.primary"> Course Context Preview</Typography>
+          </CardContent>
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography>
+              <ol>{(course.subtitle).map((mycourse)=> <li mycourse={mycourse} key={course._id}>  {mycourse.name} is {mycourse.hours} hours </li>)}</ol>
+              </Typography>
+              <Typography> Total Hours: {result} <CheckNumber/> </Typography>
+            </CardContent>
+          </Collapse>
+          </Card>
+          {/* <div>
             <h1>{course.title.toUpperCase()}</h1>
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
@@ -127,13 +201,13 @@ const CoursePreview = ({course}) => {
             <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             <h4>Course Content</h4>
             <ol>{(course.subtitle).map((mycourse)=> <li mycourse={mycourse} key={course._id}>  {mycourse.name} is {mycourse.hours} hours </li>)}</ol>
-          </div>
+          </div> */}
           <div className="course-preview-video"> <YoutubeEmbed embedId={myembedID} /></div>
           <div float='left'>
           <Dialog open={open1} onClose={handleCloseD}>
             <DialogTitle>Current Wallet Balance: ${wallet}</DialogTitle>
             <DialogContent>
-              <p>Your current balance balance allows to pay using your wallet.</p>  
+              <p>Your current balance allows you to pay using your wallet.</p>  
             </DialogContent>
             <DialogActions>
               <Button onClick={Pay}>Pay with Wallet</Button>

@@ -41,39 +41,49 @@ const CourseFullView = ({ course }) => {
         const progress = res.data
         console.log(progress)
         setProgress(progress)  
+        setValue(progress)
       });
     },[course._id, userID])
 
     const handleClick = () => {
       setValue(oldValue => {
-        const newValue = oldValue + add;
+        const newValue = oldValue + 15;
 
         if (newValue >= 100) {
+          const data={progress: 100, courseID: course._id, userID: userID};
+          axios({
+            method:"PATCH",
+            url:`/api/indTrainee/progress`,
+            data:data,
+            headers:{'Content-Type':'application/json'}
+          })
           return 100;
         }
-        const data={progress: newValue, courseID: course._id, userID: userID};
-        console.log("progress value: "+ newValue);
-        axios({
-          method:"PATCH",
-          url:`/api/indTrainee/progress`,
-          data:data,
-          headers:{'Content-Type':'application/json'}
-        })
-        return newValue;
+        else 
+        {
+          const data={progress: newValue, courseID: course._id, userID: userID};
+          axios({
+            method:"PATCH",
+            url:`/api/indTrainee/progress`,
+            data:data,
+            headers:{'Content-Type':'application/json'}
+          })
+          return newValue;
+        }
       });
     };
 
     return (
       <div>
         <div className="progress">
-        <ProgressBar key={course._id} bgcolor={"#2bb638"} completed={progress} /> 
+        <ProgressBar key={course._id} bgcolor={"#2bb638"} completed={value} /> 
         </div>
         <div className="course-view">
         <Sidebar className="course-view-sidebar">
             <Menu className="sidebar11">
             <MenuItem> Lessons </MenuItem>
             {(course.subtitle).map((mycourse,index)=>
-                <SubMenu key={index} label={(mycourse.name).toUpperCase()}>
+                <SubMenu key={index} defaultOpen={true} label={(mycourse.name).toUpperCase()}>
                   <MenuItem  routerLink={<Link to= {`/course/view?id=${course._id}`} onClick={() => {  
                     const mylink = (mycourse.link);
                     const myembed = mylink.split('=');

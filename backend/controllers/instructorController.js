@@ -247,16 +247,20 @@ const forgotPasswordInstructor = async (req,res) =>
 //////////////////////////////////////////////////////////////////
 
 
+// filter courses by instructor
 const filterCourses = async(req,res) => {
-  const { id } = req.params;
-
-  const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
-  res.status(200).json(result)
-
-  if(!result) {
-      res.status(400).json({error:"No such instructor"})
+  
+  //const instructorId = req.query.instructorId;
+  const {id}= req.body;
+  if(id)
+  {
+      const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
+      res.status(200).json(result)
   }
-
+  else
+  {
+      res.status(400).json({error:"instructor ID  is required"});
+  }
 }
 
 module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses}

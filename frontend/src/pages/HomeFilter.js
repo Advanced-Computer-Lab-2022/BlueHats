@@ -30,7 +30,7 @@ function HomeFilter() {
         {" "}
         Filter Results: {""} {""}
         <Link to="/">
-          <IconButton edge="start" color="inherit" aria-label="close">
+          <IconButton edge="start" color="secondary" aria-label="close">
             <CloseIcon />
           </IconButton>{" "}
         </Link>

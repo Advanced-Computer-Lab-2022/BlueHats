@@ -42,12 +42,7 @@ const courseSchema = new Schema({
         ref:'InstructorModel'
     },
     instructorName: {
-        type: String,
-        required: true
-    },
-    individualTrainee: {
-        type: mongoose.Types.ObjectId,
-        ref:'IndividualTrainee'
+        type: String
     },
     courseRating:
     {
@@ -65,7 +60,8 @@ const courseSchema = new Schema({
     },
     enrolled: 
     {
-        type: Number
+        type: Number,
+        default: 0
     },
     instructorRate:{
         type:Number,
@@ -92,11 +88,7 @@ const courseSchema = new Schema({
         type: Array,
         ref:'corporateTrainee',
         default: []
-    },
-    enrolledStudents: {
-        type:Number,
-        default:0
-    },
+    }
     
     
 }, { timestamps: true });

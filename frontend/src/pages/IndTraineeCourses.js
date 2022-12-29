@@ -4,6 +4,8 @@ import Card from '../components/NoCoursesCard';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import Loader from "../components/Loader"
+
 const Home = () => {
     var loggedinUser = JSON.parse(localStorage.getItem('user'));
     const userID = loggedinUser.id;
@@ -22,7 +24,9 @@ const Home = () => {
         headers:{'Content-Type':'application/json'}
       })
       .then( (res) => { 
-        setLoading(false);
+        setTimeout(()=>{
+          setLoading(false)
+        }, 1000)
         const courses = res.data;
         console.log(courses);
         setCourses(courses); 
@@ -30,6 +34,8 @@ const Home = () => {
   }, [userID]);
 
   return (
+    <>
+    {loading && <Loader/>}
     <form>
       <div className="home">
         <div className="courses">
@@ -45,6 +51,7 @@ const Home = () => {
         </div>
       </div>
     </form>
+    </>
   );
 };
 export default Home;

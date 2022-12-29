@@ -30,7 +30,7 @@ function InstructorFilter() {
         {" "}
         Filter Results: {""} {""}
         <Link to="/instructor">
-          <IconButton edge="start" color="inherit" aria-label="close">
+          <IconButton edge="start" color="secondary" aria-label="close">
             <CloseIcon />
           </IconButton>{" "}
         </Link>
