@@ -28,7 +28,7 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+//import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
 // import Typography from '@mui/material/Typography';
@@ -84,75 +84,107 @@ BootstrapDialogTitle.propTypes = {
 
 const ReportMenu = () =>  {
     const [title,setTitle] = useState('');
+    const [message, setMessage] = useState(null)
+    const [menu,setMenu] = useState(false);
 
     //other flags
     const [input,setInput] = useState(false);
     const [inputS,setInputS] = useState(false);
     const [inputD,setInputD] = useState(false);
-    const [inputR,setInputR] = useState(false);
+    const [inputT,setInputT] = useState(false);
     
-    //submit flag
-    const [submit,setSubmit] = useState(false);
 
-    const [open, setOpen] = React.useState(false);
+    const [Technical, setTechnical] = React.useState(false);
     const [System,setSystem] = React.useState(false);
     const [navigation,setNavigation] = React.useState(false);
     const [financial , setFinancial ] = React.useState(false);
     const [discount,setDiscount] = React.useState(false);
     const [transfer,setTransfer] = React.useState(false);
 
-    const handleClickOpen = () => {
-      setSubmit(true);
+    const [idT,setId] = useState();
+
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const savedId = loggedinUser.id
+    const data={_id:savedId}
+
+   
+    const handleOpenM = () => {
+      setMenu(true);
     };
   
-    const handleClose = () => {
-      setSubmit(false);
+    const handleCloseM = () => {
+      setMenu(false);
     };
-  
-
-
     const handleClickOpenTechnical = () => {
-      setOpen(true);  
+      setTechnical(true);  
+      setMessage(null);
+      setMenu(false);
     };
     const handleCloseTechnical = () => {
-      setOpen(false);
+      setTechnical(false);
       setTitle('');
     };
-
-    const handleBackTechnical= () => {
+    const handleClickOpenFinancial = () => {
+      setFinancial (true);
+      setMessage(null);
+      setMenu(false);
+    };
+    const handleCloseFinancial  = () => {
+      setFinancial (false);
+      setTitle('');
+    };
+  const handleBackTechnical= () => {
       setSystem(false);
       setNavigation(false);
-      setOpen(true);
+      setTechnical(true);
       setTitle('');
     };
-
-    const handleClickOpenSystem = () => {
-      setSystem(true);
-      setOpen(false);   
+    const handleBackFinancial= () => {
+      setDiscount(false);
+      setTransfer(false);
+      setFinancial(true);
+      setTitle('');
     };
-
+//----------------------------------------------------------------------------------------
+     const handleClickOpenSystem = () => {
+      setSystem(true);
+      setTechnical(false);   
+    };
     const handleCloseSystem = () => {
       setSystem(false);
       setInputS(false);
       setTitle('');
     };
-
     const handleSubmitSystem = () => {
       setSystem(false);
       setInputS(false);
       console.log(title);
       if(title!='')
-     { axios({
+     {
+      axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+
+      }).then(
+        (res) => { 
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
         method: "POST",
-        url : `/api/corporateTrainee/addProblem/63a756e189cc94e7139e239c/${title}`
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
       })}
       setTitle('');
-      setSubmit(true);
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
     };
-
     const handleClickOpenNavigation = () => {
       setNavigation(true);
-      setOpen(false);
+      setTechnical(false);
       setInput(false);
     };
     const handleCloseNavigation = () => {
@@ -166,41 +198,97 @@ const ReportMenu = () =>  {
       console.log(title);
       if(title!='')
       {axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+
+      }).then(
+        (res) => { 
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
         method: "POST",
-        url : `/api/corporateTrainee/addProblem/63a756e189cc94e7139e239c/${title}`
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
       })}
       setTitle('');
-      setSubmit(true);
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
     };
-
-
-    const handleClickOpenFinancial = () => {
-      setFinancial (true);
-    };
-    const handleCloseFinancial  = () => {
-      setFinancial (false);
-      setTitle('');
-    };
-
     const handleClickOpenDiscount = () => {
       setDiscount(true);
       setFinancial(false);
     };
     const handleCloseDiscount = () => {
       setDiscount(false);
+      setInputD(false);
       setTitle('');
     };
-
     const handleClickOpenTransfer = () => {
       setTransfer(true);
       setFinancial(false);
-      setSubmit(false);
     };
     const handleCloseTransfer = () => {
       setTransfer(false);
+      setInputT(false);
       setTitle('');
-      setSubmit(false);
     };
+    const handleSubmitDiscount = () => {
+      setDiscount(false);
+      setInputD(false);
+      console.log(title);
+      if(title!='')
+      {axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+
+      }).then(
+        (res) => { 
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
+        method: "POST",
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
+      })}
+      setTitle('');
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
+    };
+    const handleSubmitTransfer = () => {
+      setDiscount(false);
+      setInputD(false);
+      console.log(title);
+      if(title!='')
+      {axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+
+      }).then(
+        (res) => { 
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
+        method: "POST",
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
+      })}
+      setTitle('');
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
+    };
+     //----------------------------------------------------------------------------------------
 
     //for the input field of the other
     const handleNavigationT = () => {
@@ -218,7 +306,6 @@ const ReportMenu = () =>  {
     const handleSystemF = () => {
       setInputS(false); 
      };
-
      const handleDiscountT = () => {
       setInputD(true);
       setTitle(''); 
@@ -226,13 +313,12 @@ const ReportMenu = () =>  {
     const handleDiscountF = () => {
       setInputD(false); 
      };
-
-     const handleRefundT = () => {
-      setInputR(true);
+     const handleTransferT = () => {
+      setInputT(true);
       setTitle(''); 
      };
-    const handleRefundF = () => {
-      setInputR(false); 
+    const handleTransferF = () => {
+      setInputT(false); 
      };
 
     const handleKeyDown = (event) => {
@@ -240,25 +326,27 @@ const ReportMenu = () =>  {
           console.log(title);
         if(title!='')
          {
-          const data={
-            description: title,
-            status: "Pending",
-            response:"No Response"};
-
-           axios({
-            method: "POST",
-            url : `/api/corporateTrainee/addProblem/63a756e189cc94e7139e239c/${title}`
-          })
           axios({
             method: 'POST',
             url: '/api/problem/',
-            data:data ,
+            data:{description:title, status:"Pending", response:"No Response"} ,
             headers:{'Content-Type':'application/json'}
-
+    
+          }).then(
+            (res) => { 
+               const temp = res.data
+               console.log(temp)
+               setId(temp)  
+            }
+             );    
+          axios({
+            method: "POST",
+            url : `/api/corporateTrainee/addProblem/${idT}`,
+            data: data
           })
         }
           setTitle(''); 
-          setSubmit(true);
+          setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
         }
       };
 
@@ -267,7 +355,7 @@ const ReportMenu = () =>  {
 
 
         <div className='reportMenu'>
-           <Dialog
+           {/* <Dialog
         open={submit}
         TransitionComponent={Transition}
         keepMounted
@@ -282,31 +370,66 @@ const ReportMenu = () =>  {
             Your Problem Is Reported Successfully. The Admin Will Respond Shortly. 
           </DialogContentText>
         </DialogContent>
-      </Dialog>
-
+      </Dialog> */}
+      {message && <div className="msg">  {message}</div>}
       <Menu menuButton={<IconButton color="primary" aria-label="Menu" component="label">
         <ReportIcon />
         </IconButton>} 
         transition>
-       <SubMenu label="Report A Problem">
-       <MenuItem variant="outlined" onClick={handleClickOpenTechnical}>
-        Technical
+       
+       <MenuItem variant="outlined" onClick={handleOpenM}>
+        Report A Problem
        </MenuItem>
-        <MenuItem variant="outlined" onClick={handleClickOpenFinancial}>
-        Financial</MenuItem>
-        <MenuItem variant="outlined">
-        Other</MenuItem>
-        <input className="report" type="text" placeholder="Explain your problem "
-                value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> 
-        </SubMenu>
+       <MenuItem onClick={() => window.location.href=`/viewProblem?id=${data}`}>
+        View Reported Problems
+       </MenuItem> 
+       </Menu>
+ 
+ {      
+//---------------------------------
+}
+        <BootstrapDialog fullWidth={true}
+        onClose={handleCloseM}
+        aria-labelledby="customized-dialog-title"
+        open={menu}
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseM}>
+          Report
+        </BootstrapDialogTitle>
 
+        <DialogContent dividers>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton variant="outlined" onClick={handleClickOpenTechnical}>
+              <ListItemText primary="Technical" />
+            </ListItemButton>
+          </ListItem>
+        
+          <ListItem disablePadding>
+            <ListItemButton variant="outlined" onClick={handleClickOpenFinancial}>
+              <ListItemText primary="Financial" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding>
+              <ListItemText primary="Other" />   
+          </ListItem>
+          <ListItem disablePadding>
+              <input className="report" type="text" placeholder="Explain your problem "
+                value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> 
+                </ListItem>
+        </List>
+         
+        </DialogContent>
+      </BootstrapDialog> 
 
        
 
       <BootstrapDialog fullWidth={true}
         onClose={handleCloseTechnical}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={Technical}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseTechnical}>
           Report
@@ -330,7 +453,8 @@ const ReportMenu = () =>  {
          
         </DialogContent>
       </BootstrapDialog>        
-       
+
+
        
       <BootstrapDialog fullWidth={true}
         onClose={handleCloseSystem}
@@ -372,6 +496,7 @@ const ReportMenu = () =>  {
           
         </DialogActions>
         </BootstrapDialog> 
+
 
         <BootstrapDialog fullWidth={true}
         onClose={handleCloseNavigation}
@@ -415,6 +540,7 @@ const ReportMenu = () =>  {
         </BootstrapDialog> 
 
 
+
         <BootstrapDialog fullWidth={true}
         onClose={handleCloseFinancial}
         aria-labelledby="customized-dialog-title"
@@ -442,6 +568,7 @@ const ReportMenu = () =>  {
         </DialogContent>
       </BootstrapDialog>        
        
+
        
       <BootstrapDialog fullWidth={true}
         onClose={handleCloseDiscount}
@@ -454,35 +581,37 @@ const ReportMenu = () =>  {
         
         <DialogContent>
         <FormControl onChange={e => setTitle(e.target.value)}>
-      <FormLabel id="demo-radio-buttons-group-label">Discount Problem</FormLabel>
+      <FormLabel id="demo-radio-buttons-group-label" >Discount Problem</FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue="female"
         name="radio-buttons-group"
       >
-        <FormControlLabel value="Confusing User Journey" control={<Radio />} label="Confusing User Journey" onClick={handleNavigationF}/>
-        <FormControlLabel value="Directed To Wrong Page" control={<Radio />} label="Directed To Wrong Page" onClick={handleNavigationF}/>
-        <FormControlLabel value="Non-Specific Page Titles" control={<Radio />} label="Non-Specific Page Titles" onClick={handleNavigationF} />
-        <FormControlLabel value="Link Not Working" control={<Radio />} label="Link Not Working"  onClick={handleNavigationF}/>
-        <FormControlLabel value="" control={<Radio />} label="Other" onClick={handleNavigationT}/> 
-        {input? <input className="report" type="text" placeholder="Explain your problem "
+        <FormControlLabel value="Cluttered Page" control={<Radio />} label="Cluttered Page" onClick={handleDiscountF}/>
+        <FormControlLabel value="Low Quality Videos" control={<Radio />} label="Low Quality Videos" onClick={handleDiscountF}/>
+        <FormControlLabel value="Wrong Exam Grade" control={<Radio />} label="Wrong Exam Grade" onClick={handleDiscountF}/>
+        <FormControlLabel value="Slow Loading Time" control={<Radio />} label="Slow Loading Time" onClick={handleDiscountF}/>
+        <FormControlLabel value="Outdated Features" control={<Radio />} label="Outdated Features" onClick={handleDiscountF}/>
+        <FormControlLabel value= "" control={<Radio />} label="Other" onClick={handleDiscountT}/> 
+        {inputD? <input className="report" type="text" placeholder="Explain your problem "
                 value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> : null
                 }
-        {//pass the value of the input field
-        }
-      
       </RadioGroup>
     </FormControl>
+  
           </DialogContent>  
           <DialogActions>
-          <Button autoFocus onClick={handleCloseDiscount}>
+          <Button autoFocus onClick={handleBackFinancial}>
             Back
           </Button>
-          <Button autoFocus onClick={handleCloseDiscount}>
+          <Button autoFocus onClick={handleSubmitDiscount}>
             Submit
           </Button>
+          
         </DialogActions>
         </BootstrapDialog> 
+
+
 
         <BootstrapDialog fullWidth={true}
         onClose={handleCloseTransfer}
@@ -494,19 +623,39 @@ const ReportMenu = () =>  {
         </BootstrapDialogTitle>
         
         <DialogContent>
-          
+        <FormControl onChange={e => setTitle(e.target.value)}>
+      <FormLabel id="demo-radio-buttons-group-label" >Discount Problem</FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue="female"
+        name="radio-buttons-group"
+      >
+        <FormControlLabel value="Cluttered Page" control={<Radio />} label="Cluttered Page" onClick={handleTransferF}/>
+        <FormControlLabel value="Low Quality Videos" control={<Radio />} label="Low Quality Videos" onClick={handleTransferF}/>
+        <FormControlLabel value="Wrong Exam Grade" control={<Radio />} label="Wrong Exam Grade" onClick={handleTransferF}/>
+        <FormControlLabel value="Slow Loading Time" control={<Radio />} label="Slow Loading Time" onClick={handleTransferF}/>
+        <FormControlLabel value="Outdated Features" control={<Radio />} label="Outdated Features" onClick={handleTransferF}/>
+        <FormControlLabel value= "" control={<Radio />} label="Other" onClick={handleTransferT}/> 
+        {inputT? <input className="report" type="text" placeholder="Explain your problem "
+                value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> : null
+                }
+      </RadioGroup>
+    </FormControl>
+  
           </DialogContent>  
           <DialogActions>
-          <Button autoFocus onClick={handleCloseTransfer}>
-            Save changes
+          <Button autoFocus onClick={handleBackFinancial}>
+            Back
           </Button>
+          <Button autoFocus onClick={handleSubmitTransfer}>
+            Submit
+          </Button>
+          
         </DialogActions>
-        </BootstrapDialog> 
+        </BootstrapDialog>
+        
+     
 
-        <MenuItem onClick={() => window.location.href=`/viewProblem?id=63a756e189cc94e7139e239c`}>View Reported Problems</MenuItem>
-      </Menu>
-
-      
       </div>
     );
   }

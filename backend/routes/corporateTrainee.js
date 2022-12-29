@@ -13,8 +13,7 @@ const
     setAnswer,
     compareAnswers,
     addProblem,
-    viewProblem,
-    getEx
+    viewProblem
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -43,14 +42,14 @@ router.get('/gradeExam/:idTrainee/:idCourse',gradeExam)
 
 router.get('/viewSolution/:idCourse',viewSolution)
 
-router.put('/setAnswer/:id/:idCourse/:idEx/:answer',setAnswer)
+router.put('/setAnswer/:id/:num/:answer',setAnswer)
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 
-router.post('/addProblem/:id/:problem',addProblem)
+router.post('/addProblem/:problem',addProblem)
 
 router.get('/viewProblem/:id',viewProblem)
 
-router.get('/getEx/:idCourse/:idEx', getEx)
+//router.get('/getEx/:idCourse/:idEx', getEx)
 
 module.exports = router

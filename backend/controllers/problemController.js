@@ -27,7 +27,7 @@ const getProblem = async (req,res) => {
 }
 
 const getPending = async (req,res) => {
-  console.log("fffffffff")
+  
   const problems=await Problem.find({}).sort ({createdAt:-1})
   let i = 0;
   let temp =[];
@@ -59,7 +59,7 @@ const createProblem=async (req,res) =>{
     }
   try {
     const problem = await Problem.create({description, status , response})
-    res.status(200).json(problem)
+    res.status(200).json(problem._id)
   } catch (error) {
     res.status(400).json({error: error.message})
   }

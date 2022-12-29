@@ -1,7 +1,14 @@
 import {React, useState , useEffect} from "react"
 import axios from 'axios';
 import ViewCoursesBytitlesHrsRatePrice from '../components/CoursesTitlesHrsRatePrice'
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import NoBackpackIcon from '@mui/icons-material/NoBackpack';
 
+import Typography from '@mui/material/Typography';
 
 function Search () { 
   
@@ -9,8 +16,6 @@ function Search () {
   const title = params.get('key');
     const [courses, setCourses] = useState([]);
     const [loading,setLoading] = useState(true);
-    const [flag,setFlag] = useState(false);
-
     useEffect(() =>  {
       setLoading(true)
       
@@ -26,13 +31,7 @@ function Search () {
           const courses = res.data
           console.log(courses)
           setCourses(courses)  
-          if(courses!=[])
-            {
-              console.log(courses)
-              setFlag(true)
-            }
-          else if (courses==[])
-            setFlag(false)
+         
        }
         );    
 
@@ -42,8 +41,25 @@ function Search () {
    //console.log(flag)
     return(
       <div className="courses">
-      {flag==false? <h1>This Course Doesn't Exist.</h1> : <h3>Search Results:</h3> } 
-        {!loading && flag==true && courses.length!=0 && (courses.map(course => {
+      {courses.length==0?  
+          <Box sx={{ marginBottom:2 , maxWidth: 360, bgcolor: 'background.paper'}}>
+          <Card sx={{ maxWidth: 360, minHeight: 200, position: 'absolute', left: '40%', top: '40%', }}>
+          <CardContent>
+              <NoBackpackIcon fontSize="large"/>
+          <Typography gutterBottom variant="h5" component="div" align='center'>
+              Search Results
+          </Typography>
+          <Typography variant="body2" color="text.secondary" align='center'>
+              This Course Doesn't Exist.
+          </Typography>
+          </CardContent>
+          <CardActions>
+              <Button size="medium" color='secondary' onClick={() => window.location.href = `/`}>Check Out Available Courses</Button>
+          </CardActions>
+          </Card>
+          </Box>
+            : <h3>Search Results:</h3> } 
+        {!loading && courses.length!=0 && (courses.map(course => {
           return <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />
         }))}
         
