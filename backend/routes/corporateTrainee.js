@@ -54,7 +54,7 @@ router.get('/viewSolution/:idCourse',viewSolution)
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 
-router.post('/addProblem/:id/:problem',addProblem)
+router.post('/addProblem/:problem',addProblem)
 
 router.get('/viewProblem/:id',viewProblem)
 
