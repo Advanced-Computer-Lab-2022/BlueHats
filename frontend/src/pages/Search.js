@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import NoBackpackIcon from '@mui/icons-material/NoBackpack';
 
 import Typography from '@mui/material/Typography';
+import Loader from '../components/Loader';
 
 function Search () { 
   
@@ -43,8 +44,8 @@ function Search () {
     return(
       <>
       {loading && <Loader/>}
-      <div className="courses">
-      {courses.length==0?  
+      <div className="courses Norefund">
+      {!loading && courses.length==0?  
           <Box sx={{ marginBottom:2 , maxWidth: 360, bgcolor: 'background.paper'}}>
           <Card sx={{ maxWidth: 360, minHeight: 200, position: 'absolute', left: '40%', top: '40%', }}>
           <CardContent>

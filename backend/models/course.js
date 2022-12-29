@@ -16,13 +16,7 @@ const courseSchema = new Schema({
         required: true
     },
     subtitle: {
-        type: [{name: {type: String}, hours: {type: Number}, link: {type: String}, linkDescription: {type: String},
-             q1: {type: String}, first1: {type: String}, second1: {type: String}, third1: {type: String}, fourth1: {type: String},
-             q2: {type: String}, first2: {type: String}, second2: {type: String}, third2: {type: String}, fourth2: {type: String},
-             q3: {type: String}, first3: {type: String}, second3: {type: String}, third3: {type: String}, fourth3: {type: String},
-             q4: {type: String}, first4: {type: String}, second4: {type: String}, third4: {type: String}, fourth4: {type: String}
-        }
-        ],
+        type: [{name: {type: String}, hours: {type: Number}, link: {type: String}, linkDescription: {type: String}, question: '', firstChoice: '', secondChoice: '', thirdChoice: '', fourthChoice: '', answer: '' }],
         required: true
     },
     price: {
