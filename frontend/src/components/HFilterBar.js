@@ -18,8 +18,8 @@ function HFilterBar() {
   };
 
   return (
-    <div>
-      <h3>Filter By:</h3>
+    <div className="course-view">
+        <h3>Filter By: &nbsp; </h3>
       <div className="row">
         <div className="col-md-3 border - right">
           <nav className="navbar navbar-expand-lg navbar-light bg-light border-top p-3">

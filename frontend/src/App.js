@@ -9,7 +9,6 @@ import CourseView from './pages/CourseView';
 import Payment from './pages/Payment';
 
 import Search from './pages/Search';
-import ExamTrainee from './pages/ExamTrainee';
 import Grade from './pages/Grade';
 import ExamInd from './pages/ExamInd';
 import GradeInd from './pages/GradeInd';
@@ -68,6 +67,8 @@ import InstructorRoutes from './utils/InstructorRoutes';
 import CorporateTraineeRoutes from './utils/CorporateTraineeRoutes';
 import IndividualTraineeRoutes from './utils/IndividualTraineeRoutes';
 
+var loggedinUser = JSON.parse(localStorage.getItem('user'));
+
 
 function App() {
 
@@ -78,7 +79,7 @@ function App() {
        <Navbar/>
         <div className='pages'>
           <Routes>
-            <Route element={<PrivateRoutes />}>
+           { !loggedinUser && <Route element={<PrivateRoutes />}>
                 <Route path="/createCourse" element={<CourseForm/>}/>
                 <Route path="/instructor" element={<Instructor/>}/>
                 <Route path="/course/view" element={<CourseView/>} />
@@ -99,18 +100,18 @@ function App() {
                 <Route path="/adminPage" element={<AdminPage/>} />
                 <Route path="/instructorPage" element={<InstructorPage/>}/>
                 <Route path="/adminhome/" element={<AdminHome/>} />
-            </Route>
+            </Route>}
 
-            <Route element={<AdminRoutes />}>
+           { loggedinUser && <Route element={<AdminRoutes />}>
               <Route path="/admin/addAdmin" element={<Admin/>} />
               <Route path="/admin/instructor" element={<NewInstructor/>}/>
               <Route path="/admin/corporateTrainee" element={<NewCoTrainee/>}/>
               <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
               <Route path="/adminPage" element={<AdminPage/>} />
               <Route path="/adminhome/" element={<AdminHome/>} />
-            </Route>
+            </Route>}
 
-            <Route element={<InstructorRoutes />}>
+           { loggedinUser && <Route element={<InstructorRoutes />}>
               <Route path="/instructor" element={<Instructor/>}/>
               <Route path="/contract" element={<ContractForm/>}/>
               <Route path="/createCourse" element={<CourseForm/>}/>
@@ -119,18 +120,18 @@ function App() {
               <Route path="/instructor/profile" element={<InstructorProfile/>}/>
               <Route path="/instructor/editBiography" element={<Biography/>} />
               <Route path="/instructorPage" element={<InstructorPage/>}/>
-            </Route>
+            </Route>}
 
-            <Route element={<CorporateTraineeRoutes />}>
+            { loggedinUser && <Route element={<CorporateTraineeRoutes />}>
               <Route path="/corporateTrainee/changePassword" element={<ResetPassword/>}/>
               <Route path="/corporateTrainee/profile" element={<CoTraineeProfile/>} />
-            </Route>
+            </Route>}
 
-            <Route element={<IndividualTraineeRoutes />}>
+            { loggedinUser && <Route element={<IndividualTraineeRoutes />}>
               <Route path="/payment" element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}/>
               <Route path="/indTrainee/changePassword" element={<ResetPassword/>} />
               <Route path="/indTrainee/profile" element={<IndTrainee/>}/>
-            </Route>
+            </Route>}
 
             <Route
               path="/"
@@ -143,10 +144,6 @@ function App() {
             <Route
               path="/search/"
               element={<Search/>}
-            />
-            <Route
-              path="/examTrainee/"
-              element={<ExamTrainee/>}
             />
             <Route
               path="/gradeExam/"
