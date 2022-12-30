@@ -4,7 +4,6 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { Link } from "react-router-dom";
 import IFilterBar from "../components/IFilterBar";
-// import { acceptedX } from '../components/ContractForm';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
@@ -45,7 +44,7 @@ const Instructor = () => {
 
   const navigate = useNavigate();
   const navigateAddCourse = () => {
-    navigate('/instructor/addCourse');
+    navigate('/createCourse');
   };
 
   const [anchorEl, setAnchorEl] = useState(null);

@@ -162,7 +162,7 @@ const CourseForm = () => {
 
   return (
    
-    <form className="create" onSubmit={handleSubmit}>
+    <form className="create instructorAddCourse" onSubmit={handleSubmit}>
         <h3>Add a New Course</h3>
 
         <label>Title:</label>
@@ -179,7 +179,7 @@ const CourseForm = () => {
           value={subject}
           className={emptyFields.includes('subject') ? 'error' : ''} /> */}
            <br/>
-          <Box sx={{ minWidth: 155 }}>
+          <Box sx={{ minWidth: 160 }}>
                 <FormControl fullWidth>
                   <Select
                     value={subject}

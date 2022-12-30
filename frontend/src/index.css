@@ -65,7 +65,7 @@ header a
   top: 200px;
   min-width: 100px;
 }
-/* .instructorAddCourse {
+.instructorAddCourse {
   padding: 200px;
   padding-top: 0%;
 }
@@ -82,7 +82,7 @@ header a
 .instructorAddCourse .create span.first {
   position: absolute;
   padding-left: 10px;
-} */
+}
 /* .instructor .create .side-by-side {
   display: flex;
   flex-direction: row;
