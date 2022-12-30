@@ -373,7 +373,7 @@ export default function AccountMenu() {
 
   const [wallet, setWallet] = useState(0); 
 
-  useEffect(() =>  {
+  const handleClickOpen = () => {
     const data={type: type, userID: userID};
     axios({
       method: "PUT",
@@ -386,10 +386,10 @@ export default function AccountMenu() {
      
       setWallet(wallet)  
     });
-  },[type, userID])
-
-  const handleClickOpen = () => {
-    setOpen1(true);
+    setTimeout(()=>{
+      setOpen1(true);
+    }, 900)
+   
   };
 
   const handleCloseD = () => {

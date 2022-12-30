@@ -6,7 +6,7 @@ import axios from "axios";
 
 import Loader from "../components/Loader"
 
-const Home = () => {
+const IndTraineeCourses = () => {
     var loggedinUser = JSON.parse(localStorage.getItem('user'));
     const userID = loggedinUser.id;
 
@@ -54,4 +54,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default IndTraineeCourses;

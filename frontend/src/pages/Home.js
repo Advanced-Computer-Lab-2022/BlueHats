@@ -42,15 +42,19 @@ const Home = () => {
     <form>
       <div className="home">
         <div className="courses">
-        {/* <AliceCarousel 
-        items={items}
-        autoPlayInterval={5000}
-        autoPlayDirection="ltr"
-        autoPlay={true}
-        fadeOutAnimation={true}
-        mouseTrackingEnabled={true}
-        disableAutoPlayOnAction={true}
-        /> */}
+          <div  className='alice'>
+          <AliceCarousel 
+            sx={{width: 1000,marginLeft:15}}
+            items={items}
+            autoPlayInterval={5000}
+            autoPlayDirection="ltr"
+            autoPlay={true}
+            fadeOutAnimation={true}
+            mouseTrackingEnabled={true}
+            disableAutoPlayOnAction={true}
+            disableButtonsControls={true}
+          />
+        </div>
           <HFilterBar />
           <h3>All Courses</h3>
           {courses &&

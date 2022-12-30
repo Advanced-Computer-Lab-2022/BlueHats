@@ -1112,3 +1112,7 @@ right: 5px;
 .create .subject-fill label {
   padding-right: 3rem;
 }
+.alice {
+  width: 1000px; 
+  margin-left: 15rem;
+}
