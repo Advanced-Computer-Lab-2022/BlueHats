@@ -49,7 +49,7 @@ mongoose.connect(process.env.MONGO_URL)
     {
         // listen for requests
         app.listen(port, () => {
-            console.log('Listening on port', port);
+            console.log('Listening on port', port, '😃');
         });
     })
     .catch((error) => 

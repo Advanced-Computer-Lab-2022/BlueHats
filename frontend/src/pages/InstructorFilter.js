@@ -11,6 +11,7 @@ function InstructorFilter() {
   const target1 = params.get("key");
   const target2 = params.get("target");
   const [courses, setCourses] = useState([]);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     axios({
@@ -20,29 +21,34 @@ function InstructorFilter() {
       const courses = res.data;
       console.log(courses);
       setCourses(courses);
+      if (courses !== []) {
+        setFlag(true);
+      }
     });
   }, [target2, target1]);
 
   return (
-    <div className="courses">
-      <IFilterBar />
-      <h3>
-        {" "}
-        Filter Results: {""} {""}
-        <Link to="/instructor">
-          <IconButton edge="start" color="inherit" aria-label="close">
-            <CloseIcon />
-          </IconButton>{" "}
-        </Link>
-      </h3>
+    <div className="instructor">
+      <div className="courses">
+        <IFilterBar />
+        <h3>
+          {" "}
+          Filter Results: {""} {""}
+          <Link to="/instructor">
+            <IconButton edge="start" color="inherit" aria-label="close">
+              <CloseIcon />
+            </IconButton>{" "}
+          </Link>
+        </h3>
 
-      {courses.length === 0 ? (
-        <h1>No courses for this {target2}</h1>
-      ) : (
-        courses.map((course) => {
-          return <CourseDetails course={course} key={course._id} />;
-        })
-      )}
+        {flag === true && courses.length === 0 ? (
+          <h1>No courses for this {target2}</h1>
+        ) : (
+          courses.map((course) => {
+            return <CourseDetails course={course} key={course._id} />;
+          })
+        )}
+      </div>
     </div>
   );
 }

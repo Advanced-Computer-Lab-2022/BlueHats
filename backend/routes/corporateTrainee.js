@@ -9,6 +9,7 @@ const
     changeEmailCorporateTrainee,
     changePasswordCorporateTrainee,
     forgotPasswordCorporateTrainee,
+    getCertificateCoTrainee,
     viewSolution,
     gradeExam,
     setAnswer,
@@ -36,6 +37,8 @@ router.patch('/updateProfile',updateCorporateTraineeProfile)
 
 // forgot password
  router.post("/forgotPassword",forgotPasswordCorporateTrainee)
+
+ router.post("/getCertificate", getCertificateCoTrainee)
 
 
 router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 

@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { getParamByParam } from 'iso-country-currency'
 import { countryValue } from '../components/Navbar'
 import YoutubeEmbed from "./YoutubeEmbed";
+import { useNavigate } from 'react-router-dom';
+
 import Axios from "axios";
 
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const CoursePreview = ({course}) => {
+  const navigate = useNavigate();
 
     function CheckNumber() {
         if(result>1) {
@@ -70,6 +73,7 @@ const CoursePreview = ({course}) => {
     return (
         <div className="course-preview">
           <div>
+            <button onClick={() => navigate(-1)}>go back</button>
             <h1>{course.title.toUpperCase()}</h1>
             <p><strong></strong>{course.summary}</p>
             <p><strong>Subject: </strong>{course.subject}</p>

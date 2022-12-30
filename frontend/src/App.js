@@ -16,6 +16,7 @@ import GradeInd from './pages/GradeInd';
 
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
+import AdminHome from './pages/AdminHome';
 import NewInstructor from './pages/NewInstructor';
 import NewCoTrainee from './pages/NewCoTrainee';
 import Signup from './pages/Signup';
@@ -35,6 +36,8 @@ import HomeFilter from './pages/HomeFilter';
 import InstructorFilter from './pages/InstructorFilter';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
 import ReviewCourse from './components/CoursesTitleRatingReviews';
+import HomePage from './pages/HomePage';
+import InstructorPage from './pages/InstructorPage';
 
 
 
@@ -52,6 +55,10 @@ function App() {
             <Route
               path="/"
               element={<Home/>}
+            />
+             <Route
+              path="/Home"
+              element={<HomePage/>}
             />
             <Route
               path="/search/"
@@ -76,6 +83,10 @@ function App() {
             <Route
               path="/instructor"
               element={<Instructor/>}
+            />
+              <Route
+              path="/instructorPage"
+              element={<InstructorPage/>}
             />
             <Route
               path="/instructor/addCourse"
@@ -104,6 +115,10 @@ function App() {
             <Route
               path="/admin/addAdmin"
               element={<Admin/>}
+            />
+            <Route
+              path="/adminhome/"
+              element={<AdminHome/>}
             />
             <Route
               path="/admin/instructor"

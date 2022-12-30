@@ -15,7 +15,7 @@ const ContractForm = () => {
 
   const navigateToInstructor = () => {
     const x = accepted.push('true')
-    navigate("/instructor");
+    navigate("/InstructorPage");
     acceptedX = x;
   };
 

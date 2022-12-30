@@ -7,6 +7,9 @@ function IFilterBar() {
   const handlePrice = (price) => {
     window.location.href = `/Ifilter?target=price&key=${price}`;
   };
+  const handleSort = (sortTarget) => {
+    window.location.href = `/Ifilter?target=${sortTarget}&key=`;
+  };
 
   return (
     <div>
@@ -26,6 +29,7 @@ function IFilterBar() {
                   CS
                 </a>
                 <a
+                  className="hoveranchor"
                   onClick={() => {
                     handleSubject("math");
                   }}
@@ -33,6 +37,7 @@ function IFilterBar() {
                   Maths
                 </a>
                 <a
+                  className="hoveranchor"
                   onClick={() => {
                     handleSubject("Management");
                   }}
@@ -46,6 +51,7 @@ function IFilterBar() {
               <button className="dropbtn">Price</button>
               <div id="myDropdown" className="dropdown-content">
                 <a
+                  className="hoveranchor"
                   onClick={() => {
                     handlePrice("50");
                   }}
@@ -53,6 +59,7 @@ function IFilterBar() {
                   50$
                 </a>
                 <a
+                  className="hoveranchor"
                   onClick={() => {
                     handlePrice("200");
                   }}
@@ -60,6 +67,7 @@ function IFilterBar() {
                   200$
                 </a>
                 <a
+                  className="hoveranchor"
                   onClick={() => {
                     handlePrice("500");
                   }}
@@ -67,11 +75,41 @@ function IFilterBar() {
                   500$
                 </a>
                 <a
+                  className="hoveranchor"
                   onClick={() => {
                     handlePrice("0");
                   }}
                 >
                   Free
+                </a>
+              </div>
+            </div>
+            <div className="dropdown">
+              <button className="dropbtn">Sort By</button>
+              <div id="myDropdown" className="dropdown-content">
+                <a
+                  className="hoveranchor"
+                  onClick={() => {
+                    handleSort("popularity");
+                  }}
+                >
+                  Most Popular
+                </a>
+                <a
+                  className="hoveranchor"
+                  onClick={() => {
+                    handleSort("priceAsc");
+                  }}
+                >
+                  Price Ascendingly
+                </a>
+                <a
+                  className="hoveranchor"
+                  onClick={() => {
+                    handleSort("priceDesc");
+                  }}
+                >
+                  Price Descendingly
                 </a>
               </div>
             </div>

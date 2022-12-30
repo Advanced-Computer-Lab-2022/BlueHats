@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import Notes from "../components/Notes";
 import { Link } from "react-router-dom";
 import YoutubeEmbed from "./YoutubeEmbed";
+import Button from "@mui/material/Button";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import Exam from "./Exam";
 import ProgressBar from "./ProgressBar";
+import DownloadCertificate from "./DownloadCertificate";
+import SendCertificate from "./SendCertificate";
 
 const CourseFullView = ({ course }) => {
 
@@ -15,6 +19,11 @@ const CourseFullView = ({ course }) => {
     const [fourth, setFourth] = useState('');
     const [ans, setAns] = useState('');
     const [active, setActive] = useState("default");
+    const [downloadCert ,setDownloadCert] = useState(0)
+    const [sendCert ,setSendCert] = useState(0)
+    const [finishCourse ,setFinishCourse] = useState(0)
+
+
 
     const mylink1 = (course.previewLink);
     const myembed1 = mylink1.split('=');
@@ -28,6 +37,9 @@ const CourseFullView = ({ course }) => {
         const newValue = oldValue + add;
 
         if (newValue === 100) {
+          setSendCert(1);
+          setDownloadCert(1);
+          setFinishCourse(1);
           return 100;
         }
 
@@ -63,7 +75,9 @@ const CourseFullView = ({ course }) => {
                   <span className="material-symbols-outlined"> quiz </span> Test your knowledge  </MenuItem> 
                 </SubMenu>)}
             <MenuItem> <span className="material-symbols-outlined"> quiz </span> Final Exam </MenuItem>
+            {downloadCert>0 && (sendCert>0) &&(finishCourse>0) && <MenuItem>  <DownloadCertificate/>  </MenuItem>}
             </Menu>
+
         </Sidebar>
         <div className="course-view-video">
             {active === "default" &&  <YoutubeEmbed embedId={ myembedID1}/>}
@@ -71,8 +85,10 @@ const CourseFullView = ({ course }) => {
             {active === "question" &&  <Exam question={quest} firstO={first} secondO={second} thirdO={third} fourthO={fourth} answer={ans} />}
         </div>
         <div className="done-button">
-          {(active === "question" || active === "video" ) && <button onClick={handleClick}>Done</button>}
+          {((active === "question" || active === "video" ) || (sendCert===0) || (finishCourse===0)) ? <button onClick={handleClick}>Done</button> : <SendCertificate course={course}/>
+}
         </div>
+        <Notes />
        </div>
       </div>
     )
