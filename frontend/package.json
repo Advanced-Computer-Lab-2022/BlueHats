@@ -35,12 +35,8 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-dropdown": "^1.11.0",
-<<<<<<< HEAD
     "react-lifecycles-compat": "^3.0.4",
     "react-loader-spinner": "^5.3.4",
-=======
-    "react-hook-form": "^7.41.1",
->>>>>>> Mariam/abdelrahmannn
     "react-pro-sidebar": "^1.0.0-alpha.9",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",

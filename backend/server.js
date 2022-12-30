@@ -44,6 +44,7 @@ app.use('/api/requestCourse',requestedCoursesRoutes)
 app.use('/api/reviews',reviewsRoutes)
 
 // connect to database
+mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGO_URL)
     .then(() => 
     {

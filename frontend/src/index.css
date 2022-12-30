@@ -29,9 +29,7 @@ header a
   color: #333;
   text-decoration: none;
 }
-header a:hover {
-  background-color: blue;
-}
+
 .pages {
   max-width: 1400px;
   padding: 20px;
@@ -791,10 +789,10 @@ nav a, nav button {
 
 
 }
-.note-form button:hover {
+/* .note-form button:hover {
   background-color: #1976d2;
   color: white;
-}
+} */
 button:disabled,
 button[disabled]{
   color: #666666;
@@ -1183,7 +1181,6 @@ right: 5px;
   height: 100%;
   width: 100%;
   white-space: pre-wrap;
-  overflow-y: scroll;
 }
 .note .close {
   width: 15px;

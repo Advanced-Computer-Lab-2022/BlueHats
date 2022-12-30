@@ -97,6 +97,8 @@ function App() {
                 <Route path="/instructor/profile" element={<InstructorProfile/>}/>
                 <Route path="/instructor/editBiography" element={<Biography/>} />
                 <Route path="/adminPage" element={<AdminPage/>} />
+                <Route path="/instructorPage" element={<InstructorPage/>}/>
+                <Route path="/adminhome/" element={<AdminHome/>} />
             </Route>
 
             <Route element={<AdminRoutes />}>
@@ -105,6 +107,7 @@ function App() {
               <Route path="/admin/corporateTrainee" element={<NewCoTrainee/>}/>
               <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
               <Route path="/adminPage" element={<AdminPage/>} />
+              <Route path="/adminhome/" element={<AdminHome/>} />
             </Route>
 
             <Route element={<InstructorRoutes />}>
@@ -115,6 +118,7 @@ function App() {
               <Route path="/instructor/changePassword" element={<ResetPassword/>} />
               <Route path="/instructor/profile" element={<InstructorProfile/>}/>
               <Route path="/instructor/editBiography" element={<Biography/>} />
+              <Route path="/instructorPage" element={<InstructorPage/>}/>
             </Route>
 
             <Route element={<CorporateTraineeRoutes />}>

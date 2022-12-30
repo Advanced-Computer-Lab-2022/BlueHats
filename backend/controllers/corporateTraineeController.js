@@ -660,18 +660,85 @@ if(!courseName) {
   }
 
   }
+  const sendEmail = async (
+    subject,
+    message,
+    send_to,
+    sent_from,
+    reply_to,
+    attachments
+   ) => {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.AUTH_EMAIL,
+        pass: process.env.AUTH_PASS,
+      },
+    });
+    
+    const options = {
+      from: sent_from,
+      to: send_to,
+      replyTo: reply_to,
+      subject: subject,
+      html: message,
+      attachments: [
+        {
+          filename: "My Certificate.pdf",
+          path: "D:\BlueHats\backend\assets\My Certificate.pdf",
+        },
+      ],
+    };
+    
+    // Send Email
+    transporter.sendMail(options, function (err, info) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(info);
+      }
+    });
+   };
+   const getCertificateCoTrainee = async (req, res) => {
+    const { DynammicEmail, DynammicSubject } = req.body;
+    
+    try {
+      const send_to = DynammicEmail;
+      const sent_from = process.env.EMAIL_USER;
+      const reply_to = DynammicEmail;
+      const subject = DynammicSubject;
+      const message = `
+          <h3>Hello Abdelrahman</h3>
+          <p>Thank you for Completing your course</p>
+          <p>Regards...</p>
+      `;
+    
+      await sendEmail(subject, message, send_to, sent_from, reply_to);
+      res.status(200).json({ success: true, message: "Email Sent" });
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+   };
 
 module.exports={getCorporateTrainee,
-                getCorporateTrainees,
-                createCorporateTrainee,
-                deleteCorporateTrainee,
-                updateCorporateTraineeProfile,
-                changeEmailCorporateTrainee,
-                forgotPasswordCorporateTrainee,
-                changePasswordCorporateTrainee,
-                gradeExam,
-                viewSolution,
-                setAnswer,
-                compareAnswers,
-                getCertificateCoTrainee
+  getCorporateTrainees,
+  createCorporateTrainee,
+  deleteCorporateTrainee,
+  updateCorporateTraineeProfile,
+  changeEmailCorporateTrainee,
+  forgotPasswordCorporateTrainee,
+  gradeExam,
+  viewSolution,
+  rateCourse,
+  rateInstructor,
+  addReview,
+  requestCourse,
+  availableCourses,
+  filterCourses,
+  compareAnswers,
+  addProblem,
+  viewProblem,
+  getEx,
+  reviewCourse,
+  getCertificateCoTrainee
                 }
