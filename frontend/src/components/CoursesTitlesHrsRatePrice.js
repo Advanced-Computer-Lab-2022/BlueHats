@@ -61,6 +61,7 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
          <Link onClick={() => window.location.href=`/course/preview?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
         <p><strong>Total Hours: </strong>{result} <CheckNumber/> </p>
         <p><strong>Rating: </strong>{course.courseRating}</p>
+        {/* <p><strong>Enrolled: </strong>{course.enrolled}</p> */}
         <div  className="course-details-price">
         <p><strong>Price: </strong> {currency} {output}</p>
         </div>

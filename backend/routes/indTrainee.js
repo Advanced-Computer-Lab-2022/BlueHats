@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const{getIndTrainees,getIndTrainee,
-    signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses,rateCourse,addReview,rateInstructor,filterCourses,reviewCourse} = require('../controllers/indTraineeController')
+    signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,getCertificateInTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses,rateCourse,addReview,rateInstructor,filterCourses,reviewCourse} = require('../controllers/indTraineeController')
 const {payWithWallet} = require('../controllers/payment');
 
 //login route
@@ -27,6 +27,8 @@ router.patch('/updateProfile',updateIndTraineeProfile)
 
 // forgot password
 router.post("/forgotPassword",forgotPasswordIndTrainee)
+
+ router.post("/getCertificate", getCertificateInTrainee)
 
 // Grade Exam
 router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 

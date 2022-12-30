@@ -18,6 +18,7 @@ import RefundRequests from './pages/RefundRequests';
 
 import Preview from './pages/Preview';
 import Admin from './pages/Admin';
+import AdminHome from './pages/AdminHome';
 import NewInstructor from './pages/NewInstructor';
 import NewCoTrainee from './pages/NewCoTrainee';
 import Signup from './pages/Signup';
@@ -39,6 +40,8 @@ import InstructorFilter from './pages/InstructorFilter';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
 
 import ReviewCourse from './components/CoursesTitleRatingReviews';
+import HomePage from './pages/HomePage';
+import InstructorPage from './pages/InstructorPage';
 
 import Report from './pages/ViewProblem';
 import AdminPage from './pages/AdminPage';
@@ -128,6 +131,10 @@ function App() {
             <Route
               path="/"
               element={<Home/>}
+            />
+             <Route
+              path="/Home"
+              element={<HomePage/>}
             />
             <Route
               path="/search/"

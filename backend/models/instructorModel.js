@@ -4,33 +4,41 @@ const bcrypt = require('bcrypt')
 
 const CorporateTrainee = require('../models/corporateTraineeModel')
 
-const instructorSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  username: {
-    type: String,
-    required: true
-  },
-  email: 
+const instructorSchema = new Schema(
   {
-    type: String,
-    required: true,
-    unique:true,
-    lowercase:true
-  },
-  password: {
-    type:String ,
-    required: true
-  },
-  biography :
-  {
-    type:String ,
-    required: false
+    name: {
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    biography: {
+      type: String,
+      required: false,
+    },
+    wallet: {
+      type: Number,
+    },
+    acceptedContract: {
+      type: Boolean,
+      default: false,
+    },
   },
   wallet: 
   {
+    type: Number
     type: Number,
     default: 0
   },
@@ -68,5 +76,3 @@ const instructorSchema = new Schema({
 //  }
 
 // }
-
-module.exports = mongoose.model('InstructorModel', instructorSchema)

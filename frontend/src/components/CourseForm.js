@@ -321,6 +321,7 @@ const CourseForm = () => {
         <input
           type="date" 
           min = {disableDates()}
+          onKeyDown={(e) => e.preventDefault()}
           onChange={(e) => setPromotionStart(e.target.value)} 
           value={promotionStart} />
         
@@ -328,6 +329,7 @@ const CourseForm = () => {
         <input
           type="date" 
           min = {disableDates()}
+          onKeyDown={(e) => e.preventDefault()}
           onChange={(e) => setPromotionEnd(e.target.value)} 
           value={promotionEnd} />
         

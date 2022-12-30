@@ -10,16 +10,23 @@ function HomeFilter() {
   const params = new URLSearchParams(window.location.search);
   const target1 = params.get("key");
   const target2 = params.get("target");
+  // if (target2 === null) {
+  //   target2 = "";
+  // }
   const [courses, setCourses] = useState([]);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
+    setFlag(false);
     axios({
       method: "GET",
       url: `http://localhost:4000/filterBy/${target2}/${target1}`,
     }).then((res) => {
       const courses = res.data;
-      console.log(courses);
       setCourses(courses);
+      if (courses !== []) {
+        setFlag(true);
+      }
     });
   }, [target2, target1]);
 
