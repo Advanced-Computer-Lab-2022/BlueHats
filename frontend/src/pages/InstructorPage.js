@@ -226,7 +226,6 @@ const InstructorPage = () => {
                       onChange={(e, newValue) => setPriceRange(newValue)}
                       onChangeCommitted={onSliderCommitHandler}
                     />
-
                     <div className={classes.priceRangeInputs}>
                       <TextField
                         size="small"
@@ -239,7 +238,6 @@ const InstructorPage = () => {
                         onChange={(e) => handlePriceInputChange(e, "lower")}
                         onBlur={onTextfieldCommitHandler}
                       />
-
                       <TextField
                         size="small"
                         id="upper"
@@ -373,7 +371,8 @@ const InstructorPage = () => {
           </Paper>
         </Grid>
         <Grid xs={6} md={4}>
-          {acceptedX.length === 0 ? (
+        {/* currentUser.acceptedContract = true */}
+          {acceptedX.length === 0  ? (
             <p>Unfortuantely, You cannot create courses yet!</p>
           ) : (
             <Button onClick={navigateAddCourse}>Add Course</Button>

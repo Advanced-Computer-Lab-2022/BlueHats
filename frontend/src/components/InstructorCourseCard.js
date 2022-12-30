@@ -19,8 +19,12 @@ import {
   CardHeader,
   CardContent,
   CardActions,
-  Typography,
+  Typography
 } from "@mui/material";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import { green } from '@mui/material/colors';
+
+
 
 function InstructorCourseCard({ course }) {
   const { dispatch } = useCoursesContext();
@@ -135,11 +139,13 @@ function InstructorCourseCard({ course }) {
   return (
     <Card>
       <CardHeader
-        avatar={<Avatar />}
+        avatar={<Avatar sx={{ bgcolor: "#a256e0" }} variant="rounded">
+        <AssignmentIcon />
+      </Avatar>}
         title={<Typography variant="h6">{course.title}</Typography>}
       />
       <CardContent>
-        <Typography variant="body" paragraph>
+        <Typography variant="body" paragraph="true">
           Subject: {course.subject}
         </Typography>
         <Typography variant="overline" paragraph="true">
@@ -152,8 +158,8 @@ function InstructorCourseCard({ course }) {
         ) : (
           <Typography variant="body2">Enrolled Trainees: 0</Typography>
         )}
-        <Typography variant="h6" gutterBottom>
-          {formatter.format(priceAfterDiscount(course.price, course.promotion))}
+        <Typography variant="h6" gutterBottom> {currency}{" "}
+          {priceAfterDiscount(output, course.promotion)}
         </Typography>
         {course.promotion > 0 && (
           <Typography
