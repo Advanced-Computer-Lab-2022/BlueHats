@@ -135,12 +135,13 @@ const login = async (req, res) =>
       const pass = await bcrypt.compare(password, indTrainee.password);
       const id = indTrainee.id;
       const type = "indTrainee";
+      const email = indTrainee.email; 
       if (pass) 
       {
         // res.send("Auth Successful");
         const token = createToken(indTrainee.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token, type})
+        return res.status(200).json({id, username , token, type, email})
 
       } 
       else 
@@ -156,12 +157,13 @@ const login = async (req, res) =>
       const passw = await bcrypt.compare(password, coTrainee.password);
       const id = coTrainee.id;
       const type = "coTrainee";
+      const email = coTrainee.email;
       if (passw) 
       {
         // res.send("Auth Successful");
         const token = createToken(coTrainee.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token, type})
+        return res.status(200).json({id, username , token, type, email})
       } 
       else 
       {
