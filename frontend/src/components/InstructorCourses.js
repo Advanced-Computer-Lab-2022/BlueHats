@@ -4,7 +4,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { Button,Box } from '@mui/material';
 
 
-const ViewMyCourses = ({course }) => {
+const InstructorCourses = ({course }) => {
   function Stars(){
     if (course.instructorRate >= 1 && course.instructorRate<=1.5){
          return "⭐";
@@ -41,29 +41,23 @@ const ViewMyCourses = ({course }) => {
    }
 
     return (
-        <div className="course-details-ss">
+        <div className="co-courses">
           <h4>{course.title}</h4>
-          <p><strong>Rate:</strong>{course.instructorRate} / 5 <strong> <Stars/> </strong> </p>
+          <p><strong>Rating: </strong><Stars/> {Number.parseFloat(course.instructorRate).toFixed(2)}({course.numOfRates})</p>
           <p><strong>Enrolled students : </strong>{course.enrolledStudents} <strong> </strong> </p>
 
-          {/* <div>
-          <p><strong>Reviews: </strong> <Reviews/></p>
-          </div> */}
-
-          <div>
-          <Box  className ='rate-button' sx={{marginBottom:2}}>
+        <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
+          <Box  sx={{marginBottom:2}}>
           <Button  variant= "contained"
-          onClick={() => window.location.href=`/ireviews?courseId=${course._id}`}
+          onClick={() => window.location.href=`/reviews?courseId=${course._id}`}
           margin="normal"
           padding="normal">
             View Reviews
           </Button>
         </Box>
-        </div>
-          <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
-
+        
         </div>
       )
       
 }
-export default ViewMyCourses
+export default InstructorCourses

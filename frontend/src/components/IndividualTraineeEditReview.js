@@ -1,18 +1,23 @@
 import axios from 'axios'
 import { useState, /*setCounter*/ } from 'react'
 
-const EditReview = ({course}) => {
+const IndividualTraineeEditReview = ({course}) => {
 
   const params = new URLSearchParams(window.location.search)
   const reviewId = params.get('reviewId')
   const [loading, setLoading] = useState(true) 
   const [editedReview, setEditedReview] = useState()
 
-  const handleSubmit = async()=>{
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null)
+  const [emptyFields, setEmptyFields] = useState([])
+
+  const handleSubmit = async(e)=>{
+    e.preventDefault()
 
     setLoading(true)
      var data= {userReview:editedReview}
-      axios({
+     const response = await  axios({
         method:'PATCH',
         url: `/api/reviews/${reviewId}`,
         data:data,
@@ -20,6 +25,18 @@ const EditReview = ({course}) => {
       }).then(()=>{
           setLoading(false)
   })
+  const json = await response.json()
+  if (!response.ok) {
+    setError(json.error)
+    setEmptyFields(json.emptyFields)
+  }
+ else {
+  setEmptyFields([])
+    setError(null)
+    setMessage(null)
+    setEditedReview()
+    
+  }
 
   
 
@@ -33,10 +50,10 @@ const EditReview = ({course}) => {
       onChange={(e) => setEditedReview(e.target.value)} 
       value={editedReview}
         />
-   <button> Submit</button>   
+   <button onClick={() => window.location.href=`/myreviews/individualTrainee`}>Edit</button>   
     
    </form>
    )
 
    }
-export default EditReview
+export default IndividualTraineeEditReview
