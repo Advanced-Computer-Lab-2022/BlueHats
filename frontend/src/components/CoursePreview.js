@@ -100,26 +100,29 @@ const CoursePreview = ({course}) => {
       const mylink = (course.previewLink);
       const myembed = mylink.split('=');
       const myembedID = myembed[1];
-
-      var loggedinUser = JSON.parse(localStorage.getItem('user'));
-      const userID = loggedinUser.id;
-      const type = loggedinUser.type;
+      
       const [wallet, setWallet] = useState(0); 
-
-      useEffect(() =>  {
-        const data={type: type, userID: userID};
-        axios({
-          method: "PUT",
-          url : `/api/courses/wallet`,
-          data:data,
-          headers:{'Content-Type':'application/json'}
-        })
-        .then( (res) => { 
-          const wallet = res.data
-         
-          setWallet(wallet)  
-        });
-      },[type, userID])
+      if(user)
+      {
+        var loggedinUser = JSON.parse(localStorage.getItem('user'));
+        const userID = loggedinUser.id;
+        const type = loggedinUser.type;
+  
+        // useEffect(() =>  {
+          const data={type: type, userID: userID};
+          axios({
+            method: "PUT",
+            url : `/api/courses/wallet`,
+            data:data,
+            headers:{'Content-Type':'application/json'}
+          })
+          .then( (res) => { 
+            const wallet = res.data
+           
+            setWallet(wallet)  
+          });
+        // },[type, userID])
+      }
 
       const [open1, setOpen1] = useState(false);
 
@@ -132,6 +135,9 @@ const CoursePreview = ({course}) => {
       };
 
       const Pay = () => {
+        var loggedinUser = JSON.parse(localStorage.getItem('user'));
+        const userID = loggedinUser.id;
+        
         const data={price: course.price, userID: userID, courseID: course._id};
         axios({
           method: "PUT",
@@ -141,6 +147,7 @@ const CoursePreview = ({course}) => {
         })
         window.location.href=`/MyEnrolledCourses`
       }
+
 
     return (
         <div className="course-preview">

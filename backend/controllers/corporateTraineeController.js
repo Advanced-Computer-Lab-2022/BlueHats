@@ -546,12 +546,12 @@ var flag = 0;
 var j;
 const availableCourses = async(req,res) => { 
     // const corporateTraineeId = req.query.corporateTraineeId;
-    const { id } = req.params;
-    if(id){
+    const { userID } = req.body;
+    if(userID){
         const courses = await Course.find({}).sort({createdAt: -1});
         for (let i = 0 ; i<courses.length; i++){
             for(j = 0; j<(courses[i].corporateTrainee).length; j++){}
-                if ((courses[i].corporateTrainee)[j] === id){
+                if ((courses[i].corporateTrainee)[j] === userID){
                     flag = 1;
                     break;
                 }
@@ -601,9 +601,9 @@ res.status(200).json(problem);
 
 const filterCourses = async(req,res) => { 
   // const corporateTraineeId = req.query.corporateTraineeId;
-  const { savedID } = req.params;
-  if(savedID){
-  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(savedID)});
+  const { userID } = req.body;
+  if(userID){
+  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(userID)});
   res.status(200).json(result)
   }else{
       res.status(400).json({error:"corporateTraineeId  is required"})
@@ -748,7 +748,94 @@ if(!courseName) {
     }
    };
 
-module.exports={getCorporateTrainee,
+   const updateProgress = async(req, res) => {
+    const { progress } = req.body;
+    const { courseID } = req.body;
+    const { userID } = req.body;
+  
+    const trainee = await CorporateTrainee.findById(userID);
+  
+    const array = trainee.courses;
+  
+    const object = { course: courseID, progress: progress };
+    
+    let i = 0;
+    let newCourses = [];
+  
+    while(i < array.length)
+    {
+      const currentID = array[i].course;
+      if( currentID == courseID )
+      {
+        newCourses = newCourses.concat([object]);
+      }
+      else 
+      {
+        newCourses = newCourses.concat([array[i]]);
+      }
+      i++;
+    }
+  
+    const updatedTrainee = await CorporateTrainee.findOneAndUpdate({_id: userID} , {courses: newCourses});
+  
+    if(!trainee) 
+    {
+      return res.status(404).json({error: 'No such Individual Trainee'})
+    }
+    res.status(200).json(updatedTrainee);
+  }
+  
+  const getProgress = async(req, res) => {
+    const { courseID } = req.body;
+    const { userID } = req.body;
+  
+    const trainee = await CorporateTrainee.findById(userID);
+  
+    const array = trainee.courses;
+  
+    let i = 0;
+    let myProgress = 0;
+    while(i < array.length)
+    {
+      const currentID = array[i].course;
+      if( currentID == courseID )
+      {
+        myProgress = array[i].progress;
+      }
+      i++;
+    }
+    if(!trainee) 
+    {
+      return res.status(404).json({error: 'No such Corporate Trainee'})
+    }
+    res.status(200).json(myProgress);
+  
+  }
+  const getMyCourses = async(req, res) => {
+    const { userID } = req.body;
+  
+    const trainee = await CorporateTrainee.findById(userID);
+  
+    const array = trainee.courses;
+  
+    let myCourses = [];
+    let i = 0;
+    while(i < array.length)
+    {
+      const currentCourse = await Course.findById(array[i].course)
+      myCourses = myCourses.concat(currentCourse);
+      i++;
+    }
+  
+    if(!trainee) 
+    {
+      return res.status(404).json({error: 'No such Corporate Trainee'})
+    }
+    res.status(200).json(myCourses);
+  }
+
+module.exports={
+  getCorporateTrainee,
   getCorporateTrainees,
   createCorporateTrainee,
   deleteCorporateTrainee,
@@ -768,5 +855,8 @@ module.exports={getCorporateTrainee,
   viewProblem,
   getEx,
   reviewCourse,
-  getCertificateCoTrainee
+  getCertificateCoTrainee,
+  updateProgress,
+  getProgress,
+  getMyCourses
                 }

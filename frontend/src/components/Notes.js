@@ -76,7 +76,7 @@ function Notes() {
 
   return (
     <div className="app" onDragOver={dragOver}>
-      <h1>Lesson Notes ({notesState.totalNotes})</h1>
+      <h3>Lesson Notes: ({notesState.totalNotes})</h3>
       <p>
         {notesState.notes.length
           ? `Last note created: ${notesState.lastNoteCreated}`

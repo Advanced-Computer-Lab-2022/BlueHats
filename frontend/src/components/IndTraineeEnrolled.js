@@ -75,13 +75,37 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
   }
 
     const result = (course.subtitle).reduce((total, currentValue) => total = total + currentValue.hours,0);
+    function Stars(){
+      if (course.courseRating >= 1 && course.courseRating<=1.5){
+           return "⭐";
+           }
+      if (course.courseRating > 1.5 && course.courseRating<=2.5)
+         {
+           return "⭐⭐"
+       }
+       if (course.courseRating > 2.5 && course.courseRating<=3.5)
+         {
+           return "⭐⭐⭐"
+            
+       }
+       if (course.courseRating > 3.5 && course.courseRating<=4.5)
+         {
+           return "⭐⭐⭐⭐"
+           
+       }
+       if (course.courseRating > 4.5 && course.courseRating<=5)
+         {
+           return "⭐⭐⭐⭐⭐";
+           
+       }
+     }
 
 
     return (
       <div className="course-details">
          <Link onClick={() => window.location.href=`/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
         <p><strong>Total Hours: </strong>{result} <CheckNumber/> </p>
-        <p><strong>Rating: </strong>{course.courseRating}</p>
+        <p><strong>Rating: </strong><Stars/>{Number.parseFloat(course.courseRating).toFixed(2)} ({course.numberOfRates}) </p>
         <div className="enrolled-outer-progress">
             <CircularProgressbar
                 value={progress}
@@ -122,8 +146,17 @@ const ViewCoursesBytitlesHrsRatePrice = ({ course }) => {
           },
         }}
       >
-        <MenuItem >
-            Rate
+        <MenuItem   onClick={() => window.location.href=`/ratecourse/individualTrainee?courseId=${course._id}`}>
+            Rate Course
+          </MenuItem>
+          <MenuItem  onClick={() => window.location.href=`/rateinstructor/individualTrainee?courseId=${course._id}`}>
+            Rate Instructor
+          </MenuItem>
+          <MenuItem   onClick={() => window.location.href=`/viewaddreviews/individualtrainee?courseId=${course._id}&individualTraineeId=${userID}`}>
+            Course Reviews
+          </MenuItem>
+          <MenuItem   onClick={() => window.location.href=`/myreviews/individualTrainee?&individualTraineeId=${userID}`}>
+            My Reviews
           </MenuItem>
           <MenuItem onClick={handleClickOpen}>
             Request Refund

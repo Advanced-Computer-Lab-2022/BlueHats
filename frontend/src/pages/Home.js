@@ -10,9 +10,9 @@ import Loader from "../components/Loader"
 const handleDragStart = (e) => e.preventDefault();
 
 const items = [
-  <img src={require('../images/img1.jpg')} onDragStart={handleDragStart} role="presentation" />,
-  <img src={require('../images/img2.jpg')}  onDragStart={handleDragStart} role="presentation" />,
-  <img src={require('../images/img1.jpg')}  onDragStart={handleDragStart} role="presentation" />,
+  <img src={require('../images/img1.jpg')} onDragStart={handleDragStart} role="presentation" alt="homeIMG" />,
+  <img src={require('../images/img2.jpg')}  onDragStart={handleDragStart} role="presentation" alt="homeIMG" />,
+  <img src={require('../images/img1.jpg')}  onDragStart={handleDragStart} role="presentation" alt="homeIMG"/>,
 ];
 
 const Home = () => {

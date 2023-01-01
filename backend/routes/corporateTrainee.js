@@ -22,7 +22,10 @@ const
     requestCourse,
     availableCourses,
     filterCourses,
-    reviewCourse
+    reviewCourse,
+    updateProgress,
+    getProgress,
+    getMyCourses
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -67,7 +70,7 @@ router.get('/getEx/:idCourse/:idEx', getEx)
 ////////////////////
 
 // get all courses created by the user's id
-router.get('/filter/:id', filterCourses);
+router.put('/filter', filterCourses);
 
 // // rate a course
 router.patch('/rateCourse', rateCourse);
@@ -81,9 +84,18 @@ router.patch('/addRev', addReview);
 // request a course
 router.post('/requestCourse', requestCourse);
 
-router.get('/availableCourses/:id', availableCourses);
+router.put('/availableCourses', availableCourses);
 
 router.post('/addreview', reviewCourse);
+
+// Update Course Progress
+router.patch('/progress', updateProgress);
+
+//Get corporate trainee Progress
+router.put('/getProgress', getProgress);
+
+// Get corporate trainee Courses
+router.put('/getMyCourses', getMyCourses);
 
 
 module.exports = router

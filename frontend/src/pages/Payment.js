@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import CreditCardForm from '../components/CreditCardForm';
+import Loader from '../components/Loader';
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`);
@@ -20,7 +21,9 @@ const Payment = () => {
       url: `/api/courses/${id}`
     }).then(
       (res) => {
-        setLoading(false)
+        setTimeout(()=>{
+          setLoading(false)
+        }, 1000)
         const course = res.data
         setCourse(course)
       }
@@ -28,11 +31,14 @@ const Payment = () => {
   },[id])
 
   return (
+    <>
+    {loading && <Loader/>}
     <Elements stripe={stripePromise} >
       <div className="payment">
         {!loading &&  <CreditCardForm course={course} key={id}/>}
       </div>
     </Elements>
+    </>
   )
 }
 

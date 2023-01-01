@@ -1,27 +1,29 @@
-import { useEffect } from "react"
+import { useEffect, useState} from "react"
 import { useReviewsContext } from "../hooks/useReviewsContext"
 // components
 import IndividualTraineeReviewsDetails from "../components/IndividualTraineeReviewsDetails"
+import axios from "axios";
 
 
 const ViewAllIndReviews = ({review}) => {
-    const {reviews, dispatch} = useReviewsContext()
-
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const savedID = loggedinUser.id
+    const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        const fetchReviews = async () => {
-            var loggedinUser = JSON.parse(localStorage.getItem('user'));
-            const savedID = loggedinUser.id
-            const response = await fetch(`/api/reviews/viewiReviews/${savedID}`)
-            
-            // const response = await fetch('/api/reviews/viewiReviews/63a6356bd3f9a62c95ff1d4b')
-            const json = await response.json();
-            if(response.ok) {
-                dispatch({type: 'SET_REVIEWS', payload: json});
-                }
-            }
-        fetchReviews();
-    }, [dispatch])
-  
+      const data = {userID: savedID};
+      axios({
+        method: "PUT",
+        url: `/api/reviews/viewiReviews`,
+        data: data,
+        headers: {'Content-Type': 'application/json'}
+      }).then(
+        (res) => {
+          const reviews = res.data
+          setReviews(reviews)
+        }
+      )
+    },[savedID])
+  console.log(reviews)
 
   return (
     <div >
