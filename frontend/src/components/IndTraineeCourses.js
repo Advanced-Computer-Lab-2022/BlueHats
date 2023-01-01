@@ -37,7 +37,7 @@ const IndTraineeCourses = ({ course }) => {
          
      }
    }
-
+  
    function Reviews(){
     var res = ""
     var c = 1

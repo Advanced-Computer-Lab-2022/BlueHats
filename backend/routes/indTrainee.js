@@ -54,7 +54,7 @@ router.put('/payWithWallet', payWithWallet);
 
 
  // get all courses created by an user's id
-router.get('/filter/:id', filterCourses);
+router.put('/filter', filterCourses);
 
 // rate an instructor
 router.patch('/rateInstructor', rateInstructor);

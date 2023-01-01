@@ -1,34 +1,33 @@
-import { useEffect } from "react"
+import { useEffect , useState} from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 //import { useInstructorsContext } from "../hooks/useInstructorsContext"
 
 // components
 import IndTraineeCourses from "../components/IndTraineeCourses"
-//import axios from "axios"
+import axios from "axios"
 
 
 
 const ViewIndividualTraineeCourses = () => {
- const {courses,dispatch} = useCoursesContext()
- 
-    useEffect(() => {
-        const fetchMyCourses = async () => {
-
-           var loggedinUser = JSON.parse(localStorage.getItem('user'));
+ var loggedinUser = JSON.parse(localStorage.getItem('user'));
       const savedID = loggedinUser.id
-      const response = await fetch(`/api/indTrainee/filter/${savedID}`)
+     const [courses, setCourses] = useState([]);
 
-            // const response = await fetch('/api/indTrainee/filter/6386253315707335be9141b4')
-            const json = await response.json();
-    
-            if(response.ok) {
-                dispatch({type: 'SET_COURSES', payload: json});
-            }
-        }
-    
-        fetchMyCourses();
-      }, [dispatch])
-      
+
+      useEffect(() => {
+        const data = {id: "6386253315707335be9141b4"};
+        axios({
+          method: "PUT",
+          url: `/api/indTrainee/filter`,
+          data: data,
+          headers: {'Content-Type': 'application/json'}
+        }).then(
+          (res) => {
+            const courses = res.data
+            setCourses(courses)
+          }
+        )
+      },[savedID])
    
   return (
     <div className="ViewMyCourses">
