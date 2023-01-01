@@ -4,8 +4,10 @@ const {
     createInstructor,
     getInstructors,
    getInstructor,
+   getInstAccepted,
     deleteInstructor,
     updateBiography,
+    updateAccepted,
     changeEmailInstructor,
     changePasswordInstructor,
     forgotPasswordInstructor,
@@ -21,6 +23,9 @@ router.get('/',getInstructors )
 // GET a single instructor
 router.get('/:id',getInstructor)
 
+//Get accepted state of a single instructor
+router.get('/getAccepted/:id',getInstAccepted)
+
 // POST a new instructor
 
 router.post('/',createInstructor)
@@ -32,6 +37,8 @@ router.delete('/:id',deleteInstructor)
 router.patch('/changePassword', changePasswordInstructor)
 router.patch('/changeEmail', changeEmailInstructor)
 router.patch('/updateProfile',updateBiography)
+router.patch('/updateAccepted',updateAccepted)
+
 
 // forgot password
  router.post("/forgotPassword",forgotPasswordInstructor)

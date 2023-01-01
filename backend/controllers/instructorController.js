@@ -33,6 +33,25 @@ const getInstructor = async (req,res) =>
     }
     res.status(200).json(instructor)
 }
+//get accepted state of a  single instructor
+const getInstAccepted = async (req,res) => 
+{
+    const {id}=req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id))
+    {
+        return res.status(404).json({error:'No such instructor'})
+    }
+
+    const instructor =await Instructor.findById(id)
+
+    if(!instructor)
+    {
+        return res.status(404).json({error:'No such instructor'})
+    }
+    res.status(200).json(instructor.acceptedContract)
+}
+
 
 //create a new instructor
 const createInstructor =async (req,res) =>
@@ -105,6 +124,21 @@ const updateBiography =async (req,res) =>
   }
   res.status(200).json(instructor)
 }
+ 
+//update acceptedContract
+const updateAccepted =async (req,res) => 
+{
+  const {id}=req.body
+  const {acceptedContract}=req.body
+
+  const instructor = await Instructor.findOneAndUpdate({_id:id},{acceptedContract:acceptedContract})
+  if(!instructor)
+  {
+      return res.status(400).json({error:'Instructor not found'})
+  }
+  res.status(200).json(instructor)
+}
+
 
 const changeEmail = async (req,res) => 
 {
@@ -250,11 +284,66 @@ const forgotPasswordInstructor = async (req,res) =>
 // filter courses by instructor
 const filterCourses = async(req,res) => {
   
-  //const instructorId = req.query.instructorId;
   const {id}= req.body;
+  let query;
+
+  let uiValues = {
+    filtering: {},
+    sorting: {},
+  };
+  const reqQuery = { ...req.query};
+
+  const removeFields = ["sort"];
+
+  removeFields.forEach((val) => delete reqQuery[val]);
+
+  const filterKeys = Object.keys(reqQuery);
+  const filterValues = Object.values(reqQuery);
+
+  filterKeys.forEach((val, idx) => (uiValues.filtering[val] = filterValues));
+
+  let queryStr = JSON.stringify(reqQuery);
+
+  queryStr = queryStr.replace(
+    /\b(gt|gte|lt|lte|in)\b/g,
+    (match) => `$${match}`
+  );
+
+  query = course.find(JSON.parse(queryStr));
+
+  if (req.query.sort) {
+    const sortByArr = req.query.sort.split(",");
+    sortByArr.forEach((val) => {
+      let order;
+      if (val[0] === "-") {
+        order = "descending";
+      } else {
+        order = "ascending";
+      }
+      uiValues.sorting[val.replace("-", "")] = order;
+    });
+    const sortByStr = sortByArr.join("");
+    query = query.sort(sortByStr);
+  } else {
+    query = query.sort("-price");
+  }
+
+  const maxPrice = await course.find()
+    .sort({ price: -1 })
+    .limit(1)
+    .select("-_id price");
+
+  const minPrice = await course.find()
+    .sort({ price: 1 })
+    .limit(1)
+    .select("-_id price");
+
+  uiValues.maxPrice = maxPrice[0].price;
+  uiValues.minPrice = minPrice[0].price;
   if(id)
   {
-      const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
+      const result = await query;
+
       res.status(200).json(result)
   }
   else
@@ -263,4 +352,4 @@ const filterCourses = async(req,res) => {
   }
 }
 
-module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses}
+module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses,updateAccepted,getInstAccepted}

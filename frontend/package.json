@@ -11,6 +11,7 @@
     "@mui/icons-material": "^5.10.16",
     "@mui/lab": "^5.0.0-alpha.110",
     "@mui/material": "^5.11.0",
+    "@mui/x-date-pickers": "^5.0.12",
     "@stripe/react-stripe-js": "^1.16.1",
     "@stripe/stripe-js": "^1.46.0",
     "@szhsin/react-menu": "^3.3.1",

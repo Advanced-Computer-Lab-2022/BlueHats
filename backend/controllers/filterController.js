@@ -1,4 +1,5 @@
 const course = require("../models/course");
+const Instructor = require('../models/instructorModel')
 const mongoose = require("mongoose");
 
 const filterByPrice = async (req, res) => {
@@ -63,13 +64,15 @@ const sortByPriceA = async (req, res) => {
   res.status(200).json(courses);
 };
 
-// const getSubjects = async (req, res) => {
-//   const subjects = await course
-//     .find({}, { subject: 1 })
-//     .sort({ createdAt: -1 });
-//   res.status(200).json(subjects);
-//   console.log(subjects);
-// };
+const updatePromotions = async (req, res) => {
+  
+  const courses = await course.find({})
+  for (let index = 0; index < courses.length; index++) {
+    await courses[index].update({...req.body}); 
+  }
+  res.status(200).json(courses);
+};
+
 
 module.exports = {
   filterByPrice,
@@ -77,5 +80,6 @@ module.exports = {
   filterByRate,
   sortByPopularity,
   sortByPriceA,
-  sortByPriceD
+  sortByPriceD,
+  updatePromotions
 };

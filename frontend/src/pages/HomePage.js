@@ -200,7 +200,7 @@ const HomePage = () => {
   return (
     <Container className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={12} sm={5}>
             <FormControl component="fieldset" className={classes.filters}>
               <Typography gutterBottom> Filters </Typography>
@@ -300,8 +300,11 @@ const HomePage = () => {
                 </FormControl>
               </Box>
             </FormControl>
+            <Button size="small" color="primary" onClick={clearAllFilters}>
+              Clear All
+            </Button>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6} spacing={2}>
             <Typography gutterBottom>Sort By</Typography>
             <FormControl component="fieldset" className={classes.filters}>
               <RadioGroup
@@ -332,9 +335,6 @@ const HomePage = () => {
             </FormControl>
           </Grid>
         </Grid>
-        <Button size="small" color="primary" onClick={clearAllFilters}>
-          Clear All
-        </Button>
       </Paper>
       <Grid container spacing={2}>
         {loading ? (
@@ -343,7 +343,7 @@ const HomePage = () => {
           </div>
         ) : (
           courses.map((course) => (
-            <Grid item key={course._id} xs={15} sm={1} md={7}>
+            <Grid item key={course._id} xs={12} sm={6} md={4}>
               <HomeCoursesCard course={course} />
             </Grid>
           ))

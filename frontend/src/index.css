@@ -4,7 +4,7 @@
 /* layout */
 :root {
   --primary: #a256e0;
-  --hover: #810CA8;
+  --hover: #810ca8;
   --error: #e7195a;
   --msg: #4bffba;
 }
@@ -24,8 +24,7 @@ header .container {
   align-items: center;
   justify-content: space-between;
 }
-header a 
-{
+header a {
   color: #333;
   text-decoration: none;
 }
@@ -330,7 +329,7 @@ a:hover {
   border-radius: 50%;
   color: rgb(255, 255, 255);
 }
- .instructor-details {
+.instructor-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -411,7 +410,7 @@ a:hover {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  background-color:  var(--hover);
+  background-color: var(--hover);
 }
 
 /* The container must be positioned relative: */
@@ -500,6 +499,21 @@ a:hover {
 .course-view-sidebar {
   height: fit-content;
 }
+.course-view-sidebar button {
+  width: 110%;
+  background-color: #a256e0;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border: 0;
+  outline: none;
+  text-align: center;
+  display: flex;
+}
+.course-view-sidebar button:hover {
+  background-color: #810ca8;
+  color: white;
+}
 .course-view-video {
   width: 100%;
   padding-left: 177px;
@@ -517,6 +531,10 @@ a:hover {
   min-width: 100px;
   top: 569px;
   right: 650px;
+}
+.done button:hover {
+  background: #810ca8;
+  color: white;
 }
 header .container .inputWithButton {
   position: relative;
@@ -548,8 +566,7 @@ form.EditBiography {
   background: #fff;
   border-radius: 4px;
 }
-form.signup .title
-{
+form.signup .title {
   text-align: center;
   color: #a256e0;
   text-decoration: underline;
@@ -590,8 +607,8 @@ form.signup .title
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
- cursor: pointer;
- position: initial;
+  cursor: pointer;
+  position: initial;
 }
 .checkbox input {
   width: 15px;
@@ -689,16 +706,16 @@ nav a, nav button {
 }
 
 .exam button {
-  background:var(--primary);
+  background: var(--primary);
   opacity: 0.7;
-  border:5;
+  border: 5;
   color: #fff;
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-   right:150px;
-  top:150px;
+  right: 150px;
+  top: 150px;
   min-width: 100px;
   box-shadow: 0px 2px 2px lightgray;
   transition: ease background-color 250ms;
@@ -709,42 +726,35 @@ nav a, nav button {
   opacity: 1;
 }
 
-
-
-
-
-
 .submit button {
-  background:var(--primary) ;
+  background: var(--primary);
   border: 1;
   color: #fff;
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
- right:150px;
-  top:150px;
+  right: 150px;
+  top: 150px;
   min-width: 100px;
   box-shadow: 0px 2px 2px lightgray;
   transition: ease background-color 250ms;
-  opacity:1;
+  opacity: 1;
 }
 
-.submit button:hover{
-  background:#8949bd;
+.submit button:hover {
+  background: #8949bd;
   border: 1;
-  opacity:1;
-
+  opacity: 1;
 }
 
-.submit button:active{
-  background:#696869;
+.submit button:active {
+  background: #696869;
   border: 1;
-  opacity:1;
-
+  opacity: 1;
 }
 
-.reportMenu button{
+.reportMenu button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -752,20 +762,17 @@ nav a, nav button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-   right:150px;
-  top:150px;
+  right: 150px;
+  top: 150px;
   min-width: 100px;
   box-shadow: 0px 2px 2px lightgray;
   transition: ease background-color 250ms;
-  
 }
 
 .note-form {
   display: flex;
   flex-direction: column;
-  width: 200px; 
-
-
+  width: 200px;
 }
 .note-form textarea {
   font-family: Arial, Helvetica, sans-serif;
@@ -777,7 +784,7 @@ nav a, nav button {
   outline: none;
 }
 .note-form button {
-  width: 100%;
+  width: 110%;
   background-color: #a256e0;
   color: white;
   cursor: pointer;
@@ -786,20 +793,18 @@ nav a, nav button {
   outline: none;
   /* float: left;
   display:inline-block; */
-
-
 }
-/* .note-form button:hover {
-  background-color: #1976d2;
+.note-form button:hover {
+  background-color: #810ca8;
   color: white;
-} */
+}
 button:disabled,
-button[disabled]{
+button[disabled] {
   color: #666666;
-  background:  #deb3ff;
+  background: #deb3ff;
   border: 0;
   color: #fff;
-  cursor:not-allowed;
+  cursor: not-allowed;
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
@@ -831,7 +836,7 @@ button[disabled]{
   margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .request-details h4 {
   margin: 0 0 10px 0;
@@ -843,7 +848,7 @@ button[disabled]{
   font-size: 0.9em;
   color: #555;
 }
-.request-details span.accept{
+.request-details span.accept {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -853,7 +858,7 @@ button[disabled]{
   border-radius: 50%;
   color: rgb(247, 246, 246);
 }
-.request-details span.reject{
+.request-details span.reject {
   position: absolute;
   bottom: 10px;
   right: 25px;
@@ -864,24 +869,23 @@ button[disabled]{
   color: rgb(247, 247, 247);
 }
 
-
-.request-form{
-background: #fff;
-border-radius: 4px;
-margin: 20px auto;
-padding: 20px;
-position: relative;
-box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+.request-form {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .request-form h2 {
-margin: 0 0 10px 0;
-color: var(--primary);
+  margin: 0 0 10px 0;
+  color: var(--primary);
 }
-.policy input{
-width: 2%;
-position: relative;
-bottom: 27px;
-right: 5px;
+.policy input {
+  width: 2%;
+  position: relative;
+  bottom: 27px;
+  right: 5px;
 }
 /* Request form */
 
@@ -945,7 +949,7 @@ right: 5px;
   /* ...existing styles */
 
   /* Windows High Contrast Mode */
-  background-color:#a256e0 ;
+  background-color: #a256e0;
 }
 
 .form-control input[type="radio"]:focus {
@@ -1015,7 +1019,7 @@ right: 5px;
   /* ...existing styles */
 
   /* Windows High Contrast Mode */
-  background-color:#a256e0 ;
+  background-color: #a256e0;
 }
 
 .form-controll input[type="radio"]:focus {
@@ -1029,59 +1033,59 @@ right: 5px;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgb(0 0 0 / 5%);
-  }
-  .review-form h2 {
-    margin: 0 0 10px 0;
-    color: var(--primary);
-  }
-  
-  .rate-button Button{
-    background: var(--primary);
-    border: 0;
-    color: #fff;
-    padding: 10px;
-    font-family: "Poppins";
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .post-review{
-    position:static;
-    font-size: 1.1em;
-    background-color: #a256e0;
-    border: 2px solid black;
-    box-shadow: 4px 4px 4px #999999;
-  }
-  
-  .edit-details {
-    background: #fff;
-    border-radius: 4px;
-    margin: 20px auto;
-  }
-  
-  .edit-details h4 {
-    margin: 0 0 10px 0;
-    font-size: 1.2em;
-    color: var(--primary);
-  }
-  .edit-details p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #555;
-  }
-  .edit-details span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    background: #f1f1f1;
-    padding: 6px;
-    border-radius: 50%;
-    color: #333;
-  }
+}
+.review-form h2 {
+  margin: 0 0 10px 0;
+  color: var(--primary);
+}
 
-  /* button { 
+.rate-button Button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.post-review {
+  position: static;
+  font-size: 1.1em;
+  background-color: #a256e0;
+  border: 2px solid black;
+  box-shadow: 4px 4px 4px #999999;
+}
+
+.edit-details {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+}
+
+.edit-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.edit-details p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+.edit-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+
+/* button { 
     font-size: 1.1em;
     background-color: #EBF5FF;
     color: #4312AE;
@@ -1109,19 +1113,19 @@ right: 5px;
   padding: 10px 20px;
   align-items: center;
 }
-.main-footer .container .row{
+.main-footer .container .row {
   display: flex;
   justify-content: space-between;
 }
-.main-footer .container .row .linkk{
- padding-top: 2.5rem;
+.main-footer .container .row .linkk {
+  padding-top: 2.5rem;
 }
-.main-footer .container .row li{
+.main-footer .container .row li {
   list-style: none;
   padding-bottom: 10px;
   cursor: pointer;
 }
-.main-footer .container .row li:hover{
+.main-footer .container .row li:hover {
   color: var(--primary);
 }
 .loader {
@@ -1138,16 +1142,16 @@ right: 5px;
   padding-left: 30rem;
   padding-bottom: 10rem;
 }
-.payment-form strong{
+.payment-form strong {
   padding-right: 3.7rem;
 }
 .payment-form input {
-  max-width: 30rem; 
+  max-width: 30rem;
 }
-.payment-form .card-form{
+.payment-form .card-form {
   padding-top: 3rem;
 }
-.payment-form button{
+.payment-form button {
   margin-left: 11rem;
   min-width: 100px;
 }
@@ -1162,7 +1166,7 @@ right: 5px;
   padding-right: 3rem;
 }
 .alice {
-  width: 1000px; 
+  width: 1000px;
   margin-left: 15rem;
 }
 .note {

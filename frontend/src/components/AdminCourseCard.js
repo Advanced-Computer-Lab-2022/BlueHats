@@ -11,6 +11,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import Rating from "@mui/material/Rating";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import Axios from "axios";
 import {
@@ -20,13 +23,11 @@ import {
   CardContent,
   CardActions,
   Typography,
+  CardMedia,
 } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DatePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
-function InstructorCourseCard({ course }) {
+function AdminCourseCard({ course }) {
   const { dispatch } = useCoursesContext();
   const [open, setOpen] = useState(false);
   const [promotionEditedStart, setPromotionStartEdited] = useState("");
@@ -85,12 +86,15 @@ function InstructorCourseCard({ course }) {
     setOpen(false);
     if (newPromotion !== null) {
       Axios.patch(`http://localhost:4000/api/courses/${course._id}`, {
-        promotionStart: promotionEditedStart,
         promotionEnd: promotionEditedEnd,
         promotion: newPromotion,
       });
-      window.location.reload(false);
+      //   window.location.reload(false);
     }
+  };
+
+  const onKeyDown = (e) => {
+    e.preventDefault();
   };
 
   const handleClickAway = () => {
@@ -136,9 +140,6 @@ function InstructorCourseCard({ course }) {
     var rate = info[to];
     setOutput(Math.round(course.price * rate));
   }
-  const onKeyDown = (e) => {
-    e.preventDefault();
-  };
 
   return (
     <Card>
@@ -151,10 +152,10 @@ function InstructorCourseCard({ course }) {
         title={<Typography variant="h6">{course.title}</Typography>}
       />
       <CardContent>
-        <Typography variant="body" paragraph="true">
+        <Typography variant="body" paragraph={true}>
           Subject: {course.subject}
         </Typography>
-        <Typography variant="overline" paragraph="true">
+        <Typography variant="overline" paragraph={true}>
           {course.summary}
         </Typography>
         {course.enrolled > 0 ? (
@@ -306,17 +307,9 @@ function InstructorCourseCard({ course }) {
         >
           Learn More
         </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="error"
-          onClick={handleDelete}
-        >
-          Delete
-        </Button>
       </CardActions>
     </Card>
   );
 }
 
-export default InstructorCourseCard;
+export default AdminCourseCard;

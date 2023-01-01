@@ -7,7 +7,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import Exam from "./Exam";
 import ProgressBar from "./ProgressBar";
 import axios from "axios";
-import DownloadCertificate from "./DownloadCertificate";
+import SenDownloadCertificate from "./SenDownloadCertificate";
 import SendCertificate from "./SendCertificate";
 
 const CourseFullView = ({ course }) => {
@@ -66,9 +66,6 @@ const CourseFullView = ({ course }) => {
             data:data,
             headers:{'Content-Type':'application/json'}
           })
-          setSendCert(1);
-          setDownloadCert(1);
-          setFinishCourse(1);
           return 100;
         }
         else 
@@ -113,9 +110,9 @@ const CourseFullView = ({ course }) => {
                   <span className="material-symbols-outlined"> quiz </span> Test your knowledge  </MenuItem> 
                 </SubMenu>)}
             <MenuItem> <span className="material-symbols-outlined"> quiz </span> Final Exam </MenuItem>
-            {downloadCert>0 && (sendCert>0) &&(finishCourse>0) && <MenuItem>  <DownloadCertificate/>  </MenuItem>}
+            {(value===100) && <MenuItem>  <SenDownloadCertificate course={course}/>  </MenuItem>}
             </Menu>
-
+          
         </Sidebar>
         <div className="course-view-video">
             {active === "default" &&  <YoutubeEmbed embedId={ myembedID1}/>}
@@ -123,8 +120,7 @@ const CourseFullView = ({ course }) => {
             {active === "question" &&  <Exam question={quest} firstO={first} secondO={second} thirdO={third} fourthO={fourth} answer={ans} />}
         </div>
         <div className="done-button">
-          {((active === "question" || active === "video" ) || (sendCert===0) || (finishCourse===0)) ? <button onClick={handleClick}>Done</button> : <SendCertificate course={course}/>
-}
+          {(active === "question" || active === "video" )  && <button onClick={handleClick}>Done</button> }
         </div>
         <Notes />
        </div>

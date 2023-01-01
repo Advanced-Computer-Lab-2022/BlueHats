@@ -11,60 +11,61 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import axios from "axios";
+import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function SendCertificate({ course }) {
-//   const [open, setOpen] = useState(false);
+  //   const [open, setOpen] = useState(false);
   const [openSB, setOpenSB] = useState(false);
-//   const [email, setEmail] = useState("");
+  //   const [email, setEmail] = useState("");
 
-  //without email form
+  // without email form
 
-  //   var loggedinUser = JSON.parse(localStorage.getItem("user"));
-  //   const savedEmail = loggedinUser.email;
+  var loggedinUser = JSON.parse(localStorage.getItem("user"));
+  const savedEmail = loggedinUser.email;
+  console.log(savedEmail);
 
-  const handleClickSB = () => {
+  const handleClickSB = async () => {
     setOpenSB(true);
+    await axios.post("http://localhost:4000/api/indTrainee/getCertificate", {
+      DynammicEmail: savedEmail,
+      DynammicSubject: course.title,
+    });
   };
-  const handleCloseSB = async (event, reason) => {
+  const handleCloseSB = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpenSB(false);
-    // await axios.post("http://localhost:4000/api/indTrainee/getCertificate", {
-    //   DynammicEmail: savedEmail,
-    //   DynammicSubject: course.title,
-    // });
   };
 
-//   //with email form
-//   const handleClickOpen = () => {
-//     setOpen(true);
-//   };
+  //   //with email form
+  //   const handleClickOpen = () => {
+  //     setOpen(true);
+  //   };
 
-//   const handleClose = async () => {
-//     setOpen(false);
-//     if (email.length !== 0) {
-//       await axios.post("http://localhost:4000/api/indTrainee/getCertificate", {
-//         DynammicEmail: email,
-//         DynammicSubject: course.title,
-//       });
-//     }
-//   };
-//   const handleClickAway = () => {
-//     setOpen(true);
-//   };
+  //   const handleClose = async () => {
+  //     setOpen(false);
+  //     if (email.length !== 0) {
+  //       await axios.post("http://localhost:4000/api/indTrainee/getCertificate", {
+  //         DynammicEmail: email,
+  //         DynammicSubject: course.title,
+  //       });
+  //     }
+  //   };
+  //   const handleClickAway = () => {
+  //     setOpen(true);
+  //   };
 
   return (
     <div>
       <Stack spacing={2} sx={{ width: "100%" }}>
         <div>
-          <Button
-            variant="outlined"
+          <button
+            className="note-form"
             onClick={handleClickSB}
             sx={{
               ":hover": {
@@ -74,7 +75,7 @@ function SendCertificate({ course }) {
             }}
           >
             Done
-          </Button>
+          </button>
         </div>
         <Snackbar open={openSB} autoHideDuration={4500} onClose={handleCloseSB}>
           <Alert

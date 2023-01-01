@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { getParamByParam } from 'iso-country-currency'
-import { countryValue } from '../components/Navbar'
-import Axios from "axios";import {
+import { getParamByParam } from "iso-country-currency";
+import { countryValue } from "../components/Navbar";
+import Axios from "axios";
+import {
   Avatar,
   Card,
   CardHeader,
   CardContent,
   CardActions,
   Typography,
+  Rating,
+  Button,
 } from "@mui/material";
-import Rating from "@mui/material/Rating";
-import Button from "@mui/material/Button";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 function HomeCourseCard({ course }) {
-
   const [currency, setCurrency] = useState("");
   const [toCurrency, setToCurrency] = useState("");
   // Initializing all the state variables
@@ -66,7 +67,11 @@ function HomeCourseCard({ course }) {
   return (
     <Card>
       <CardHeader
-        avatar={<Avatar />}
+        avatar={
+          <Avatar sx={{ bgcolor: "#a256e0" }} variant="rounded">
+            <AssignmentIcon />
+          </Avatar>
+        }
         title={<Typography variant="h6">{course.title}</Typography>}
       />
       <CardContent>
@@ -86,18 +91,15 @@ function HomeCourseCard({ course }) {
           value={course.courseRating}
           readOnly
           name={course.title}
-          size="small"
+          size="medium"
           precision={0.5}
         />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="small" color="primary">
-          Enroll
-        </Button>{" "}
         <Button
-          variant="small"
+          variant="contained"
           size="small"
-          color="primary"
+          sx={{ bgcolor: "#a256e0",":hover": { bgcolor: "#810CA8", color: "white" } }}
           onClick={() =>
             (window.location.href = `/course/preview?id=${course._id}`)
           }

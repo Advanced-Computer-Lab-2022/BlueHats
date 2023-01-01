@@ -68,7 +68,6 @@ import InstructorRoutes from './utils/InstructorRoutes';
 import CorporateTraineeRoutes from './utils/CorporateTraineeRoutes';
 import IndividualTraineeRoutes from './utils/IndividualTraineeRoutes';
 
-
 function App() {
 
 
@@ -144,10 +143,10 @@ function App() {
               path="/search/"
               element={<Search/>}
             />
-            <Route
+            {/* <Route
               path="/examTrainee/"
               element={<ExamTrainee/>}
-            />
+            /> */}
             <Route
               path="/gradeExam/"
               element={<Grade/>}
