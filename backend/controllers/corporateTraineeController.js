@@ -546,8 +546,8 @@ var flag = 0;
 var j;
 const availableCourses = async(req,res) => { 
     // const corporateTraineeId = req.query.corporateTraineeId;
-    const { savedID } = req.params;
-    if(savedID){
+    const { id } = req.params;
+    if(id){
         const courses = await Course.find({}).sort({createdAt: -1});
         for (let i = 0 ; i<courses.length; i++){
             for(j = 0; j<(courses[i].corporateTrainee).length; j++){}
