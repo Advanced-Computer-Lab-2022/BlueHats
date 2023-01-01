@@ -546,12 +546,12 @@ var flag = 0;
 var j;
 const availableCourses = async(req,res) => { 
     // const corporateTraineeId = req.query.corporateTraineeId;
-    const { savedID } = req.params;
-    if(savedID){
+    const { userID } = req.body;
+    if(userID){
         const courses = await Course.find({}).sort({createdAt: -1});
         for (let i = 0 ; i<courses.length; i++){
             for(j = 0; j<(courses[i].corporateTrainee).length; j++){}
-                if ((courses[i].corporateTrainee)[j] === id){
+                if ((courses[i].corporateTrainee)[j] === userID){
                     flag = 1;
                     break;
                 }
@@ -601,9 +601,9 @@ res.status(200).json(problem);
 
 const filterCourses = async(req,res) => { 
   // const corporateTraineeId = req.query.corporateTraineeId;
-  const { savedID } = req.params;
-  if(savedID){
-  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(savedID)});
+  const { userID } = req.body;
+  if(userID){
+  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(userID)});
   res.status(200).json(result)
   }else{
       res.status(400).json({error:"corporateTraineeId  is required"})

@@ -29,7 +29,7 @@ router.patch('/:id', editReview);
 
 
 router.get('/viewcReviews/:id', viewCorporateReviews);
-router.get('/viewiReviews/:id', viewIndividualReviews);
+router.put('/viewiReviews', viewIndividualReviews);
 
 
 router.get('/viewall/:id', viewCourseReviews);

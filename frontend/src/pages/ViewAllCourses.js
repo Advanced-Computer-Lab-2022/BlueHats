@@ -1,32 +1,51 @@
 import AllCourses from '../components/AvailableCourses'
 import { Button,Box } from '@mui/material';
 
-import { useEffect } from "react"
+import { useEffect, useState} from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 // import FilterBar from "../components/FilterBar"
+import axios from "axios"
 
 const ViewAllCourses = () => {
 
-  const {courses, dispatch} = useCoursesContext()
+  // const {courses, dispatch} = useCoursesContext()
 
   
-  useEffect(() => {
-    const fetchCourses = async () => {
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
 
-      var loggedinUser = JSON.parse(localStorage.getItem('user'));
-      const savedID = loggedinUser.id
-      const response = await fetch(`/api/corporateTrainee/availableCourses/${savedID}`)
+  //     var loggedinUser = JSON.parse(localStorage.getItem('user'));
+  //     const savedID = loggedinUser.id
+  //     const response = await fetch(`/api/corporateTrainee/availableCourses/${savedID}`)
 
-      // const response = await fetch('/api/courses')
-      const json = await response.json()
+  //     // const response = await fetch('/api/courses')
+  //     const json = await response.json()
 
-      if (response.ok) {
-        dispatch({type: 'SET_COURSES', payload: json})
-      }
+  //     if (response.ok) {
+  //       dispatch({type: 'SET_COURSES', payload: json})
+  //     }
+  //   }
+
+  //   fetchCourses()
+  // }, [dispatch])
+  const [courses, setCourses] = useState([]);
+  var loggedinUser = JSON.parse(localStorage.getItem('user'));
+  const savedID = loggedinUser.id
+useEffect(() => {
+  const data = {userID: savedID};
+  axios({
+    method: "PUT",
+    url: `/api/corporateTrainee/availableCourses`,
+    data: data,
+    headers: {'Content-Type': 'application/json'}
+  }).then(
+    (res) => {
+      const courses = res.data
+      setCourses(courses)
     }
-
-    fetchCourses()
-  }, [dispatch])
+  )
+},[savedID])
+console.log(courses)
 
   return (
     <form >
