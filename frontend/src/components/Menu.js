@@ -466,6 +466,12 @@ export default function AccountMenu() {
         <MenuItem>
           <Avatar /> Profile
         </MenuItem>
+        {user.type=="coTrainee" && <MenuItem onClick={() => window.location.href = `/courses`}>
+        <ListItemIcon>
+          <LibraryBooksIcon />
+        </ListItemIcon>
+        My Courses
+      </MenuItem>}
       {user.type=="indTrainee" && <MenuItem onClick={() => window.location.href = `/MyEnrolledCourses`}>
         <ListItemIcon>
           <LibraryBooksIcon />
