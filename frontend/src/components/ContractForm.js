@@ -17,9 +17,9 @@ const ContractForm = () => {
   
   
   const navigateToInstructor = async () => {
-    const x = accepted.push('true')
-    navigate("/instructor");
-    acceptedX = x;
+    // const x = accepted.push('true')
+    navigate("/createCourse");
+    // acceptedX = x;
     // set currentuser.acceptedContract =true
     await  axios.patch(`http://localhost:4000/api/instructor/updateAccepted`, {
       id: savedID,

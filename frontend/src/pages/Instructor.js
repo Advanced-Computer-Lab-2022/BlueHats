@@ -54,7 +54,7 @@ const Instructor = () => {
 
   const navigate = useNavigate();
   const navigateAddCourse = () => {
-    navigate("/instructor/addCourse");
+    navigate("/home");
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -74,9 +74,7 @@ const Instructor = () => {
       {loading && <Loader />}
       <div className="instructor">
         <div className="courses">
-          <Link to="/contract" state={accepted}>
-            Contract
-          </Link>
+        
           <h3>My Courses</h3>
           <IFilterBar />
 
@@ -93,13 +91,16 @@ const Instructor = () => {
             onMouseEnter={handlePopoverOpen}
             onMouseLeave={handlePopoverClose}
           >
-            {valid === true && (
+            {(valid === true) ? (
               <AddCircleIcon
                 fontSize="large"
                 sx={{ color: "#a256e0", cursor: "pointer" }}
                 onClick={navigateAddCourse}
               />
-            )}
+            ):  <AddCircleIcon
+                fontSize="large"
+                sx={{ color: "#a256e0", cursor: "pointer" }}
+              onClick={() => window.location.href = `/contract`}/> }
           </Typography>
           <Popover
             id="mouse-over-popover"
