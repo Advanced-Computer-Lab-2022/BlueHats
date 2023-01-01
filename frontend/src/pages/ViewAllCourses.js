@@ -1,10 +1,11 @@
-import AvailableCourses from '../components/AvailableCourses'
+import AllCourses from '../components/AvailableCourses'
+import { Button,Box } from '@mui/material';
 
 import { useEffect } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 // import FilterBar from "../components/FilterBar"
 
-const ViewAvailableCourses = () => {
+const ViewAllCourses = () => {
 
   const {courses, dispatch} = useCoursesContext()
 
@@ -12,14 +13,11 @@ const ViewAvailableCourses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
 
-      // var loggedinUser = JSON.parse(localStorage.getItem('user'));
-      // const savedID = loggedinUser.id
+      var loggedinUser = JSON.parse(localStorage.getItem('user'));
+      const savedID = loggedinUser.id
+      const response = await fetch(`/api/corporateTrainee/availableCourses/${savedID}`)
 
-        //     const response = await fetch('/api/corporateTrainee/availableCourses' + savedID, {
-//             method: 'GET'
-   //     }
-
-      const response = await fetch('/api/courses')
+      // const response = await fetch('/api/courses')
       const json = await response.json()
 
       if (response.ok) {
@@ -31,12 +29,38 @@ const ViewAvailableCourses = () => {
   }, [dispatch])
 
   return (
-    <form>
-      <a className= "my-courses" href="/subcourses">My Courses</a>
+    <form >
+      <Box className='cotrainee-button1' sx={{marginBottom:2}}>
+          <Button variant= "contained"
+          onClick={() => window.location.href=`/myrequests/status`}
+          margin="normal"
+          padding="normal">
+            My Requests
+          </Button>
+        </Box>
+
+        <Box className='cotrainee-button2' sx={{marginBottom:2}}>
+          <Button variant= "contained"
+          onClick={() => window.location.href=`/myreviews/corporatetrainee`}
+          margin="normal"
+          padding="normal">
+            My Reviews
+          </Button>
+        </Box>
+
+      <Box className='cotrainee-button3' sx={{marginBottom:2}}>
+          <Button variant= "contained"
+          onClick={() => window.location.href=`/mycourses/corporatetrainee`}
+          margin="normal"
+          padding="normal">
+           My courses
+          </Button>
+        </Box>
+
        <h2>Available Courses</h2>
         <div className="courses">
         {courses && courses.map(course => (
-          <AvailableCourses course={course} key={course._id} />
+          <AllCourses course={course} key={course._id} />
         ))}
         </div>
      
@@ -44,5 +68,5 @@ const ViewAvailableCourses = () => {
     
   )
 }
-export default ViewAvailableCourses
+export default ViewAllCourses
 

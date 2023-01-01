@@ -3,24 +3,22 @@ import { useCoursesContext } from "../hooks/useCoursesContext"
 //import { useInstructorsContext } from "../hooks/useInstructorsContext"
 
 // components
-import ViewEnrolledCourses from "../components/EnrolledCourses"
+import IndTraineeCourses from "../components/IndTraineeCourses"
 //import axios from "axios"
 
 
 
-const EnrolledCourses = () => {
+const ViewIndividualTraineeCourses = () => {
  const {courses,dispatch} = useCoursesContext()
  
     useEffect(() => {
         const fetchMyCourses = async () => {
 
-          // var loggedinUser = JSON.parse(localStorage.getItem('user'));
-          // const savedID = loggedinUser.id
-          
-          //     const response = await fetch('/api/indTrainee/filter/' + savedID, {
-//             method: 'GET'
-   //     }
-            const response = await fetch('/api/indTrainee/filter/6386253315707335be9141b4')
+           var loggedinUser = JSON.parse(localStorage.getItem('user'));
+      const savedID = loggedinUser.id
+      const response = await fetch(`/api/indTrainee/filter/${savedID}`)
+
+            // const response = await fetch('/api/indTrainee/filter/6386253315707335be9141b4')
             const json = await response.json();
     
             if(response.ok) {
@@ -37,7 +35,7 @@ const EnrolledCourses = () => {
       <div className="Mycourses">
         <h3>Mycourses</h3>
         {courses && courses.map((course) => (
-          <ViewEnrolledCourses course={course} key={course._id} />
+          <IndTraineeCourses course={course} key={course._id} />
         ))}
       </div>
     </div>
@@ -46,4 +44,4 @@ const EnrolledCourses = () => {
 
 }
 
-export default EnrolledCourses
+export default ViewIndividualTraineeCourses
