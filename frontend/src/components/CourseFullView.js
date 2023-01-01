@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Notes from "../components/Notes";
 import { Link } from "react-router-dom";
 import YoutubeEmbed from "./YoutubeEmbed";
-import Button from "@mui/material/Button";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import Exam from "./Exam";
 import ProgressBar from "./ProgressBar";
@@ -56,7 +55,7 @@ const CourseFullView = ({ course }) => {
 
     const handleClick = () => {
       setValue(oldValue => {
-        const newValue = oldValue + 15;
+        const newValue = oldValue + add;
 
         if (newValue >= 100) {
           const data={progress: 100, courseID: course._id, userID: userID};
@@ -112,7 +111,7 @@ const CourseFullView = ({ course }) => {
                     setActive("question");}} />}> 
                   <span className="material-symbols-outlined"> quiz </span> Test your knowledge  </MenuItem> 
                 </SubMenu>)}
-            <MenuItem> <span className="material-symbols-outlined"> quiz </span> Final Exam </MenuItem>
+            {/* <MenuItem> <span className="material-symbols-outlined"> quiz </span> Final Exam </MenuItem> */}
             {downloadCert>0 && (sendCert>0) &&(finishCourse>0) && <MenuItem>  <DownloadCertificate/>  </MenuItem>}
             </Menu>
 
@@ -123,8 +122,8 @@ const CourseFullView = ({ course }) => {
             {active === "question" &&  <Exam question={quest} firstO={first} secondO={second} thirdO={third} fourthO={fourth} answer={ans} />}
         </div>
         <div className="done-button">
-          {((active === "question" || active === "video" ) || (sendCert===0) || (finishCourse===0)) ? <button onClick={handleClick}>Done</button> : <SendCertificate course={course}/>
-}
+        {/* {(active === "question" || active === "video" ) && <button onClick={handleClick}>Done</button>} */}
+          {((active === "question" || active === "video" ) || (sendCert===0) || (finishCourse===0)) ? <button onClick={handleClick}>Done</button> : <SendCertificate course={course}/>}
         </div>
         <Notes />
        </div>

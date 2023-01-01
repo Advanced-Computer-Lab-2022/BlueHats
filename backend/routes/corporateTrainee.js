@@ -22,7 +22,10 @@ const
     requestCourse,
     availableCourses,
     filterCourses,
-    reviewCourse
+    reviewCourse,
+    updateProgress,
+    getProgress,
+    getMyCourses
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -84,6 +87,15 @@ router.post('/requestCourse', requestCourse);
 router.get('/availableCourses/:id', availableCourses);
 
 router.post('/addreview', reviewCourse);
+
+// Update Course Progress
+router.patch('/progress', updateProgress);
+
+//Get corporate trainee Progress
+router.put('/getProgress', getProgress);
+
+// Get corporate trainee Courses
+router.put('/getMyCourses', getMyCourses);
 
 
 module.exports = router

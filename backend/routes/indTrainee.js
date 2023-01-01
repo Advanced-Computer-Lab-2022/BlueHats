@@ -40,7 +40,7 @@ router.put('/setAnswer/:id/:answer',setAnswer)
 router.get('/compareAnswers/:solution/:answer',compareAnswers)
 
 // Update Course Progress
-router.put('/progress', updateProgress)
+router.patch('/progress', updateProgress)
 
 //Get an indTrainee Progress
 router.put('/getProgress', getProgress);

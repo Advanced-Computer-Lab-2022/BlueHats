@@ -123,6 +123,7 @@ function App() {
             </Route>}
 
             { loggedinUser && <Route element={<CorporateTraineeRoutes />}>
+             {/* add a corporate path for course view */}
               <Route path="/corporateTrainee/changePassword" element={<ResetPassword/>}/>
               <Route path="/corporateTrainee/profile" element={<CoTraineeProfile/>} />
             </Route>}
@@ -131,6 +132,8 @@ function App() {
               <Route path="/payment" element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}/>
               <Route path="/indTrainee/changePassword" element={<ResetPassword/>} />
               <Route path="/indTrainee/profile" element={<IndTrainee/>}/>
+              <Route path="/MyEnrolledCourses" element={<IndTraineeCourses/>}/>
+              <Route path="/course/view" element={<CourseView/>} />
             </Route>}
 
             <Route
@@ -157,8 +160,6 @@ function App() {
               path="/gradeInd/"
               element={<GradeInd/>}
             />
-           
-           
             <Route
               path="/HFilter"
               element={<HomeFilter/>}
