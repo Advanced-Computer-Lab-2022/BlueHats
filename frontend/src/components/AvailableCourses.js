@@ -6,7 +6,7 @@ import { Button,Box } from '@mui/material';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 
-const AvailableCourses = ({ course, corporateTrainee }) => { 
+const AllCourses = ({ course, corporateTrainee }) => { 
   
 //   const { dispatch } = useCoursesContext();
 
@@ -18,7 +18,18 @@ const AvailableCourses = ({ course, corporateTrainee }) => {
 //       return 'hour';
 //     }
 //   }
-
+  function requestStatus(){
+  if (course.requestStatus == 1){
+    return "Accepted";
+  }
+  if (course.requestStatus == 2){
+    return "Rejected";
+  }
+  if (course.requestStatus == 0){
+    return "Not requested";
+  }
+  
+  }
   function Stars(){
     if (course.courseRating >= 1 && course.courseRating<=1.5){
          return "⭐";
@@ -43,29 +54,30 @@ const AvailableCourses = ({ course, corporateTrainee }) => {
          
      }
     }
-
     // to get id of current user
   // var loggedinUser = JSON.parse(localStorage.getItem('user'))
-  // const corporateTraineeId  = loggedinUser.id
+  // const savedID  = loggedinUser.id
     return (
       
-      <div className="course-details">      
+      <div className="co-courses">      
          <h4>{course.title}</h4> 
-        <p><strong>Rating: </strong> {course.courseRating} <Stars/> </p>
+         <p><strong>Rating: </strong><Stars/>{Number.parseFloat(course.courseRating).toFixed(2)} ({course.numberOfRates}) </p>
          <p><strong>summary: </strong>{course.summary}</p>
-        <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
 
-        <div> <Box sx={{marginBottom:2}}>
-          <Button className = "request" variant= "contained"
-          onClick={() => window.location.href=`/requestCourse?courseId=${course._id}&corporateTraineeId=63a756e189cc94e7139e239c`}
+         <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
+
+        <Box sx={{marginBottom:2}}>
+          <Button variant= "contained"
+          onClick={() => window.location.href=`/requestcourse?courseId=${course._id}&corporateTraineeId=63a756e189cc94e7139e239c`}
           margin="normal"
           padding="normal">
             Request
           </Button>
         </Box>
+        
         </div>
-      </div>
+      
     )
 }
   
-export default AvailableCourses;
+export default AllCourses;

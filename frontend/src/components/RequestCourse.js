@@ -16,20 +16,20 @@ const RequestCourse = () => {
   var [es, setEs] = useState()
   var [atp, setAtp] = useState()
   
+  const [message, setMessage] = useState(null);
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
 
-
-  const handleSubmit = async()=>{
-
+  const handleSubmit = async(e)=>{
+    e.preventDefault()
     setLoading(true)
      var data= {reason:goalForApply,
                 highestLevelOfEducation:hloe,
                 employmentStatus:es,
                 agreedToPolicy:atp
                 }
-      axios({
+     const response = await  axios({
         method:'POST',
         url: `/api/corporateTrainee/requestCourse?courseId=${courseId}&corporateTraineeId=${corporateTraineeId}`,
         data:data,
@@ -37,6 +37,21 @@ const RequestCourse = () => {
       }).then(()=>{
           setLoading(false)
   })
+  const json = await response.json()
+  if (!response.ok) {
+    setError(json.error)
+    setEmptyFields(json.emptyFields)
+  }
+ else {
+  setEmptyFields([])
+    setError(null)
+    setMessage(null)
+    setHloe()
+    setAtp()
+    setEs()
+    setGoalForApply()
+    setMessage("sent!")
+  }
   
 }
 
@@ -49,7 +64,7 @@ const RequestCourse = () => {
     <h4>What's your highest level of education?</h4>
     
     <label class="form-controll">
-  <input type="radio" name="radioo" onChange={(e) => setHloe(e.target.value)}  value={"High School"}/>
+  <input type="radio" name="radioo" onChange={(e) => setHloe(e.target.value)}  value={"High School"}required/>
   High School
 </label>
 
@@ -76,7 +91,7 @@ const RequestCourse = () => {
 
 <h4>What's your employment status?</h4>
     <label class="form-control">
-  <input type="radio" name="radio" onChange={(e) => setEs(e.target.value)} value={"Full time"}/>
+  <input type="radio" name="radio" onChange={(e) => setEs(e.target.value)} value={"Full time"}required/>
   Full time
 </label>
 
@@ -109,33 +124,27 @@ const RequestCourse = () => {
 
 <textarea rows="5" cols="90" name="comment" required
     onChange={(e) => setGoalForApply(e.target.value)} 
-      value={goalForApply}>
+      value={goalForApply} >
+      
 </textarea>
 </div>
 
     <h4>Terms and conditions</h4>
     <div className="policy">
-    <label for = "policy">``````I'm sharing accurate information on my application.</label>
+    <label for = "policy">I'm sharing accurate information on my application.</label>
     <input   type="checkbox" id="policy" name="policy" 
     value={atp = "Agreed to the policy"}
     onChange={(e) => setAtp(e.target.value)}
     className={emptyFields.includes('atp') ? 'error' : ''}
-      />
+     required />
     </div>
 
 
 {/*///////////////////////////////////////////////*/}
-   <button onClick={<Alert severity="success">
-  <AlertTitle>Success</AlertTitle>
-  This is a success alert — <strong>check it out!</strong>
-</Alert>}> Submit</button>
-
-
-{error && <div className="error">{error}<Alert severity="error">
-  <AlertTitle>Error</AlertTitle>
-  This is an error alert — <strong>check it out!</strong>
-</Alert></div>}
-    
+   <button onClick={() => window.location.href=`/courses`}> Submit</button>
+   
+     {/* {message && <div className='msg'}{message}</div>} */}
+   {error && <div className="error">{error}</div>}
    </form>
    )
 

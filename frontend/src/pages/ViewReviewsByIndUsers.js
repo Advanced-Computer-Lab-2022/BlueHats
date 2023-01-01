@@ -8,15 +8,18 @@ import ReviewDetails from "../components/ReviewDetails"
 
 // import TextareaValidator from "./AddReview"
 
-const ViewReviewsByUsers = () => {
+const ViewReviewsByIndUsers = () => {
 
     const [courseReview, setCourseReview] = useState()
     const [loading, setLoading] = useState(true) 
     const params = new URLSearchParams(window.location.search);
   const courseId = params.get('courseId');
+  const individualTraineeId = params.get('individualTraineeId');
 
-   // var loggedinUser = JSON.parse(localStorage.getItem('user'));
-    // const savedID = loggedinUser.id
+  const [error, setError] = useState(null)
+  const [emptyFields, setEmptyFields] = useState([])
+  const [message, setMessage] = useState(null);
+   
 
  const {reviews, dispatch} = useReviewsContext()
 
@@ -35,18 +38,34 @@ const ViewReviewsByUsers = () => {
     fetchReviews()
   }, [dispatch])
 
-  const handleSubmit = async()=>{
+  const handleSubmit = async(e)=>{
+    e.preventDefault()
+
   setLoading(true)
      var data= {userReview:courseReview}
-      axios({
+     const response1 = await  axios({
         method:'POST',
-        url: `/api/indTrainee/addreview/?courseId=${courseId}&individualTraineeId=63a6356bd3f9a62c95ff1d4b`,
-        //url: `/api/indTrainee/addreview/?courseId=${courseId}&individualTraineeId=${savedID}`,
+        // url: `/api/indTrainee/addreview/?courseId=${courseId}&individualTraineeId=63a6356bd3f9a62c95ff1d4b`,
+        url: `/api/indTrainee/addreview/?courseId=${courseId}&individualTraineeId=${individualTraineeId}`,
         data:data,
         headers:{'Content-Type':'application/json'}
       }).then(()=>{
           setLoading(false)
+          window.location.href=`/viewaddreviews/individualtrainee?courseId=${courseId}`
+
   })
+
+  const json1 = await response1.json()
+  if (!response1.ok) {
+    setError(json1.error)
+    setEmptyFields(json1.emptyFields)
+  }
+ else {
+  setEmptyFields([])
+    setError(null)
+    setMessage(null)
+    setCourseReview()
+  }
   }
   
   return (
@@ -75,4 +94,4 @@ const ViewReviewsByUsers = () => {
 
 }
 
-export default ViewReviewsByUsers
+export default ViewReviewsByIndUsers

@@ -28,6 +28,8 @@ app.use((req, res, next) =>
     console.log(req.path, req.method);
     next();
 });
+const requestsStatusRoutes = require('./routes/requestsStatus')
+
 
 // routes
 app.use('/api/user', userRoutes);
@@ -42,6 +44,7 @@ app.use('/api/problem', problemRoutes);
 app.use('/filterBy', filterRoutes)
 app.use('/api/requestCourse',requestedCoursesRoutes)
 app.use('/api/reviews',reviewsRoutes)
+app.use('/api/requeststatus',requestsStatusRoutes)
 
 // connect to database
 mongoose.set("strictQuery", false);

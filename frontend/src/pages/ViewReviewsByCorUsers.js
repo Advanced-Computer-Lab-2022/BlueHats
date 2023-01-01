@@ -10,13 +10,18 @@ import ReviewDetails from "../components/ReviewDetails"
 
 const ViewReviewsByCorUsers = () => {
 
-    const [courseReview, setCourseReview] = useState('');
-    const [loading, setLoading] = useState(true) 
-    const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
   const courseId = params.get('courseId');
+  const corporateTraineeId = params.get('corporateTraineeId');
 
-   // var loggedinUser = JSON.parse(localStorage.getItem('user'));
-    // const savedID = loggedinUser.id
+  
+    const [courseReview, setCourseReview] = useState();
+    const [loading, setLoading] = useState(true) 
+    const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
+    const [message, setMessage] = useState(null);
+
+
 
  const {reviews, dispatch} = useReviewsContext()
 
@@ -35,22 +40,43 @@ const ViewReviewsByCorUsers = () => {
     fetchReviews()
   }, [dispatch])
 
-  const handleSubmit = async()=>{
+
+  const handleSubmit = async(e)=>{
+
+    e.preventDefault()
+
   setLoading(true)
      var data= {userReview:courseReview}
-      axios({
+    const response1 = await axios({
         method:'POST',
-        url: `/api/corporateTrainee/addreview/?courseId=${courseId}&corporateTraineeId=63a756e189cc94e7139e239c`,
-        //url: `/api/indTrainee/addreview/?courseId=${courseId}&corporateTraineeId=${savedID}`,
+        // url: `/api/corporateTrainee/addreview/?courseId=${courseId}&corporateTraineeId=63a756e189cc94e7139e239c`,
+        url: `/api/indTrainee/addreview/?courseId=${courseId}&corporateTraineeId=${corporateTraineeId}`,
         data:data,
         headers:{'Content-Type':'application/json'}
       }).then(()=>{
-          setLoading(false)
+        setLoading(false)
+        window.location.href=`/viewaddreviews/corporatetrainee?courseId=${courseId}`
+
   })
+
+  const json1 = await response1.json()
+  if (!response1.ok) {
+    setError(json1.error)
+    setEmptyFields(json1.emptyFields)
   }
+ else {
+  setEmptyFields([])
+    setError(null)
+    setMessage(null)
+    setCourseReview()
+  }
+}
+
   
+ //onClick={    window.location.href=`/viewaddreviews/corporatetrainee?courseId=${courseId}`}
+
   return (
-      <div >
+      <div>
         <div>
         {reviews && reviews.map(review => (
           <ReviewDetails review={review} key={review._id} />
@@ -66,8 +92,7 @@ const ViewReviewsByCorUsers = () => {
           
         </textarea>
         
-        <button className="post-review"onClick={handleSubmit}> POST</button> 
-
+        <button className="post-review" onClick={handleSubmit}> POST</button> 
       </div>
     
   )

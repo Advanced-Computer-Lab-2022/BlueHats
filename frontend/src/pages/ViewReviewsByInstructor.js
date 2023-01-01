@@ -7,13 +7,13 @@ import ReviewDetails from "../components/ReviewDetails"
 
 const ViewReviewsByInstructors = () => {
 
-    const [courseReview, setCourseReview] = useState()
-    const [loading, setLoading] = useState(true) 
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get('courseId');
 
 
  const {reviews, dispatch} = useReviewsContext()
+
+
 
  useEffect(() => {
     const fetchReviews = async () => {

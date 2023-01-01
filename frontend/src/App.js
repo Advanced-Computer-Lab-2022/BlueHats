@@ -32,33 +32,15 @@ import CoTraineeProfile from './pages/coTraineeProfile';
 import Biography from './pages/biography';
 import CourseForm from "./components/CourseForm"
 import ViewInstructors from "./pages/ViewInstructors"
-import ViewInstructorCourses from "./pages/ViewInstructorCourses"
 import ContractForm from './components/ContractForm';
 import HomeFilter from './pages/HomeFilter';
 import InstructorFilter from './pages/InstructorFilter';
-import EnrolledCourses from './pages/ViewIndividualUserCourses';
 
-import ReviewCourse from './components/CoursesTitleRatingReviews';
 import HomePage from './pages/HomePage';
 import InstructorPage from './pages/InstructorPage';
 
 import Report from './pages/ViewProblem';
 import AdminPage from './pages/AdminPage';
-import RevCourse from './components/CorporateTraineeRateCourse'
-
-import ViewAvailableCourses from './pages/ViewAllCourses';
-import RequestCourse from './components/RequestCourse';
-import ViewRequests from './pages/ViewRequests';
-
-import MyCourses from './pages/ViewCorporateUserCourses'
-import ViewReviewsByUsers from './pages/ViewReviewsByIndUsers'
-import ViewReviewsByInstructors from './pages/ViewReviewsByInstructor'
-
-import ViewReviewsByCorUsers from './pages/ViewReviewsByCorUsers'
-import ViewAllCoReviews from './pages/ViewAllCoReviews';
-import ViewAllIndReviews from './pages/ViewAllIndividualUserReviews';
-
-import EditReview from './components/EditReview'
 
 //Routes
 import PrivateRoutes from './utils/PrivateRoutes';
@@ -66,6 +48,33 @@ import AdminRoutes from './utils/AdminRoutes';
 import InstructorRoutes from './utils/InstructorRoutes';
 import CorporateTraineeRoutes from './utils/CorporateTraineeRoutes';
 import IndividualTraineeRoutes from './utils/IndividualTraineeRoutes';
+
+
+
+/* Mohamed urls */
+import IndTraineeRateInstructor from './components/IndTraineeRateInstructor';
+import IndTraineeRateCourse from './components/IndTraineeRateCourse';
+import ViewIndividualTraineeCourses from './pages/ViewIndividualUserCourses';
+import ViewAllIndReviews from './pages/ViewAllIndividualUserReviews';
+import IndividualTraineeEditReview from './components/IndividualTraineeEditReview'
+import ViewReviewsByIndUsers from './pages/ViewReviewsByIndUsers'
+
+
+import CorporateTraineeRateInstructor from './components/CorporateTraineeRateInstructor'
+import CorporateTraineeRateCourse from './components/CorporateTraineeRateCourse'
+import ViewCorporateTraineeCourses from './pages/ViewCorporateUserCourses'
+import ViewAllCourses from './pages/ViewAllCourses';
+import RequestCourse from './components/RequestCourse';
+import ViewReviewsByCorUsers from './pages/ViewReviewsByCorUsers'
+import ViewAllCoReviews from './pages/ViewAllCoReviews';
+import CorporateTraineeEditReview from './components/CorporateTraineeEditReview'
+import ViewMyRequestsStatus from './pages/ViewMyRequestsStatus'
+
+import ViewInstructorCourses from "./pages/ViewInstructorCourses"
+import ViewReviewsByInstructors from './pages/ViewReviewsByInstructor'
+
+
+import ViewRequests from './pages/ViewRequests';
 
 var loggedinUser = JSON.parse(localStorage.getItem('user'));
 
@@ -199,68 +208,100 @@ function App() {
             />
 
             <Route
-              path="/Mycourses"
-              element={<ViewInstructorCourses/>}
+              path="/viewProblem/"
+              element={<Report/>}
             />
-            <Route
-              path="/EnrolledCourses"
-              element={<EnrolledCourses/>}
-            />
-          
-            <Route
-              path="/review"
-              element={<ReviewCourse/>}
-            />
-             <Route
-              path= "/availableCourses"
-              element={<ViewAvailableCourses/>}
-            />
-            <Route
-              path="/requestCourse"
-              element={<RequestCourse/>}
-            />
-            <Route
-              path="/requests"
-              element={<ViewRequests/>}
-            />
-            <Route
-              path="/subcourses"
-              element={<MyCourses/>}
-            />
-             <Route
-              path="/rev"
-              element={<RevCourse/>}
-            />
-             <Route
-              path="/ureviews"
-              element={<ViewReviewsByUsers/>}
-            />
-             <Route
-              path="/ireviews"
-              element={<ViewReviewsByInstructors/>}
-            />
+
+
+
+            {/** m urls */}
+
             
+            {/* individual trainee urls */}
             <Route
-              path="/creviews"
-              element={<ViewReviewsByCorUsers/>}
+              path="/ratecourse/individualTrainee"
+              element={<IndTraineeRateCourse/>}
             />
 
              <Route
-              path="/vaireviews"
-              element={<ViewAllIndReviews/>}
+              path="/rateinstructor/individualTrainee"
+              element={<IndTraineeRateInstructor/>}
+            />
+
+            <Route
+              path="/mycourses/individualTrainee"
+              element={<ViewIndividualTraineeCourses/>}
             />
              <Route
-              path="/vacreviews"
+              path="/myreviews/individualTrainee"
+              element={<ViewAllIndReviews/>}
+            />
+            <Route
+              path="/edit/inidividualtrainee"
+              element={<IndividualTraineeEditReview/>}
+            />
+            <Route
+              path="/viewaddreviews/individualtrainee"
+              element={<ViewReviewsByIndUsers/>}
+            />
+
+
+
+             {/* corporate trainee urls */}
+            <Route
+              path="/mycourses/corporateTrainee"
+              element={<ViewCorporateTraineeCourses/>}
+            />
+             <Route
+              path="/ratecourse/corporateTrainee"
+              element={<CorporateTraineeRateCourse/>}
+            />
+             <Route
+              path="/rateinstructor/corporateTrainee"
+              element={<CorporateTraineeRateInstructor/>}
+            />
+
+            <Route
+              path="/requestcourse"
+              element={<RequestCourse/>}
+            />
+            <Route
+              path="/courses"
+              element={<ViewAllCourses/>}
+            />
+            <Route
+              path="/viewaddreviews/corporatetrainee"
+              element={<ViewReviewsByCorUsers/>}
+            />
+            <Route
+              path="/myreviews/corporatetrainee"
               element={<ViewAllCoReviews/>}
             />
             <Route
-              path="/edit"
-              element={<EditReview/>}
+              path="/edit/corporatetrainee"
+              element={<CorporateTraineeEditReview/>}
+            />
+            <Route
+              path="/myrequests/status"
+              element={<ViewMyRequestsStatus/>}
             />
             
+            
+
+            {/* instructor urls */}
             <Route
-              path="/viewProblem/"
-              element={<Report/>}
+              path="/mycourses/instructor"
+              element={<ViewInstructorCourses/>}
+            />
+            <Route
+              path="/reviews"
+              element={<ViewReviewsByInstructors/>}
+            />
+             
+            {/* admin urls */}
+            <Route
+              path="/requests/admin"
+              element={<ViewRequests/>}
             />
 
           </Routes>

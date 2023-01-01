@@ -251,7 +251,7 @@ const forgotPasswordInstructor = async (req,res) =>
 const filterCourses = async(req,res) => {
   
   //const instructorId = req.query.instructorId;
-  const {id}= req.body;
+  const {id}= req.params;
   if(id)
   {
       const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
@@ -262,5 +262,20 @@ const filterCourses = async(req,res) => {
       res.status(400).json({error:"instructor ID  is required"});
   }
 }
+
+// const filterCourses = async(req,res) => {
+  
+//   //const instructorId = req.query.instructorId;
+//   const {savedID}= req.params;
+//   if(savedID)
+//   {
+//       const result = await course.find({instructor:mongoose.Types.ObjectId(savedID)});
+//       res.status(200).json(result)
+//   }
+//   else
+//   {
+//       res.status(400).json({error:"instructor ID  is required"});
+//   }
+// }
 
 module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses}

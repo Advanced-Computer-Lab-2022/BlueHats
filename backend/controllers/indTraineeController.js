@@ -564,17 +564,32 @@ const rateInstructor = async (req, res) => {
     }
 
  // View only the users courses by filtering the courses by the user's id
-  const filterCourses = async(req,res) => {
-    const { id } = req.params;
-
-    const result = await Course.find({individualTrainee:mongoose.Types.ObjectId(id)});
-    res.status(200).json(result)
-
-    if(!result) {
-        res.status(400).json({error:"No such user"})
-    }
-
+ const filterCourses = async(req,res) => {
+  
+  //const instructorId = req.query.instructorId;
+  const {id}= req.body;
+  if(id)
+  {
+      const result = await Course.find({individualTrainee:mongoose.Types.ObjectId(id)});
+      res.status(200).json(result)
   }
+  else
+  {
+      res.status(400).json({error:"individualTrainee ID  is required"});
+  }
+}
+
+  // const filterCourses = async(req,res) => {
+  //   const { id } = req.params;
+
+  //   const result = await Course.find({individualTrainee:mongoose.Types.ObjectId(id)});
+  //   res.status(200).json(result)
+
+  //   if(!result) {
+  //       res.status(400).json({error:"No such user"})
+  //   }
+
+  // }
 
 // add a new rate to the course and calculate the new overall course rate
 var averageRate = 0;

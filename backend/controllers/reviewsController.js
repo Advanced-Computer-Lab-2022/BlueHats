@@ -111,9 +111,9 @@ const viewCourseReviews = async (req,res) => {
 } 
 
 const viewCorporateReviews = async (req, res)=> {
-    const {id} = req.params
+    const {savedID} = req.params
 
-    const result = await review.find({corporateTraineeId:mongoose.Types.ObjectId(id)});
+    const result = await review.find({corporateTraineeId:mongoose.Types.ObjectId(savedID)});
     res.status(200).json(result);
 
     if(!result) {
@@ -122,9 +122,9 @@ const viewCorporateReviews = async (req, res)=> {
 }
 
 const viewIndividualReviews = async (req, res)=>{
-    const {id} = req.params
+    const {savedID} = req.params
 
-    const result = await review.find({individualTraineeId:mongoose.Types.ObjectId(id)});
+    const result = await review.find({individualTraineeId:mongoose.Types.ObjectId(savedID)});
     res.status(200).json(result);
 
     if(!result) {

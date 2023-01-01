@@ -9,6 +9,7 @@ const exercise = require('../models/exercise');
 const review = require ('../models/reviewsModel')
 ///////////////
 const RequestCourse = require ('../models/requestCourse')
+const MyRequests = require ('../models/requestsStatus')
 
 //get all corporateTrainees
 const getCorporateTrainees = async (req, res) => {
@@ -475,52 +476,68 @@ const rateInstructor = async (req, res) => {
         }
 
     
-    const requestCourse = async (req, res) => {
+        const requestCourse = async (req, res) => {
 
-            const courseId = req.query.courseId;
-            if(!mongoose.Types.ObjectId.isValid(courseId)){
-                return res.status(404).json({error: 'No such course'})
-            }
-            const requestedCourse = await Course.find({_id:courseId});
+          const courseId = req.query.courseId;
+          if(!mongoose.Types.ObjectId.isValid(courseId)){
+              return res.status(404).json({error: 'No such course'})
+          }
+          const requestedCourse = await Course.find({_id:courseId});
 
-            const courseName = requestedCourse[0].title;
+          const courseName = requestedCourse[0].title;
 
-            const corporateTraineeId = req.query.corporateTraineeId;
+          const corporateTraineeId = req.query.corporateTraineeId;
 
-            if(!mongoose.Types.ObjectId.isValid(corporateTraineeId)){
-                return res.status(404).json({error: 'No such user exists'})
-            }
-            const UserWhoApplied = await CorporateTrainee.find({_id:corporateTraineeId});
+          if(!mongoose.Types.ObjectId.isValid(corporateTraineeId)){
+              return res.status(404).json({error: 'No such user exists'})
+          }
+          const UserWhoApplied = await CorporateTrainee.find({_id:corporateTraineeId});
 
-            const corporateTraineeName = UserWhoApplied[0].username;
+          const corporateTraineeName = UserWhoApplied[0].username;
+          
+          // create request
+          const {reason , highestLevelOfEducation ,employmentStatus,agreedToPolicy} = await req.body
+          let emptyFields = []
+
+          if (!reason) {
+              emptyFields.push('reason')
+          }
+          if (!highestLevelOfEducation) {
+              emptyFields.push('highestLevelOfEducation')
+          }
+          if (!employmentStatus) {
+              emptyFields.push('employmentStatus')
+          }
+          if (!agreedToPolicy) {
+              emptyFields.push('agreedToPolicy')
+          }
+
+          if (emptyFields.length > 0) {
+              return res.status(400).json({ error: 'Please fill in all fields', emptyFields })          
+          }
+         
+         
+
+          try {
             
             // create request
-            const {reason , highestLevelOfEducation ,employmentStatus,agreedToPolicy} = await req.body
-            let emptyFields = []
+           
+              const requestCourse = await RequestCourse.create({courseName, corporateTraineeName, reason , highestLevelOfEducation,employmentStatus,agreedToPolicy,corporateTraineeId,courseId})
+              // var requests = UserWhoApplied[0].requests
+              // var status = "pending"
+              // var newRequest = requests.push({courseId:{courseId},coursename:{courseName},requestStatus:status});
 
-            if (!reason) {
-                emptyFields.push('reason')
-            }
-            if (!highestLevelOfEducation) {
-                emptyFields.push('highestLevelOfEducation')
-            }
-            if (!employmentStatus) {
-                emptyFields.push('employmentStatus')
-            }
-            if (!agreedToPolicy) {
-                emptyFields.push('agreedToPolicy')
-            }
+              // await CorporateTrainee.findOneAndUpdate({_id:corporateTraineeId},{
+              //   requests:newRequest
+              // })
+              var status = "pending"
+              await MyRequests.create({courseName,courseId,corporateTraineeId,status})
 
-            if (emptyFields.length > 0) {
-                return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+              res.status(200).json(requestCourse)
+            } catch (error) {
+              res.status(400).json({error: error.message})
             }
-            try {
-                const requestCourse = await RequestCourse.create({courseName, corporateTraineeName, reason , highestLevelOfEducation,employmentStatus,agreedToPolicy,corporateTraineeId,courseId})
-                res.status(200).json(requestCourse)
-              } catch (error) {
-                res.status(400).json({error: error.message})
-              }
-        }
+      }
 
 
 // View only the users courses by filtering the courses by the user's id
@@ -529,8 +546,8 @@ var flag = 0;
 var j;
 const availableCourses = async(req,res) => { 
     // const corporateTraineeId = req.query.corporateTraineeId;
-    const { id } = req.params;
-    if(id){
+    const { savedID } = req.params;
+    if(savedID){
         const courses = await Course.find({}).sort({createdAt: -1});
         for (let i = 0 ; i<courses.length; i++){
             for(j = 0; j<(courses[i].corporateTrainee).length; j++){}
@@ -571,11 +588,22 @@ res.status(200).json(problem);
 }
 
 // View only the user courses by filtering the courses by the user's id
+// const filterCourses = async(req,res) => { 
+//   // const corporateTraineeId = req.query.corporateTraineeId;
+//   const { id } = req.params;
+//   if(id){
+//   const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(id)});
+//   res.status(200).json(result)
+//   }else{
+//       res.status(400).json({error:"corporateTraineeId  is required"})
+//   }
+// }
+
 const filterCourses = async(req,res) => { 
   // const corporateTraineeId = req.query.corporateTraineeId;
-  const { id } = req.params;
-  if(id){
-  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(id)});
+  const { savedID } = req.params;
+  if(savedID){
+  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(savedID)});
   res.status(200).json(result)
   }else{
       res.status(400).json({error:"corporateTraineeId  is required"})

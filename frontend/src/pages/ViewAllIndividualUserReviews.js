@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useReviewsContext } from "../hooks/useReviewsContext"
 // components
-import MyReviewsDetails from "../components/MyReviewsDetails"
+import IndividualTraineeReviewsDetails from "../components/IndividualTraineeReviewsDetails"
 
 
 const ViewAllIndReviews = ({review}) => {
@@ -9,13 +9,11 @@ const ViewAllIndReviews = ({review}) => {
 
     useEffect(() => {
         const fetchReviews = async () => {
-            // var loggedinUser = JSON.parse(localStorage.getItem('user'));
-        // const savedID = loggedinUser.id
-
-           //     const response = await fetch('/api/reviews/viewiReviews/' + savedID, {
-//             method: 'GET'
-   //     }
-            const response = await fetch('/api/reviews/viewiReviews/63a6356bd3f9a62c95ff1d4b')
+            var loggedinUser = JSON.parse(localStorage.getItem('user'));
+            const savedID = loggedinUser.id
+            const response = await fetch(`/api/reviews/viewiReviews/${savedID}`)
+            
+            // const response = await fetch('/api/reviews/viewiReviews/63a6356bd3f9a62c95ff1d4b')
             const json = await response.json();
             if(response.ok) {
                 dispatch({type: 'SET_REVIEWS', payload: json});
@@ -31,7 +29,7 @@ const ViewAllIndReviews = ({review}) => {
 
         <div>
         {reviews && reviews.map(review => (
-          <MyReviewsDetails review={review} key={review._id} />
+          <IndividualTraineeReviewsDetails review={review} key={review._id} />
         ))}
       </div>
 

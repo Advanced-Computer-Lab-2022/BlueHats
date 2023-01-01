@@ -1,6 +1,8 @@
 import { useRequestsContext } from '../hooks/useRequestsContext'
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const RequestDetails = ({ RequestCourse }) => {
   const { dispatch } = useRequestsContext();
@@ -32,15 +34,15 @@ const RequestDetails = ({ RequestCourse }) => {
     return (
       <div className="request-details">
         <h4>{RequestCourse.courseName}</h4>
-        <p><strong>•User: </strong>{RequestCourse.corporateTraineeName}</p>
+        <p><strong>•username: </strong>{RequestCourse.corporateTraineeName}</p>
         <p><strong>•Highest level of education: </strong>{RequestCourse.highestLevelOfEducation}</p>
         <p><strong>•Employment status: </strong>{RequestCourse.employmentStatus}</p>
         <p><strong>•Reason: </strong>{RequestCourse.reason}</p>
         <p><strong>•{RequestCourse.agreedToPolicy}</strong></p>
-
         <p>Added {formatDistanceToNow(new Date(RequestCourse.createdAt), {addSuffix: true})}</p>
-        <div><span className='accept' onClick={handleClick1}>accept</span></div>
-       <div><span className='reject' onClick={handleClick2}>reject</span></div>
+      
+        <button className='accept' onClick={handleClick1}><CheckIcon/></button>
+       <button className='reject' onClick={handleClick2}><CloseIcon/></button>
       </div>
     )
   }

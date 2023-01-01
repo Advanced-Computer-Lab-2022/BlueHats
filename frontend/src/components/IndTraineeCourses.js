@@ -3,7 +3,7 @@ import { Button,Box } from '@mui/material';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 
-const ViewEnrolledCourses = ({ course }) => { 
+const IndTraineeCourses = ({ course }) => { 
 
   function CheckNumber() {
     if (course.totalhours>1) {
@@ -37,7 +37,7 @@ const ViewEnrolledCourses = ({ course }) => {
          
      }
    }
-
+  
    function Reviews(){
     var res = ""
     var c = 1
@@ -47,46 +47,55 @@ const ViewEnrolledCourses = ({ course }) => {
     }
         return res;
    }
+   var loggedinUser = JSON.parse(localStorage.getItem('user'));
+     const savedID = loggedinUser.id
   
     return (
-      <div className="course-details-ss">
+      <div className="ind-courses">
         <h4>{course.title}</h4>
         <p><strong>Total Hours: </strong>{course.totalhours} <CheckNumber/> </p>
         <div  className="course-details-price">
         <p className="view-price" ><strong ></strong>{course.price}</p>
         </div>
-        <p><strong>Rating: </strong>{Number.parseFloat(course.courseRating).toFixed(2)} / 5 <strong> <Stars/></strong> </p>
+        <p><strong>Rating: </strong><Stars/>{Number.parseFloat(course.courseRating).toFixed(2)} ({course.numberOfRates}) </p>
         
         {/* <div>
           <p><strong>Reviews: </strong> <Reviews/></p>
         </div> */}
 
+        <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
         
-        
-        <Box  className ='rate-button' sx={{marginBottom:2}}>
+        <Box sx={{marginBottom:2}}>
           <Button  variant= "contained"
-          onClick={() => window.location.href=`/review?courseId=${course._id}`}
+          onClick={() => window.location.href=`/ratecourse/individualTrainee?courseId=${course._id}`}
           margin="normal"
           padding="normal">
-            Rate Course
+            Rate course
+          </Button>
+        </Box>
+
+        <Box  sx={{marginBottom:2}}>
+          <Button  variant= "contained"
+          onClick={() => window.location.href=`/rateinstructor/individualTrainee?courseId=${course._id}`}
+          margin="normal"
+          padding="normal">
+           Rate instructor
           </Button>
         </Box>
 
 
-
-        <Box  className ='rate-button' sx={{marginBottom:2}}>
+        <Box  sx={{marginBottom:2}}>
           <Button  variant= "contained"
-          onClick={() => window.location.href=`/ureviews?courseId=${course._id}`}
+          onClick={() => window.location.href=`/viewaddreviews/individualtrainee?courseId=${course._id}&individualTraineeId=${savedID}`}
           margin="normal"
           padding="normal">
             View Reviews
           </Button>
         </Box>
 
-        <p>Added {formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
       </div>
     )
 }
   
   
-  export default ViewEnrolledCourses;
+  export default IndTraineeCourses;
