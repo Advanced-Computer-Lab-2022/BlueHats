@@ -33,25 +33,6 @@ const getInstructor = async (req,res) =>
     }
     res.status(200).json(instructor)
 }
-//get accepted state of a  single instructor
-const getInstAccepted = async (req,res) => 
-{
-    const {id}=req.params
-
-    if(!mongoose.Types.ObjectId.isValid(id))
-    {
-        return res.status(404).json({error:'No such instructor'})
-    }
-
-    const instructor =await Instructor.findById(id)
-
-    if(!instructor)
-    {
-        return res.status(404).json({error:'No such instructor'})
-    }
-    res.status(200).json(instructor.acceptedContract)
-}
-
 
 //create a new instructor
 const createInstructor =async (req,res) =>
@@ -124,21 +105,6 @@ const updateBiography =async (req,res) =>
   }
   res.status(200).json(instructor)
 }
- 
-//update acceptedContract
-const updateAccepted =async (req,res) => 
-{
-  const {id}=req.body
-  const {acceptedContract}=req.body
-
-  const instructor = await Instructor.findOneAndUpdate({_id:id},{acceptedContract:acceptedContract})
-  if(!instructor)
-  {
-      return res.status(400).json({error:'Instructor not found'})
-  }
-  res.status(200).json(instructor)
-}
-
 
 const changeEmail = async (req,res) => 
 {
@@ -288,8 +254,7 @@ const filterCourses = async(req,res) => {
   const {id}= req.params;
   if(id)
   {
-      const result = await query;
-
+      const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
       res.status(200).json(result)
   }
   else
@@ -298,4 +263,51 @@ const filterCourses = async(req,res) => {
   }
 }
 
-module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses}
+// const filterCourses = async(req,res) => {
+  
+//   //const instructorId = req.query.instructorId;
+//   const {savedID}= req.params;
+//   if(savedID)
+//   {
+//       const result = await course.find({instructor:mongoose.Types.ObjectId(savedID)});
+//       res.status(200).json(result)
+//   }
+//   else
+//   {
+//       res.status(400).json({error:"instructor ID  is required"});
+//   }
+// }
+
+//update acceptedContract
+const updateAccepted =async (req,res) => 
+{
+  const {id}=req.body
+  const {acceptedContract}=req.body
+
+  const instructor = await Instructor.findOneAndUpdate({_id:id},{acceptedContract:acceptedContract})
+  if(!instructor)
+  {
+      return res.status(400).json({error:'Instructor not found'})
+  }
+  res.status(200).json(instructor)
+}
+//get accepted state of a  single instructor
+const getInstAccepted = async (req,res) => 
+{
+    const {id}=req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id))
+    {
+        return res.status(404).json({error:'No such instructor'})
+    }
+
+    const instructor =await Instructor.findById(id)
+
+    if(!instructor)
+    {
+        return res.status(404).json({error:'No such instructor'})
+    }
+    res.status(200).json(instructor.acceptedContract)
+}
+
+module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses, getInstAccepted, updateAccepted}

@@ -695,7 +695,7 @@ const rateCourse = async (req, res) => {
         attachments: [
           {
             filename: "My Certificate.pdf",
-            path: "/Users/abdelrahman/Desktop/Engineering/Semester7/ACL/LastDraft/BlueHats/backend/assets/My Certificate.pdf",
+            path: "D:\BlueHats\backend\assets\My Certificate.pdf",
           },
         ],
       };

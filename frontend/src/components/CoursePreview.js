@@ -102,7 +102,7 @@ const CoursePreview = ({course}) => {
       const myembedID = myembed[1];
       
       const [wallet, setWallet] = useState(0); 
-      if(user)
+      if(user.type=="indTrainee")
       {
         var loggedinUser = JSON.parse(localStorage.getItem('user'));
         const userID = loggedinUser.id;
@@ -152,12 +152,12 @@ const CoursePreview = ({course}) => {
     return (
         <div className="course-preview">
            <Card sx={{ minWidth: 380 }}>
-           {user &&  wallet<course.price && <CardHeader
+           {user.type=="indTrainee" &&  wallet<course.price && <CardHeader
             action={<Button onClick={() => window.location.href=`/payment?id=${course._id}`} size="large" color="secondary">Enroll Now</Button>}
             title={course.title.toUpperCase()}
             subheader= {"Subject: "+course.subject.toUpperCase()}
           />}
-           {user &&  wallet>=course.price &&<CardHeader
+           {user.type=="indTrainee"  &&  wallet>=course.price &&<CardHeader
             action={<Button onClick={handleClickOpen} size="large" color="secondary">Enroll Now</Button>}
             title={course.title.toUpperCase()}
             subheader= {"Subject: "+course.subject.toUpperCase()}
