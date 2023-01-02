@@ -8,7 +8,7 @@ import { CoursesContextProvider } from './context/CoursesContext';
 import { AdminsContextProvider } from './context/AdminsContext';
 import { InstructorsContextProvider } from './context/InstructorsContext';
 import { CorporateTraineesContextProvider } from './context/CorporateTraineesContext';
-//import { IndTraineesContextProvider } from './context/IndTraineesContext';
+import { IndTraineesContextProvider } from './context/IndTraineesContext';
 import { InstContextProvider } from './context/InstContext';
 import { AuthContextProvider } from './context/AuthContext';
 
@@ -17,6 +17,7 @@ import { AuthContextProvider } from './context/AuthContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <IndTraineesContextProvider>
     <AuthContextProvider>
     <ProSidebarProvider>
     <CorporateTraineesContextProvider>
@@ -32,5 +33,6 @@ root.render(
     </CorporateTraineesContextProvider>
     </ProSidebarProvider>
     </AuthContextProvider>
+    </IndTraineesContextProvider>
   </React.StrictMode>
 );

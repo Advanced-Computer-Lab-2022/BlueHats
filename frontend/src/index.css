@@ -4,6 +4,8 @@
 /* layout */
 :root {
   --primary: #a256e0;
+  --hover: #810CA8;
+  --disabled:  #b487da;
   --error: #e7195a;
   --msg: #4bffba;
 }
@@ -39,12 +41,8 @@ header a
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
-.instructor {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
-}
-.instructor button {
+
+/* .instructor button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -56,7 +54,7 @@ header a
   right:150px;
   top:150px;
   min-width: 100px;
-}
+} */
 .instructor .instructor-wallet button {
   background: var(--primary);
   border: 0;
@@ -139,15 +137,30 @@ header a
   border-radius: 50%;
   color: #333;
 }
-.admin {
+/* .admin {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px;
-}
-.admin-details {
+  gap: 100px; */
+
+div.admin-details  , div.addInstructor-details , div.corporateTrainee-details , div.indTrainees-details{
+  display: inline-grid;
+  column-gap: 50px;
+  row-gap: 15px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   background: #fff;
   border-radius: 4px;
-  margin: 20px auto;
+  border-color: #a256e0;
+  border-bottom-style: groove;
+  border-top-style: groove;
+  border-right-style: groove;
+  border-left-style: groove;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
@@ -205,11 +218,6 @@ header a
   border-radius: 50%;
   color: #333;
 }
-.corporateTrainee {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
-}
 .corporateTrainee-details {
   background: #fff;
   border-radius: 4px;
@@ -253,22 +261,27 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
-form button {
+button {
   background: var(--primary);
   border: 0;
   color: #fff;
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
+  width: 50%;
+  margin-left: 100px;
   cursor: pointer;
 }
-form button:disabled {
+button:disabled {
   background: #b487da;
+  /*background: #d8a8ff;*/
   border: 0;
   color: #fff;
   padding: 10px;
   font-family: "Poppins";
   border-radius: 4px;
+  width: 50%;
+  margin-left: 100px;
   cursor: not-allowed;
 }
 div.error {
@@ -281,6 +294,12 @@ div.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+div.menu{
+  cursor:pointer;
+}
+div.delete{
+  cursor:pointer;
 }
 div.msg {
   padding: 10px;
@@ -538,40 +557,103 @@ header .container .inputWithButton button {
   border: none;
   cursor: pointer;
 }
+div.signupButton{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  margin-left: 60px;
+  width:65%;
+  cursor: pointer;
+}
+
+div.signupButton:disabled {
+  background: #b487da;
+  background: #d8a8ff;
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  margin-left: 160px;
+  width:65%;
+  cursor: not-allowed;
+}
 /*auth forms*/
-form.signup, form.login , form.forgotPassword , form.resetPassword , form.changeEmail , form.changePassword , form.EditBiography{
+form.signup, form.login , form.admin , form.instructor , form.corporateTrainee{
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
+  /*background: linear-gradient(135deg , #71b7e6 , #9b59b6);*/
+  /*background: linear-gradient(135deg , #71b7e6 , #d893f4);*/
+  background: linear-gradient(135deg , #92d3ff , #e9b3ff);
   border-radius: 4px;
 }
-form.signup .title
+
+form.forgotPassword , form.resetPassword , form.changeEmail , form.changePassword , form.EditBiography{
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  /* background: #d5b9ec; */
+  background: linear-gradient(135deg ,#f4d9ff, #d2edff );
+  border-radius: 4px;
+}
+form.signup .title , form.login .title , form.admin .title , form.instructor .title , form.corporateTrainee  .title 
 {
   text-align: center;
-  color: #a256e0;
+  /*color: #a256e0;*/
+  color: #ffffff;
   text-decoration: underline;
   font-size: 1.4em;
 }
-.indTrainee-details {
+form.changeEmail .title , form.forgotPassword .title, form.resetPassword .title , form.changePassword .title , form.EditBiography .title
+{
+  text-align: center;
+  /*color: #a256e0;*/
+  color: #000000;
+  text-decoration: underline;
+  font-size: 1.2em;
+}
+form.signup .info , form.admin .info , form.instructor .info , form.corporateTrainee .info 
+{
+  margin: 0;
+  font-family: "Poppins";
+  color: #ffffff;
+  font-size: 0.7em;
+  margin-bottom: 12px;
+}
+
+form.forgotPassword .info , form.changePassword .info ,  form.resetPassword .info 
+{
+  margin: 0;
+  font-family: "Poppins";
+  color: #555555;
+  font-size: 0.7em;
+  margin-bottom: 12px;
+}
+
+/* .indTrainee-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-}
-.indTrainee-details h4 {
+} */
+.viewIndTrainee-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
-.indTrainee-details p {
+.viewIndTrainee-details p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
 }
-.indTrainee-details span {
+.viewIndTrainee-details span {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -606,12 +688,13 @@ form.signup .title
   color: #000000;
   text-align: left;
   line-height: normal;
-  padding-left: 10px;
+  /*padding-left: 10px;*/
   margin: 20px 20px 20px 0;
 }
 nav {
   display: flex;
   align-items: center;
+  z-index: 4;
 }
 nav a, nav button {
   margin-left: 10px;
@@ -676,14 +759,22 @@ nav button {
   background-color: tomato;
   color: white;
 }
-button:disabled,
-button[disabled]{
-  color: #666666;
-  background:  #deb3ff;
-  border: 0;
-  color: #fff;
-  cursor:not-allowed;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-}
+/* input[type="radio"] {
+  /* ...existing styles */
+  /* display: grid;
+  place-content: center;
+} */
+
+/* input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+} */
+
+/*input[type="radio"]:checked::before {
+  transform: scale(1);
+} */

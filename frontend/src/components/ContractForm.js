@@ -14,9 +14,9 @@ const ContractForm = () => {
   
 
   const navigateToInstructor = () => {
-    const x = accepted.push('true')
+    //const x = accepted.push('true')
     navigate("/instructor");
-    acceptedX = x;
+    //acceptedX = x;
   };
 
 
@@ -175,17 +175,32 @@ const ContractForm = () => {
           </p>
         </div>
 
-        <div>
+        <div className="checkbox">
           <label htmlFor="agree">
             I agree to <b>terms and conditions </b>
             <input type="checkbox" id="agree" onChange={checkboxHandler} />
           </label>
-        </div>
-        <button disabled={!agree} className="btn" onClick={navigateToInstructor}>
+            </div>
+        <div className="button">
+        <button disabled={!agree} onClick={navigateToInstructor}>
           Accept
         </button>
+        </div>
+
+        {/* <div className="checkbox">
+          <label>
+            <input type="checkbox" id="agree" onChange={checkboxHandler} />
+            <label> I agree to <b>terms and conditions</b></label>
+          </label>
+        </div> */}
+
+        {/* <button disabled={!agree} className="btn" onClick={navigateToInstructor}>
+              Accept
+        </button> */}
+
       </div>
-    </div>
+    </div> 
+
   );
 };
 

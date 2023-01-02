@@ -7,6 +7,7 @@ import Instructor from './pages/Instructor';
 import AddCourse from './pages/AddCourse';
 import CourseView from './pages/CourseView';
 import Payment from './pages/Payment';
+import Dashboard from './pages/dashboard';
 
 import Search from './pages/Search';
 import ExamTrainee from './pages/ExamTrainee';
@@ -15,16 +16,19 @@ import ExamInd from './pages/ExamInd';
 import GradeInd from './pages/GradeInd';
 
 import Preview from './pages/Preview';
-import Admin from './pages/Admin';
-import NewInstructor from './pages/NewInstructor';
-import NewCoTrainee from './pages/NewCoTrainee';
+import AddAdmin from './pages/AddAdmin';
+import AddInstructor from './pages/AddInstructor';
+import AddCoTrainee from './pages/AddCoTrainee';
+import ViewAdmin from './pages/viewAdmins';
+import ViewIndTrainee from './pages/ViewIndTrainees';
+import ViewCoTrainee from './pages/ViewCoTrainee';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ForgotPassword from './pages/forgotPassword';
 import ResetPassword from './pages/resetPassword';
 import ChangePassword from './pages/changePassword';
 import ChangeEmail from './pages/changeEmail';
-import IndTrainee from './pages/indTrainees';
+import IndTrainee from './pages/ViewIndTrainees';
 import InstructorProfile from './pages/instructorProfile';
 import CoTraineeProfile from './pages/coTraineeProfile';
 import Biography from './pages/biography';
@@ -36,6 +40,7 @@ import HomeFilter from './pages/HomeFilter';
 import InstructorFilter from './pages/InstructorFilter';
 import EnrolledCourses from './pages/ViewIndividualUserCourses';
 import ReviewCourse from './components/CoursesTitleRatingReviews';
+import ViewAdmins from './pages/viewAdmins';
 
 
 
@@ -104,23 +109,31 @@ function App() {
             />
             <Route
               path="/admin/addAdmin"
-              element={<Admin/>}
+              element={<AddAdmin/>}
             />
             <Route
               path="/admin/instructor"
-              element={<NewInstructor/>}
+              element={<AddInstructor/>}
             />
             <Route
               path="/admin/corporateTrainee"
-              element={<NewCoTrainee/>}
+              element={<AddCoTrainee/>}
             />
             <Route
               path="/createCourse"
               element={<CourseForm/>}
             />
-             <Route
-              path="/Instructors"
+            <Route
+              path="/admin/viewInstructors"
               element={<ViewInstructors/>}
+            />
+            <Route
+              path="/admin/viewCoTrainees"
+              element={<ViewCoTrainee/>}
+            />
+            <Route
+              path="/admin/viewIndTrainees"
+              element={<ViewIndTrainee/>}
             />
             <Route
               path="/Mycourses"
@@ -147,7 +160,7 @@ function App() {
               element={<ChangePassword/>}
             />
             <Route
-              path="/instructor/changeEmail"
+              path="/changeEmail"
               element={<ChangeEmail/>}
             />
             <Route
@@ -175,7 +188,7 @@ function App() {
               element={<CoTraineeProfile/>}
             />
             <Route
-              path="/instructor/editBiography"
+              path="/editBiography"
               element={<Biography/>}
             />
             <Route
@@ -192,7 +205,14 @@ function App() {
               path="/payment"
               element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}
             />
-            
+             <Route
+              path="/admin/dashboard"
+              element={<Dashboard/>}
+            />
+            <Route
+            path="/admin/viewAdmins"
+            element={<ViewAdmin/>}
+          />
           </Routes>
         </div>
       </BrowserRouter>

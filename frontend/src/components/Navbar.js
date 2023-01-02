@@ -4,6 +4,11 @@ import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import PersonIcon from '@mui/icons-material/Person';
+
+//import AvatarGroup from '@mui/joy/AvatarGroup';
+//import Avatar from '@mui/joy/Avatar';
+//import Box from '@mui/joy/Box';
 
 export var countryValue = 'Egypt';
 
@@ -59,7 +64,13 @@ const Navbar = () => {
                 <nav>
                 {user && (
                  <div>
-                    <span>{user.username}</span>
+                        {/* <Avatar variant="solid" />
+                        <Avatar variant="soft" />
+                        <Avatar variant="outlined" /> */}
+                        {/* <Avatar src="/broken-image.jpg" />
+                        <Avatar variant="plain" /> */}
+                        {/* <Avatar>RE</Avatar> */}
+                    <span>{<PersonIcon />}{user.username}</span>
                     <button onClick={handleClick}>Log out</button>
                 </div>
                 )}

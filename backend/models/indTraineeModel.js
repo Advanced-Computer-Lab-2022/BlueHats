@@ -37,6 +37,12 @@ const indTraineeSchema = new Schema({
     type:String ,
     required: true
   },
+  flag: 
+  {
+    type:String ,
+    required: false,
+    default:true
+  },
   grade: 
    [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, num: {type: Number}}]
   ,
@@ -50,26 +56,5 @@ const indTraineeSchema = new Schema({
   courses: [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, progress: {type: Number}}]
 }, { timestamps: true })
 
-// indTraineeSchema.statics.login = async function(username, password) {
-
-//   if (!username || !password) 
-//   {
-//     throw Error('All fields must be filled')
-//   }
-
-//   const user = await this.findOne({ username })
-//   if (!user) 
-//   {
-//     throw Error('Incorrect username')
-//   }
-
-//   const match = await bcrypt.compare(password, user.password)
-//   if (!match) 
-//   {
-//     throw Error('Incorrect password')
-//   }
-
-//   return user
-// }
 
 module.exports = mongoose.model('IndTrainee', indTraineeSchema)

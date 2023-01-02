@@ -116,7 +116,9 @@ const CourseDetails = ({ course }) => {
     return (
       <div className="course-details">
         <Link onClick={() => window.location.href=`/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
+        
         <p><strong>Subject: </strong>{course.subject}</p>
+        {/* <img src ={require ("../courses/cs.png" )} alt="cs"/> */}
         <p><strong>Price: </strong> {currency} {priceAfterDiscount(output,course.promotion)}</p>
         {course.promotion>0 && <p><strong>Promotion: </strong> {course.promotion} % &nbsp; Valid Until {course.promotionEnd}</p>  }
         <div float='left'>

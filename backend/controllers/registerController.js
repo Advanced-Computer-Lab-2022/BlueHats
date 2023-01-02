@@ -3,10 +3,10 @@ const validator = require('validator')
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer")
 
-//const registerModel = require('../models/registerModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const Instructor = require('../models/instructorModel')
 const IndTrainee = require('../models/indTraineeModel')
+const Admin = require('../models/adminModel')
 
 require('dotenv').config();
 
@@ -41,45 +41,46 @@ const signUp = async (req, res) =>
 
     if(!validator.isEmail(email))
     {
-        return res.status(404).json({error:"email is not valid"})
+        return res.status(404).json({error:"This email is not valid"})
     }
 
     if(!validator.isStrongPassword(password))
     {
-        return res.status(404).json({error:"password is not strong enough"})
+        return res.status(404).json({error:"Your password is not strong enough "})
+    }
+
+    if(confirmPassword !== password)
+    {
+      return res.status(404).json({error:"passwords do not match"})
     }
 
     // checking that the email is not taken by any user
     const coTrainee = await CorporateTrainee.findOne({email})
     const indTrainee = await IndTrainee.findOne({email})
     const instructor = await Instructor.findOne({email})
+    const admin = await Admin.findOne({email})
 
-    if(indTrainee || coTrainee || instructor) 
+    if(indTrainee || coTrainee || instructor || admin) 
     {
         return res.status(404).json({error:"This email is already in use"})
     }
 
     // checking that the username is not taken by any user
     const instUsername = await Instructor.findOne({username})
+    const adminUsername = await Admin.findOne({username})
     const coTraineeUsername = await CorporateTrainee.findOne({username})
     const indTraineeUsername = await IndTrainee.findOne({username})
 
-    if(instUsername || coTraineeUsername || indTraineeUsername) 
+    if(instUsername || coTraineeUsername || indTraineeUsername || adminUsername) 
     {
         return res.status(404).json({error:"This username is already taken"})
-    }
-
-    if(!password===confirmPassword)
-    {
-        return res.status(404).json({error:"Passwords do not match"})
     }
     
     try
     {
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
-        const hashedPass = await bcrypt.hash(confirmPassword, salt);
-        const user = await IndTrainee.create({ firstName:firstName , lastName:lastName , username:username , email: email , password: hashedPassword ,confirmPassword: hashedPass , gender:gender});
+        const user = await IndTrainee.create({ firstName:firstName , lastName:lastName , username:username , email: email , password: hashedPassword , gender:gender});
         //const token = createToken(user.username);
 
         //res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
@@ -124,8 +125,9 @@ const login = async (req, res) =>
     const indTrainee = await IndTrainee.findOne({username});
     const instructor = await Instructor.findOne({username});
     const coTrainee = await CorporateTrainee.findOne({username});
+    const admin = await Admin.findOne({username});
 
-    if(!indTrainee && !instructor && !coTrainee)
+    if(!indTrainee && !instructor && !coTrainee && !admin)
     {
         return res.status(404).send({error:"This username is incorrect"})
     }
@@ -134,12 +136,13 @@ const login = async (req, res) =>
     {
       const pass = await bcrypt.compare(password, indTrainee.password);
       const id = indTrainee.id;
+      const flag = indTrainee.flag;
       if (pass) 
       {
         // res.send("Auth Successful");
         const token = createToken(indTrainee.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token})
+        return res.status(200).json({id,flag, username , token})
 
       } 
       else 
@@ -152,19 +155,40 @@ const login = async (req, res) =>
     {
     if (coTrainee) 
     {
-      const passw = await bcrypt.compare(password, coTrainee.password);
+      const pass = await bcrypt.compare(password, coTrainee.password);
       const id = coTrainee.id;
-      if (passw) 
+      const flag = coTrainee.flag;
+      if (pass) 
       {
         // res.send("Auth Successful");
         const token = createToken(coTrainee.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token})
+        return res.status(200).json({id ,flag, username , token})
       } 
       else 
       {
         // res.send("Wrong password.");
-        return res.status(404).send({error: "wrong password 2"})
+        return res.status(404).send({error: "wrong password "})
+      }
+    } 
+    else
+    {
+      if (admin) 
+    {
+      const pass = await bcrypt.compare(password, admin.password);
+      const id = admin.id;
+      const flag = admin.flag
+      if (pass) 
+      {
+        // res.send("Auth Successful");
+        const token = createToken(admin.username);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.status(200).send ({id,flag,username ,token})
+      } 
+      else 
+      {
+        // res.send("Wrong password.");
+        return res.status(404).send({error: "wrong password "})
       }
     } 
 
@@ -172,12 +196,13 @@ const login = async (req, res) =>
     {
       const pass = await bcrypt.compare(password, instructor.password);
       const id = instructor.id;
+      const flag = instructor.flag
       if (pass) 
       {
         // res.send("Auth Successful");
         const token = createToken(instructor.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({id, username , token})
+        return res.status(200).json({id,flag , username , token})
         
       } 
       else 
@@ -187,6 +212,8 @@ const login = async (req, res) =>
       }
    
     }
+  }
+  
   }
 }
  
@@ -209,21 +236,27 @@ const changePassword = async (req,res) =>
 {
   const {username}=req.body
   const {password}=req.body
-  // const{confirmPassword}=req.body
+  const {confirmPassword}=req.body
   
-  if( !password || !username)
+  if( !password || !confirmPassword)
   {
     return res.status(400).json({ error: 'Please fill in all fields'})
   }
   
   try
   {
+    if(confirmPassword !== password)
+    {
+      return res.status(404).json({error:"passwords do not match"})
+    }
+
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
-
+    
     const indTrainee = await IndTrainee.findOne({username});
     const instructor = await Instructor.findOne({username});
     const coTrainee = await CorporateTrainee.findOne({username});
+    const admin = await Admin.findOne({username});
     
     if(indTrainee)
     {
@@ -233,19 +266,25 @@ const changePassword = async (req,res) =>
 
     if(coTrainee)
     {
-      const user = await CorporateTrainee.findOneAndUpdate({username:username},{password:hashedPassword})
+      const user = await CorporateTrainee.findOneAndUpdate({username:username},{password:hashedPassword , flag:true})
       res.status(200).json({user})
     }
 
     if(instructor)
     {
-      const user = await Instructor.findOneAndUpdate({username:username},{password:hashedPassword})
+      const user = await Instructor.findOneAndUpdate({username:username},{password:hashedPassword , flag:"true"})
+      res.status(200).json({user})
+    }
+
+    if(admin)
+    {
+      const user = await Admin.findOneAndUpdate({username:username},{password:hashedPassword ,flag:true})
       res.status(200).json({user})
     }
     
-    if(!instructor && !coTrainee && !indTrainee)
+    if(!instructor && !coTrainee && !indTrainee && !admin)
     {
-      return res.status(404).json({error: 'No such user'})
+      return res.status(404).json({error: 'You have  to login first in order to change your password'})
     }
   }
   catch (error)
@@ -260,17 +299,17 @@ const resetPassword = async (req,res) =>
 {
   const {email}=req.body
   const {password}=req.body
-  // const{confirmPassword}=req.body
+  const{confirmPassword}=req.body
   
-  if( !password || !email)
+  if( !password || !confirmPassword)
   {
     return res.status(400).json({ error: 'Please fill in all fields'})
   }
-  // const pass = await bcrypt.compare(password, confirmPassword);
-  // if(!password === confirmPassword)
-  // {
-  //   return res.status(400).json({ error: 'Password is  not confirmed'})
-  // }
+
+  if(password !== confirmPassword)
+  {
+    return res.status(400).json({ error: 'Passwords do  not match'})
+  }
   
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(password, salt);
@@ -278,6 +317,7 @@ const resetPassword = async (req,res) =>
   const indTrainee = await IndTrainee.findOne({email});
   const instructor = await Instructor.findOne({email});
   const coTrainee = await CorporateTrainee.findOne({email});
+  const admin = await Admin.findOne({email});
   
   if(indTrainee)
   {
@@ -296,8 +336,14 @@ const resetPassword = async (req,res) =>
     const user = await Instructor.findOneAndUpdate({email:email},{password:hashedPassword})
     res.status(200).json({user})
   }
+
+  if(admin)
+  {
+    const user = await Admin.findOneAndUpdate({email:email},{password:hashedPassword})
+    res.status(200).json({user})
+  }
   
-  if(!instructor && !coTrainee && !indTrainee)
+  if(!instructor && !coTrainee && !indTrainee && !admin)
   {
     return res.status(404).json({error: 'No such user'})
   }
@@ -318,8 +364,9 @@ const forgotPassword = async (req,res) =>
     const instructor = await Instructor.findOne({email:email})
     const coTrainee = await CorporateTrainee.findOne({email:email})
     const indTrainee = await IndTrainee.findOne({email:email})
+    const admin = await Admin.findOne({email:email})
 
-    if(instructor || coTrainee || indTrainee)
+    if(instructor || coTrainee || indTrainee || admin)
     {
       let mailOptions=
       {
@@ -340,7 +387,7 @@ const forgotPassword = async (req,res) =>
     }
     else
     {
-      res.status(404).json({error:"incorrect email"})
+      res.status(404).json({error:"This email is not correct"})
     }
   }
   catch (error)

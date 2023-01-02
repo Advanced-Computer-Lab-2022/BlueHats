@@ -5,11 +5,11 @@ export const IndTraineesContext = createContext()
 export const indTraineesReducer = (state, action) => {
   switch (action.type)
    {
-    case 'LOGIN':
-      return {indTrainees: action.payload} 
+    // case 'LOGIN':
+    //   return {indTrainees: action.payload} 
 
-    case 'LOGOUT':
-      return {indTrainees: null } 
+    // case 'LOGOUT':
+    //   return {indTrainees: null } 
 
     case 'SET_INDTRAINEES':
       return { indTrainees: action.payload }

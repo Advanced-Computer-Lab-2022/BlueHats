@@ -1,15 +1,11 @@
 const express = require('express')
 const 
 {
-    createCorporateTrainee,
-    getCorporateTrainees,
     getCorporateTrainee,
-    deleteCorporateTrainee,
-    updateCorporateTraineeProfile,
-    changeEmailCorporateTrainee,
-    forgotPasswordCorporateTrainee,
-    viewSolution,
+    getCorporateTrainees,
     gradeExam,
+    createCorporateTrainee,
+    viewSolution,
     setAnswer,
     compareAnswers
 } = require('../controllers/corporateTraineeController' )
@@ -26,15 +22,15 @@ router.get('/:id',getCorporateTrainee)
 router.post('/',createCorporateTrainee)
 
 // DELETE a CorporateTrainee
-router.delete('/:id',deleteCorporateTrainee)
+//router.delete('/:id',deleteCorporateTrainee)
 
 // UPDATE an IndTrainee
 // router.patch('/changePassword', changePasswordCorporateTrainee)
-router.patch('/changeEmail', changeEmailCorporateTrainee)
-router.patch('/updateProfile',updateCorporateTraineeProfile)
+// router.patch('/changeEmail', changeEmailCorporateTrainee)
+// router.patch('/updateProfile',updateCorporateTraineeProfile)
 
 // forgot password
- router.post("/forgotPassword",forgotPasswordCorporateTrainee)
+//router.post("/forgotPassword",forgotPasswordCorporateTrainee)
 
 
 router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 

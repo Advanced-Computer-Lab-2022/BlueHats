@@ -1,20 +1,22 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcrypt')
-
-const CorporateTrainee = require('../models/corporateTraineeModel')
 
 const instructorSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
     required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  email:{
+    type: String,
+    required: true,
+    unique:true,
+    lowercase:true
   },
   username: {
-    type: String,
-    required: true
-  },
-  email: 
-  {
     type: String,
     required: true,
     unique:true,
@@ -23,6 +25,16 @@ const instructorSchema = new Schema({
   password: {
     type:String ,
     required: true
+  },
+  gender: 
+  {
+    type:String ,
+    required: true
+  },
+  flag: 
+  {
+    type:String ,
+    required: false
   },
   biography :
   {
@@ -39,29 +51,5 @@ const instructorSchema = new Schema({
     type: [{type: mongoose.Types.ObjectId , ref:'Course'}]
   }
 }, { timestamps: true })
-
-// instructorSchema.statics.login = async function(username, password) {
-
-//   if (!username || !password) {
-//     throw Error('All fields must be filled')
-//   }
-
-//   const user = await this.findOne({ username })
-//   if (!user) 
-//   {
-//     // throw Error('Incorrect email')
-//     const trainee = await CorporateTrainee.login(username, password)
-//   }
-//   else
-//   {
-//     const match = await bcrypt.compare(password, user.password)
-//     if (!match) 
-//     {
-//     throw Error('Incorrect password')
-//     }
-//     return user
-//  }
-
-// }
 
 module.exports = mongoose.model('InstructorModel', instructorSchema)
