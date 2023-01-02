@@ -1873,3 +1873,20 @@ label.star:before {
   .cotrainee-button3 button:hover {
     background-color:  var(--hover);
   }
+
+  .all-courses button{
+    background: var(--primary);
+    border: 0;
+    color: #fff;
+    padding: 10px;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 40px;
+  }
+  .all-courses button:hover {
+    background-color:  var(--hover);
+  }
+
+  

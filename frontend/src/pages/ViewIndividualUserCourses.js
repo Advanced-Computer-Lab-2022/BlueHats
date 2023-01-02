@@ -15,7 +15,7 @@ const ViewIndividualTraineeCourses = () => {
 
 
       useEffect(() => {
-        const data = {id: "6386253315707335be9141b4"};
+        const data = {id: "savedID"};
         axios({
           method: "PUT",
           url: `/api/indTrainee/filter`,
