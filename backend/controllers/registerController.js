@@ -184,6 +184,7 @@ const login = async (req, res) =>
     {
       const pass = await bcrypt.compare(password, admin.password);
       const id = admin.id;
+      const type = "admin";
       const flag = admin.flag
       if (pass) 
       {
