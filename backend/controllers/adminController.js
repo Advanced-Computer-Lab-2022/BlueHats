@@ -7,7 +7,6 @@ const validator = require('validator')
 const Admin = require('../models/adminModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const Problem = require('../models/reportedProblem')
-const CorporateTrainee = require('../models/corporateTraineeModel')
 const Instructor = require('../models/instructorModel')
 const IndTrainee = require('../models/indTraineeModel')
 

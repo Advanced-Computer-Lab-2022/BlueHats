@@ -137,9 +137,9 @@ header a {
 /* .admin {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px; */
-
-div.admin-details  , div.addInstructor-details , div.corporateTrainee-details , div.indTrainees-details{
+  gap: 100px;
+} */
+div.admin-details  , div.addInstructor-details , div.corporateTrainee-details , div.indTrainees-details {
   display: inline-grid;
   column-gap: 50px;
   row-gap: 15px;
@@ -215,6 +215,11 @@ div.admin-details  , div.addInstructor-details , div.corporateTrainee-details , 
   border-radius: 50%;
   color: #333;
 }
+/* .corporateTrainee {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+} */
 .corporateTrainee-details {
   background: #fff;
   border-radius: 4px;
@@ -258,7 +263,17 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
-button {
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* button { add div
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -268,10 +283,10 @@ button {
   width: 50%;
   margin-left: 100px;
   cursor: pointer;
-}
+} 
 button:disabled {
   background: #b487da;
-  /*background: #d8a8ff;*/
+  background: #d8a8ff;
   border: 0;
   color: #fff;
   padding: 10px;
@@ -279,6 +294,15 @@ button:disabled {
   border-radius: 4px;
   width: 50%;
   margin-left: 100px;
+  cursor: not-allowed;
+}*/
+form button:disabled {
+  background: #b487da;
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
   cursor: not-allowed;
 }
 div.error {
@@ -289,14 +313,38 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
-input.error {
-  border: 1px solid var(--error);
-}
 div.menu{
   cursor:pointer;
 }
+div.signupButton{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  margin-left: 60px;
+  width:65%;
+  cursor: pointer;
+}
+
+div.signupButton:disabled {
+  background: #b487da;
+  background: #d8a8ff;
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  margin-left: 160px;
+  width:65%;
+  cursor: not-allowed;
+}
 div.delete{
   cursor:pointer;
+}
+input.error {
+  border: 1px solid var(--error);
 }
 div.msg {
   padding: 10px;
@@ -574,57 +622,25 @@ header .container .inputWithButton button {
   border: none;
   cursor: pointer;
 }
-div.signupButton{
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  margin-left: 60px;
-  width:65%;
-  cursor: pointer;
-}
-
-div.signupButton:disabled {
-  background: #b487da;
-  background: #d8a8ff;
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  margin-left: 160px;
-  width:65%;
-  cursor: not-allowed;
-}
 /*auth forms*/
-form.signup, form.login , form.admin , form.instructor , form.corporateTrainee{
+form.signup, form.login , form.admin , form.instructor , form.corporateTrainee {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
-  background: #fff;
-  /*background: linear-gradient(135deg , #71b7e6 , #9b59b6);*/
-  /*background: linear-gradient(135deg , #71b7e6 , #d893f4);*/
   background: linear-gradient(135deg , #92d3ff , #e9b3ff);
   border-radius: 4px;
 }
-
-form.forgotPassword , form.resetPassword , form.changeEmail , form.changePassword , form.EditBiography{
+form.forgotPassword , form.resetPassword , form.changeEmail , form.changePassword , form.EditBiography {
+  text-align: center;
+  color: #a256e0;
+  text-decoration: underline;
+  font-size: 1.4em;
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   /* background: #d5b9ec; */
   background: linear-gradient(135deg ,#f4d9ff, #d2edff );
   border-radius: 4px;
-}
-form.signup .title , form.login .title , form.admin .title , form.instructor .title , form.corporateTrainee  .title 
-{
-  text-align: center;
-  /*color: #a256e0;*/
-  color: #ffffff;
-  text-decoration: underline;
-  font-size: 1.4em;
 }
 form.changeEmail .title , form.forgotPassword .title, form.resetPassword .title , form.changePassword .title , form.EditBiography .title
 {
@@ -651,7 +667,6 @@ form.forgotPassword .info , form.changePassword .info ,  form.resetPassword .inf
   font-size: 0.7em;
   margin-bottom: 12px;
 }
-
 /* .indTrainee-details {
   background: #fff;
   border-radius: 4px;
@@ -659,8 +674,8 @@ form.forgotPassword .info , form.changePassword .info ,  form.resetPassword .inf
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-}
-.indTrainee-details h4 {
+} */
+.viewIndTrainee-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
@@ -705,13 +720,12 @@ form.forgotPassword .info , form.changePassword .info ,  form.resetPassword .inf
   color: #000000;
   text-align: left;
   line-height: normal;
-  /*padding-left: 10px;*/
+  padding-left: 10px;
   margin: 20px 20px 20px 0;
 }
 /* nav {
   display: flex;
   align-items: center;
-  z-index: 4;
 }
 nav a, nav button {
   margin-left: 10px;

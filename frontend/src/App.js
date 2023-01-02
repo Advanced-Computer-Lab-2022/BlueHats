@@ -20,7 +20,6 @@ import Preview from './pages/Preview';
 import AdminHome from './pages/AdminHome';
 import AddInstructor from './pages/AddInstructor';
 import AddCoTrainee from './pages/AddCoTrainee';
-import ViewAdmin from './pages/viewAdmins';
 import ViewIndTrainee from './pages/ViewIndTrainees';
 import ViewCoTrainee from './pages/ViewCoTrainee';
 import Signup from './pages/Signup';
@@ -79,6 +78,7 @@ import ViewReviewsByInstructors from './pages/ViewReviewsByInstructor'
 
 
 import ViewRequests from './pages/ViewRequests';
+import AddAdmin from './pages/AddAdmin';
 
 var loggedinUser = JSON.parse(localStorage.getItem('user'));
 
@@ -100,9 +100,10 @@ function App() {
                 <Route path="/payment" element={<Payment keys={{ stripe: "YOUR STRIPE PUBLIC KEY HERE" }}/>}/>
                 <Route path="/MyEnrolledCourses" element={<IndTraineeCourses/>}/>
                 <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
-                <Route path="/admin/addAdmin" element={<Admin/>} />
-                <Route path="/admin/instructor" element={<NewInstructor/>}/>
-                <Route path="/admin/corporateTrainee" element={<NewCoTrainee/>}/>
+                <Route path="/admin/addAdmin" element={<AddAdmin/>} />
+                <Route path="/admin/instructor" element={<AddInstructor/>}/>
+                <Route path="/admin/corporateTrainee" element={<AddCoTrainee/>}/>
+          
                 <Route path="/instructor/changeEmail" element={<ChangeEmail/>} />
                 <Route path="/indTrainee/changePassword" element={<ResetPassword/>} />
                 <Route path="/instructor/changePassword" element={<ResetPassword/>} />
@@ -116,9 +117,9 @@ function App() {
             </Route>}
 
            { loggedinUser && <Route element={<AdminRoutes />}>
-              <Route path="/admin/addAdmin" element={<Admin/>} />
-              <Route path="/admin/instructor" element={<NewInstructor/>}/>
-              <Route path="/admin/corporateTrainee" element={<NewCoTrainee/>}/>
+              <Route path="/admin/addAdmin" element={<AddAdmin/>} />
+              <Route path="/admin/instructor" element={<AddInstructor/>}/>
+              <Route path="/admin/corporateTrainee" element={<AddCoTrainee/>}/>
               <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
               <Route path="/adminPage" element={<AdminPage/>} />
               <Route path="/adminhome/" element={<AdminHome/>} />
@@ -148,6 +149,7 @@ function App() {
               <Route path="/MyEnrolledCourses" element={<IndTraineeCourses/>}/>
               <Route path="/course/view" element={<CourseView/>} />
             </Route>}
+           
 
             <Route
               path="/"
@@ -329,7 +331,7 @@ function App() {
             />
             <Route
             path="/admin/viewAdmins"
-            element={<ViewAdmin/>}
+            element={<ViewAdmins/>}
           />
           </Routes>
         </div>
