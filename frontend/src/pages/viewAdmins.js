@@ -2,6 +2,7 @@ import { useEffect } from "react"
 
 // components
 import AdminDetails from "../components/AdminDetails"
+import AdminMenu from '../components/AdminMenu';
 //import AdminForm from "../components/AdminForm"
 
 import { useAdminsContext } from "../hooks/useAdminsContext"
@@ -25,11 +26,14 @@ const ViewAdmins = () => {
 }, [dispatch])
 
   return (
+    <>
+    <AdminMenu/>
     <div className="admin">
         {admins && admins.map(admin => (
           <AdminDetails admin={admin} key={admin._id} />
         ))}
     </div>
+    </>
   )
 }
 export default ViewAdmins

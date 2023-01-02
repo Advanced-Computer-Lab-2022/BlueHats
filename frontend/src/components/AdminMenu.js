@@ -162,7 +162,7 @@ export default function SwipeableTemporaryDrawer() {
           </ListItem>
  
         <ListItem disablePadding>
-            <ListItemButton onClick={() =>window.location.href=`/RefundRequests`} >
+            <ListItemButton onClick={() =>window.location.href=`/admin/refund-requests`} >
               <ListItemIcon>
                 <LocalOfferIcon />
               </ListItemIcon>

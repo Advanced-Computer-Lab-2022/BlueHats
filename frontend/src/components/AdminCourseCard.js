@@ -294,7 +294,7 @@ function AdminCourseCard({ course }) {
         />
       </CardContent>
       <CardActions>
-        <Button
+        {/* <Button
           variant="contained"
           size="small"
           sx={{
@@ -306,7 +306,7 @@ function AdminCourseCard({ course }) {
           }
         >
           Learn More
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>
   );

@@ -3,6 +3,7 @@ import { useRequestsContext } from "../hooks/useRequestsContext"
 
 // components
 import RequestDetails from "../components/RequestDetails"
+import AdminMenu from '../components/AdminMenu';
 
 
 import { useEffect } from "react"
@@ -27,6 +28,7 @@ const ViewRequests = () => {
   
   return (
       <div >
+        <AdminMenu/>
         <div>
         {requests && requests.map(RequestCourse => (
           <RequestDetails RequestCourse={RequestCourse} key={RequestCourse._id} />

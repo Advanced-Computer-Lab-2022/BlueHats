@@ -463,9 +463,9 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+       { user.type=="admin" && <MenuItem onClick={() => window.location.href = `/AdminHome`}>
           <Avatar /> Profile
-        </MenuItem>
+        </MenuItem>}
         {user.type=="coTrainee" && <MenuItem onClick={() => window.location.href = `/courses`}>
         <ListItemIcon>
           <LibraryBooksIcon />

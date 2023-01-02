@@ -187,14 +187,14 @@ div.admin-details  , div.addInstructor-details , div.corporateTrainee-details , 
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
-.addInstructor-details {
+/* .addInstructor-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-}
+} */
 .addInstructor-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
@@ -1391,6 +1391,11 @@ button[disabled] {
     position: relative;
     left: 85%;
     width: 15%;
+  }
+  .co-courses .enrolled-menu button{
+    position: sticky;
+    top: 10px;
+    right: 12px;
   }
   .co-courses button:hover {
     background-color:  var(--hover);

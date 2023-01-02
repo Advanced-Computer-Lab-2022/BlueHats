@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import React from 'react';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import HomeCoursesCard from "../components/HomeCourseCard";
 import {
@@ -22,6 +25,8 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { makeStyles } from "tss-react/mui";
+import Loader from "../components/Loader"
+
 
 const useStyles = makeStyles({
   root: {
@@ -197,7 +202,29 @@ const HomePage = () => {
     setPriceRange([0, sliderMax]);
     navigate(`${location.pathname}`);
   };
+  const handleDragStart = (e) => e.preventDefault();
+
+const items = [
+  <img src={require('../images/img1.jpg')} onDragStart={handleDragStart} role="presentation" alt="homeIMG" />,
+  <img src={require('../images/img2.jpg')}  onDragStart={handleDragStart} role="presentation" alt="homeIMG" />,
+  <img src={require('../images/img1.jpg')}  onDragStart={handleDragStart} role="presentation" alt="homeIMG"/>,
+];
   return (
+    <>
+    {loading && <Loader/>}
+    <div  className='alice'>
+    <AliceCarousel 
+      sx={{width: 1000,marginLeft:15}}
+      items={items}
+      autoPlayInterval={5000}
+      autoPlayDirection="ltr"
+      autoPlay={true}
+      fadeOutAnimation={true}
+      mouseTrackingEnabled={true}
+      disableAutoPlayOnAction={true}
+      disableButtonsControls={true}
+    />
+  </div>
     <Container className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -304,8 +331,8 @@ const HomePage = () => {
             <Button   sx={{ paddingLeft: 3 }} size="small" color="primary" onClick={clearAllFilters}>
               Clear All
             </Button>
-          {/* </Grid>
-          <Grid item xs={12} sm={6} spacing={2}> */}
+          </Grid>
+          <Grid item xs={12} sm={6} spacing={2}>
             <Typography   sx={{ paddingLeft: 3 }} gutterBottom>Sort By</Typography>
             <FormControl component="fieldset" className={classes.filters}>
               <RadioGroup
@@ -341,11 +368,7 @@ const HomePage = () => {
         </Grid>
       </Paper>
       <Grid container spacing={2}>
-        {loading ? (
-          <div className={classes.loader}>
-            <CircularProgress size="3rem" thickness={5} />
-          </div>
-        ) : (
+        {(
           courses.map((course) => (
             <Grid item key={course._id} xs={12} sm={6} md={4}>
               <HomeCoursesCard course={course} />
@@ -354,6 +377,7 @@ const HomePage = () => {
         )}
       </Grid>
     </Container>
+    </>
   );
 };
 

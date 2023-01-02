@@ -19,7 +19,7 @@ const AddInstructorDetails = ({ instructor }) => {
       <div className="addInstructor-details">
         <h4>{instructor.firstName} {instructor.lastName}</h4> 
         <span>{<PersonRemoveIcon onClick={handleClick} />}</span>
-        <p>Added {formatDistanceToNow(new Date(instructor.createdAt), {addSuffix: true})}</p>
+        {/* <p>Added {formatDistanceToNow(new Date(instructor.createdAt), {addSuffix: true})}</p> */}
         <p><strong>Username: </strong>{instructor.username}</p>
         <p><strong>Email: </strong>{instructor.email}</p>
         <p><strong>Biography: </strong>{instructor.biography}</p>

@@ -102,26 +102,30 @@ const CoursePreview = ({course}) => {
       const myembedID = myembed[1];
       
       const [wallet, setWallet] = useState(0); 
-      if(user.type=="indTrainee")
+      if(user )
       {
-        var loggedinUser = JSON.parse(localStorage.getItem('user'));
-        const userID = loggedinUser.id;
-        const type = loggedinUser.type;
-  
-        // useEffect(() =>  {
-          const data={type: type, userID: userID};
-          axios({
-            method: "PUT",
-            url : `/api/courses/wallet`,
-            data:data,
-            headers:{'Content-Type':'application/json'}
-          })
-          .then( (res) => { 
-            const wallet = res.data
-           
-            setWallet(wallet)  
-          });
-        // },[type, userID])
+        if(user.type=="indTrainee")
+        {
+
+          var loggedinUser = JSON.parse(localStorage.getItem('user'));
+          const userID = loggedinUser.id;
+          const type = loggedinUser.type;
+    
+          // useEffect(() =>  {
+            const data={type: type, userID: userID};
+            axios({
+              method: "PUT",
+              url : `/api/courses/wallet`,
+              data:data,
+              headers:{'Content-Type':'application/json'}
+            })
+            .then( (res) => { 
+              const wallet = res.data
+             
+              setWallet(wallet)  
+            });
+          // },[type, userID])
+        }
       }
 
       const [open1, setOpen1] = useState(false);
@@ -152,12 +156,13 @@ const CoursePreview = ({course}) => {
     return (
         <div className="course-preview">
            <Card sx={{ minWidth: 380 }}>
-           {user.type=="indTrainee" &&  wallet<course.price && <CardHeader
+            
+           {user && user.type=="indTrainee" &&  wallet<course.price && <CardHeader
             action={<Button onClick={() => window.location.href=`/payment?id=${course._id}`} size="large" color="secondary">Enroll Now</Button>}
             title={course.title.toUpperCase()}
             subheader= {"Subject: "+course.subject.toUpperCase()}
           />}
-           {user.type=="indTrainee"  &&  wallet>=course.price &&<CardHeader
+           {user && user.type=="indTrainee"  &&  wallet>=course.price &&<CardHeader
             action={<Button onClick={handleClickOpen} size="large" color="secondary">Enroll Now</Button>}
             title={course.title.toUpperCase()}
             subheader= {"Subject: "+course.subject.toUpperCase()}

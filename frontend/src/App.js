@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // pages and components
-import Home from './pages/Home';
+import Home from './pages/HomePage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Instructor from './pages/Instructor';
@@ -100,7 +100,9 @@ function App() {
                 <Route path="/admin/addAdmin" element={<AddAdmin/>} />
                 <Route path="/admin/instructor" element={<AddInstructor/>}/>
                 <Route path="/admin/corporateTrainee" element={<AddCoTrainee/>}/>
-          
+                <Route path="/admin/viewInstructors" element={<ViewInstructors/>}/>
+                <Route path="/admin/viewCoTrainees" element={<ViewCoTrainee/>} />
+                <Route path="/admin/viewIndTrainees" element={<ViewIndTrainee/>}/>
                 <Route path="/instructor/changeEmail" element={<ChangeEmail/>} />
                 <Route path="/indTrainee/changePassword" element={<ResetPassword/>} />
                 <Route path="/instructor/changePassword" element={<ResetPassword/>} />
@@ -120,6 +122,9 @@ function App() {
               <Route path="/admin/refund-requests" element={<RefundRequests/>}/>
               <Route path="/adminPage" element={<AdminPage/>} />
               <Route path="/adminhome/" element={<AdminHome/>} />
+              <Route path="/admin/viewInstructors" element={<ViewInstructors/>}/>
+              <Route path="/admin/viewCoTrainees" element={<ViewCoTrainee/>} />
+              <Route path="/admin/viewIndTrainees" element={<ViewIndTrainee/>}/>
             </Route>}
 
            { loggedinUser && <Route element={<InstructorRoutes />}>
@@ -161,8 +166,6 @@ function App() {
               element={<Search/>}
             />
             
-           
-           
             <Route
               path="/HFilter"
               element={<HomeFilter/>}
@@ -176,18 +179,7 @@ function App() {
               element={<Preview/>}
             />
             
-             <Route
-              path="/Instructors"
-              element={<ViewInstructors/>}
-            />
-            <Route
-              path="/admin/viewCoTrainees"
-              element={<ViewCoTrainee/>}
-            />
-            <Route
-              path="/admin/viewIndTrainees"
-              element={<ViewIndTrainee/>}
-            />
+           
             <Route
               path="/Mycourses"
               element={<ViewInstructorCourses/>}
