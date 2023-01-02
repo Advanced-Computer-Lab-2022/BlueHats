@@ -108,7 +108,7 @@ const CourseFullView = ({ course }) => {
                     setActive("question");}} />}> 
                   <span className="material-symbols-outlined"> quiz </span> Test your knowledge  </MenuItem> 
                 </SubMenu>)}
-            <MenuItem> <span className="material-symbols-outlined"> quiz </span> Final Exam </MenuItem>
+            {/* <MenuItem> <span className="material-symbols-outlined"> quiz </span> Final Exam </MenuItem> */}
             {(value===100) && <MenuItem>  <SenDownloadCertificate course={course}/>  </MenuItem>}
             </Menu>
           

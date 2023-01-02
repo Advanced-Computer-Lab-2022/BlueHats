@@ -3,6 +3,7 @@ const course = require('../models/course');
 const mongoose = require('mongoose');
 const MyRequests = require ('../models/requestsStatus')
 
+const CorporateTrainee = require('../models/corporateTraineeModel');
 
 const getAllRequests = async(req, res) => {
     const requests = await RequestCourse.find({}).sort({createdAt: -1});
@@ -34,17 +35,17 @@ const acceptRequest = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such request'})
     }
-
     const requestedCourse = await RequestCourse.find({_id: id});
+
     var cId = requestedCourse[0].courseId;
     var coTId = requestedCourse[0].corporateTraineeId;
-    const findCourse = await course.find({_id:cId})
 
+    const findCourse = await course.find({_id:cId})
     var cT = findCourse[0].corporateTrainee
     var es = findCourse[0].enrolled
     es++;
     cT.push(coTId)
-   
+
     const addCourse = await course.findOneAndUpdate({_id:cId},{
         corporateTrainee: cT,
         enrolled:es,        
@@ -52,15 +53,18 @@ const acceptRequest = async (req, res) => {
     await MyRequests.findOneAndUpdate({corporateTraineeId:mongoose.Types.ObjectId(coTId),courseId:mongoose.Types.ObjectId(cId) },{
         status:"Accepted"
     });
-    // const addCourse = await course.findOneAndUpdate({_id:cId},{
-    //     corporateTrainee: coTId
-    // })
+
+     ////////////////////////
+     const trainee = await CorporateTrainee.findById(coTId);
+     const object = { course: cId, progress: 0 };
+     const newCourses = trainee.courses.concat([object]);  
+     await CorporateTrainee.findOneAndUpdate({_id: coTId} , {courses: newCourses});
+     //////////////////////
+    
 
     if(!addCourse) {
         return res.status(404).json({error: 'No such course exists'})
     }
-   
-
     const request = await RequestCourse.findOneAndDelete({_id: id});
 
     if(!request) {
@@ -83,11 +87,6 @@ const rejectRequest = async (req, res) => {
     await MyRequests.findOneAndUpdate({corporateTraineeId:mongoose.Types.ObjectId(coTId),courseId:mongoose.Types.ObjectId(cId) },{
         status:"Rejected"
     });
-
-    // var status =  
-    // await course.findOneAndUpdate({_id:cId},{
-    //     requestStatus: status
-    // })
 
     const request = await RequestCourse.findOneAndDelete({_id: id});
 

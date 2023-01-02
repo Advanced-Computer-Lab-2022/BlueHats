@@ -203,7 +203,7 @@ const HomePage = () => {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={12} sm={5}>
             <FormControl component="fieldset" className={classes.filters}>
-              <Typography gutterBottom> Filters </Typography>
+              <Typography   sx={{ paddingLeft: 3 }} gutterBottom> Filters </Typography>
               <div className={classes.filters}>
                 <Slider
                   min={0}
@@ -213,6 +213,7 @@ const HomePage = () => {
                   disabled={loading}
                   onChange={(e, newValue) => setPriceRange(newValue)}
                   onChangeCommitted={onSliderCommitHandler}
+                  sx={{ paddingLeft: 3 }}
                 />
 
                 <div className={classes.priceRangeInputs}>
@@ -241,7 +242,7 @@ const HomePage = () => {
                   />
                 </div>
               </div>
-              <Box sx={{ minWidth: 120 }}>
+              <Box sx={{ maxWidth: 200, padding: 3}}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Subject</InputLabel>
                   <Select
@@ -261,7 +262,7 @@ const HomePage = () => {
                   </Select>
                 </FormControl>
               </Box>
-              <Box sx={{ minWidth: 120 }}>
+              <Box sx={{ maxWidth: 200, padding: 3 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Rating</InputLabel>
                   <Select
@@ -300,12 +301,12 @@ const HomePage = () => {
                 </FormControl>
               </Box>
             </FormControl>
-            <Button size="small" color="primary" onClick={clearAllFilters}>
+            <Button   sx={{ paddingLeft: 3 }} size="small" color="primary" onClick={clearAllFilters}>
               Clear All
             </Button>
-          </Grid>
-          <Grid item xs={12} sm={6} spacing={2}>
-            <Typography gutterBottom>Sort By</Typography>
+          {/* </Grid>
+          <Grid item xs={12} sm={6} spacing={2}> */}
+            <Typography   sx={{ paddingLeft: 3 }} gutterBottom>Sort By</Typography>
             <FormControl component="fieldset" className={classes.filters}>
               <RadioGroup
                 aria-label="price-order"
@@ -318,18 +319,21 @@ const HomePage = () => {
                   disabled={loading}
                   control={<Radio />}
                   label="Price: Highest - Lowest"
+                  sx={{ paddingLeft: 3 }}
                 />
                 <FormControlLabel
                   value="ascending"
                   disabled={loading}
                   control={<Radio />}
                   label="Price: Lowest - Highest"
+                  sx={{ paddingLeft: 3 }}
                 />
                 <FormControlLabel
                   value="popularity"
                   disabled={loading}
                   control={<Radio />}
                   label="Popularity: Highest - Lowest"
+                  sx={{ paddingLeft: 3 }}
                 />
               </RadioGroup>
             </FormControl>
