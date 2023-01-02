@@ -1,5 +1,5 @@
 const express = require('express')
-const { updateCorporateTraineeProfile } = require('../controllers/corporateTraineeController')
+//const { updateCorporateTraineeProfile } = require('../controllers/corporateTraineeController')
 const {
     createInstructor,
     getInstructors,
@@ -8,9 +8,7 @@ const {
     deleteInstructor,
     updateBiography,
     updateAccepted,
-    changeEmailInstructor,
-    changePasswordInstructor,
-    forgotPasswordInstructor,
+    changeEmail,
     filterCourses
 } = require('../controllers/instructorController' )
 
@@ -34,14 +32,14 @@ router.post('/',createInstructor)
 router.delete('/:id',deleteInstructor)
 
 // UPDATE an IndTrainee
-router.patch('/changePassword', changePasswordInstructor)
-router.patch('/changeEmail', changeEmailInstructor)
+//router.patch('/changePassword', changePasswordInstructor)
+router.patch('/changeEmail', changeEmail)
 router.patch('/updateProfile',updateBiography)
 router.patch('/updateAccepted',updateAccepted)
 
 
 // forgot password
- router.post("/forgotPassword",forgotPasswordInstructor)
+//router.post("/forgotPassword",forgotPasswordInstructor)
 
 // search in instructor courses
 router.get('/search/:id/:key', instructorSearch);

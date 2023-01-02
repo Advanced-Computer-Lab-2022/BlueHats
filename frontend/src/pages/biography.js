@@ -1,12 +1,19 @@
 import { useState } from "react"
 import axios from "axios"
-//import { useLogin } from "../hooks/useLogin"
-//import {Navigate} from 'react-router-dom'
+
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Biography = () => {
   const [biography, setBiography] = useState('')
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error1, setError] = useState(null)
+  const [open, setOpen] = useState(false)
 
 
   const handleSubmit = async (e) => 
@@ -15,9 +22,22 @@ const Biography = () => {
     console.log(biography)
   }
 
+  const handleClose = () => 
+  {
+    window.location.href=`/editBiography`
+  };
+
+  const handleOkay = () => 
+  {
+    window.location.href=`/instructor/profile`
+  };
+
   const handleClick = async () =>
   {
-    const data={biography:biography}
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const savedUsername = loggedinUser.username
+    const data={username:savedUsername , biography}
+
     axios({
       method:"PATCH",
       url:`/api/instructor/updateProfile`,
@@ -26,10 +46,12 @@ const Biography = () => {
     })
     .then(() =>{
       setLoading(false)
-      alert("Your biography has been updated");
+      setError(null)
+      setOpen(true)
     })
     .catch(error => 
           {
+          setError(error.response.data.error)
           console.log(error)
       })
     
@@ -38,7 +60,9 @@ const Biography = () => {
 
   return (
     <form className="EditBiography"onSubmit={handleSubmit}>
+      <div className="title">
       <h3>Edit Biography</h3>
+      </div>
 
       <label>Biography:</label>
       <input
@@ -48,7 +72,28 @@ const Biography = () => {
       />
 
       <button onClick={handleClick}>Update Biography</button>
-      {error && <div className = "error">{error}</div>}
+      {error1 && <div className = "error">{error1}</div>}
+
+      <div>
+       <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Biography updated!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+         Your biography have been updated successfully
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleOkay}>Okay</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
        
     </form>
   )

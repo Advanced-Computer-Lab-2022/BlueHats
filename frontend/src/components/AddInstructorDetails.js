@@ -1,5 +1,7 @@
 import { useInstructorsContext } from '../hooks/useInstructorsContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import * as React from 'react';
 
 const AddInstructorDetails = ({ instructor }) => {
   const { dispatch } = useInstructorsContext(); 
@@ -15,25 +17,13 @@ const AddInstructorDetails = ({ instructor }) => {
 
     return (
       <div className="addInstructor-details">
-        <h4>{instructor.name}</h4>
+        <h4>{instructor.firstName} {instructor.lastName}</h4> 
+        <span>{<PersonRemoveIcon onClick={handleClick} />}</span>
+        <p>Added {formatDistanceToNow(new Date(instructor.createdAt), {addSuffix: true})}</p>
         <p><strong>Username: </strong>{instructor.username}</p>
         <p><strong>Email: </strong>{instructor.email}</p>
-        {/* <p><strong>Password: </strong>{instructor.password}</p> */}
         <p><strong>Biography: </strong>{instructor.biography}</p>
-        <p>{instructor.createdAt}</p>
-        <p>Added {formatDistanceToNow(new Date(instructor.createdAt), {addSuffix: true})}</p>
-        <a className = "Edit email" href = "/instructor/changeEmail">
-                    Edit my email
-        </a>
-        <br/>
-        <a className = "Edit biography" href = "/instructor/editBiography">
-                    Edit my biography
-        </a>
-        <br/>
-        <a className = "Change Password" href = "/instructor/changePassword">
-                    Change password
-        </a>
-      </div>
+    </div>
     )
   }
   

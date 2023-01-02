@@ -17,7 +17,10 @@ const ChangeEmail = () => {
 
   const handleClick = async () =>
   {
-    const data={email:email}
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const savedUsername = loggedinUser.username
+    const data={username:savedUsername , email}
+
     axios({
       method:"PATCH",
       url:`/api/instructor/changeEmail`,
@@ -38,9 +41,12 @@ const ChangeEmail = () => {
 
   return (
     <form className="changeEmail"onSubmit={handleSubmit}>
-      <h3>Change Email</h3>
 
-      <label>Email:</label>
+      <div className="title">
+      <h3>Change Email</h3>
+      </div>
+
+      <label>New email:</label>
       <input
        type ="text"
        onChange={(e) => setEmail(e.target.value)}

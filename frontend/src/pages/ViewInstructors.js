@@ -1,43 +1,35 @@
-//import { useEffect } from "react"
-import { useInstructorsContext } from "../hooks/useInstContext"
+import { useEffect } from "react"
 
 // components
-import InstructorDetails from "../components/InstructorDetails"
+import InstructorDetails from "../components/AddInstructorDetails"
+//import AdminForm from "../components/AdminForm"
 
-
-import { useEffect } from "react"
-import { useCoursesContext } from "../hooks/useCoursesContext"
+import { useInstructorsContext } from "../hooks/useInstructorsContext"
 
 const ViewInstructors = () => {
- const {instructors, dispatch} = useInstructorsContext()
- const {courses} = useCoursesContext()
+  const { instructors, dispatch } = useInstructorsContext()
+  //const [admins, setAdmins] = useState(null)
+  useEffect(() => {
+    const fetchInstructors = async () => {
+      const response = await fetch('/api/instructor')
+      const json = await response.json()
 
-    // fetch all courses
-    useEffect(() => {
-      const fetchInstructors = async () => {
-        const response = await fetch('/api/instructors')
-        const json = await response.json()
-  
-        if (response.ok) {
-          dispatch({type: 'SET_INSTRUCTORS', payload: json})
-        }
+      if (response.ok) 
+      {
+        dispatch({type: 'SET_INSTRUCTORS', payload: json})
       }
-  
-      fetchInstructors()
-    }, [dispatch])
+    }
 
-  
+    fetchInstructors()
+ // }, [])
+}, [dispatch])
+
   return (
-      <div >
-        <div>
-        {instructors && instructors.map(Instructor => (
-          <InstructorDetails Instructor={Instructor} key={Instructor._id} />
+    <div className="instructor">
+        {instructors && instructors.map(instructor => (
+          <InstructorDetails instructor={instructor} key={instructor._id} />
         ))}
-      </div>
-      </div>
-      
+    </div>
   )
-
 }
-
 export default ViewInstructors

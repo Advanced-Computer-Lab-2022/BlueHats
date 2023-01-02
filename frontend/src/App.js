@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Instructor from './pages/Instructor';
 import CourseView from './pages/CourseView';
 import Payment from './pages/Payment';
+import Dashboard from './pages/dashboard';
 
 import Search from './pages/Search';
 import Grade from './pages/Grade';
@@ -16,17 +17,19 @@ import IndTraineeCourses from './pages/IndTraineeCourses';
 import RefundRequests from './pages/RefundRequests';
 
 import Preview from './pages/Preview';
-import Admin from './pages/Admin';
 import AdminHome from './pages/AdminHome';
-import NewInstructor from './pages/NewInstructor';
-import NewCoTrainee from './pages/NewCoTrainee';
+import AddInstructor from './pages/AddInstructor';
+import AddCoTrainee from './pages/AddCoTrainee';
+import ViewAdmin from './pages/viewAdmins';
+import ViewIndTrainee from './pages/ViewIndTrainees';
+import ViewCoTrainee from './pages/ViewCoTrainee';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ForgotPassword from './pages/forgotPassword';
 import ResetPassword from './pages/resetPassword';
 import ChangePassword from './pages/changePassword';
 import ChangeEmail from './pages/changeEmail';
-import IndTrainee from './pages/indTrainees';
+import IndTrainee from './pages/ViewIndTrainees';
 import InstructorProfile from './pages/instructorProfile';
 import CoTraineeProfile from './pages/coTraineeProfile';
 import Biography from './pages/biography';
@@ -48,6 +51,7 @@ import AdminRoutes from './utils/AdminRoutes';
 import InstructorRoutes from './utils/InstructorRoutes';
 import CorporateTraineeRoutes from './utils/CorporateTraineeRoutes';
 import IndividualTraineeRoutes from './utils/IndividualTraineeRoutes';
+import ViewAdmins from './pages/viewAdmins';
 
 
 
@@ -187,6 +191,18 @@ function App() {
               element={<ViewInstructors/>}
             />
             <Route
+              path="/admin/viewCoTrainees"
+              element={<ViewCoTrainee/>}
+            />
+            <Route
+              path="/admin/viewIndTrainees"
+              element={<ViewIndTrainee/>}
+            />
+            <Route
+              path="/Mycourses"
+              element={<ViewInstructorCourses/>}
+            />
+            <Route
               path="/signup"
               element={<Signup/>}
             />
@@ -224,7 +240,7 @@ function App() {
             />
 
              <Route
-              path="/rateinstructor/individualTrainee"
+              path="/rateindividualTrainee"
               element={<IndTraineeRateInstructor/>}
             />
 
@@ -272,6 +288,10 @@ function App() {
             <Route
               path="/viewaddreviews/corporatetrainee"
               element={<ViewReviewsByCorUsers/>}
+              />
+              <Route
+              path="/editBiography"
+              element={<Biography/>}
             />
             <Route
               path="/myreviews/corporatetrainee"
@@ -303,7 +323,14 @@ function App() {
               path="/requests/admin"
               element={<ViewRequests/>}
             />
-
+             <Route
+              path="/admin/dashboard"
+              element={<Dashboard/>}
+            />
+            <Route
+            path="/admin/viewAdmins"
+            element={<ViewAdmin/>}
+          />
           </Routes>
         </div>
         <Footer/>

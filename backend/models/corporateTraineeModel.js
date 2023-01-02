@@ -5,22 +5,42 @@ const Schema = mongoose.Schema
 
 
 const corporateTraineeSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
     required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  email:{
+    type: String,
+    required: true,
+    unique:true,
+    lowercase:true
   },
   username: {
-    type: String,
-    required: true
-  },
-  email: 
-  {
     type: String,
     required: true,
     unique:true,
     lowercase:true
   },
   password: {
+    type:String ,
+    required: true
+  },
+  gender: 
+  {
+    type:String ,
+    required:true
+  },
+  flag: 
+  {
+    type:String ,
+    required: false
+  },
+  corporate: 
+  {
     type:String ,
     required: true
   },

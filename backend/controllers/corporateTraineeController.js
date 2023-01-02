@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const mongoose = require("mongoose");
 const Course = require("../models/course");
 const bcrypt = require("bcrypt");
@@ -10,6 +11,18 @@ const review = require ('../models/reviewsModel')
 ///////////////
 const RequestCourse = require ('../models/requestCourse')
 const MyRequests = require ('../models/requestsStatus')
+=======
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const nodemailer = require("nodemailer")
+const validator = require('validator')
+
+const Admin = require('../models/adminModel')
+const CorporateTrainee = require('../models/corporateTraineeModel')
+const Instructor = require('../models/instructorModel')
+const IndTrainee = require('../models/indTraineeModel')
+const Course = require('../models/course');
+>>>>>>> Mariam/dina
 
 //get all corporateTrainees
 const getCorporateTrainees = async (req, res) => {
@@ -35,6 +48,7 @@ const getCorporateTrainee = async (req, res) => {
 };
 
 //create new CorporateTraineeModel
+<<<<<<< HEAD
 const createCorporateTrainee = async (req, res) => {
   const { name, username, email, password } = req.body;
   let emptyFields = [];
@@ -66,9 +80,93 @@ const createCorporateTrainee = async (req, res) => {
     res.status(200).json(corporateTrainee)
   } catch (error) {
     res.status(400).json({ error: error.message });
+=======
+const createCorporateTrainee=async (req,res) =>
+{
+    const {firstName , lastName , username , email , password , gender , corporate} = req.body
+    let emptyFields = []
+
+    if (!firstName) 
+    {
+      emptyFields.push('firstName')
+    }
+    if (!lastName) 
+    {
+      emptyFields.push('lastName')
+    }
+    if (!username)
+    {
+      emptyFields.push('username')
+    }
+    if (!email) 
+    {
+      emptyFields.push('email')
+    }
+    if (!password) 
+    {
+      emptyFields.push('password')
+    }
+    if (!gender) 
+    {
+      emptyFields.push('gender')
+    }
+    if (!corporate) 
+    {
+      emptyFields.push('corporate')
+    }
+
+    if (emptyFields.length > 0) 
+    {
+      return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+    }
+
+  if(!validator.isEmail(email))
+  {
+    return res.status(404).json({error:"This email is not valid"})
+  }
+
+  if(!validator.isStrongPassword(password))
+  {
+    return res.status(404).json({error:"Your password is not strong enough "})
+  }
+
+  // checking that the email is not taken by any user
+  const coTrainee = await CorporateTrainee.findOne({email})
+  const indTrainee = await IndTrainee.findOne({email})
+  const instructor = await Instructor.findOne({email})
+  const admin = await Admin.findOne({email})
+
+  if(indTrainee || coTrainee || instructor || admin) 
+  {
+   return res.status(404).json({error:"This email is already in use"})
+  } 
+
+  // checking that the username is not taken by any user
+  const instUsername = await Instructor.findOne({username})
+  const adminUsername = await Admin.findOne({username})
+  const coTraineeUsername = await CorporateTrainee.findOne({username})
+  const indTraineeUsername = await IndTrainee.findOne({username})
+
+  if(instUsername || coTraineeUsername || indTraineeUsername || adminUsername) 
+  {
+    return res.status(404).json({error:"This username is already taken"})
+  }
+
+  try 
+  {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const coTrainee = await CorporateTrainee.create({firstName, lastName, username , email, password:hashedPassword , gender , flag:"false" , corporate})
+    res.status(200).json(coTrainee)
+  } 
+  catch (error) 
+  {
+    res.status(400).json({error: error.message})
+>>>>>>> Mariam/dina
   }
 };
 
+<<<<<<< HEAD
 //delete a corporateTrainee
 const deleteCorporateTrainee = async (req, res) => {
   const { id } = req.params;
@@ -206,6 +304,18 @@ const gradeExam = async (req, res) => {
   }
   if (!mongoose.Types.ObjectId.isValid(idTrainee)) {
     return res.status(404).json({ error: "No such Corporate Trainee" });
+=======
+const gradeExam = async(req,res) => {
+  const idCourse = req.params.idCourse
+  const idTrainee = req.params.idTrainee
+  console.log(idCourse,idTrainee)
+
+    if(!mongoose.Types.ObjectId.isValid(idCourse)) {
+        return res.status(404).json({error: 'No such course'})
+    }
+    if(!mongoose.Types.ObjectId.isValid(idTrainee)) {
+      return res.status(404).json({error: 'No such Corporate Trainee'})
+>>>>>>> Mariam/dina
   }
   const trainee = await CorporateTrainee.findOne({_id: idTrainee})
   const crs = await Course.findOne({_id: idCourse})
@@ -398,6 +508,7 @@ const compareAnswers = async(req,res) => {
     return res.json(false)
 }
 
+<<<<<<< HEAD
 const addProblem = async(req,res) => {
   const id = req.params.id;
   const problem = req.params.problem;
@@ -859,4 +970,13 @@ module.exports={
   updateProgress,
   getProgress,
   getMyCourses
+=======
+module.exports={getCorporateTrainee,
+                getCorporateTrainees,
+                gradeExam,
+                createCorporateTrainee,
+                viewSolution,
+                setAnswer,
+                compareAnswers
+>>>>>>> Mariam/dina
                 }

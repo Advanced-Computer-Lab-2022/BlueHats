@@ -37,6 +37,12 @@ const indTraineeSchema = new Schema({
     type:String ,
     required: true
   },
+  flag: 
+  {
+    type:String ,
+    required: false,
+    default:true
+  },
   grade: 
    [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, num: {type: Number}}]
   ,

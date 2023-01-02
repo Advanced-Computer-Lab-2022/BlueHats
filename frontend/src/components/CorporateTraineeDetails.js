@@ -1,5 +1,8 @@
 import { useCorporateTraineesContext } from '../hooks/useCorporateTraineesContext'
+
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import * as React from 'react';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 const CorporateTraineeDetails = ({ corporateTrainee }) => {
   const { dispatch } = useCorporateTraineesContext(); 
@@ -15,11 +18,12 @@ const CorporateTraineeDetails = ({ corporateTrainee }) => {
 
     return (
       <div className="corporateTrainee-details">
-        <h4>{corporateTrainee.name}</h4>
-        <p><strong>Username: </strong>{corporateTrainee.username}</p>
-        <p><strong>Password: </strong>{corporateTrainee.password}</p>
+       <h4>{corporateTrainee.firstName} {corporateTrainee.lastName}</h4>
+        <span>{<PersonRemoveIcon onClick={handleClick} />}</span>
         <p>Added {formatDistanceToNow(new Date(corporateTrainee.createdAt), {addSuffix: true})}</p>
-        <span className = "material-symbols-outlined" onClick={handleClick}>delete</span>
+        <p><strong>Username: </strong>{corporateTrainee.username}</p>
+        <p><strong>Email: </strong>{corporateTrainee.email}</p>
+        <p><strong>Corporate: </strong>{corporateTrainee.corporate}</p>
       </div>
     )
   }

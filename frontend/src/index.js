@@ -25,6 +25,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <IndTraineesContextProvider>
+    <IndTraineesContextProvider>
     <AuthContextProvider>
     <ProSidebarProvider>
     <CorporateTraineesContextProvider>
@@ -47,6 +48,7 @@ root.render(
     </CorporateTraineesContextProvider>
     </ProSidebarProvider>
     </AuthContextProvider>
+    </IndTraineesContextProvider>
     </IndTraineesContextProvider>
   </React.StrictMode>
 );

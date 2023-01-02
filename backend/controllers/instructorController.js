@@ -1,12 +1,16 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const nodemailer = require("nodemailer")
+const validator = require('validator')
 
 const Instructor = require('../models/instructorModel')
 
 //////////////////
 const course = require('../models/course');
 
+const CorporateTrainee = require('../models/corporateTraineeModel')
+const Admin = require('../models/adminModel')
+const IndTrainee = require('../models/indTraineeModel')
 
 //get all instructors
 const getInstructors=async (req,res)=>
@@ -37,43 +41,81 @@ const getInstructor = async (req,res) =>
 //create a new instructor
 const createInstructor =async (req,res) =>
 {
-    const {name, username , email, password} = req.body
-    let emptyFields = []
+  const {firstName , lastName , username , email , password , gender} = req.body
+  let emptyFields = []
 
-    if (!name) 
-    {
-      emptyFields.push('name')
-    }
-
-    if (!username) 
-    {
-      emptyFields.push('username')
-    }
-    if (!email) {
-      emptyFields.push('email')
-    }
-    if (!password) 
-    {
-      emptyFields.push('password')
-    }
-
-    if (emptyFields.length > 0) 
-    {
-      return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
-    }
-
-  try 
+  if (!firstName) 
   {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const instructor = await Instructor.create({name, username ,email , password:hashedPassword})
-    res.status(200).json(instructor)
+    emptyFields.push('firstName')
   }
-  
-  catch (error) 
+  if (!lastName) 
   {
-    res.status(400).json({error: error.message})
+    emptyFields.push('lastName')
   }
+  if (!username)
+  {
+    emptyFields.push('username')
+  }
+  if (!email) 
+  {
+    emptyFields.push('email')
+  }
+  if (!password) 
+  {
+    emptyFields.push('password')
+  }
+  if (!gender) 
+  {
+    emptyFields.push('gender')
+  }
+
+  if (emptyFields.length > 0) 
+  {
+    return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+  }
+
+  if(!validator.isEmail(email))
+  {
+      return res.status(404).json({error:"This email is not valid"})
+  }
+
+  if(!validator.isStrongPassword(password))
+  {
+      return res.status(404).json({error:"Your password is not strong enough "})
+  }
+
+// checking that the email is not taken by any user
+const coTrainee = await CorporateTrainee.findOne({email})
+const indTrainee = await IndTrainee.findOne({email})
+const instructor = await Instructor.findOne({email})
+const admin = await Admin.findOne({email})
+
+if(indTrainee || coTrainee || instructor || admin) 
+{
+    return res.status(404).json({error:"This email is already in use"})
+} 
+
+// checking that the username is not taken by any user
+const instUsername = await Instructor.findOne({username})
+const adminUsername = await Admin.findOne({username})
+const coTraineeUsername = await CorporateTrainee.findOne({username})
+const indTraineeUsername = await IndTrainee.findOne({username})
+
+if(instUsername || coTraineeUsername || indTraineeUsername || adminUsername) 
+{
+    return res.status(404).json({error:"This username is already taken"})
+}
+try 
+{
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(password, salt);
+  const instructor = await Instructor.create({firstName, lastName, username , email, password:hashedPassword , gender,flag:"false"})
+  res.status(200).json(instructor)
+} 
+catch (error) 
+{
+  res.status(400).json({error: error.message})
+}
 }
 
 //delete an instructor
@@ -97,11 +139,11 @@ const updateBiography =async (req,res) =>
 {
   const {username}=req.body
   const {biography}=req.body
-
+  
   const instructor = await Instructor.findOneAndUpdate({username:username},{biography:biography})
   if(!instructor)
   {
-      return res.status(400).json({error:'No such instructor'})
+      return res.status(400).json({error:'You have to log in first in order to be able to update your biography'})
   }
   res.status(200).json(instructor)
 }
@@ -110,11 +152,6 @@ const changeEmail = async (req,res) =>
 {
   const {email} = req.body
   const {username} = req.body
-  
-  if( !username || !email)
-  {
-    return res.status(400).json({ error: 'Please fill in all fields'})
-  }
   
   const instructor = await Instructor.findOne({username});
   
@@ -126,72 +163,13 @@ const changeEmail = async (req,res) =>
   
   if(!instructor)
   {
-    return res.status(404).json({error: 'No such instructor'})
+    return res.status(404).json({error: 'You have to log in first in order to be able to change your email'})
   }
 }
 
-//update an instructor
-const changePasswordInstructor = async (req,res) => 
-{
-  const {id}=req.body
-  const {password}=req.body
-  // const{confirmPassword}=req.body
-  
-  if(!id || !password )
-  {
-    return res.status(400).json({ error: 'Please fill in all fields'})
-  }
-  // const pass = await bcrypt.compare(password, confirmPassword);
-  // if(!password === confirmPassword)
-  // {
-  //   return res.status(400).json({ error: 'Password is  not confirmed'})
-  // }
-  
-  if(!mongoose.Types.ObjectId.isValid(id))
-  {
-      return res.status(404).json({error:'No such instructor'})
-  }
-  const salt = 10;
-  const hashedPassword = await bcrypt.hash(password, salt);
 
-  const instructor = await Instructor.findOneAndUpdate({_id:id},{password:hashedPassword})
-  if(!instructor)
-  {
-      return res.status(400).json({error:'No such instructor'})
-  }
-  res.status(200).json(instructor)
-}
 
-const changeEmailInstructor = async (req,res) => 
-{
-  // const {id}=req.body
-  const {email}=req.body
 
-  if( !email)
-  {
-    return res.status(400).json({ error: 'Please fill in all fields'})
-  }
-
-  // if(!mongoose.Types.ObjectId.isValid(id))
-  // {
-  //   return res.status(404).json({error:'No such instructor'})
-  // }
-
-  try
-  {
-    const instructor = await Instructor.findOneAndUpdate({_id:"638b4508ecdf4b2561760c25"},{email:email})
-    if(!instructor)
-    {
-        return res.status(400).json({error:'No such instructor'})
-    }
-    res.status(200).json(instructor)
-  }
-  catch(error)
-  {
-    console.log(error)
-    res.status(404).json(error)
-  }
-}
 
 
 let transporter = nodemailer.createTransport
@@ -203,47 +181,7 @@ let transporter = nodemailer.createTransport
     }
 })
 
-const forgotPasswordInstructor = async (req,res) =>
-{
-  const{email}=req.body
 
-  if(!email)
-  {
-    return res.status(400).json({ error: 'Please Write your email'})
-  }
-
-  try
-  {
-    const user = await Instructor.findOne({email:email})
-    if(user)
-    {
-      let mailOptions=
-      {
-        from:process.env.AUTH_EMAIL,
-        to:email,
-        subject:"Reset Password",
-        html : `<p>We heard that you lost the password.</p><p>Don't worry, use this link to reset it</p>
-            <p>This link<b> expires in 60 minutes</b>.</p> 
-            <a href="http://localhost:3000/resetPassword">reset your password now</a>` 
-      }
-
-      transporter.sendMail(mailOptions,(error,info) =>
-      {
-        if (error)
-          return res.json(error)
-      })
-      res.status(200).json({success:"email sent"})
-    }
-    else
-    {
-      res.status(404).json({error:"incorrect email"})
-    }
-  }
-  catch (error)
-  {
-    res.status(404).json(error)
-  }
-}
 //////////////////////////////////////////////////////////////////
 
 
@@ -310,4 +248,4 @@ const getInstAccepted = async (req,res) =>
     res.status(200).json(instructor.acceptedContract)
 }
 
-module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,forgotPasswordInstructor,updateBiography,changeEmailInstructor,changePasswordInstructor,filterCourses, getInstAccepted, updateAccepted}
+module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,updateBiography,changeEmail,filterCourses, getInstAccepted, updateAccepted}
