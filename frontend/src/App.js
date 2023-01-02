@@ -76,6 +76,7 @@ import ViewReviewsByInstructors from './pages/ViewReviewsByInstructor'
 
 import ViewRequests from './pages/ViewRequests';
 import AddAdmin from './pages/AddAdmin';
+import CourseViewC from './pages/CourseViewC';
 
 var loggedinUser = JSON.parse(localStorage.getItem('user'));
 
@@ -139,7 +140,7 @@ function App() {
             </Route>}
 
             { loggedinUser && <Route element={<CorporateTraineeRoutes />}>
-             {/* add a corporate path for course view */}
+            <Route path="/corporateTrainee/course/view" element={<CourseViewC/>} />
               <Route path="/corporateTrainee/changePassword" element={<ResetPassword/>}/>
               <Route path="/corporateTrainee/profile" element={<CoTraineeProfile/>} />
             </Route>}

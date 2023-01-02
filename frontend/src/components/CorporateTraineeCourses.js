@@ -99,8 +99,8 @@ const CorporateTraineeCourses = ({ course }) => {
          
     return (
       <div className="co-courses">
-        {/* <Link onClick={() => window.location.href=`/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link>  */}
-        <h4>{course.title}</h4> 
+        <Link onClick={() => window.location.href=`/corporateTrainee/course/view?id=${course._id}`}>  <h4>{course.title}</h4> </Link> 
+        {/* <h4>{course.title}</h4>  */}
         <p><strong>Total Hours: </strong>{course.totalhours} <CheckNumber/> </p>
         {/* <p className="view-price" ><strong ></strong>{course.price}</p> */}
 
