@@ -486,6 +486,8 @@ const rateInstructor = async (req, res) => {
 
           const courseName = requestedCourse[0].title;
 
+          // const { userID } = req.body;
+
           const corporateTraineeId = req.query.corporateTraineeId;
 
           if(!mongoose.Types.ObjectId.isValid(corporateTraineeId)){
@@ -515,30 +517,30 @@ const rateInstructor = async (req, res) => {
           if (emptyFields.length > 0) {
               return res.status(400).json({ error: 'Please fill in all fields', emptyFields })          
           }
-         
-         
-
           try {
             
             // create request
-           
               const requestCourse = await RequestCourse.create({courseName, corporateTraineeName, reason , highestLevelOfEducation,employmentStatus,agreedToPolicy,corporateTraineeId,courseId})
-              // var requests = UserWhoApplied[0].requests
-              // var status = "pending"
-              // var newRequest = requests.push({courseId:{courseId},coursename:{courseName},requestStatus:status});
-
-              // await CorporateTrainee.findOneAndUpdate({_id:corporateTraineeId},{
-              //   requests:newRequest
-              // })
-              var status = "pending"
+              
+              var status = "pending..."
               await MyRequests.create({courseName,courseId,corporateTraineeId,status})
 
+              
               res.status(200).json(requestCourse)
             } catch (error) {
               res.status(400).json({error: error.message})
             }
       }
-
+   const filterCourses = async(req,res) => { 
+        // const corporateTraineeId = req.query.corporateTraineeId;
+        const { id } = req.body;
+        if(id){
+        const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(id)});
+        res.status(200).json(result)
+        }else{
+            res.status(400).json({error:"corporateTraineeId  is required"})
+        }
+      }
 
 // View only the users courses by filtering the courses by the user's id
 var availableC = [];
@@ -550,11 +552,12 @@ const availableCourses = async(req,res) => {
     if(userID){
         const courses = await Course.find({}).sort({createdAt: -1});
         for (let i = 0 ; i<courses.length; i++){
-            for(j = 0; j<(courses[i].corporateTrainee).length; j++){}
+            for(j = 0; j<(courses[i].corporateTrainee).length; j++){
                 if ((courses[i].corporateTrainee)[j] === userID){
                     flag = 1;
                     break;
                 }
+              }
             if (flag == 1)
             {
                 continue;
@@ -569,6 +572,7 @@ const availableCourses = async(req,res) => {
         res.status(400).json({error:"corporateTraineeId  is required"})
     }
 }
+
     
 const viewProblem = async(req,res) => {
   const id = req.params.id;
@@ -599,16 +603,6 @@ res.status(200).json(problem);
 //   }
 // }
 
-const filterCourses = async(req,res) => { 
-  // const corporateTraineeId = req.query.corporateTraineeId;
-  const { userID } = req.body;
-  if(userID){
-  const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(userID)});
-  res.status(200).json(result)
-  }else{
-      res.status(400).json({error:"corporateTraineeId  is required"})
-  }
-}
 
 //////////////////////////////////////////////////
 
