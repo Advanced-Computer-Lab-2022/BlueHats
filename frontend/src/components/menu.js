@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -20,12 +20,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-
 
 
 import { useLogout } from '../hooks/useLogout'
@@ -39,23 +33,15 @@ import ListItemButton from '@mui/material/ListItemButton';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import ListItemText from '@mui/material/ListItemText';
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import Slide from '@mui/material/Slide';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-import CourseMenu from './CourseMenu';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import { createSpacing } from '@mui/system';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-
-const ariaLabel = { 'aria-label': 'description' };
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 //Report Stuff
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -109,7 +95,6 @@ BootstrapDialogTitle.propTypes = {
 export default function AccountMenu() {
   var loggedinUser = JSON.parse(localStorage.getItem('user'));
   const userID = loggedinUser.id;
-  const userType = loggedinUser.type;
   const data={id:userID}
 
   //Report a Probelm 
@@ -126,95 +111,20 @@ export default function AccountMenu() {
   const [Technical, setTechnical] = React.useState(false);
   const [System,setSystem] = React.useState(false);
   const [navigation,setNavigation] = React.useState(false);
-  const [financial , setFinancial] = React.useState(false);
+  const [financial , setFinancial ] = React.useState(false);
   const [discount,setDiscount] = React.useState(false);
   const [transfer,setTransfer] = React.useState(false);
 
-  
-  const [submit,setSubmit] = useState(false);
-  const [f,setF] = useState(false);
   const [idT,setId] = useState();
-  const [courses,setCourses] = useState();
-  const [loading,setLoading] = useState(true);
-  const [courseFlag,setCourseFlag] = useState(false);
-  const [msg, setMsg] = React.useState(false);
- // const [value, setValue] = React.useState('female');
 
-  const handleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  useEffect(() => {
-      setLoading(true)
-         if(idT != null)
-        {
-          if(userType == "coTrainee")
-          {
-            axios({
-            method: "PUT",
-            url : `/api/corporateTrainee/addProblem/${idT}`,
-            data: data,
-            headers:{'Content-Type':'application/json'}
-          }).then(() => 
-          {
-            setLoading(false)
-            setMessage("Your problem is submitted successfully. The admin will respond shortly.")
-            setTitle('')
-            setSubmit(false)
-        })
-      }
-      else if (userType == "indTrainee"){
-        axios({
-          method: "PUT",
-          url : `/api/indTrainee/addProblem/${idT}`,
-          data: data,
-          headers:{'Content-Type':'application/json'}
-        }).then(() => 
-        {
-          setLoading(false)
-          setMessage("Your problem is submitted successfully. The admin will respond shortly.")
-          setTitle('')
-          setSubmit(false)
-      })
-      }
-      else if (userType == "instructor"){
-        axios({
-          method: "PUT",
-          url : `/api/instructor/addProblem/${idT}`,
-          data: data,
-          headers:{'Content-Type':'application/json'}
-        }).then(() => 
-        {
-          setLoading(false)
-          setMessage("Your problem is submitted successfully. The admin will respond shortly.")
-          setTitle('')
-          setSubmit(false)
-      })
-      }
-      
-      }
-     
-       console.log("iddddd:" , idT)
-       console.log("trainee:" , data)
-   
-  },[f])
-
-  
-  
-  
-  
   // Report a Probelm handles
   const handleOpenM = () => {
       setMenu(true);
     };
+ 
     const handleCloseM = () => {
       setMenu(false);
     };
-    const handleCloseMenu = () =>{
-      setTechnical(false);
-      setFinancial(false);
-      setMenu(true);
-    }
     const handleClickOpenTechnical = () => {
       setTechnical(true);  
       setMessage(null);
@@ -246,39 +156,9 @@ export default function AccountMenu() {
       setTitle('');
     };
 //----------------------------------------------------------------------------------------
-   
-    const handleCloseCourse = () => {
-      setCourseFlag(false);
-      setTitle('');
-    }
-    const handleBackCourse = () => {
-      setCourseFlag(false);
-      setSystem(true);
-    }
-    const handleSubmitCourse = () =>{
-      setCourseFlag(false);
-      if(title!='')
-      {
-          axios({
-            method: 'POST',
-            url: '/api/problem/',
-            data:{description:title, status:"Pending", response:"No Response", unseen: true} ,
-            headers:{'Content-Type':'application/json'}
-      
-          }).then(
-            (res) => {
-              const temp = res.data
-              setId(temp)  
-              setF(false);
-            })
-          setSubmit(true);
-          setF(true);
-        
-    }
-    }
      const handleClickOpenSystem = () => {
       setSystem(true);
-      setTechnical(false);
+      setTechnical(false);  
     };
     const handleCloseSystem = () => {
       setSystem(false);
@@ -294,19 +174,23 @@ export default function AccountMenu() {
       axios({
         method: 'POST',
         url: '/api/problem/',
-        data:{description:title, status:"Pending", response:"No Response", unseen: true} ,
+        data:{description:title, status:"Pending", response:"No Response"} ,
         headers:{'Content-Type':'application/json'}
-  
+ 
       }).then(
         (res) => {
            const temp = res.data
+           console.log(temp)
            setId(temp)  
-           setF(false);
-        })
-      setSubmit(true);
-      setF(true);
-    }
-      
+        }
+         );    
+      axios({
+        method: "POST",
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
+      })}
+      setTitle('');
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
     };
     const handleClickOpenNavigation = () => {
       setNavigation(true);
@@ -323,23 +207,27 @@ export default function AccountMenu() {
       setInput(false);
       console.log(title);
       if(title!='')
-      {
-        axios({
-          method: 'POST',
-          url: '/api/problem/',
-          data:{description:title, status:"Pending", response:"No Response", unseen: true} ,
-          headers:{'Content-Type':'application/json'}
-    
-        }).then(
-          (res) => {
-             const temp = res.data
-             setId(temp)  
-             setF(false);
-          })
-        setSubmit(true);
-        setF(true);
-    }
-     };
+      {axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+ 
+      }).then(
+        (res) => {
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
+        method: "POST",
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
+      })}
+      setTitle('');
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
+    };
     const handleClickOpenDiscount = () => {
       setDiscount(true);
       setFinancial(false);
@@ -363,46 +251,53 @@ export default function AccountMenu() {
       setInputD(false);
       console.log(title);
       if(title!='')
-      {
-        axios({
-          method: 'POST',
-          url: '/api/problem/',
-          data:{description:title, status:"Pending", response:"No Response", unseen: true} ,
-          headers:{'Content-Type':'application/json'}
-    
-        }).then(
-          (res) => {
-             const temp = res.data
-             setId(temp)  
-             setF(false);
-          })
-        setSubmit(true);
-        setF(true);
-      }
+      {axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+ 
+      }).then(
+        (res) => {
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
+        method: "POST",
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
+      })}
+      setTitle('');
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
     };
     const handleSubmitTransfer = () => {
-      setTransfer(false);
+      setDiscount(false);
       setInputD(false);
       console.log(title);
       if(title!='')
-      {
-        axios({
-          method: 'POST',
-          url: '/api/problem/',
-          data:{description:title, status:"Pending", response:"No Response", unseen: true} ,
-          headers:{'Content-Type':'application/json'}
-    
-        }).then(
-          (res) => {
-             const temp = res.data
-             setId(temp)  
-             setF(false);
-          })
-        setSubmit(true);
-        setF(true);
-      }
+      {axios({
+        method: 'POST',
+        url: '/api/problem/',
+        data:{description:title, status:"Pending", response:"No Response"} ,
+        headers:{'Content-Type':'application/json'}
+ 
+      }).then(
+        (res) => {
+           const temp = res.data
+           console.log(temp)
+           setId(temp)  
+        }
+         );    
+      axios({
+        method: "POST",
+        url : `/api/corporateTrainee/addProblem/${idT}`,
+        data: data
+      })}
       setTitle('');
-      };
+      setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
+    };
      //----------------------------------------------------------------------------------------
  
     //for the input field of the other
@@ -413,33 +308,7 @@ export default function AccountMenu() {
     const handleNavigationF = () => {
       setInput(false);
     };
-    const handleNavigationFL = () => {
-      setInput(false);
-        if(userType == "coTrainee")
-        {
-          axios({
-          method: 'GET',
-          url: `/api/corporateTrainee/getCourses/${userID}`
-        }).then((res) => {
-          const temp = res.data
-          console.log(temp);
-          setCourses(temp);
-        })
-      }
-      else if (userType == "indTrainee")
-      {
-        axios({
-        method: 'GET',
-        url: `/api/indTrainee/getCourses/${userID}`
-      }).then((res) => {
-        const temp = res.data
-        console.log(temp);
-        setCourses(temp);
-      })
-    }  
-      setCourseFlag(true);
-      setNavigation(false);
-    }
+ 
     const handleSystemT = () => {
       setInputS(true);
       setTitle('');
@@ -447,36 +316,6 @@ export default function AccountMenu() {
     const handleSystemF = () => {
       setInputS(false);
      };
-
-
-     const handleSystemFL = () => {
-      setInputS(false);
-      if(userType == "coTrainee")
-      { 
-        axios({
-          method: 'GET',
-          url: `/api/corporateTrainee/getCourses/${userID}`
-        }).then((res) => {
-          const temp = res.data
-          console.log(temp);
-          setCourses(temp);
-        })
-      }
-      else if (userType == "indTrainee")
-      {
-        axios({
-          method: 'GET',
-          url: `/api/indTrainee/getCourses/${userID}`
-        }).then((res) => {
-          const temp = res.data
-          console.log(temp);
-          setCourses(temp);
-        })
-      }
-      setCourseFlag(true);
-      setSystem(false);
-
-     }
      const handleDiscountT = () => {
       setInputD(true);
       setTitle('');
@@ -491,6 +330,7 @@ export default function AccountMenu() {
     const handleTransferF = () => {
       setInputT(false);
      };
+ 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
           console.log(title);
@@ -499,32 +339,25 @@ export default function AccountMenu() {
           axios({
             method: 'POST',
             url: '/api/problem/',
-            data:{description:title, status:"Pending", response:"No Response", unseen: true} ,
+            data:{description:title, status:"Pending", response:"No Response"} ,
             headers:{'Content-Type':'application/json'}
-      
+   
           }).then(
             (res) => {
                const temp = res.data
+               console.log(temp)
                setId(temp)  
-               setF(false);
-            })
-          setSubmit(true);
-          setF(true);
+            }
+             );    
+          axios({
+            method: "POST",
+            url : `/api/corporateTrainee/addProblem/${idT}`,
+            data: data
+          })
         }
-          setMenu(false);    
+          setTitle('');
+          setMessage("Your Problem Is Reported Successfully. The Admin Will Respond Shortly.");
         }
-      };
-
-      const handleClickMsg = () => {
-        setMsg(true);
-      };
-    
-      const handleCloseMsg = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        setMsg(false);
       };
 
 
@@ -579,7 +412,6 @@ export default function AccountMenu() {
 
   console.log("wallet"+wallet)
   return (
-    
     <><React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Typography sx={{ minWidth: 100 }}>{user.username}</Typography>
@@ -665,7 +497,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           Report a Problem
         </MenuItem>}
-       { (user.type!=="admin") && <MenuItem  onClick={() => window.location.href=`/viewProblem?id=${userID}`}>
+       { (user.type!=="admin") && <MenuItem  onClick={() => window.location.href=`/viewProblem?id=${data}`}>
           <ListItemIcon>
             <ReportGmailerrorredIcon />
           </ListItemIcon>
@@ -708,12 +540,12 @@ export default function AccountMenu() {
               <ListItemText primary="Technical" />
             </ListItemButton>
           </ListItem>
-        {userType == "indTrainee"? <ListItem disablePadding>
+       
+          <ListItem disablePadding>
             <ListItemButton variant="outlined" onClick={handleClickOpenFinancial}>
               <ListItemText primary="Financial" />
             </ListItemButton>
-          </ListItem> : null}
-          
+          </ListItem>
  
           <ListItem >
               <ListItemText primary="Other: [Mention Below]" />  
@@ -726,42 +558,8 @@ export default function AccountMenu() {
          
         </DialogContent>
       </BootstrapDialog>
-      {
-//------------------------------------------------------------------------------------------------------------------------------------------------
- }
-      <Snackbar open={msg} autoHideDuration={6000} onClose={handleClickMsg}>
-        <Alert onClose={handleCloseMsg} severity="success" sx={{ width: '100%' }}>
-          Problem Submitted successfully!
-        </Alert>
-      </Snackbar>
-    
-      <BootstrapDialog fullWidth={true}
-        onClose={handleCloseCourse}
-        aria-labelledby="customized-dialog-title"
-        open={courseFlag}
-      >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseCourse}>
-          Courses
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-
-        <CourseMenu/>
-
-        <DialogActions>
-          <Button autoFocus onClick={handleBackCourse}>
-            Back
-          </Button>
-          <Button autoFocus onClick={handleSubmitCourse}>
-            Submit
-          </Button>
-        </DialogActions>
-         
-        </DialogContent>
-      </BootstrapDialog>        
-      {
-//------------------------------------------------------------------------------------------------------------------------------------------------
- }
-            
+ 
+       
  
       <BootstrapDialog fullWidth={true}
         onClose={handleCloseTechnical}
@@ -787,12 +585,6 @@ export default function AccountMenu() {
             </ListItemButton>
           </ListItem>
         </List>
-
-        <DialogActions>
-          <Button autoFocus onClick={handleCloseMenu}>
-            Back
-          </Button>
-        </DialogActions>
          
         </DialogContent>
       </BootstrapDialog>        
@@ -817,7 +609,8 @@ export default function AccountMenu() {
         name="radio-buttons-group"
       >
         <FormControlLabel value="Cluttered Page" control={<Radio />} label="Cluttered Page" onClick={handleSystemF}/>
-        <FormControlLabel value="Low Quality Videos" control={<Radio />} label="Low Quality Videos" onClick={handleSystemFL}/>
+        <FormControlLabel value="Low Quality Videos" control={<Radio />} label="Low Quality Videos" onClick={handleSystemF}/>
+        <FormControlLabel value="Wrong Exam Grade" control={<Radio />} label="Wrong Exam Grade" onClick={handleSystemF}/>
         <FormControlLabel value="Slow Loading Time" control={<Radio />} label="Slow Loading Time" onClick={handleSystemF}/>
         <FormControlLabel value="Outdated Features" control={<Radio />} label="Outdated Features" onClick={handleSystemF}/>
         <FormControlLabel value= "" control={<Radio />} label="Other" onClick={handleSystemT}/>
@@ -826,7 +619,6 @@ export default function AccountMenu() {
                 }
       </RadioGroup>
     </FormControl>
-    
  
           </DialogContent>  
           <DialogActions>
@@ -840,7 +632,8 @@ export default function AccountMenu() {
         </DialogActions>
         </BootstrapDialog>
  
-        {userType == "indTrainee"? <BootstrapDialog fullWidth={true}
+ 
+        <BootstrapDialog fullWidth={true}
         onClose={handleCloseNavigation}
         aria-labelledby="customized-dialog-title"
         open={navigation}
@@ -857,11 +650,10 @@ export default function AccountMenu() {
         defaultValue="female"
         name="radio-buttons-group"
       >
-       
         <FormControlLabel value="Confusing User Journey" control={<Radio />} label="Confusing User Journey" onClick={handleNavigationF}/>
         <FormControlLabel value="Directed To Wrong Page" control={<Radio />} label="Directed To Wrong Page" onClick={handleNavigationF}/>
         <FormControlLabel value="Non-Specific Page Titles" control={<Radio />} label="Non-Specific Page Titles" onClick={handleNavigationF} />
-        <FormControlLabel value="Link Not Working" control={<Radio />} label="Link Not Working"  onClick={handleNavigationFL}/>
+        <FormControlLabel value="Link Not Working" control={<Radio />} label="Link Not Working"  onClick={handleNavigationF}/>
         <FormControlLabel value="" control={<Radio />} label="Other" onClick={handleNavigationT}/>
         {input? <input className="report" type="text" placeholder="Explain your problem "
                 value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> : null
@@ -881,47 +673,7 @@ export default function AccountMenu() {
           </Button>
         </DialogActions>
         </BootstrapDialog>
-      : null }
  
-
- {userType == "instructor"? <BootstrapDialog fullWidth={true}
-        onClose={handleCloseNavigation}
-        aria-labelledby="customized-dialog-title"
-        open={navigation}
-      >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseNavigation}>
-          Report
-        </BootstrapDialogTitle>
-       
-        <DialogContent>
-        <FormControl onChange={e => setTitle(e.target.value)}>
-      <FormLabel id="demo-radio-buttons-group-label">Navigation Problem</FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue=""
-        name="radio-buttons-group"
-      >
-       
-        <FormControlLabel value="Promotion not applied" control={<Radio />} label="Promotion not applied" onClick={handleNavigationF}/>
-        <FormControlLabel value="Payment of new enrolls in not received" control={<Radio />} label="Payment of new enrolls in not received" onClick={handleNavigationF}/>
-        <FormControlLabel value="" control={<Radio />} label="Other" onClick={handleNavigationT}/>
-        {input? <input className="report" type="text" placeholder="Explain your problem "
-                value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> : null
-                }
-      </RadioGroup>
-    </FormControl>
-          </DialogContent>  
-          <DialogActions>
-          <Button autoFocus onClick={handleBackTechnical}>
-            Back
-          </Button>
-          <Button autoFocus onClick={handleSubmitNavigation}>
-            Submit
-          </Button>
-        </DialogActions>
-        </BootstrapDialog>
-      : null }
-         
  
  
         <BootstrapDialog fullWidth={true}
@@ -947,12 +699,7 @@ export default function AccountMenu() {
             </ListItemButton>
           </ListItem>
         </List>
-        <DialogActions>
-          <Button autoFocus onClick={handleCloseMenu}>
-            Back
-          </Button>
-        </DialogActions>
-
+         
         </DialogContent>
       </BootstrapDialog>        
        
@@ -975,7 +722,12 @@ export default function AccountMenu() {
         defaultValue="female"
         name="radio-buttons-group"
       >
-        <FormControlLabel value="Discount not applied" control={<Radio />} label="Discount not applied" onClick={handleDiscountF}/>
+        <FormControlLabel value="Cluttered Page" control={<Radio />} label="Cluttered Page" onClick={handleDiscountF}/>
+        <FormControlLabel value="Low Quality Videos" control={<Radio />} label="Low Quality Videos" onClick={handleDiscountF}/>
+        <FormControlLabel value="Wrong Exam Grade" control={<Radio />} label="Wrong Exam Grade" onClick={handleDiscountF}/>
+        <FormControlLabel value="Slow Loading Time" control={<Radio />} label="Slow Loading Time" onClick={handleDiscountF}/>
+        <FormControlLabel value="Outdated Features" control={<Radio />} label="Outdated Features" onClick={handleDiscountF}/>
+        <FormControlLabel value= "" control={<Radio />} label="Other" onClick={handleDiscountT}/>
         {inputD? <input className="report" type="text" placeholder="Explain your problem "
                 value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> : null
                 }
@@ -993,6 +745,9 @@ export default function AccountMenu() {
          
         </DialogActions>
         </BootstrapDialog>
+ 
+ 
+ 
         <BootstrapDialog fullWidth={true}
         onClose={handleCloseTransfer}
         aria-labelledby="customized-dialog-title"
@@ -1010,8 +765,11 @@ export default function AccountMenu() {
         defaultValue="female"
         name="radio-buttons-group"
       >
-        <FormControlLabel value="Refund not accepted" control={<Radio />} label="Refund not accepted" onClick={handleTransferF}/>
-        <FormControlLabel value="Refund accepted but not received" control={<Radio />} label="Refund accepted but not received" onClick={handleTransferF}/>
+        <FormControlLabel value="Cluttered Page" control={<Radio />} label="Cluttered Page" onClick={handleTransferF}/>
+        <FormControlLabel value="Low Quality Videos" control={<Radio />} label="Low Quality Videos" onClick={handleTransferF}/>
+        <FormControlLabel value="Wrong Exam Grade" control={<Radio />} label="Wrong Exam Grade" onClick={handleTransferF}/>
+        <FormControlLabel value="Slow Loading Time" control={<Radio />} label="Slow Loading Time" onClick={handleTransferF}/>
+        <FormControlLabel value="Outdated Features" control={<Radio />} label="Outdated Features" onClick={handleTransferF}/>
         <FormControlLabel value= "" control={<Radio />} label="Other" onClick={handleTransferT}/>
         {inputT? <input className="report" type="text" placeholder="Explain your problem "
                 value={title} onChange={e => setTitle(e.target.value)} onKeyDown={handleKeyDown} /> : null
@@ -1030,7 +788,6 @@ export default function AccountMenu() {
          
         </DialogActions>
         </BootstrapDialog>
-        {message && <div className = "msg">{message}</div>}
     </>
   );
 }
