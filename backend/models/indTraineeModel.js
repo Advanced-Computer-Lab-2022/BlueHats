@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
+const reportedProblem = require('./reportedProblem')
+
 const indTraineeSchema = new Schema({
   firstName: 
   {
@@ -36,17 +38,13 @@ const indTraineeSchema = new Schema({
   {
     type:String ,
     required: true
-  },
-  grade: 
-   [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, num: {type: Number}}]
-  ,
-  answers: {
-    type: [String]
-  },
+  } ,
   wallet: 
   {
     type: Number
-  },
+  } ,
+  problem: [{type: mongoose.Types.ObjectId}]
+ ,
   courses: [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, progress: {type: Number}}]
 }, { timestamps: true })
 

@@ -9,10 +9,6 @@ import CourseView from './pages/CourseView';
 import Payment from './pages/Payment';
 
 import Search from './pages/Search';
-import ExamTrainee from './pages/ExamTrainee';
-import Grade from './pages/Grade';
-import ExamInd from './pages/ExamInd';
-import GradeInd from './pages/GradeInd';
 import IndTraineeCourses from './pages/IndTraineeCourses';
 import RefundRequests from './pages/RefundRequests';
 
@@ -133,22 +129,7 @@ function App() {
               path="/search/"
               element={<Search/>}
             />
-            <Route
-              path="/examTrainee/"
-              element={<ExamTrainee/>}
-            />
-            <Route
-              path="/gradeExam/"
-              element={<Grade/>}
-            />
-             <Route
-              path="/examInd/"
-              element={<ExamInd/>}
-            />
-            <Route
-              path="/gradeInd/"
-              element={<GradeInd/>}
-            />
+            
            
            
             <Route

@@ -27,16 +27,11 @@ const corporateTraineeSchema = new Schema({
     type:String ,
     required: true
   },
-  grade: 
-   [{ex: {type: mongoose.Types.ObjectId , ref:'exercise'}, num: {type: Number}}]
+  problem: [{type: mongoose.Types.ObjectId}]
   ,
-  temp: 
-    [{question: {type:Number}, answer: {type: String}}]
-  ,
-  problem: [reportedProblem.schema]
-  ,
-  courses: [course.schema]
+  courses: [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, progress: {type: Number}}]
 }, { timestamps: true })
+
 
 // corporateTraineeSchema.statics.login = async function(username, password) {
 

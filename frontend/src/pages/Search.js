@@ -44,8 +44,9 @@ function Search () {
     return(
       <>
       {loading && <Loader/>}
-      <div className="courses Norefund">
-      {!loading && courses.length==0?  
+      <div className="courses">
+      {!loading && courses.length==0? 
+      <div className="Norefund" >
           <Box sx={{ marginBottom:2 , maxWidth: 360, bgcolor: 'background.paper'}}>
           <Card sx={{ maxWidth: 360, minHeight: 200, position: 'absolute', left: '40%', top: '40%', }}>
           <CardContent>
@@ -62,6 +63,7 @@ function Search () {
           </CardActions>
           </Card>
           </Box>
+          </div>
             : <h3>Search Results:</h3> } 
         {!loading && courses.length!=0 && (courses.map(course => {
           return <ViewCoursesBytitlesHrsRatePrice course={course} key={course._id} />

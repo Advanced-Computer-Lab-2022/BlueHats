@@ -33,16 +33,27 @@ const getPending = async (req,res) => {
   let temp =[];
   while(i<problems.length){
     if(problems[i].status == "Pending"){
-      temp = temp.concat([problems[i]]);
+      if(problems[i].unseen == true){
+        temp = temp.concat([problems[i]]);
+      }
     }
     i++;
+  }
+  let j = 0;
+  while(j<problems.length){
+    if(problems[j].status == "Pending"){
+      if(problems[j].unseen == false){
+        temp = temp.concat([problems[j]]);
+      }
+    }
+    j++;
   }
   console.log(temp);
   res.status(200).json(temp)
 }
 
 const createProblem=async (req,res) =>{
-    const {description, status , response} = req.body
+    const {description, status , response,unseen} = req.body
     let emptyFields = []
 
     if (!description) {
@@ -54,11 +65,14 @@ const createProblem=async (req,res) =>{
     if (!response) {
       emptyFields.push('response')
     }
+    if (!unseen) {
+      emptyFields.push('unseen')
+    }
     if (emptyFields.length > 0) {
       return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
     }
   try {
-    const problem = await Problem.create({description, status , response})
+    const problem = await Problem.create({description, status , response, unseen})
     res.status(200).json(problem._id)
   } catch (error) {
     res.status(400).json({error: error.message})
@@ -131,6 +145,38 @@ const addResponse = async (req,res) => {
   return res.status(200).json(problem);
 }
 
+const getUnseen = async (req,res) => {
+  const idProblem = req.params.idProblem
+  console.log(idProblem)
+
+    if(!mongoose.Types.ObjectId.isValid(idProblem)) {
+        return res.status(404).json({error: 'No such Problem'})
+    }
+  
+  const problem = await Problem.findById({_id: idProblem})
+  const temp = problem.unseen;
+  if(!problem) {
+    return res.status(404).json({error: 'No such Problem'})
+  }
+  return res.status(200).json(temp);
+
+}
+const updateSeen = async (req,res) => {
+  const idProblem = req.params.idProblem
+  console.log(idProblem)
+
+    if(!mongoose.Types.ObjectId.isValid(idProblem)) {
+        return res.status(404).json({error: 'No such Problem'})
+    }
+   const problem = await Problem.findOneAndUpdate({_id: idProblem},{unseen: false})
+
+   if(!problem) {
+     return res.status(404).json({error: 'No such Problem'})
+     }
+  
+   return res.status(200).json(problem); 
+  
+}
 
 
-module.exports={getProblem,getProblems,createProblem,deleteProblem,updateProblem,getPending,updateStatus,addResponse}
+module.exports={getProblem,getProblems,createProblem,deleteProblem,updateProblem,getPending,updateStatus,addResponse,getUnseen,updateSeen}

@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import 'react-dropdown/style.css';
 
 
-const Exam = ({question, firstO, secondO, thirdO, fourthO, answer}) =>{
+const IndExam = ({question, firstO, secondO, thirdO, fourthO, answer}) =>{
 
   
   const [ans,setAns] = useState('');
@@ -63,7 +63,7 @@ const Exam = ({question, firstO, secondO, thirdO, fourthO, answer}) =>{
      setSubmit(true);
     axios({
       method: "PUT",
-      url : `/api/corporateTrainee/compareAnswers/${answer}/${ans}`
+      url : `/api/indTrainee/compareAnswers/${answer}/${ans}`
     }).then(
         (res) => { 
            const flag = res.data
@@ -140,4 +140,4 @@ const Exam = ({question, firstO, secondO, thirdO, fourthO, answer}) =>{
     )
 
 }
-export default Exam
+export default IndExam

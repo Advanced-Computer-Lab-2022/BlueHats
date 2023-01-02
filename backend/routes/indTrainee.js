@@ -1,8 +1,26 @@
 const express = require('express')
 const router = express.Router()
 
-const{getIndTrainees,getIndTrainee,
-    signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses,rateCourse,addReview,rateInstructor,filterCourses,reviewCourse} = require('../controllers/indTraineeController')
+const{getIndTrainees,
+    getIndTrainee,
+    signupIndTrainee,
+    deleteIndTrainee,
+    changePasswordIndTrainee,
+    loginIndTrainee,
+    forgotPasswordIndTrainee,
+    updateIndTraineeProfile,
+    compareAnswers,
+    addProblem,
+    viewProblem,
+    getCourses,
+    updateProgress,
+    getProgress,
+    getMyCourses,
+    rateCourse,
+    addReview,
+    rateInstructor,
+    filterCourses,
+    reviewCourse} = require('../controllers/indTraineeController')
 const {payWithWallet} = require('../controllers/payment');
 
 //login route
@@ -28,15 +46,6 @@ router.patch('/updateProfile',updateIndTraineeProfile)
 // forgot password
 router.post("/forgotPassword",forgotPasswordIndTrainee)
 
-// Grade Exam
-router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 
-
-router.get('/viewSolution/:idCourse',viewSolution)
-
-router.put('/setAnswer/:id/:answer',setAnswer)
- 
-router.get('/compareAnswers/:solution/:answer',compareAnswers)
-
 // Update Course Progress
 router.put('/progress', updateProgress)
 
@@ -48,6 +57,14 @@ router.put('/getMyCourses', getMyCourses);
 
 // Pay for a course with wallet
 router.put('/payWithWallet', payWithWallet);
+
+router.get('/getCourses/:id',getCourses)
+
+router.put('/compareAnswers/:solution/:answer',compareAnswers)
+
+router.put('/addProblem/:problem',addProblem)
+
+router.get('/viewProblem/:id',viewProblem)
 
 
 

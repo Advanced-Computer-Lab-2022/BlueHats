@@ -42,7 +42,8 @@ const instructorSchema = new Schema({
     numberOfRates:{
         type: Number,
         default:0
-    } 
+    },
+    problem: [{type: mongoose.Types.ObjectId}] 
 }, { timestamps: true })
 
 // instructorSchema.statics.login = async function(username, password) {

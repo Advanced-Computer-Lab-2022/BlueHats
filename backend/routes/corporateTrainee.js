@@ -8,20 +8,18 @@ const
     updateCorporateTraineeProfile,
     changeEmailCorporateTrainee,
     forgotPasswordCorporateTrainee,
-    viewSolution,
-    gradeExam,
-    setAnswer,
     compareAnswers,
     addProblem,
     viewProblem,
-    getEx,
     rateCourse,
     rateInstructor,
     addReview,
     requestCourse,
     availableCourses,
     filterCourses,
-    reviewCourse
+    reviewCourse,
+    addCourse,
+    getCourses
 } = require('../controllers/corporateTraineeController' )
 
 const router = express.Router()
@@ -46,20 +44,15 @@ router.patch('/updateProfile',updateCorporateTraineeProfile)
 // forgot password
 router.post("/forgotPassword",forgotPasswordCorporateTrainee)
 
-router.get('/gradeExam/:idTrainee/:idCourse',gradeExam) 
+router.put('/addCourse/:id/:idCourse',addCourse)
 
-router.get('/viewSolution/:idCourse',viewSolution)
-
-// router.put('/setAnswer/:id/:idCourse/:idEx/:answer',setAnswer)
+router.get('/getCourses/:id',getCourses)
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 
-router.post('/addProblem/:problem',addProblem)
+router.put('/addProblem/:problem',addProblem)
 
 router.get('/viewProblem/:id',viewProblem)
-
-router.get('/getEx/:idCourse/:idEx', getEx)
-
 
 ////////////////////
 
