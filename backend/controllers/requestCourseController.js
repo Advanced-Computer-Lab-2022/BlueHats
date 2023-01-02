@@ -55,8 +55,9 @@ const acceptRequest = async (req, res) => {
     });
 
      ////////////////////////
+     const trainee = await CorporateTrainee.findById(coTId);
      const object = { course: cId, progress: 0 };
-     const newCourses = CorporateTrainee.courses.concat([object]);  
+     const newCourses = trainee.courses.concat([object]);  
      await CorporateTrainee.findOneAndUpdate({_id: coTId} , {courses: newCourses});
      //////////////////////
     

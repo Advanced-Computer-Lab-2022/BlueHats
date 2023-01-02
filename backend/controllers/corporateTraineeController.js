@@ -533,7 +533,7 @@ const rateInstructor = async (req, res) => {
       }
    const filterCourses = async(req,res) => { 
         // const corporateTraineeId = req.query.corporateTraineeId;
-        const { id } = req.body;
+        const { id } = req.params;
         if(id){
         const result = await Course.find({corporateTrainee:mongoose.Types.ObjectId(id)});
         res.status(200).json(result)
