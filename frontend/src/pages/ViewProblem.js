@@ -10,6 +10,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import NoBackpackIcon from '@mui/icons-material/NoBackpack';
+
+import Loader from '../components/Loader';
 
 const bull = (
     <Box
@@ -25,15 +28,19 @@ function ViewProblem ()  {
     const id = params.get('id');
     const [problems, setProblems] = useState([]);
     const [loading,setLoading] = useState(true);
-    const [flag,setFlag] = useState(false);
+    var loggedinUser = JSON.parse(localStorage.getItem('user'));
+    const userType = loggedinUser.type;
+    
   
       useEffect(() =>  {
         setLoading(true)
-        setFlag(false)
+       
         if(id==''){
           return
         }
-           axios({
+           if(userType == "coTrainee")
+           {
+            axios({
             method: "GET",
             url : `/api/corporateTrainee/viewProblem/${id}`
           }).then(
@@ -42,30 +49,75 @@ function ViewProblem ()  {
             const problems = res.data
             console.log(problems)
             setProblems(problems)  
-            if(problems!=[])
-              {
-                console.log(problems)
-                setFlag(true)
-              }
+          
          }
-          );    
+          );    }
+          else if (userType == "indTrainee"){
+            axios({
+              method: "GET",
+              url : `/api/indTrainee/viewProblem/${id}`
+            }).then(
+           (res) => { 
+              setLoading(false)
+              const problems = res.data
+              console.log(problems)
+              setProblems(problems)  
+            
+           }
+            );
+          }
+
+          else if (userType == "instructor"){
+            axios({
+              method: "GET",
+              url : `/api/instructor/viewProblem/${id}`
+            }).then(
+           (res) => { 
+              setLoading(false)
+              const problems = res.data
+              console.log(problems)
+              setProblems(problems)  
+            
+           }
+            );
+          }
   
         
-     },[id])
+     },[])
      
     return(
-        
-        <div className="reportView">
-        {problems.length==0? <h1>No Reported Problems.</h1> : <h1>Reported Problems:</h1> } 
+      <>
+      {loading && <Loader/>}
+        <div className="courses">
+        {!loading && problems.length==0? 
+        <div className="Norefund" >
+        <Box sx={{ marginBottom:2 , maxWidth: 360, bgcolor: 'background.paper'}}>
+        <Card sx={{ maxWidth: 360, minHeight: 200, position: 'absolute', left: '40%', top: '40%', }}>
+        <CardContent>
+            <NoBackpackIcon fontSize="large"/>
+        <Typography gutterBottom variant="h5" component="div" align='center'>
+            Reported Problems
+        </Typography>
+        <Typography variant="body2" color="text.secondary" align='center'>
+            No Reported Problems.
+        </Typography>
+        </CardContent>
+        <CardActions>
+            <Button size="medium" color='secondary' onClick={() => window.location.href = `/`}>Go To Home Page</Button>
+        </CardActions>
+        </Card>
+        </Box>
+        </div>
+         : <h1>Reported Problems:</h1> } 
 
-           {!loading && flag==true && problems.length!=0 &&(problems.map(prb => 
+           {!loading && problems.length!=0 &&(problems.map(prb => 
              
             <div prb={prb} key={prb.id}>
                 <Box sx={{ marginBottom:2 , maxWidth: 360, bgcolor: 'background.paper',border:3, borderRadius: '4px', borderColor: "#a256e0" }}>
                 <Card sx={{ maxWidth: 360 }}>
                 <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                Problem: {prb.problem}
+                Problem: {prb.description}
                 </Typography>
                 <List
                 sx={{
@@ -74,7 +126,6 @@ function ViewProblem ()  {
                     bgcolor: 'background.paper',
                 }}
                 >
-                    
                 <ListItem disablePadding>
                     
                     <ListItemText primary="Status:" secondary={prb.status} />
@@ -82,16 +133,11 @@ function ViewProblem ()  {
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem disablePadding>
-                   
                     <ListItemText primary="Response:" secondary={prb.response} />
                
                 </ListItem>
                 </List>
                 </CardContent>
-                {/* <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
-                </CardActions> */}
                 </Card>
                 </Box>
             </div>
@@ -101,6 +147,7 @@ function ViewProblem ()  {
         
 
         </div>
+        </>
 
     )
 }

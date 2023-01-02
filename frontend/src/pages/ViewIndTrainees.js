@@ -3,6 +3,7 @@ import { useEffect } from "react"
 // components
 import IndTraineeDetails from "../components/IndTraineeDetails"
 
+import AdminMenu from '../components/AdminMenu';
 import { useIndTraineesContext } from "../hooks/useIndTraineesContext"
 
 const ViewIndTrainees = () => {
@@ -24,11 +25,14 @@ const ViewIndTrainees = () => {
 }, [dispatch])
 
   return (
+    <>
+    <AdminMenu/>
     <div className="indTrainees">
         {indTrainees && indTrainees.map(indTrainee => (
           <IndTraineeDetails indTrainee={indTrainee} key={indTrainee._id} />
         ))}
     </div>
+    </>
   )
 }
 export default ViewIndTrainees

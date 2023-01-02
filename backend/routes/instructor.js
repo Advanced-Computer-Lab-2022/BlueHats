@@ -42,8 +42,7 @@ router.patch('/updateAccepted',updateAccepted)
 //router.post("/forgotPassword",forgotPasswordInstructor)
 
 // search in instructor courses
-router.get('/search/:id/:key', instructorSearch);
-
+router.get('/search/:key', instructorSearch);
 
 // get all courses created by an instructor
 // router.put('/myCourses', filterCourses);

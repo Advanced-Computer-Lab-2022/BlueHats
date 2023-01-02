@@ -53,7 +53,9 @@ const indTraineeSchema = new Schema({
   {
     type: Number,
     default: 0
-  },
+  } ,
+  problem: [{type: mongoose.Types.ObjectId}]
+ ,
   courses: [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, progress: {type: Number}}]
 }, { timestamps: true })
 

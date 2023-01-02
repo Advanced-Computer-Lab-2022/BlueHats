@@ -180,14 +180,21 @@ const Signup = () => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Hi
+        <b>Terms and conditions</b>
+        1.you are not allowed to share / use any of the videos content
+        2.you are not allowed to post or provide any inappropriate, offensive, racist, hateful, sexist, pornographic, false, misleading, incorrect, infringing, defamatory or libelous content or information;
+        <br/>
+        <b>Refund policy</b>
+        1.We allow you to have a full refund only if less than 50% of the course has been attended otherwise you will not be able to receive a refund
+        2.Refunds will be added to your wallet and you will be able to Pay with your wallet at anytime
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Close</Button>
+        <Button color='secondary' onClick={handleClose}>Close</Button>
       </DialogActions>
       </Dialog>
     </div>
+
 
     </form>
   )

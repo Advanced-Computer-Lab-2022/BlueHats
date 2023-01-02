@@ -7,12 +7,9 @@ import Footer from './components/Footer';
 import Instructor from './pages/Instructor';
 import CourseView from './pages/CourseView';
 import Payment from './pages/Payment';
-import Dashboard from './pages/dashboard';
+
 
 import Search from './pages/Search';
-import Grade from './pages/Grade';
-import ExamInd from './pages/ExamInd';
-import GradeInd from './pages/GradeInd';
 import IndTraineeCourses from './pages/IndTraineeCourses';
 import RefundRequests from './pages/RefundRequests';
 
@@ -163,18 +160,9 @@ function App() {
               path="/search/"
               element={<Search/>}
             />
-            <Route
-              path="/gradeExam/"
-              element={<Grade/>}
-            />
-             <Route
-              path="/examInd/"
-              element={<ExamInd/>}
-            />
-            <Route
-              path="/gradeInd/"
-              element={<GradeInd/>}
-            />
+            
+           
+           
             <Route
               path="/HFilter"
               element={<HomeFilter/>}
@@ -325,10 +313,7 @@ function App() {
               path="/requests/admin"
               element={<ViewRequests/>}
             />
-             <Route
-              path="/admin/dashboard"
-              element={<Dashboard/>}
-            />
+             
             <Route
             path="/admin/viewAdmins"
             element={<ViewAdmins/>}

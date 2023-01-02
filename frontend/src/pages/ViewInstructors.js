@@ -3,6 +3,7 @@ import { useEffect } from "react"
 // components
 import InstructorDetails from "../components/AddInstructorDetails"
 //import AdminForm from "../components/AdminForm"
+import AdminMenu from '../components/AdminMenu';
 
 import { useInstructorsContext } from "../hooks/useInstructorsContext"
 
@@ -25,11 +26,14 @@ const ViewInstructors = () => {
 }, [dispatch])
 
   return (
+    <>
+    <AdminMenu/>
     <div className="instructor">
         {instructors && instructors.map(instructor => (
           <InstructorDetails instructor={instructor} key={instructor._id} />
         ))}
     </div>
+    </>
   )
 }
 export default ViewInstructors

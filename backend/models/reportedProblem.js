@@ -10,6 +10,9 @@ const reportedProblemSchema = new Schema({
     },
     response: {
         type: String
+    },
+    unseen: {
+        type: Boolean
     }
 }, { timestamps: true });
 

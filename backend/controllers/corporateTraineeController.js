@@ -389,28 +389,6 @@ const compareAnswers = async(req,res) => {
     return res.json(false)
 }
 
-const addProblem = async(req,res) => {
-  const id = req.params.id;
-  const problem = req.params.problem;
-  if(!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such Corporate Trainee'})
-}
-  const trainee = await CorporateTrainee.findById({_id: id })
-  console.log(id,problem)
-  const obj = {
-    problem: problem,
-    status: 'Pending',
-    response: 'No Response'
-  };
-  const problemTemp = trainee.problem.concat([obj])
-  console.log(problemTemp)  
-  const finalT = await CorporateTrainee.findOneAndUpdate({_id: id }, {problem : problemTemp})
-  console.log(finalT)
-  if(!trainee) {
-    return res.status(404).json({error: 'No such Corporate Trainee'})
-}
-res.status(200).json(trainee);
-}
 
 
 
@@ -564,23 +542,96 @@ const availableCourses = async(req,res) => {
     }
 }
 
-    
+const getCourses = async(req,res) => {
+  const id = req.params.id;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+}
+ const trainee = await CorporateTrainee.findById({_id: id })
+ const crs = trainee.courses;
+ let i = 0;
+ let temp = [];
+ let x = null;
+ while(i<crs.length){
+  x = await Course.findById({_id:crs[i].course})
+  temp = temp.concat([x]);
+  i++;
+ }
+ console.log("courses:",temp)
+ res.status(200).json(temp)
+}
+ 
 const viewProblem = async(req,res) => {
   const id = req.params.id;
   if(!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such Corporate Trainee'})
 }
   const trainee = await CorporateTrainee.findById({_id: id })
-  console.log(id)
   const problem = trainee.problem
+  console.log(id)
+  let i =0;
+  let y = [];
+  let temp1 = null;
+  console.log("problem",problem)
+  while(i<problem.length){
+    console.log("idddd", problem[i]._id)
+    temp1 = await Problem.findById({_id: problem[i]})
+    console.log(temp1);
+    if(temp1.status == "Pending")
+      y = y.concat([temp1])
+    i++;  
+  }
+  let j =0;
+  let temp2 = null;
+  while(j<problem.length){
+   temp2 = await Problem.findById({_id: problem[j]})
+    if(temp2.status == "Resolved")
+      y = y.concat([temp2])
+    j++;  
+  }
   if(!trainee) {
     return res.status(404).json({error: 'No such Corporate Trainee'})
 }
-if(problem==[]){
+if(y==[]){
   res.status(200).json([]);
 }
-res.status(200).json(problem);
+res.status(200).json(y);
 }
+ 
+const addProblem = async(req,res) => {
+  const id = req.body.id;
+  const idProblem = req.params.problem;
+  console.log("id", id)
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+  }
+  const trainee = await CorporateTrainee.findById({_id: id })
+  const prb =  trainee.problem
+   console.log(idProblem)  
+   
+  let flag = false;
+  let i =0;
+  while(i< prb.length){
+    if(prb[i] == idProblem){
+      flag = true;
+    }
+    i++;
+  }
+  if(flag ==false)
+  {
+    const problemTemp = trainee.problem.concat([idProblem])
+    console.log(problemTemp)  
+    const finalT = await CorporateTrainee.findOneAndUpdate({_id: id }, {problem : problemTemp})
+    console.log(finalT)
+  }
+  if(!trainee) {
+    return res.status(404).json({error: 'No such Corporate Trainee'})
+}
+res.status(200).json(trainee);
+}
+
+
+
 
 // View only the user courses by filtering the courses by the user's id
 // const filterCourses = async(req,res) => { 
@@ -840,5 +891,6 @@ module.exports={
   getCertificateCoTrainee,
   updateProgress,
   getProgress,
-  getMyCourses
+  getMyCourses,
+  getCourses
                 }

@@ -205,7 +205,7 @@ const Login = () =>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handlePass}>Change password</Button>
+        <Button color='secondary' onClick={handlePass}>Change password</Button>
         </DialogActions>
       </Dialog>
     </div> 

@@ -115,7 +115,7 @@ const ForgotPassword = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>OK</Button>
+        <Button color='secondary' onClick={handleClose}>OK</Button>
         </DialogActions>
       </Dialog>
     </div>

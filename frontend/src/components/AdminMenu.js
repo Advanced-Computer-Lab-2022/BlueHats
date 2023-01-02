@@ -18,15 +18,15 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-
-
-
-
+ 
+ 
+ 
+ 
 export default function SwipeableTemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
   });
-
+ 
     const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -35,10 +35,10 @@ export default function SwipeableTemporaryDrawer() {
     ) {
       return;
     }
-
+ 
     setState({ ...state, [anchor]: open });
   };
-
+ 
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -50,21 +50,21 @@ export default function SwipeableTemporaryDrawer() {
           <ListItem disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/addAdmin`}>
               <ListItemIcon>
-                <PersonAddAltIcon /> 
+                <PersonAddAltIcon />
               </ListItemIcon>
               <ListItemText primary="Add a new admin" />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem  disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/instructor`}>
               <ListItemIcon>
-                <PersonAddAltIcon /> 
+                <PersonAddAltIcon />
               </ListItemIcon>
               <ListItemText primary="Add a new instructor" />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem  disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/corporateTrainee`}>
               <ListItemIcon>
@@ -73,30 +73,30 @@ export default function SwipeableTemporaryDrawer() {
               <ListItemText primary="Add a new corporate trainee" />
             </ListItemButton>
           </ListItem>
-
+ 
         </List>
-
+ 
       <Divider />
-
+ 
       <List>
           <ListItem disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/viewAdmins`}>
               <ListItemIcon>
-                <PeopleOutlineIcon /> 
+                <PeopleOutlineIcon />
               </ListItemIcon>
               <ListItemText primary="Admins" />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem  disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/viewInstructors`}>
               <ListItemIcon>
-                <PeopleOutlineIcon /> 
+                <PeopleOutlineIcon />
               </ListItemIcon>
               <ListItemText primary="Instructors" />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem  disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/viewCoTrainees`}>
               <ListItemIcon>
@@ -105,7 +105,7 @@ export default function SwipeableTemporaryDrawer() {
               <ListItemText primary="Corporate Trainees" />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem  disablePadding>
             <ListItemButton onClick={() =>window.location.href=`/admin/viewIndTrainees`}>
               <ListItemIcon>
@@ -114,73 +114,73 @@ export default function SwipeableTemporaryDrawer() {
               <ListItemText primary="Individual Trainees" />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem  disablePadding>
-            <ListItemButton onClick={() =>window.location.href=`/admin/corporateTrainee`}>
+            <ListItemButton onClick={() =>window.location.href=`/adminhome/`}>
               <ListItemIcon>
                <MenuBookIcon />
               </ListItemIcon>
               <ListItemText primary="Courses" />
             </ListItemButton>
           </ListItem>
-
+ 
         </List>
-
+ 
         <Divider />
-
+ 
       <List>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() =>window.location.href=`/adminPage`}>
               <ListItemIcon>
-               <ReportProblemIcon /> 
+               <ReportProblemIcon />
               </ListItemIcon>
               <ListItemText primary='Reported problems' />
             </ListItemButton>
           </ListItem>
-
+ 
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() =>window.location.href=`/requests/admin`}>
               <ListItemIcon>
-               <LibraryAddIcon /> 
+               <LibraryAddIcon />
               </ListItemIcon>
               <ListItemText primary='Course requests' />
             </ListItemButton>
           </ListItem>
       </List>
-
+ 
       <Divider />
-
+ 
       <List>
        
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() =>window.location.href=`/AdminHome`}>
               <ListItemIcon>
-                <DiscountIcon /> 
+                <DiscountIcon />
               </ListItemIcon>
               <ListItemText primary="Add a promotion"/>
             </ListItemButton>
           </ListItem>
-
+ 
         <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() =>window.location.href=`/RefundRequests`} >
               <ListItemIcon>
-                <LocalOfferIcon /> 
+                <LocalOfferIcon />
               </ListItemIcon>
               <ListItemText primary='Refund requests' />
             </ListItemButton>
           </ListItem>
       </List>
-
+ 
       <Divider />
     </Box>
   );
-
+ 
   return (
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
             <div className='menu'>
-           <MenuIcon on onClick={toggleDrawer(anchor, true)}>{anchor}</MenuIcon> 
+           <MenuIcon on onClick={toggleDrawer(anchor, true)}>{anchor}</MenuIcon>
            </div>
           <SwipeableDrawer
             anchor={anchor}

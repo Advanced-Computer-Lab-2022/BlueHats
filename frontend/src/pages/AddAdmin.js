@@ -3,6 +3,7 @@ import { useEffect } from "react"
 // components
 import AdminForm from "../components/AdminForm"
 import { useAdminsContext } from "../hooks/useAdminsContext"
+import AdminMenu from '../components/AdminMenu';
 
 const NewAdmin = () => {
   const { admin, dispatch } = useAdminsContext()
@@ -22,7 +23,10 @@ const NewAdmin = () => {
 }, [dispatch])
 
   return (
+    <>
+    <AdminMenu/>
       <AdminForm />
+      </>
   )
 }
 export default NewAdmin

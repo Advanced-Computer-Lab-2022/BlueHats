@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import CorporateTraineeDetails from "../components/CorporateTraineeDetails"
 import { useCorporateTraineesContext } from "../hooks/useCorporateTraineesContext"
 
+import AdminMenu from '../components/AdminMenu';
+
 const NewCoTrainee = () => {
   //const [corporateTrainee, setCorporateTrainees] = useState(null)
   const { corporateTrainees , dispatch } = useCorporateTraineesContext()
@@ -24,6 +26,8 @@ const NewCoTrainee = () => {
 }, [dispatch])
 
   return (
+    <>
+    <AdminMenu/>
     <div className="corporateTrainee">
       <div className="corporateTrainees">
         {corporateTrainees && corporateTrainees.map(corporateTrainee => (
@@ -31,6 +35,7 @@ const NewCoTrainee = () => {
         ))}
       </div>
     </div>
+    </>
   )
 }
 export default NewCoTrainee 

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 // components
 import InstructorForm from "../components/AddInstructorForm"
 import { useInstructorsContext } from "../hooks/useInstructorsContext"
+import AdminMenu from '../components/AdminMenu';
 
 const NewInstructor = () => {
   const { instructor, dispatch } = useInstructorsContext()
@@ -22,7 +23,11 @@ const NewInstructor = () => {
 }, [dispatch])
 
   return (
-      <InstructorForm />
+    <>
+    <AdminMenu/>
+    <InstructorForm />
+      </>
+   
   )
 }
 export default NewInstructor

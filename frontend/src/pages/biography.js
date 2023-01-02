@@ -90,7 +90,7 @@ const Biography = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOkay}>Okay</Button>
+        <Button  color='secondary' onClick={handleOkay}>Okay</Button>
         </DialogActions>
       </Dialog>
     </div>

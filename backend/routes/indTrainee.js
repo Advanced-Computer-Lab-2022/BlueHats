@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const{getIndTrainees,getIndTrainee,
-    signupIndTrainee,deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,getCertificateInTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses,rateCourse,addReview,rateInstructor,filterCourses,reviewCourse} = require('../controllers/indTraineeController')
+    signupIndTrainee,getCourses, addProblem, viewProblem, deleteIndTrainee,changePasswordIndTrainee,loginIndTrainee,forgotPasswordIndTrainee,getCertificateInTrainee,updateIndTraineeProfile,gradeExam,viewSolution,setAnswer,compareAnswers,updateProgress,getProgress,getMyCourses,rateCourse,addReview,rateInstructor,filterCourses,reviewCourse} = require('../controllers/indTraineeController')
 const {payWithWallet} = require('../controllers/payment');
 
 //login route
@@ -30,12 +30,12 @@ router.post("/forgotPassword",forgotPasswordIndTrainee)
 
  router.post("/getCertificate", getCertificateInTrainee)
 
-// Grade Exam
-router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 
+// // Grade Exam
+// router.get('/gradeExam/:idCourse/:idTrainee',gradeExam) 
 
-router.get('/viewSolution/:idCourse',viewSolution)
+// router.get('/viewSolution/:idCourse',viewSolution)
 
-router.put('/setAnswer/:id/:answer',setAnswer)
+// router.put('/setAnswer/:id/:answer',setAnswer)
  
 router.get('/compareAnswers/:solution/:answer',compareAnswers)
 
@@ -50,6 +50,14 @@ router.put('/getMyCourses', getMyCourses);
 
 // Pay for a course with wallet
 router.put('/payWithWallet', payWithWallet);
+
+router.get('/getCourses/:id',getCourses)
+
+router.put('/compareAnswers/:solution/:answer',compareAnswers)
+
+router.put('/addProblem/:problem',addProblem)
+
+router.get('/viewProblem/:id',viewProblem)
 
 
 

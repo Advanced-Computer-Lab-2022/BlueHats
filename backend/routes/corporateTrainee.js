@@ -7,10 +7,10 @@ const
     createCorporateTrainee,
     getCertificateCoTrainee,
     viewSolution,
+    getCourses,
     compareAnswers,
     addProblem,
     viewProblem,
-    getEx,
     rateCourse,
     rateInstructor,
     addReview,
@@ -47,20 +47,15 @@ router.post('/',createCorporateTrainee)
 
  router.post("/getCertificate", getCertificateCoTrainee)
 
-router.get('/gradeExam/:idTrainee/:idCourse',gradeExam) 
+// router.put('/addCourse/:id/:idCourse',addCourse)
 
-router.get('/viewSolution/:idCourse',viewSolution)
-
-// router.put('/setAnswer/:id/:idCourse/:idEx/:answer',setAnswer)
+router.get('/getCourses/:id',getCourses)
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 
-router.post('/addProblem/:problem',addProblem)
+router.put('/addProblem/:problem',addProblem)
 
 router.get('/viewProblem/:id',viewProblem)
-
-router.get('/getEx/:idCourse/:idEx', getEx)
-
 
 ////////////////////
 

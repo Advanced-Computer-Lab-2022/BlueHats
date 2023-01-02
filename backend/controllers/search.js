@@ -53,25 +53,29 @@ const getCoursesBySearch = async (req,res) => {
 const instructorSearch = async(req,res) => {
   
     
-    const instructorId = req.params['id']
-    const skey = req.params['key']
-    if(instructorId){
-    const result1 = await course.find({instructor:mongoose.Types.ObjectId(instructorId), title: skey });
-    if(result1.length==0){
-        const result2 = await course.find({instructor:mongoose.Types.ObjectId(instructorId), subject: skey });
-        if(result2.length==0)
-        res.json("This course doesn't exist")
-        else{
-           res.status(200).json({result2})
-        }
+    const id = req.body.id
+    const key = req.params.key
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such Instructor'})
     }
-    else{
-        res.status(200).json({result1})
+    
+    const crs = await course.find({instructor: id});
+    let i =0;
+    let temp = [];
+    while(i<crs.length){
+        if(crs[i].title == key)
+            temp = temp.concat([crs[i]])
+        if(crs[i].subject == key)
+            temp = temp.concat([crs[i]])
+        i++;
     }
-        
-    }else{
-        res.status(400).json({error:"instructorId  is required"})
-    }
+    if(crs.length == 0)
+  {
+      return res.status(400).json({error:'No courses avaliable'})
+  }
+  res.status(200).json(temp)
+
+   
 }
 
 

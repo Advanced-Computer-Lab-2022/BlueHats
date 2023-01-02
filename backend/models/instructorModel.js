@@ -59,7 +59,8 @@ const instructorSchema = new Schema({
   {
     type: Boolean,
     default: false
-  } 
+  },
+    problem: [{type: mongoose.Types.ObjectId}] 
 }, { timestamps: true })
 
 

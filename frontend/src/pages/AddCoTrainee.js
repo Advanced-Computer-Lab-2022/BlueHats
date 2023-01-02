@@ -3,6 +3,7 @@ import { useEffect } from "react"
 // components
 import CoTraineeForm from "../components/CorporateTraineeForm"
 import { useCorporateTraineesContext } from "../hooks/useCorporateTraineesContext"
+import AdminMenu from '../components/AdminMenu';
 
 const NewCoTrainee = () => {
   const { coTrainee, dispatch } = useCorporateTraineesContext()
@@ -22,7 +23,11 @@ const NewCoTrainee = () => {
 }, [dispatch])
 
   return (
-      <CoTraineeForm />
+    <>
+    <AdminMenu/>
+    <CoTraineeForm />
+      </>
+   
   )
 }
 export default NewCoTrainee

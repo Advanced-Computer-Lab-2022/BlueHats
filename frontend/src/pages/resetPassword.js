@@ -102,7 +102,7 @@ const ResetPassword = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Login now</Button>
+        <Button color='secondary' onClick={handleClose}>Login now</Button>
         </DialogActions>
       </Dialog>
     </div>

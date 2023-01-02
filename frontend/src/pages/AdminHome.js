@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import AdminCoursesCard from "../components/AdminCourseCard";
+import AdminMenu from '../components/AdminMenu';
 import {
   Container,
   CircularProgress,
@@ -244,6 +245,8 @@ const AdminHome = () => {
     navigate(`${location.pathname}`);
   };
   return (
+    <>
+    <AdminMenu/>
     <Container className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container direction="row" spacing={2}>
@@ -459,6 +462,7 @@ const AdminHome = () => {
         )}
       </Grid>
     </Container>
+    </>
   );
 };
 

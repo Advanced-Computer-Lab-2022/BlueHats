@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const nodemailer = require("nodemailer")
 const validator = require('validator')
+const Problem = require('../models/reportedProblem');
 
 const Instructor = require('../models/instructorModel')
 
@@ -203,7 +204,81 @@ const filterCourses = async(req,res) => {
 
 // const filterCourses = async(req,res) => {
   
-//   //const instructorId = req.query.instructorId;
+
+const viewProblem = async(req,res) => {
+  const id = req.params.id;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Instructor'})
+}
+  const trainee = await Instructor.findById({_id: id })
+  const problem = trainee.problem
+  console.log(id)
+  let i =0;
+  let y = [];
+  let temp1 = null;
+  console.log("problem",problem)
+  while(i<problem.length){
+    console.log("idddd", problem[i]._id)
+    temp1 = await Problem.findById({_id: problem[i]})
+    console.log(temp1);
+    if(temp1.status == "Pending")
+      y = y.concat([temp1])
+    i++;  
+  }
+  let j =0;
+  let temp2 = null;
+  while(j<problem.length){
+   temp2 = await Problem.findById({_id: problem[j]})
+    if(temp2.status == "Resolved")
+      y = y.concat([temp2])
+    j++;  
+  }
+  if(!trainee) {
+    return res.status(404).json({error: 'No such Instructor'})
+}
+if(y==[]){
+  res.status(200).json([]);
+}
+res.status(200).json(y);
+}
+
+
+const addProblem = async(req,res) => {
+  const id = req.body.id;
+  const idProblem = req.params.problem;
+  console.log("id", id)
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Instructor'})
+  }
+  const trainee = await Instructor.findById({_id: id })
+  const prb =  trainee.problem
+   console.log(idProblem)  
+   
+  let flag = false;
+  let i =0;
+  while(i< prb.length){
+    if(prb[i] == idProblem){
+      flag = true;
+    }
+    i++;
+  }
+  if(flag ==false)
+  {
+    const problemTemp = trainee.problem.concat([idProblem])
+    console.log(problemTemp)  
+    const finalT = await Instructor.findOneAndUpdate({_id: id }, {problem : problemTemp})
+    console.log(finalT)
+  }
+  if(!trainee) {
+    return res.status(404).json({error: 'No such Instructor'})
+}
+res.status(200).json(trainee);
+}
+ 
+
+
+
+// module.query.instructorId;
 //   const {savedID}= req.params;
 //   if(savedID)
 //   {
@@ -248,4 +323,4 @@ const getInstAccepted = async (req,res) =>
     res.status(200).json(instructor.acceptedContract)
 }
 
-module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,updateBiography,changeEmail,filterCourses, getInstAccepted, updateAccepted}
+module.exports={getInstructor,getInstructors,createInstructor,deleteInstructor,updateBiography,changeEmail,filterCourses, getInstAccepted, updateAccepted,addProblem,viewProblem}

@@ -55,4 +55,5 @@ const corporateTraineeSchema = new Schema({
   courses: [{course: {type: mongoose.Types.ObjectId , ref:'Course'}, progress: {type: Number}}]
 }, { timestamps: true })
 
+
 module.exports = mongoose.model('CorporateTrainee', corporateTraineeSchema)
