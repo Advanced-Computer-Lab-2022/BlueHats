@@ -51,7 +51,8 @@ const CorporateTraineeCourses = ({ course }) => {
    }
   
        var loggedinUser = JSON.parse(localStorage.getItem('user'));
-         const savedID = loggedinUser.id
+         const userID = loggedinUser.id
+         
     return (
       <div className="co-courses">
         <h4>{course.title}</h4>
@@ -86,7 +87,7 @@ const CorporateTraineeCourses = ({ course }) => {
 
         <Box  sx={{marginBottom:2}}>
           <Button  variant= "contained"
-          onClick={() => window.location.href=`/viewaddreviews/corporatetrainee?courseId=${course._id}&corporateTraineeId=${savedID}`}
+          onClick={() => window.location.href=`/viewaddreviews/corporatetrainee?courseId=${course._id}&corporateTraineeId=${userID}`}
           margin="normal"
           padding="normal">
             View Reviews

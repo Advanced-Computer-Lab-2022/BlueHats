@@ -5,12 +5,15 @@ const CorporateTraineeEditReview = ({course}) => {
 
   const params = new URLSearchParams(window.location.search)
   const reviewId = params.get('reviewId')
+  const corporateTraineeId = params.get('corporateTraineeId');
+
   const [loading, setLoading] = useState(true) 
   const [editedReview, setEditedReview] = useState()
 
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
+
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
@@ -41,6 +44,8 @@ const CorporateTraineeEditReview = ({course}) => {
   
 
 }
+var loggedinUser = JSON.parse(localStorage.getItem('user'));
+const userID = loggedinUser.id
    return (
 
     <form className ="review-form" onSubmit={handleSubmit}> 
@@ -50,7 +55,7 @@ const CorporateTraineeEditReview = ({course}) => {
       onChange={(e) => setEditedReview(e.target.value)} 
       value={editedReview}
         />
-   <button onClick={() => window.location.href=`/myreviews/corporatetrainee`}>Edit</button>   
+   <button onClick={() => window.location.href=`/myreviews/corporatetrainee?corporateTraineeId=${userID}`}>Edit</button>   
     
    </form>
    )

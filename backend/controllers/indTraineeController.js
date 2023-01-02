@@ -564,18 +564,14 @@ const rateInstructor = async (req, res) => {
     }
 
  // View only the users courses by filtering the courses by the user's id
- const filterCourses = async(req,res) => {
-  
-  //const instructorId = req.query.instructorId;
-  const {id}= req.body;
-  if(id)
-  {
-      const result = await Course.find({individualTrainee:mongoose.Types.ObjectId(id)});
-      res.status(200).json(result)
-  }
-  else
-  {
-      res.status(400).json({error:"individualTrainee ID  is required"});
+ const filterCourses = async(req,res) => { 
+  // const corporateTraineeId = req.query.corporateTraineeId;
+  const { userID } = req.body;
+  if(userID){
+  const result = await Course.find({individualTrainee:mongoose.Types.ObjectId(userID)});
+  res.status(200).json(result)
+  }else{
+      res.status(400).json({error:"corporateTraineeId  is required"})
   }
 }
 

@@ -48,7 +48,7 @@ router.get('/search/:id/:key', instructorSearch);
 // get all courses created by an instructor
 // router.put('/myCourses', filterCourses);
 
-router.get('/myCourses/:id', filterCourses);
+router.put('/myCourses', filterCourses);
 
 
 module.exports = router

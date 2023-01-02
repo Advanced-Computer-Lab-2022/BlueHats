@@ -64,8 +64,8 @@ router.get('/getEx/:idCourse/:idEx', getEx)
 
 ////////////////////
 
-// get all courses created by the user's id
-router.put('/filter', filterCourses);
+router.get('/filter/:id', filterCourses);
+// router.put('/filter', filterCourses);
 
 // // rate a course
 router.patch('/rateCourse', rateCourse);

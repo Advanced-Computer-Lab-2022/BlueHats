@@ -8,6 +8,7 @@ import axios from "axios"
 
 const ViewAllCourses = () => {
 
+
   // const {courses, dispatch} = useCoursesContext()
 
   
@@ -28,6 +29,7 @@ const ViewAllCourses = () => {
 
   //   fetchCourses()
   // }, [dispatch])
+
   const [courses, setCourses] = useState([]);
   var loggedinUser = JSON.parse(localStorage.getItem('user'));
   const savedID = loggedinUser.id
@@ -49,33 +51,22 @@ console.log(courses)
 
   return (
     <form >
-      <Box className='cotrainee-button1' sx={{marginBottom:2}}>
-          <Button variant= "contained"
-          onClick={() => window.location.href=`/myrequests/status`}
-          margin="normal"
-          padding="normal">
+      <div className='all-courses'>
+          <Button 
+          onClick={() => window.location.href=`/myrequests/status?corporateTraineeId=${savedID}`}>
             My Requests
           </Button>
-        </Box>
 
-        <Box className='cotrainee-button2' sx={{marginBottom:2}}>
-          <Button variant= "contained"
-          onClick={() => window.location.href=`/myreviews/corporatetrainee`}
-          margin="normal"
-          padding="normal">
+          <Button
+          onClick={() => window.location.href=`/myreviews/corporatetrainee?corporateTraineeId=${savedID}`}>
             My Reviews
           </Button>
-        </Box>
 
-      <Box className='cotrainee-button3' sx={{marginBottom:2}}>
-          <Button variant= "contained"
-          onClick={() => window.location.href=`/mycourses/corporatetrainee`}
-          margin="normal"
-          padding="normal">
+          <Button 
+          onClick={() => window.location.href=`/mycourses/corporatetrainee?corporateTraineeId=${savedID}`}>
            My courses
           </Button>
-        </Box>
-
+    </div>
        <h2>Available Courses</h2>
         <div className="courses">
         {courses && courses.map(course => (

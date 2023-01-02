@@ -47,6 +47,8 @@ setEmptyFields([])
 }
 
 }
+var loggedinUser = JSON.parse(localStorage.getItem('user'));
+const userID = loggedinUser.id
    return (
 
     <form className ="cor-rate" onSubmit={handleSubmit}> 
@@ -87,7 +89,7 @@ setEmptyFields([])
       <Alert severity="success">This is a success alert — check it out!</Alert>
     </Stack>*/ }
 
-   <button onClick={() => window.location.href=`/mycourses/corporateTrainee`}>Submit</button>  
+   <button onClick={() => window.location.href=`/mycourses/corporateTrainee?corporateTraineeId=${userID}`}>Submit</button>  
 
     {/* {message && <div className='msg'}{message}</div>} */}
     {error && <div className="error">{error}</div>}

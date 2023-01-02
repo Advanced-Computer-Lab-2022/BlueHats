@@ -50,7 +50,7 @@ const ViewReviewsByCorUsers = () => {
     const response1 = await axios({
         method:'POST',
         // url: `/api/corporateTrainee/addreview/?courseId=${courseId}&corporateTraineeId=63a756e189cc94e7139e239c`,
-        url: `/api/indTrainee/addreview/?courseId=${courseId}&corporateTraineeId=${corporateTraineeId}`,
+        url: `/api/corporatetrainee/addreview/?courseId=${courseId}&corporateTraineeId=${corporateTraineeId}`,
         data:data,
         headers:{'Content-Type':'application/json'}
       }).then(()=>{

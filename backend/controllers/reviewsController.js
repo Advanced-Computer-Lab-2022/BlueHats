@@ -111,9 +111,9 @@ const viewCourseReviews = async (req,res) => {
 } 
 
 const viewCorporateReviews = async (req, res)=> {
-    const {savedID} = req.params
+    const {id} = req.params
 
-    const result = await review.find({corporateTraineeId:mongoose.Types.ObjectId(savedID)});
+    const result = await review.find({corporateTraineeId:mongoose.Types.ObjectId(id)});
     res.status(200).json(result);
 
     if(!result) {
