@@ -5,7 +5,7 @@ const IndividualTraineeRoutes = () => {
     const type = loggedinUser.type;
 
     return(
-        type=="indTrainee"? <Outlet/> : <Navigate to="/"/>
+        type==="indTrainee"? <Outlet/> : <Navigate to="/"/>
     )
 }
 

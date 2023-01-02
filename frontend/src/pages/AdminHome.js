@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
-import CoursesCard from "../components/HomeCourseCard";
+import AdminCoursesCard from "../components/AdminCourseCard";
 import {
   Container,
   CircularProgress,
@@ -19,8 +19,16 @@ import {
   MenuItem,
   Button,
   Rating,
+  ClickAwayListener,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
 } from "@mui/material";
 import Box from "@mui/material/Box";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { makeStyles } from "tss-react/mui";
 
 const useStyles = makeStyles({
@@ -63,6 +71,10 @@ const AdminHome = () => {
   const [subjectName, setSubjectName] = useState("");
   const [rating, setRating] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [open, setOpen] = useState(false);
+  const [promotionEditedStart, setPromotionStartEdited] = useState("");
+  const [promotionEditedEnd, setPromotionEditedEnd] = useState("");
+  const [newPromotion, setNewPromotion] = useState(null);
 
   useEffect(() => {
     let cancel;
@@ -104,6 +116,28 @@ const AdminHome = () => {
 
     return () => cancel();
   }, [filter, params, sorting, subjectName, rating]);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    if (newPromotion !== null) {
+      axios.patch(`http://localhost:4000/filterBy/patchAll`, {
+        promotionStart: promotionEditedStart,
+        promotionEnd: promotionEditedEnd,
+        promotion: newPromotion,
+      });
+      window.location.reload(false);
+    }
+  };
+
+  const handleClickAway = () => {
+    setOpen(true);
+  };
+  const handleCloseWithoutEditing = () => {
+    setOpen(false);
+  };
 
   const handlePriceInputChange = (e, type) => {
     let newRange;
@@ -189,18 +223,30 @@ const AdminHome = () => {
     } else setSearchParams(`?${urlFilterRating}`);
   };
 
+  function disableDates() {
+    const today = new Date();
+    const dd = today.getDate();
+    const mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  }
+  const onKeyDown = (e) => {
+    e.preventDefault();
+  };
+
   const clearAllFilters = () => {
     setFilter("");
     setSorting("");
     setSubjectName("");
     setRating("");
     setPriceRange([0, sliderMax]);
+    console.log(disableDates());
     navigate(`${location.pathname}`);
   };
   return (
     <Container className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container>
+        <Grid container direction="row" spacing={2}>
           <Grid item xs={12} sm={5}>
             <FormControl component="fieldset" className={classes.filters}>
               <Typography gutterBottom> Filters </Typography>
@@ -214,7 +260,6 @@ const AdminHome = () => {
                   onChange={(e, newValue) => setPriceRange(newValue)}
                   onChangeCommitted={onSliderCommitHandler}
                 />
-
                 <div className={classes.priceRangeInputs}>
                   <TextField
                     size="small"
@@ -227,7 +272,6 @@ const AdminHome = () => {
                     onChange={(e) => handlePriceInputChange(e, "lower")}
                     onBlur={onTextfieldCommitHandler}
                   />
-
                   <TextField
                     size="small"
                     id="upper"
@@ -300,6 +344,9 @@ const AdminHome = () => {
                 </FormControl>
               </Box>
             </FormControl>
+            <Button size="small" color="primary" onClick={clearAllFilters}>
+              Clear All
+            </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography gutterBottom>Sort By</Typography>
@@ -331,10 +378,72 @@ const AdminHome = () => {
               </RadioGroup>
             </FormControl>
           </Grid>
+          <Grid item>
+            <div>
+              Promotions
+              <Button onClick={handleOpen}> Set For All</Button>
+            </div>
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Edit/Add a Promotion</DialogTitle>
+                <DialogContent>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Discount Percentage"
+                    value={newPromotion}
+                    type="number"
+                    onChange={(e) => setNewPromotion(e.target.value)}
+                    variant="outlined"
+                  />
+                  <p>Promotion Start Date:</p>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      renderInput={(props) => (
+                        <TextField
+                          onKeyDown={onKeyDown}
+                          {...props}
+                          size="small"
+                          helperText={null}
+                        />
+                      )}
+                      closeOnSelect={true}
+                      margin="dense"
+                      id="startDate"
+                      value={promotionEditedStart}
+                      disablePast={true}
+                      onChange={(value) => setPromotionStartEdited(value)}
+                    />
+                  </LocalizationProvider>
+                  <p>Promotion End Date:</p>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                      renderInput={(props) => (
+                        <TextField
+                          onKeyDown={onKeyDown}
+                          {...props}
+                          size="small"
+                          helperText={null}
+                        />
+                      )}
+                      closeOnSelect={true}
+                      margin="dense"
+                      id="startDate"
+                      value={promotionEditedEnd}
+                      disablePast={true}
+                      onChange={(value) => setPromotionEditedEnd(value)}
+                    />
+                  </LocalizationProvider>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseWithoutEditing}>Cancel</Button>
+                  <Button onClick={handleClose}>Done</Button>
+                </DialogActions>
+              </Dialog>
+            </ClickAwayListener>
+          </Grid>
         </Grid>
-        <Button size="small" color="primary" onClick={clearAllFilters}>
-          Clear All
-        </Button>
       </Paper>
       <Grid container spacing={2}>
         {loading ? (
@@ -343,8 +452,8 @@ const AdminHome = () => {
           </div>
         ) : (
           courses.map((course) => (
-            <Grid item key={course._id} xs={12} sm={6} md={4}>
-              <CoursesCard course={course} />
+            <Grid item key={course._id} xs={12} sm={6} md={7}>
+              <AdminCoursesCard course={course} />
             </Grid>
           ))
         )}

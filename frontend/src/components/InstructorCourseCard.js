@@ -19,12 +19,12 @@ import {
   CardHeader,
   CardContent,
   CardActions,
-  Typography
+  Typography,
 } from "@mui/material";
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { green } from '@mui/material/colors';
-
-
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 function InstructorCourseCard({ course }) {
   const { dispatch } = useCoursesContext();
@@ -85,10 +85,11 @@ function InstructorCourseCard({ course }) {
     setOpen(false);
     if (newPromotion !== null) {
       Axios.patch(`http://localhost:4000/api/courses/${course._id}`, {
+        promotionStart: promotionEditedStart,
         promotionEnd: promotionEditedEnd,
         promotion: newPromotion,
       });
-      //   window.location.reload(false);
+      window.location.reload(false);
     }
   };
 
@@ -135,13 +136,18 @@ function InstructorCourseCard({ course }) {
     var rate = info[to];
     setOutput(Math.round(course.price * rate));
   }
+  const onKeyDown = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <Card>
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: "#a256e0" }} variant="rounded">
-        <AssignmentIcon />
-      </Avatar>}
+        avatar={
+          <Avatar sx={{ bgcolor: "#a256e0" }} variant="rounded">
+            <AssignmentIcon />
+          </Avatar>
+        }
         title={<Typography variant="h6">{course.title}</Typography>}
       />
       <CardContent>
@@ -158,8 +164,9 @@ function InstructorCourseCard({ course }) {
         ) : (
           <Typography variant="body2">Enrolled Trainees: 0</Typography>
         )}
-        <Typography variant="h6" gutterBottom> {currency}{" "}
-          {priceAfterDiscount(output, course.promotion)}
+        <Typography variant="h6" gutterBottom>
+          {" "}
+          {currency} {priceAfterDiscount(output, course.promotion)}
         </Typography>
         {course.promotion > 0 && (
           <Typography
@@ -175,7 +182,10 @@ function InstructorCourseCard({ course }) {
             <Button
               variant="contained"
               size="small"
-              color="primary"
+              sx={{
+                bgcolor: "#a256e0",
+                ":hover": { bgcolor: "#810CA8", color: "white" },
+              }}
               onClick={handleOpen}
             >
               Edit
@@ -187,7 +197,10 @@ function InstructorCourseCard({ course }) {
             <Button
               variant="contained"
               size="small"
-              color="primary"
+              sx={{
+                bgcolor: "#a256e0",
+                ":hover": { bgcolor: "#810CA8", color: "white" },
+              }}
               onClick={handleOpen}
             >
               Add
@@ -210,33 +223,63 @@ function InstructorCourseCard({ course }) {
                   variant="outlined"
                 />
                 <p>Promotion Start Date:</p>
-                <input
-                  autoFocus
-                  margin="dense"
-                  id="startDate"
-                  value={promotionEditedStart}
-                  type="date"
-                  min={disableDates()}
-                  onKeyDown={(e) => e.preventDefault()}
-                  onChange={(e) => setPromotionStartEdited(e.target.value)}
-                  variant="outlined"
-                />
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    renderInput={(props) => (
+                      <TextField
+                        onKeyDown={onKeyDown}
+                        {...props}
+                        size="small"
+                        helperText={null}
+                      />
+                    )}
+                    closeOnSelect={true}
+                    margin="dense"
+                    id="startDate"
+                    value={promotionEditedStart}
+                    disablePast={true}
+                    onChange={(value) => setPromotionStartEdited(value)}
+                  />
+                </LocalizationProvider>
                 <p>Promotion End Date:</p>
-                <input
-                  autoFocus
-                  margin="dense"
-                  id="endDate"
-                  type="date"
-                  value={promotionEditedEnd}
-                  min={disableDates()}
-                  onKeyDown={(e) => e.preventDefault()}
-                  onChange={(e) => setPromotionEditedEnd(e.target.value)}
-                  variant="outlined"
-                />
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    renderInput={(props) => (
+                      <TextField
+                        onKeyDown={onKeyDown}
+                        {...props}
+                        size="small"
+                        helperText={null}
+                      />
+                    )}
+                    closeOnSelect={true}
+                    margin="dense"
+                    id="startDate"
+                    value={promotionEditedEnd}
+                    disablePast={true}
+                    onChange={(value) => setPromotionEditedEnd(value)}
+                  />
+                </LocalizationProvider>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleCloseWithoutEditing}>Cancel</Button>
-                <Button onClick={handleClose}>Done</Button>
+                <Button
+                  sx={{
+                    bgcolor: "#a256e0",
+                    ":hover": { bgcolor: "#810CA8", color: "white" },
+                  }}
+                  onClick={handleCloseWithoutEditing}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  sx={{
+                    bgcolor: "#a256e0",
+                    ":hover": { bgcolor: "#810CA8", color: "white" },
+                  }}
+                  onClick={handleClose}
+                >
+                  Done
+                </Button>
               </DialogActions>
             </Dialog>
           </ClickAwayListener>
@@ -245,7 +288,7 @@ function InstructorCourseCard({ course }) {
           value={course.courseRating}
           readOnly
           name={course.title}
-          size="small"
+          size="medium"
           precision={0.5}
         />
       </CardContent>
@@ -253,7 +296,10 @@ function InstructorCourseCard({ course }) {
         <Button
           variant="contained"
           size="small"
-          color="primary"
+          sx={{
+            bgcolor: "#a256e0",
+            ":hover": { bgcolor: "#810CA8", color: "white" },
+          }}
           onClick={() =>
             (window.location.href = `/course/view?id=${course._id}`)
           }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export var acceptedX = [];
 
@@ -11,17 +12,24 @@ const ContractForm = () => {
   const location = useLocation();
   const accepted= location.state;
 
+  var loggedinUser = JSON.parse(localStorage.getItem("user"));
+  const savedID = loggedinUser.id;
   
-
-  const navigateToInstructor = () => {
-    const x = accepted.push('true')
-    navigate("/InstructorPage");
-    acceptedX = x;
-    // currentuser.acceptedContract =true
+  
+  const navigateToInstructor = async () => {
+    // const x = accepted.push('true')
+    navigate("/createCourse");
+    // acceptedX = x;
+    // set currentuser.acceptedContract =true
+    await  axios.patch(`http://localhost:4000/api/instructor/updateAccepted`, {
+      id: savedID,
+      acceptedContract: true,
+    });
   };
-
-
+  
+  
   const checkboxHandler = () => {
+    console.log(savedID)
     setAgree(!agree);
   };
 

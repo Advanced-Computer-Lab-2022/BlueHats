@@ -695,7 +695,7 @@ const rateCourse = async (req, res) => {
         attachments: [
           {
             filename: "My Certificate.pdf",
-            path: "D:\BlueHats\backend\assets\My Certificate.pdf",
+            path: "/Users/abdelrahman/Desktop/Engineering/Semester7/ACL/LastDraft/BlueHats/backend/assets/My Certificate.pdf",
           },
         ],
       };
@@ -710,7 +710,7 @@ const rateCourse = async (req, res) => {
       });
      };
      const getCertificateInTrainee = async (req, res) => {
-      const { DynammicEmail, DynammicSubject } = req.body;
+      const { DynammicEmail, DynammicSubject, DynammicName } = req.body;
       
       try {
         const send_to = DynammicEmail;
@@ -718,7 +718,7 @@ const rateCourse = async (req, res) => {
         const reply_to = DynammicEmail;
         const subject = DynammicSubject;
         const message = `
-            <h3>Hello Abdelrahman</h3>
+            <h3>Hello ${DynammicName} </h3>
             <p>Thank you for Completing your course</p>
             <p>Regards...</p>
         `;

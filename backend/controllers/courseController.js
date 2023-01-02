@@ -230,6 +230,5 @@ module.exports = {
     getCourse,
     deleteCourse,
     updateCourse,
-    
 
 };

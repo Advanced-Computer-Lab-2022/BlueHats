@@ -728,7 +728,7 @@ if(!courseName) {
     });
    };
    const getCertificateCoTrainee = async (req, res) => {
-    const { DynammicEmail, DynammicSubject } = req.body;
+    const { DynammicEmail, DynammicSubject, DynammicName } = req.body;
     
     try {
       const send_to = DynammicEmail;
@@ -736,7 +736,7 @@ if(!courseName) {
       const reply_to = DynammicEmail;
       const subject = DynammicSubject;
       const message = `
-          <h3>Hello Abdelrahman</h3>
+          <h3>Hello ${DynammicName} </h3>
           <p>Thank you for Completing your course</p>
           <p>Regards...</p>
       `;
