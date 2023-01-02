@@ -191,7 +191,7 @@ const login = async (req, res) =>
         // res.send("Auth Successful");
         const token = createToken(admin.username);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(200).send ({id,flag,username ,token})
+        res.status(200).send ({id,flag,username ,token, type})
       } 
       else 
       {
