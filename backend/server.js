@@ -40,11 +40,11 @@ app.use('/api/indTrainee', indTraineeRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/problem', problemRoutes);
 
-//app.use('/api/instructors', instRoutes); 
-app.use('/filterBy', filterRoutes)
-app.use('/api/requestCourse',requestedCoursesRoutes)
-app.use('/api/reviews',reviewsRoutes)
-app.use('/api/requeststatus',requestsStatusRoutes)
+
+app.use('/filterBy', filterRoutes);
+app.use('/api/requestCourse',requestedCoursesRoutes);
+app.use('/api/reviews',reviewsRoutes);
+app.use('/api/requeststatus',requestsStatusRoutes);
 
 // connect to database
 mongoose.set("strictQuery", false);

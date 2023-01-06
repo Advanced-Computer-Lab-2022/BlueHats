@@ -208,7 +208,8 @@ Course View Page
 - Mongoose
 - React Stripe
 - JSPDF
-- Bootstrap/
+- Bootstrap
+
 **Server:**
 - Node
 - Express
@@ -420,6 +421,94 @@ If the query is empty, this request will get all courses NOT FILTERED
 | :-------- | :------- | :------------------------- |
 | `course attributes` | `JSON` | **Required**. Attributes to be updated |
  
+#### Get all instructors
+ 
+```http
+  GET /api/instructor/
+```
+#### Get one instructor
+ 
+```http
+  GET  /api/instructor/:id
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of instructor to fetch |
+#### Get accepted contract state of an instructor
+ 
+```http
+  GET  /api/instructor/getAccepted/:id
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of instructor to fetch |
+
+#### Get searched courses of an instructor
+ 
+```http
+  GET  /api/instructor/search/:key
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of instructor to fetch | 
+| `key`      | `string` | **Required**. Key of course instructor tries to fetch | 
+
+#### Delete Instructor
+ 
+```http
+  DELETE  /api/instructor/:id
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of instructor to fetch |
+
+#### Update Instructor Email
+ 
+```http
+  PATCH  /api/instructor/changeEmail
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required**. Email of instructor to fetch |
+| `username`      | `string` | **Required**. Username of instructor to fetch |
+
+#### Update Instructor Biography
+ 
+```http
+  PATCH  /api/instructor/updateProfile
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `biography`      | `string` | **Required**. Biography of instructor to fetch |
+| `username`      | `string` | **Required**. Username of instructor to fetch |
+
+#### Update Instructor Accepted Contract State
+ 
+```http
+  PATCH  /api/instructor/updateAccepted
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of instructor to fetch |
+| `acceptedContract`      | `boolean` | **Required**. acceptedContract of instructor to fetch |
+
+#### Get Instructor Courses
+ 
+```http
+  PUT  /api/instructor/myCourses
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of instructor to fetch |
+
  
  
 ## Tests
