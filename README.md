@@ -1339,44 +1339,346 @@ The query gets all refund requests
  
  
 ## Tests
-search by title,subject,instructor or something that doesn't exist in the database.
+//search//
+search by title or subject.
 http
-  GET /api/courses/search/${key}
- 
- 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `key` | `string` | *Required*. search key |
- 
- 
-login with wrong password.
+  GET /api/courses/search?key=ACL
+
+returns course with id = "63b6a8664658a566c5b6e3ce"
+
+
+search by a word that doesn't exist in the database.
 http
-  POST /api/user/login
- 
- 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `password` | `string` | *Required*. password of user |
- 
- 
-signup with username that already exists.
+  GET /api/courses/search?key=mechanics
+  
+returns "This course doesn't exist"
+
+
+
+//take an exercise//
+answer the exercise with a correct answer.
 http
-  POST /api/user/signup
- 
- 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `username` | `string` | *Required*. username of registering user |
- 
-creating a form without accepting the contract
- 
+  PUT /api/corporateTrainee/compareAnswers?answer=sun&?ans=sun
+  
+  returns true
+
+
+answer the exercise with a wrong answer.
 http
-  GET /api/instructor/getAccepted/${id}
+  PUT /api/corporateTrainee/compareAnswers?answer=sun&?ans=moon
  
+  returns false
+
+
+
+//report a problem//
+report a problem with a correct problem id and a correct corporate trainee id
+http
+  PUT /api/corporateTrainee/addProblem?problem=63b6c0810c9939204d273f1c
+  data: {id:63b6a5bf4658a566c5b6e2f2}
+  
+  returns "Problem submitted successfully!", the problem is added to the array of problems of the corporate trainee with that id
  
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `id` | `Number` | *Required*. Id of instructor |
+
+report a problem with a correct problem id but a wrong corporate trainee id
+http
+  PUT /api/corporateTrainee/addProblem?problem=63b6c0810c9939204d273f1c
+  data: {id:63b6a5bf4658a566c5b6e255}
+  
+  returns "No such corporate trainee.", nothing is added to the array of problems of the corporate trainee with that id
+  
+  
+  
+ //view reported problems//
+ view reported problems by a corporate trainee using a correct id
+ http
+  GET /api/corporateTrainee/viewProblem?id=63b6a5bf4658a566c5b6e2f2
+ 
+ returns all problems reported by the corporate trainee with the pending problems at the top and the resolved problems at the bottom
+ 
+
+ view reported problems by a corporate trainee using a wrong id
+ http
+  GET /api/corporateTrainee/viewProblem?id=63b6a5bf4658a566c5b6e255
+ 
+ returns "No such corporate trainee."
+
+
+
+//update the status of a problem//
+update the status of a problem using a correct problem id 
+http
+  PUT /api/problem/updateStatus?idProblem=63b6c0810c9939204d273f1c
+  
+  returns "Problem is resolved successfully!" , resolves the problem to the corporate trainee
+  
+  
+  update the status of a problem using a wrong problem id 
+http
+  PUT /api/problem/updateStatus?idProblem=63b6c0810c9939204d273f2f
+  
+  returns "No such Problem" , the problem remains pending
+  
+  
+  
+  //add a response to a problem//
+  add a response to a problem using a correct problem id
+ http
+  PUT /api/problem/addResponse?idProblem=63b6c0810c9939204d273f1c&?response="working on it"
+  
+  returns "Response is updated successfully!" , updates the problem's response to the corporate trainee 
+  
+  
+    add a response to a problem using a wrong problem id
+ http
+  PUT /api/problem/addResponse?idProblem=63b6c0810c9939204d273f2f&?response="working on it"
+  
+  returns "No such problem!" , doesn't update the problem's response to the corporate trainee 
+ 
+
+ add a response to a problem using a correct problem id but no response
+ http
+  PUT /api/problem/addResponse?idProblem=63b6c0810c9939204d273f1c&?response=
+  
+  returns "Please enter a response" , doesn't update the problem's response to the corporate trainee 
+
+
+
+//view all pending problems//
+ view pending reported problems and there are reported problems
+ http
+  GET /api/problem/
+  
+  returns all pending reported problems 
+  
+  
+  
+  view pending reported problems and there aren't reported problems
+ http
+  GET /api/problem/
+  
+  returns "No reported problems." 
+
+
+
+ //checking if a problem was visited before by the admin//
+  check if a problem was visited before using a correct problem id
+ http
+  GET /api/problem/getUnseen?idProblem=63b6c0810c9939204d273f1c
+  returns false if the problem was visited before and true if it wasn't
+  
+  
+  check if a problem was visited before using a wrong problem id
+ http
+  GET /api/problem/getUnseen?idProblem=63b6c0810c9939204d273f25
+  returns "No such problem."
+
+
+
+//take an exercise//
+answer the exercise with a correct answer.
+http
+  PUT /api/indTrainee/compareAnswers?answer=sun&?ans=sun
+  
+  returns true
+
+
+answer the exercise with a wrong answer.
+http
+  PUT /api/indTrainee/compareAnswers?answer=sun&?ans=moon
+ 
+  returns false
+
+
+
+//report a problem//
+report a problem with a correct problem id and a correct individual trainee id
+http
+  PUT /api/indTrainee/addProblem?problem=63b6c0810c9939204d273f1c
+  data: {id:639ba3f7f3c05775d538e990}
+  
+  returns "Problem submitted successfully!", the problem is added to the array of problems of the individual trainee with that id
+ 
+
+report a problem with a correct problem id but a wrong individual trainee id
+http
+  PUT /api/indTrainee/addProblem?problem=63b6c0810c9939204d273f1c
+  data: {id:63b6a5bf4658a566c5b6e255}
+  
+  returns "No such individual trainee.", nothing is added to the array of problems of the individual trainee with that id
+  
+  
+  
+ //view reported problems//
+ view reported problems by a individual trainee using a correct id
+ http
+  GET /api/indTrainee/viewProblem?id=639ba3f7f3c05775d538e990
+ 
+ returns all problems reported by the individual trainee with the pending problems at the top and the resolved problems at the bottom
+ 
+
+ view reported problems by a individual trainee using a wrong id
+ http
+  GET /api/indTrainee/viewProblem?id=63b6a5bf4658a566c5b6e255
+ 
+ returns "No such individual trainee."
+
+
+
+
+//forgot password//
+                   
+enter correct email to receive the reset password link on email.
+http
+  POST/api/user/forgotPassword
+                   
+data:{email:"ameliohelpteam@gmail.com"}
+                   
+returns :email sent to user with the reset password link
+
+                   
+enter incorrect email so error message will be displayed.
+http
+  POST/api/user/forgotPassword
+
+data:{email:"ameliohelp@gmail.com"}
+                   
+returns : "This email is not correct"             
+
+                   
+//reset password//
+enter matching strong password and confirm password.
+http
+  PATCH/api/user/resetPassword
+
+data:{password:"abcABC123!" , confirmPassword:"abcABC123!"}
+                   
+returns : password changed successfully and the user is redirected to the login page to login with the new password      
+
+                   
+enter not matching password and confirm password.
+  PATCH/api/user/resetPassword
+  
+data:{password:"abcABC123!" , confirmPassword:"abcABC23!"}
+                   
+returns : "Passwords do  not match"  
+             
+                   
+//login//
+
+enter correct username and correct password.
+  POST/api/user/login
+  
+data:{username:"gana.khaled" , password:"abcABC23!"}
+                   
+returns : logged in successfully and user will be navigated to his/her homepage  
+                   
+                   
+enter incorrect username and correct password.
+  POST/api/user/login
+  
+data:{username:"gana.khale" , password:"abcABC23!"}
+                   
+returns : "This username is incorrect" 
+                   
+                   
+enter correct username and incorrect password.
+  POST/api/user/login
+  
+data:{username:"gana.khaled" , password:"abcABC23"}
+                   
+returns :  "wrong password "
+
+                                      
+enter correct username and not entering password
+  POST/api/user/login
+  
+data:{username:"gana.khaled"}
+                   
+returns :  "please fill in all fields"
+                   
+
+//signup//
+                                                                           
+enter all fields correctly
+  POST/api/user/signup
+  
+data:{firstName:"omar",lastName:"mohamed",username:"omar.mohamed", email:"omar.mohamed@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"male"}
+                   
+returns : user will be signed up successfully and will receive a verification mail with the log in link
+                   
+                   
+enter a used username by other user
+  POST/api/user/signup
+  
+data:{firstName:"ganna",lastName:"hany",username:"gana.khaled", email:"gana.hany@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"female"}
+                   
+returns : "This username is already taken"
+
+                   
+enter a non valid email
+  POST/api/user/signup
+  
+data{firstName:"ganna",lastName:"hany",username:"gana.hany", email:"gana.hany", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"female"}
+                   
+returns : "This username is not valid"
+                   
+  
+enter a weak password
+  POST/api/user/signup
+  
+data{firstName:"ganna",lastName:"hany",username:"gana.hany", email:"gana.hany@gmail.com", password:"abc123",confirmPassword:"abc123",gender:"female"}
+                   
+returns : "This password is not strong enough"
+                   
+                   
+enter non matching passwords
+  POST/api/user/signup
+  
+data{firstName:"ganna",lastName:"hany",username:"gana.hany", email:"gana.hany@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123",gender:"female"}
+                   
+returns : "Passwords do not match"
+                   
+Missing fields
+  POST/api/user/signup
+  
+data{firstName:"ganna",lastName:"hany",username:"gana.hany", email:"gana.hany@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123!"}
+                   
+returns : "please fill in all fields"
+
+
+//change password//
+                   
+Missing fields
+  PATCH/api/user/changePassword
+  
+data{password:"abcABC123!"}
+                   
+returns : "please fill in all fields"
+                   
+                   
+Weak password
+  PATCH/api/user/changePassword
+  
+data{password:"abc123",confirmPassword:"abc123"}
+                   
+returns : "Password is not strong enough"
+                   
+                   
+Password and confirm password do not match
+  PATCH/api/user/changePassword
+  
+data:{password:"abcABC123!",confirmPassword:"abcABC123"}
+                   
+returns : "Passwords do not match"
+  
+Password and confirm password match and strong enough
+PATCH/api/user/changePassword
+  
+data:{password:"abcABC123!",confirmPassword:"abcABC123!"}
+                   
+returns : password changed successfully and user should login with the new password now 
+
  
 ## How To Use
 
@@ -1457,6 +1759,7 @@ Please refer to each project's style and contribution guidelines for submitting 
  
 **NOTE**: Be sure to merge the latest from "upstream" before making a pull request!
  
+
  
 ## Credits
 This project is made possible by the community surrounding it and especially the wonderful people and projects listed in this document.
@@ -1469,6 +1772,13 @@ Main contributors to the project:\
 -[Dina Mohamed](https://github.com/dinamuhamedd)\
 -[Abdelrahman Amgad](https://github.com/abdelrahmanamgad1)
  
+**Resources**
+
+[MERN STACK](https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE)
+
+[MERN STACK Authentication tutorial](https://www.youtube.com/watch?v=WsRBmwNkv3Q&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT)
+
+[MUI React Library](https://v4.mui.com/getting-started/installation/)
 ## License
  
 MIT License
