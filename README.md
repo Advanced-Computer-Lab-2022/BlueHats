@@ -195,9 +195,11 @@ Payment Page
 Course View Page
 [![Screenshot-2023-01-02-at-4-25-17-AM.png](https://i.postimg.cc/L4J3rD1T/Screenshot-2023-01-02-at-4-25-17-AM.png)](https://postimg.cc/PNkDDmKp)
 
-Course Preview
-![preview](https://user-images.githubusercontent.com/105923198/211103241-67d56dce-568e-4fb1-ba9a-12601177d38c.png)
+Course Preview Page
+![preview](https://user-images.githubusercontent.com/105923198/211103977-e84fe272-908a-47bc-94c0-d134829b4a67.png)
  
+Indiviual/Corporate Trainee Courses Page
+![my courses](https://user-images.githubusercontent.com/105923198/211104805-eb18a05b-77a7-449e-8874-513979ddfa3e.png)
  
  
  
