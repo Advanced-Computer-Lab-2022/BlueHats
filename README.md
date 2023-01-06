@@ -173,71 +173,65 @@ Add Admin Page
  
  
 ## Code Examples
- 
-- This function searches for the search key in the title,subject and instructors
- 
-```
-const getCoursesBySearch = async (req,res) => {
-    const key = req.params.key
-    const result = await course.find({}).populate('instructor');
-    const titleRes = await course.find({title: key})
-    console.log(titleRes)
-    if(titleRes.length==0){
-        const subjRes = await course.find({subject: key})
-        console.log(subjRes)
-        if(subjRes.length==0){
-            let i = 0;
-            let resTemp = [];
-            while(i<result.length){
-                if(result[i].instructor != null && result[i].instructor.name == key){
-                    resTemp=resTemp.concat([result[i]])
-                    console.log(result[i])
-                }
-                i++;
-            }
-            const instRes =resTemp
-            console.log(instRes)
-            if(instRes.length==0){
-               const empty = []
-                res.status(200).json(empty)
-            }
-            else{
-                 res.status(200).json(instRes)
-            }
-        }
-        else{
-             res.status(200).json(subjRes)
-        }
-       
-    }
-    else if (titleRes.length!=0){
-         res.status(200).json(titleRes)
-    }
-    else{
-         res.status(200).json([])
-    }
-}
-```
-- This function updates a response to a problem by the admin
-```
-const addResponse = async (req,res) => {
-  const idProblem = req.params.idProblem
-  const resp = req.params.response
- 
-  console.log(idProblem)
- 
-    if(!mongoose.Types.ObjectId.isValid(idProblem)) {
-        return res.status(404).json({error: 'No such Problem'})
-    }
- 
-  const problem = await Problem.findOneAndUpdate({_id: idProblem},{response: resp})
- 
-  if(!problem) {
-    return res.status(404).json({error: 'No such Problem'})
-  }
- 
-  return res.status(200).json(problem);
-}
+
+1)![1](https://user-images.githubusercontent.com/116211733/211104382-dd89a072-52c3-4ead-82cc-f103b675ffd4.png)
+
+:
+
+Search function takes the search keyword and tries matching it to the subject attribute in the course schema and if no matches were found it tries matching the search keyword to the instructor name attribute after populating the course by the instructor id and if no matches are found then it tries to match the search keyword with the title attribute in the course schema. In any step if anything matches add this course to the result array that is printed to the user in the end.
+
+
+
+
+2)![2](https://user-images.githubusercontent.com/116211733/211104549-746b06bc-6cfc-41df-8c7b-9ca173cbeb49.png)
+
+:
+
+AddResponse function takes the response written by the admin and updates the response attribute in the problem schema with it using the idProblem to fetch the requested problem. The trainee or instructor who reported that problem will see the updated response from the admin.
+
+
+
+3)![3](https://user-images.githubusercontent.com/116211733/211104897-f77816ae-f3f3-4830-940c-936475e59bf8.png)
+
+![4](https://user-images.githubusercontent.com/116211733/211104924-e6fb400e-eabc-4520-9710-b56b5f1af39e.png)
+
+:
+
+This function allows a new user (guest) to sign up as an indtrainee . The user is required to fill in all fields so if some fields are empty an error message will be displayed for the user (“please fill in all fields”) .
+
+.The user enters his/her first name , last name , username , email , password , confirm password and gender.
+
+.The user should enter a valid email (in the correct format) so in case of entering a non valid email  an error message will be displayed (“email is not valid”) in order to enter a valid email.
+
+.The user should enter a strong password so in case of entering a weak password  an error message will be displayed (“password is not strong enough”) in order to enter a valid email.
+
+.The email should not be used by any other user so if the user entered a used email, an error message will be displayed (“This email is already in use”) in order to enter another email
+
+.The username should be unique and not used by any other user so if the user entered a used username , an error message will be displayed (“This username is already taken”) in order to enter another username.
+
+.The password and confirm password should match so in case of different passwords an error message will be displayed (“Passwords do not match”) in order to enter matching passwords.
+
+
+.Then passwords are hashed to avoid the sensitive data being visible from anyone. 
+
+.At the end the individual trainee is added to the database and an email with the login link is sent to the user to verify his/her account and the user is asked to login to the system.
+
+
+4)![5](https://user-images.githubusercontent.com/116211733/211104977-fa605de8-190f-404b-a19e-70e23f37daad.png)
+
+
+:
+
+
+The user is asked to enter his/her email and this email should be registered so we look for this email in all our databases as the user who forgot his/her password may be admin,instructor,individual trainee or a corporate trainee .
+
+If the user did not enter his/her email and tried to receive the email  an error message will be displayed (“Please write your email”) .
+
+If this email exists and email is sent to the user with the reset password link .
+
+If this email does not exist  an error message will be displayed (“this email is not correct”) .
+
+
 ```
 - Function that allows the trainee to pay for a course to register
 ```
@@ -273,43 +267,53 @@ const payWithWallet = async (req, res) => {
  
 ## Installation
  
-1- Make sure you download VScode \
-2- Clone the repository from the master branch and save it in some folder (FolderX)\
+1- Make sure you download VScode 
+2- Clone the repository from the master branch and save it in some folder (FolderX)
 3- Open the your terminal and type in the next commands
- 
- 
-```bash
+
   cd <FolderX's path folder by folder until you get there>
   npm install //this installs missing dependencies
-```
-Go to 'Backend' Folder> create a new file call it '.env' and add the following code lines:
-```bash
-PORT = <port number>
+  npm install node
+  npm install express
+  npm install mongoose
+  npm install react
+  npm install @mui/material
+  npm install react-icons
+  npm install nodeMailer 
+  npm install jsonwebtoken
+  npm install bcrypt
+  npm install stripe
+  npm install cors
+  npm install axios 
+  npm install react-router-dom
+
+Go to 'Backend' Folder> create a new file call it '.env' and add the following code lines: 
+
+PORT = <port number> 
 MONGO_URL = "<your MongoDB collection's URL>"
 AUTH_EMAIL = "<your company email>"
 AUTH_PASS = "<password of the previous email>"
 SERVICE = "gmail"
 SECRET = <your secret pass>
 STRIPE_SECRET_KEY= "<Your Stripe Secret Key"
-```
- 
- 
+
+
+
 Now add another terminal to your VScode.\
-In one terminal add the next commands:
- 
-```bash
+In one terminal add the next commands: 
+
   cd backend
   npm run dev
-```
- 
+
+
 In the other terminal add the next commands:
- 
-```bash
+  
   cd frontend
   npm start
-```
-A webpage will be opened automatically in your default browser.\
+
+A web page will be opened automatically in your default browser.\
 YOU GUESSED RIGHT! It's AMELIO!! 🤩
+
 ## API Reference
  
 #### Get all courses
@@ -670,6 +674,668 @@ If the query is empty, this request will get all courses NOT FILTERED
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required**. ID of corporate trainee to fetch |
+
+#### Get all corporate trainees
+ 
+```http
+  GET /api/corporateTrainee/
+```
+The query gets all corporate trainees in the system.
+ 
+ 
+ 
+#### Get a corporate trainee
+ 
+```http
+  GET /api/corporateTrainee/:id
+```
+ The query gets the requested corporate trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of corporate trainee to fetch |
+ 
+ 
+ 
+ #### Add a corporate trainee
+ 
+```http
+  Post /api/corporateTrainee/
+```
+ The query adds a new corporate trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **Required**. name of corporate trainee to be added|
+| `username`      | `string` | **Required**. username of corporate trainee to be added|
+| `email`      | `string` | **Required**. email of corporate trainee to be added|
+| `password`      | `password` | **Required**. password of corporate trainee to be added|
+ 
+ 
+ 
+ #### Delete a corporate trainee
+ 
+```http
+  Delete /api/corporateTrainee/:id
+```
+ The query deletes the corporate trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of corporate trainee to be deleted|
+ 
+ 
+ 
+ #### patch an email
+ 
+```http
+  Patch /api/corporateTrainee/changeEmail
+```
+ The query updates the corporate trainee's email.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of corporate trainee to update his/her email|
+| `email`      | `string` | **Required**. updated email of corporate trainee|
+ 
+ 
+ 
+ #### patch new corporate trainee attributes 
+ 
+```http
+  Patch /api/corporateTrainee/updateProfile
+```
+ The query updates the corporate trainee's profile.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of corporate trainee to update his/her profile|
+| `corporate trainee attributes`      | `JSON` | **Required**. Attributes to be updated|
+ 
+ 
+ 
+#### post a password
+ 
+```http
+  Post /api/corporateTrainee/forgotPassword
+```
+ The query changes the corporate trainee's password.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required**. email of corporate trainee to update his/her password|
+ 
+ 
+ 
+#### get courses of a corporate trainee
+ 
+```http
+  Get /api/corporateTrainee/getCourses/:id
+```
+ The query gets the corporate trainee's courses.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of corporate trainee to be fetched|
+ 
+ 
+ 
+#### put an answer
+ 
+```http
+  Put /api/corporateTrainee/compareAnswers/:solution/:answer
+```
+ The query adds the answer of a corporate trainee to an exercise.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `solution`      | `string` | **Required**. solution of the exercise|
+| `answer`      | `string` | **Required**. answer of the exercise submitted by the corporate trainee|
+ 
+ 
+ 
+#### put a problem
+ 
+```http
+  Put /api/corporateTrainee/addProblem/:problem
+```
+ The query adds the reported problem of a corporate trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `problem`      | `string` | **Required**. reported problem submitted by corporate trainee|
+ 
+ 
+ 
+#### get a problem
+ 
+```http
+  Get /api/corporateTrainee/viewProblem/:id
+```
+ The query views the reported problems by a corporate trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of corporate trainee to be fetched|
+ 
+ 
+ 
+ 
+#### patch a course's rating
+ 
+```http
+  Patch /api/corporateTrainee/rateCourse
+```
+ The query adds a rating to a course.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseId`      | `string` | **Required**. id of course to be rated|
+ 
+ 
+ 
+#### patch an instructor's rating
+ 
+```http
+  Patch /api/corporateTrainee/rateInstructor
+```
+ The query adds a rating to an instructor.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `instructorId`      | `string` | **Required**. id of instructor to be rated|
+ 
+ 
+ 
+#### patch a review of a course
+ 
+```http
+  Patch /api/corporateTrainee/addRev
+```
+ The query adds a review to a course.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseId`      | `string` | **Required**. id of course to be reviewed|
+ 
+ 
+ 
+#### post a corporate trainee's request to access a course
+ 
+```http
+  Post /api/corporateTrainee/requestCourse
+```
+ The query requests a course by the corporate trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseId`      | `string` | **Required**. id of course to be requested|
+ 
+ 
+ 
+#### get a corporate trainee's courses 
+ 
+```http
+  Get /api/corporateTrainee/availableCourses/:id
+```
+ The query gets a corporate trainee's courses.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of corporate trainee to be fetched|
+ 
+ 
+ 
+==================================================================
+ 
+#### Get all individual trainees
+ 
+```http
+  GET /api/indTrainee/
+```
+The query gets all individual trainees in the system.
+ 
+ 
+ 
+#### Get a individual trainee
+ 
+```http
+  GET /api/indTrainee/:id
+```
+ The query gets the requested individual trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of individual trainee to fetch |
+ 
+ 
+ 
+ #### Add a individual trainee
+ 
+```http
+  Post /api/indTrainee/
+```
+ The query adds a new individual trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `name`      | `string` | **Required**. name of individual trainee to be added|
+| `username`      | `string` | **Required**. username of individual trainee to be added|
+| `email`      | `string` | **Required**. email of individual trainee to be added|
+| `password`      | `password` | **Required**. password of individual trainee to be added|
+ 
+ 
+ 
+ #### Delete a individual trainee
+ 
+```http
+  Delete /api/indTrainee/:id
+```
+ The query deletes the individual trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of individual trainee to be deleted|
+ 
+ 
+ 
+ #### patch an email
+ 
+```http
+  Patch /api/indTrainee/changeEmail
+```
+ The query updates the individual trainee's email.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of individual trainee to update his/her email|
+| `email`      | `string` | **Required**. updated email of individual trainee|
+ 
+ 
+ 
+ #### patch new corporate trainee attributes 
+ 
+```http
+  Patch /api/indTrainee/updateProfile
+```
+ The query updates the individual trainee's profile.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of individual trainee to update his/her profile|
+| `individual trainee attributes`      | `JSON` | **Required**. Attributes to be updated|
+ 
+ 
+ 
+#### post a password
+ 
+```http
+  Post /api/indTrainee/forgotPassword
+```
+ The query changes the individual trainee's password.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required**. email of individual trainee to update his/her password|
+ 
+ 
+ 
+#### get courses of a individual trainee
+ 
+```http
+  Get /api/indTrainee/getCourses/:id
+```
+ The query gets the individual trainee's courses.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of individual trainee to be fetched|
+ 
+ 
+ 
+#### put an answer
+ 
+```http
+  Put /api/indTrainee/compareAnswers/:solution/:answer
+```
+ The query adds the answer of a individual trainee to an exercise.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `solution`      | `string` | **Required**. solution of the exercise|
+| `answer`      | `string` | **Required**. answer of the exercise submitted by the individual trainee|
+ 
+ 
+ 
+#### put a problem
+ 
+```http
+  Put /api/indTrainee/addProblem/:problem
+```
+ The query adds the reported problem of a individual trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `problem`      | `string` | **Required**. reported problem submitted by individual trainee|
+ 
+ 
+ 
+#### get a problem
+ 
+```http
+  Get /api/indTrainee/viewProblem/:id
+```
+ The query views the reported problems by a individual trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of individual trainee to be fetched|
+ 
+ 
+ 
+ 
+#### patch a course's rating
+ 
+```http
+  Patch /api/indTrainee/rateCourse
+```
+ The query adds a rating to a course.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseId`      | `string` | **Required**. id of course to be rated|
+ 
+ 
+ 
+#### patch an instructor's rating
+ 
+```http
+  Patch /api/indTrainee/rateInstructor
+```
+ The query adds a rating to an instructor.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `instructorId`      | `string` | **Required**. id of instructor to be rated|
+ 
+ 
+ 
+#### patch a review of a course
+ 
+```http
+  Patch /api/indTrainee/addRev
+```
+ The query adds a review to a course.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseId`      | `string` | **Required**. id of course to be reviewed|
+ 
+ 
+ 
+#### post a individual trainee's request to access a course
+ 
+```http
+  Post /api/indTrainee/requestCourse
+```
+ The query requests a course by the individual trainee.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseId`      | `string` | **Required**. id of course to be requested|
+ 
+ 
+ 
+#### get a individual trainee's courses 
+ 
+```http
+  Get /api/indTrainee/availableCourses/:id
+```
+ The query gets a individual trainee's courses.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. id of individual trainee to be fetched|
+ 
+ 
+ 
+ 
+#### put the progress of a trainee in a course
+ 
+```http
+  Put /api/indTrainee/progress
+```
+ The query updates the progress of an individual trainee in a course.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `prpgress`      | `number` | **Required**. progress of individual trainee in a course|
+| `courseID`      | `string` | **Required**. id of course to be fetched|
+| `userID`      | `string` | **Required**. id of individual trainee to be fetched|
+ 
+ 
+ 
+#### get the progress of a trainee in a course
+ 
+```http
+  Get /api/indTrainee/getProgress
+```
+ The query gets the progress of an individual trainee in a course.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseID`      | `string` | **Required**. id of course to be fetched|
+| `userID`      | `string` | **Required**. id of individual trainee to be fetched|
+
+#### get a problem
+ 
+http
+  Get /api/problem/:id
+
+ The query gets the reported problem with this id
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | *Required*. id of problem to be fetched|
+
+                   
+#### create a problem
+                   
+ http
+  POST /api/problem
+
+ The query creates new problem
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `problem attributes` | `JSON` | **Required**. All problem attributes |
+
+                   
+#### delete a problem
+                   
+http
+  DELETE /api/problem/:id
+
+The query deletes the problem with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id`      | `string` | *Required*. id of problem to be deleted|
+
+
+#### update a problem
+                   
+http
+  PATCH /api/problem/:id
+
+The query updates the problem with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id`      | `string` | *Required*. id of problem to be fetched|
+| `problem attributes` | `string` | **Required**. Attributes to be updated|
+
+
+#### get pending problems
+                   
+http
+  GET /api/problem/
+
+The query gets all pending problems 
+
+
+#### update Status
+                   
+http
+  PUT /api/problem/updateStatus/:idProblem
+
+The query updates the status of a problem to be resolved
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idProblem`      | `string` | *Required*. id of problem to be updated|
+
+
+#### update Seen
+                   
+http
+  PUT /api/problem/updateSeen/:idProblem
+
+The query mark a problem as seen
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idProblem`      | `string` | *Required*. id of problem to be updated|
+
+
+#### get unseen
+                   
+http
+  GET /api/problem/getUnseen/:idProblem
+
+The query gets the unseen attribute value of a problem
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idProblem`      | `string` | *Required*. id of problem to be fetched|
+
+               
+#### add response
+                   
+http
+  PUT /api/problem/addResponse/:idProblem/:response
+
+The query updates the response to a problem
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `idProblem`      | `string` | *Required*. id of problem to be updated|
+| `response` | `string` | **Required**. response of the problem|
+
+
+------------------------------------------------------------------------------
+                   
+#### get search results
+ 
+```http
+  Get /api/courses/search/:key
+```
+ The query gets search results of the entered search keyword.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `key`      | `string` | **Required**. Search keyword|
+                   
+#### get courses
+                   
+http
+  Get /api/courses
+
+The query gets all courses                 
+
+ #### Get a single course
+                   
+http
+  GET /api/courses/:id
+
+The query gets the course with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id`      | `string` | *Required*. id of course to be fetched|
+
+    
+                   
+ #### create a new course
+                   
+http
+  POST /api/courses/
+
+The query creates a new course
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `course attributes` | `JSON` | *Required*. All courses attributes |
+                   
+
+#### delete a course
+                   
+http
+  DELETE /api/courses/:id
+
+The query deletes the course with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id`      | `string` | *Required*. id of course to be deleted|
+
+ 
+#### update a course
+                   
+http
+  PATCH /api/courses/:id
+
+The query updates the course with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id`      | `string` | *Required*. id of course to be fetched|
+| `course attributes` | `string` | **Required**. Attributes to be updated|
+ 
+
+#### pay for a course
+                   
+http
+  POST /api/courses/payment
+
+The query pays the course with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `amount `      | `string` | *Required*. amount to be payed|
+| `courseID ` | `string` | **Required**. course id paying for|
+| `userID  ` | `string` | **Required**. user id paying for the course|
+                   
+
+#### Request Refund
+                   
+http
+  POST /api/courses/requestRefund
+
+The query pays the course with this id
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `amount `      | `string` | *Required*. amount to be payed|
+| `courseID ` | `string` | **Required**. course id paying for|
+| `userID  ` | `string` | **Required**. user id paying for the course|
+
+
+#### Get user wallet
+                   
+http
+  PUT /api/courses/wallet
+
+The query gets the user wallet
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `type `      | `string` | *Required*. type of user either instructor or individual trainee|
+| `userID  ` | `string` | **Required**. user id paying for the course|
+                   
+                   
+#### Get amount to be refunded
+                   
+http
+  PUT /api/courses/getCoursePrice
+
+The query gets the amount to be refunded
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `refundID `      | `string` | *Required*. id of the refund requested|
+
+                   
+#### Get refund course name
+                   
+http
+  PUT /api/courses/getCourseName
+
+The query gets the name of the course refund was requested for
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `refundID `      | `string` | *Required*. id of the refund requested|
+                   
+                   
+#### Get the name of the trainee requested a refund
+                   
+http
+  PUT /api/courses/getTraineeName
+
+The query gets the name of the trainee requested a refund
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `refundID `      | `string` | *Required*. id of the refund requested|
+                   
+                   
+#### Get all refund requests
+                   
+http
+  PUT /api/courses/getRefundRequests
+
+The query gets all refund requests
+
  
  
 ## Tests
