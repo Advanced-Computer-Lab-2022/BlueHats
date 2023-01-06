@@ -194,6 +194,9 @@ Payment Page
  
 Course View Page
 [![Screenshot-2023-01-02-at-4-25-17-AM.png](https://i.postimg.cc/L4J3rD1T/Screenshot-2023-01-02-at-4-25-17-AM.png)](https://postimg.cc/PNkDDmKp)
+
+Course Preview
+![preview](https://user-images.githubusercontent.com/105923198/211102974-1d7630a8-d136-45e3-8afd-807e853575e1.png)
  
  
  
