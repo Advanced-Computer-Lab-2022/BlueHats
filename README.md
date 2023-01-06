@@ -776,19 +776,72 @@ http
 | `id` | `Number` | *Required*. Id of instructor |
  
 ## How To Use
- 
-- signup using first name, last name, email, password
-- login with username and password
-- logout
-- change password
-- request courses and pay for them
-- watch explanation videos
-- take evlaution exercises
-- keep track of the progress
-- take notes
-- get a certificate at the end of the course and download it
-- get discounts on courses
-- report any problem and get a response from an admin
+
+- As an indiviual trainee, 
+  - sign up using your first name, last name, email, password, and gender. 
+  - login with your username and password.
+  - preview available coures on the website.
+  - enroll in any course they are interested in by paying using their wallet or credit card.
+  - watch each subtitle video of the course they enrolled in and solve its exercise 
+  - check whether they solved the exercise correctly or not and view the correct solution
+  - take notes while watching the course subtitle videos
+  - check their progress in the coures they are enrolled in
+  - get a certificate sent to their email when their progress of the course reaches 100% and download it as a PDF
+  - refund a course they are enrolled in if their progress is less than 50%
+  - receive a full refund into their wallet of the course they requested to refund after being accepted by the admin
+  - rate courses they enrolled in 
+  - rate the instructors of the courses they enrolled in
+  - write a review for the courses they enrolled in 
+  - delete a review for the courses they enrolled in 
+  - edit a review for the courses they enrolled in 
+  - change their account password
+  - report any problem in the website and reseive a response from the admin
+  - logout from their account
+
+- As a Corporate trainee, 
+  - login with your username and password set by the admin.
+  - preview available coures on the website.
+  - request any course they are interested in.
+  - check whether the courses they requested are accepted or rejected by the admin
+  - watch each subtitle video of the course they requested (and the request was accepted) in and solve its exercise 
+  - check whether they solved the exercise correctly or not and view the correct solution
+  - take notes while watching the course subtitle videos
+  - check their progress in the coures they are enrolled in
+  - get a certificate sent to their email when their progress of the course reaches 100% and download it as a PDF
+  - rate courses they enrolled in 
+  - rate the instructors of the courses they enrolled in
+  - write a review for the courses they enrolled in 
+  - delete a review for the courses they enrolled in 
+  - edit a review for the courses they enrolled in 
+  - change their account password
+  - report any problem in the website and reseive a response from the admin
+  - logout from their account
+
+- As an Instructor, 
+  - login with your username and password set by the admin.
+  - preview available coures on the website.
+  - accept the contract of uploaded video licence and payment policy
+  - add a course (after accepting the contract) by entering
+    the course title, subject, summary, price, promotion, promotion start date, promotion end date(or no promotion at all),
+    each subtitles title, youtube video link, video  summary, exercise and their correct answer
+  - add promotion to any of their courses or all their courses at any time after course publish
+  - view the rating and reviews of their courses
+  - change their account password
+  - report any problem in the website and reseive a response from the admin
+  - logout from their account
+
+- As an Admin, 
+  - login with your username and password.
+  - preview available coures on the website.
+  - apply promotion to any course or all courses at any time
+  - add Corporate trainee and set their  username and password
+  - add indiviual trainee and set their username and password
+  - add another admin and set their username and password
+  - view reported problems, resolve them, and set their status 
+  - view requested course refunds and accept them
+  - view requested courses from Corporate trainees and accept or reject them
+  - change their account password
+  - logout from their account
 ## Contributing
  
 Please refer to each project's style and contribution guidelines for submitting patches and additions. In general, we follow the "fork-and-pull" Git workflow.
@@ -838,6 +891,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- 
- 
-
