@@ -208,7 +208,7 @@ Course View Page
 - Mongoose
 - React Stripe
 - JSPDF
-- Bootstrap
+- Bootstrap/
 **Server:**
 - Node
 - Express
