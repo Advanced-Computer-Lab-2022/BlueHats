@@ -1,21 +1,45 @@
  
-# Amelio
- 
-Amelio is an Online Learning System website that creates a robust learning experience that feels like a classroom experience, offering the traditional classroom characteristics (like instructor-student interaction, Q&As, discussion).
+# Online Learning System : Ameilo
+
+Amelio is an Online Learning System website *implemented using MERN stack*  that creates a robust learning experience that feels like a classroom experience, offering the traditional classroom characteristics (Students have their lessons through online videos , Have to solve exercise(s) after each lesson and at the end have a certificate if he/she passes the course).
+Also an admin manages the available instructors and corporate trainees from one end , instructors manage the courses they offer and the user (corporate trainee / individual trainee) is able to search and view the available courses to choose his/her desirable courses from the other end .
+
  
 ## Motivation
  
-Amelio was built as an integrated set of interactive online services that provide trainers, learners, and others involved in education with information, tools, and resources to support and enhance education delivery and management. These important learning environments are achieved through a learning platform’s features and tools that create the level of interaction and engagement students need. include content modules, learning modules, evaluation modules, and communication modules. These modules allow for your training program to incorporate a variety of teaching styles for every learner, and allows for learners to boost their performance level and knowledge-retention levels.
-## Build Status
- 
+Amelio was built as an integrated set of interactive online services that provide trainers, learners, and others involved in education with information, tools, and resources to support and enhance education delivery and management. These important learning environments are achieved through a learning platform’s features and tools that create the level of interaction and engagement students need. include content modules, learning modules and  evaluation modules. These modules allow for your training program to incorporate a variety of teaching styles for every learner, and allows for learners to boost their performance level and knowledge-retention levels.
+
+
+## Table of Content
+## 1. Build Status
+## 2. Code style 
+## 3. Screenshots 
+## 4. Tech/Framework used 
+## 5. Extra Features 
+## 6. Code examples
+## 7. Installation 
+## 8. API reference 
+## 9. Tests
+## 10. How to use 
+## 11. Contribute 
+## 12. Credits
+## 13. Licence 
+
+## Build status
+
 - can't search in filtered results
+- users can’t search by instructor name
+- users can’t follow up on reported problems
 - can't filter in search results
-- can't update the progress based on the minutes watched in the video
-- can't receive the money in the wallet
-- can't see grades for exercises done previously
+- can't update the progress based on the minutes watched in the video 
+- can't receive the money in the wallet 
+- can't see grades for exercises done previously 
 - can't see the average mark scored on the exercises of the course
 - can't ask the course instructor questions about the course
+
 ## Code Style
+Consistent indentation should be used in the code along with following any established coding conventions or guidelines that are relevant to the language used.  Syntax highlighting is used to make the code easier to read by anyone and to help readers to understand what is happening in the code. It is also a good idea to include comments on your code to explain what is happening and to make it easier for other to understand.
+
  
 **JavaScript**
 - Two spaces indentation.
@@ -79,104 +103,10 @@ if (item == null) {
 **CSS**
  
 - Two spaces indentation.
-- Use lowercase hex colors (e.g. #fff) instead of color names (e.g. white).
+- Use lowercase hex colours (e.g. #fff) instead of colour names (e.g. white).
 - Use * {box-sizing: border-box;}.
 - Use hyphens between class names, not camelCase or under_scores.
 - Use only classes for styling most of the time (no #ids, elems etc).
-- Don't use inline styling.
-- Profile your selectors with webkit inspector.
-- Use tree-style indentation.
- 
-```
-.signup-page {
-  background: #0d0; }
-  .signup-button {
-    padding: 10px;
-    background-image: url("../img/signup.png"); }
- 
-/* This looks cool if you use Stylus etc. */
-.chat-page {
-  font-size: 0.9em; }
-  .identity {
-    margin-bottom: 20px; }
-    .identity-profile {
-      height: 4em; }
-    .identity-nickname {
-      float: left;
-      width: 165px; }
-    .identity-avatar {
-      float: right; }
-    .identity-updates {
-      margin-top: 10px; }
-    .identity-status {
-      height: 30px; }
-    .identity-current-mood {
-      padding-left: 5px; }
-    .identity-button {
-      float: right; }
-```
-- Use this sequence of properties
-```
-.item {
-  position: static;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
- 
-  display: block;
-  visibility: hidden;
-  float: none;
-  clear: none;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
- 
-  box-sizing: content-box;
-  width: auto;
-  min-width: 0;
-  max-width: 0;
-  height: auto;
-  min-height: 0;
-  max-height: 0;
-  margin: 0;
-  padding: 0;
- 
-  table-layout: fixed;
-  empty-cells: show;
-  border-spacing: 0;
-  border-collapse: collapse;
-  list-style: none;
- 
-  font: 1em sans-serif;
-  font-family: Arial, sans-serif;
-  font-size: 1em;
-  font-weight: normal;
-  font-style: normal;
-  font-variant: normal;
- 
-  content: "";
-  cursor: default;
-  text-align: left;
-  vertical-align: top;
-  line-height: 1;
-  white-space: normal;
-  text-decoration: none;
-  text-indent: 1;
-  text-transform: uppercase;
-  letter-spacing: 1;
-  word-spacing: normal;
- 
-  opacity: 1;
-  color: #d00;
-  text-shadow: 5px 5px 5px #d59;
-  border: 1px solid #d00;
-  border-radius: 15px;
-  box-shadow: inset 1px 0 0 #fff;
-  background: #fff url("../i/bg.png") no-repeat 0 0; }
-```
- 
- 
  
  
  
@@ -185,9 +115,6 @@ if (item == null) {
  
 Login Page
 [![2023-01-02-3.png](https://i.postimg.cc/CKDVPk4L/2023-01-02-3.png)](https://postimg.cc/LqH7hq7r)
- 
-Admin Course View Page
-[![Screenshot-2023-01-02-at-4-31-21-AM.png](https://i.postimg.cc/NMmfHZnD/Screenshot-2023-01-02-at-4-31-21-AM.png)](https://postimg.cc/8JkS8XNf)
  
 Payment Page
 [![Screenshot-2023-01-02-at-4-29-42-AM.png](https://i.postimg.cc/5tjX671K/Screenshot-2023-01-02-at-4-29-42-AM.png)](https://postimg.cc/sBdjLJM5)
@@ -201,43 +128,48 @@ Course Preview Page
 Indiviual/Corporate Trainee Courses Page
 ![my courses](https://user-images.githubusercontent.com/105923198/211104805-eb18a05b-77a7-449e-8874-513979ddfa3e.png)
  
- 
+No Courses Found for this search Page
+![no courses](https://user-images.githubusercontent.com/105923198/211105660-65af4b82-d475-4c0a-9f30-c7ada296de15.png)
+
+Add Admin Page
+![add admin](https://user-images.githubusercontent.com/105923198/211106393-9f7527b0-9c10-4e47-8a85-fcd085c4991e.png)
  
  
  
 ## Tech Stack
 **Client:**
-- React
-- Axios
-- MUI
-- Mongoose
-- React Stripe
-- JSPDF
-- Bootstrap
+- React : A free and open-source front-end JavaScript library for building user interfaces based on UI components
+- Axios :A way of fetching APIs in React
+- MUI : provides a simple, customizable, and accessible library of React components.
+- Mongoose : is a schema-less NoSQL document database used to store data 
+- React Stripe : Payment API
+- JSPDF : convert an html to pdf
+
 
 **Server:**
-- Node
-- Express
-- MongoDB
-- Bcrypt
-- Cors
-- JWT
-- Nodemailer
-- Stripe
-- Validator
+- Node.js : A back-end JavaScript runtime environment, runs on the V8 JavaScript Engine, and executes JavaScript code outside a web browser
+- Express : is a back end web application framework for building APIs with Node.js
+- MongoDB : is a schema-less NoSQL document database used to store data 
+- Bcrypt : To avoid the sensitive data being visible from anyone(hashing passwords)
+- Cors : a system consisting of transmitting HTTP headers, that determines whether browsers block frontend JavaScript code from accessing responses for cross-origin requests.
+- JWT : used for authentication. After a user signs in to an application, the application then assigns JWT to that user. Subsequent requests by the user will include the assigned JWT. 
+- Nodemailer :  module that allows you to send emails from your server
+- Stripe : Payment API
+- Validator : ensuring that user input is correct, and useful (correct email format , strong password)
  
 ## Features
- 
 - Write notes while watching your course lessons and download it
-- Download and receive by mail your dynammic certificate upon completion
-- Fullscreen mode
+- Download and receive by mail your dynamic certificate upon completion
+- Full Screen mode
 - Instructors can redeem their salary from a smart wallet
-- Evaluate instructors and courses using ratings/reviews
-- Instructors can see the number of enrolled students in their courses
-- Trainees can request a refund if less than 50% of the course was not a satsifactory
-- Report problems to be resolved by admins
-- Trainees can see a preview lesson of the course they're interested in
-- Trainees have the ability to test their knowledge by solving quizzes for the lesson they're taking
+- Evaluate instructors and courses using ratings/reviews 
+- /*Instructors can see the number of enrolled students in their courses*/
+- Trainees can request a refund if less than 50% of the course was not a satisfactory 
+- Report problems to be resolved by admins 
+- Trainees can see a preview lesson of the course they're interested in 
+- Trainees have the ability to test their knowledge by solving quizzes for the lesson they are taking
+- Any user who forgot his/her password while logging in can click on the forget password link in the login page, he/she will be redirected to a page to enter his/her registered email and then a link will be sent to the user by email in order to reset his/her password.
+
  
  
 ## Code Examples
