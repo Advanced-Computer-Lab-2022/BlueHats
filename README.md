@@ -1679,6 +1679,75 @@ data:{password:"abcABC123!",confirmPassword:"abcABC123!"}
                    
 returns : password changed successfully and user should login with the new password now 
 
+//adding new corporate trainee//
+                   
+all fields are entered successfully
+POST/api/corporateTrainee/
+  
+data:{firstName:"layan",lastName:"mohamed",username:"layan.mohamed", email:"layan.mohamed@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"female" , corporate:"guc"}
+                   
+returns : "A new corporate trainee have been added successfully "
+            
+                   
+weak password
+POST/api/corporateTrainee/
+  
+data:{firstName:"layan",lastName:"mohamed",username:"layan.mohamed", email:"layan.mohamed@gmail.com", password:"abc123",confirmPassword:"abc123!",gender:"female" , corporate:"guc"}
+                   
+returns : "password is not strong enough"
+                   
+
+POST/api/corporateTrainee/
+  
+data:{firstName:"layan",lastName:"mohamed",username:"layan.mohamed", email:"layan.mohamed@gmail.com", password:"abcABC123",confirmPassword:"abcABC123!",gender:"female" , corporate:"guc"}
+                   
+returns : "Passwords do not match"
+
+
+___________________________________________
+
+//adding new admin//
+                   
+all fields are entered successfully
+POST/api/admin/
+  
+data:{firstName:"sara",lastName:"mahmoud",username:"sara.mahmoud", email:"sara.mahmoud@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"female" }
+                   
+returns : "A new admin has been added successfully "
+            
+                   
+weak password
+POST/api/admin/
+  
+data:{firstName:"sara",lastName:"mahmoud",username:"sara.mahmoud", email:"sara.mahmoud@gmail.com", password:"abc123",confirmPassword:"abc123",gender:"female" }
+                   
+returns : "password is not strong enough"
+    
+               
+Not matching passwords
+POST/api/admin/
+  
+data:{firstName:"sara",lastName:"mahmoud",username:"sara.mahmoud", email:"sara.mahmoud@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123",gender:"female" }
+                   
+returns : "Passwords do not match"
+
+
+entering a username taken by another user
+POST/api/admin/
+  
+data:{firstName:"gana",lastName:"mahmoud",username:"gana.khaled", email:"gana.khaled@gmail.com", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"female" }
+                   
+returns : "This username is used by another user"
+          
+                   
+entering a non valid email
+POST/api/admin/
+  
+data:{firstName:"gana",lastName:"mahmoud",username:"gana.mahmoud", email:"gana.khaled", password:"abcABC123!",confirmPassword:"abcABC123!",gender:"female" }
+                   
+returns : "This email is not valid"
+
+
  
 ## How To Use
 
@@ -1779,6 +1848,55 @@ Main contributors to the project:\
 [MERN STACK Authentication tutorial](https://www.youtube.com/watch?v=WsRBmwNkv3Q&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT)
 
 [MUI React Library](https://v4.mui.com/getting-started/installation/)
+
+**Team Members and Sprint Contributions**
+
+        ACL - BlueHats
+
+-------------Team Members-------------
+
+1- Mariam El Madbouly 49-3985(Scrum Master)
+2- Dina Mohammed 49-0647
+3- Yasmin Hossam 49-3777
+4- Abdelrahman Amgad 49-16529
+5- Muhammed Magdy 49-6695 
+
+
+-------------Sprint 1 Tasks-------------
+
+ Mariam El Madbouly: 6, 12, 23
+
+ Dina Mohammed: 55, 56, 57
+
+ Yasmin Hossam: 11, 20
+ 
+ Abdelrahman Amgad: 9, 10, 19
+
+ Muhammed Magdy: 7, 8, 18
+
+-------------Sprint 2 Tasks-------------
+
+ Mariam El Madbouly: 24, 25, 39, 26, 27
+
+ Dina Mohammed: 29, 31, 32
+
+ Yasmin Hossam: 35, 36, 37, 38 
+ 
+ Abdelrahman Amgad: 5, 17, 30
+
+ Muhammed Magdy: 21, 28, 33, 34
+
+-------------Sprint 3 Tasks-------------
+
+ Mariam El Madbouly: 15, 16, 22, 40, 45, 46, 51, 54
+
+ Dina Mohammed: 1, 2, 3, 4
+
+ Yasmin Hossam: 47, 48, 49, 52, 53
+ 
+ Abdelrahman Amgad: 13, 14, 41, 42, 43, 44, 60
+
+ Muhammed Magdy: 50, 58, 59
 ## License
  
 MIT License
