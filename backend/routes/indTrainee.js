@@ -51,7 +51,7 @@ router.put('/getMyCourses', getMyCourses);
 // Pay for a course with wallet
 router.put('/payWithWallet', payWithWallet);
 
-router.get('/getCourses/:id',getCourses)
+router.put('/getCourses/:id',getCourses)
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 

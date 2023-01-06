@@ -49,7 +49,7 @@ router.post('/',createCorporateTrainee)
 
 // router.put('/addCourse/:id/:idCourse',addCourse)
 
-router.get('/getCourses/:id',getCourses)
+router.get('/getCourses/:id',getCourses);
 
 router.put('/compareAnswers/:solution/:answer',compareAnswers)
 

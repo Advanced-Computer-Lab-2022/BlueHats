@@ -190,10 +190,10 @@ let transporter = nodemailer.createTransport
 const filterCourses = async(req,res) => {
   
   //const instructorId = req.query.instructorId;
-  const {userID}= req.body;
-  if(userID)
+  const {id}= req.body;
+  if(id)
   {
-      const result = await course.find({instructor:mongoose.Types.ObjectId(userID)});
+      const result = await course.find({instructor:mongoose.Types.ObjectId(id)});
       res.status(200).json(result)
   }
   else

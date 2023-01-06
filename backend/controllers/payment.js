@@ -74,7 +74,13 @@ const courseRefund = async (req, res) => {
 
 
     const refund = await Refund.findOneAndDelete({ _id: refundID });
-    console.log(refund+"yayyy")
+    console.log(refund+"yayyy");
+
+    const mycourse = await course.findById(courseID);
+
+    const enrolled = mycourse.enrolled - 1;
+
+    const updateCourse = await course.findOneAndUpdate({_id: courseID}, {enrolled : enrolled});
 
     const result = await course.findById(courseID).populate('instructor');
 

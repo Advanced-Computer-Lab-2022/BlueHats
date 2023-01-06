@@ -161,79 +161,65 @@ const InstructorPage = () => {
   };
   const handleChangeSubject = (event) => {
     setSubjectName(event.target.value);
-    const urlFilterSubject = `subject=${event.target.value}`;
+    const urlFilterSubject = `?subject=${event.target.value}`;
     const urlFilterAppendSubject = `&subject=${event.target.value}`;
 
     if (location.search) {
       if (
-        (searchParams.has("price[gte]") ||
-          searchParams.has("price[lte]") ||
-          searchParams.has("courseRating")) &&
-        !searchParams.has("subject")
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("courseRating")) &&
+        !filter.includes("subject")
       ) {
         console.log("Checker1");
-        setFilter(`${location.search}${urlFilterAppendSubject}`);
-        setSearchParams(`${location.search}${urlFilterAppendSubject}`);
-
-        navigate(`${location}${urlFilterAppendSubject}`);
-        console.log(filter);
+        setFilter(filter + urlFilterAppendSubject);
+        navigate(`${location.pathname}${filter}${urlFilterAppendSubject}`);
         //-------^^DONE^^-------//
-      } else if (filter.includes("&subject")) {
+      } else if (
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("courseRating")) &&
+        filter.includes("subject")
+      ) {
         console.log("Checker2");
-        console.log(filter);
-        // searchParams.delete("subject");
-        // setSearchParams(urlFilterSubject);
-        // // navigate(`${location.pathname}?${urlFilterSubject}`);
-        setFilter(filter + urlFilterSubject);
-        // setFilter(searchParams);
-
-        navigate(`${location.pathname}${filter}`);
-      } else if (filter.includes("?subject")) {
-        setFilter(`?urlFilterSubject`)
-        navigate(`${location.pathname}?${urlFilterSubject}`);
+        setFilter(urlFilterSubject);
+        navigate(`${location.pathname}${urlFilterSubject}`);
+        //-------^^DONE^^-------//
       }
-    } else setFilter(`?subject=${event.target.value}`);
-    navigate(`${location.pathname}?subject=${event.target.value}`);
+    } else {
+      setFilter(urlFilterSubject);
+      navigate(`${location.pathname}${urlFilterSubject}`);
+    }
   };
   const handleChangeRating = (event) => {
-    setSubjectName(event.target.value);
-    const urlFilterRating = `courseRating=${event.target.value}`;
+    setRating(event.target.value);
+    const urlFilterRating = `?courseRating=${event.target.value}`;
     const urlFilterAppendRating = `&courseRating=${event.target.value}`;
 
     if (location.search) {
       if (
-        (searchParams.has("price[gte]") ||
-          searchParams.has("price[lte]") ||
-          searchParams.has("subject")) &&
-        !searchParams.has("courseRating")
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("subject")) &&
+        !filter.includes("courseRating")
       ) {
         console.log("Checker1");
-        setFilter(location.search + urlFilterAppendRating);
-        setSearchParams(location.search + urlFilterAppendRating);
-
-        navigate(`${location}${urlFilterAppendRating}`);
-        console.log(filter);
+        setFilter(filter + urlFilterAppendRating);
+        navigate(`${location.pathname}${filter}${urlFilterAppendRating}`);
         //-------^^DONE^^-------//
       } else if (
-        // (searchParams.has("price[gte]") ||
-        // searchParams.has("price[lte]") ||
-        // searchParams.has("courseRating")) &&
-        searchParams.has("subject") ||
-        filter.includes("courseRatinng")
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("subject")) &&
+        filter.includes("courseRating")
       ) {
         console.log("Checker2");
-        console.log(filter);
-        console.log(searchParams.toString());
-        // searchParams.delete("subject");
-        // setSearchParams(urlFilterSubject);
-        // // navigate(`${location.pathname}?${urlFilterSubject}`);
-        setFilter(filter + urlFilterRating);
-        // setFilter(searchParams);
-
-        navigate(`${location.pathname}${filter}`);
+        setFilter(urlFilterRating);
+        navigate(`${location.pathname}${urlFilterRating}`);
+        //-------^^DONE^^-------//
       }
-    } else setFilter(`?courseRating=${event.target.value}`);
-    navigate(`${location.pathname}?courseRating=${event.target.value}`);
+    } else setFilter(urlFilterRating);
+    navigate(`${location.pathname}${urlFilterRating}`);
   };
 
   const clearAllFilters = () => {

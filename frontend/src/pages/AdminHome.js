@@ -186,42 +186,65 @@ const AdminHome = () => {
   };
   const handleChangeSubject = (event) => {
     setSubjectName(event.target.value);
-    const urlFilterSubject = `subject=${event.target.value}`;
-    if (location.search) {
-      if (searchParams.has("price[gte]") && searchParams.has("price[lte]")) {
-        console.log("Checker");
-        let here = new URL(window.location.href);
-        here.searchParams.append("subject", 4);
-      } else if (searchParams.get("subject")) {
-        searchParams.delete("subject");
-        setSearchParams(urlFilterSubject);
-        // navigate(`${location.search}&${urlFilterSubject}`);
-      }
-    } else setSearchParams(`?subject=${event.target.value}`);
-    // navigate(`${location.pathname}?${urlFilterSubject}`);
-  };
-  const handleChangeRating = (event) => {
-    // console.log(rating);
-    setRating(event.target.value);
-    const urlFilterRating = `courseRating=${event.target.value}`;
-    // if (location.search) {
-    //   navigate(`${location.search}&${urlFilterRating}`);
-    // } else navigate(`${location.pathname}?${urlFilterRating}`);
+    const urlFilterSubject = `?subject=${event.target.value}`;
+    const urlFilterAppendSubject = `&subject=${event.target.value}`;
+
     if (location.search) {
       if (
-        searchParams.has("price[gte]") ||
-        searchParams.has("price[lte]") ||
-        searchParams.has("subject")
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("courseRating")) &&
+        !filter.includes("subject")
       ) {
-        console.log("Checker Rating");
-        let here = new URL(window.location.href);
-        here.searchParams.append("subject", 4);
-      } else if (searchParams.has("courseRating")) {
-        searchParams.delete("courseRating");
-        setSearchParams(urlFilterRating);
-        // navigate(`${location.search}&${urlFilterRating}`);
+        console.log("Checker1");
+        setFilter(filter + urlFilterAppendSubject);
+        navigate(`${location.pathname}${filter}${urlFilterAppendSubject}`);
+        //-------^^DONE^^-------//
+      } else if (
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("courseRating")) &&
+        filter.includes("subject")
+      ) {
+        console.log("Checker2");
+        setFilter(urlFilterSubject);
+        navigate(`${location.pathname}${urlFilterSubject}`);
+        //-------^^DONE^^-------//
       }
-    } else setSearchParams(`?${urlFilterRating}`);
+    } else {
+      setFilter(urlFilterSubject);
+      navigate(`${location.pathname}${urlFilterSubject}`);
+    }
+  };
+  const handleChangeRating = (event) => {
+    setRating(event.target.value);
+    const urlFilterRating = `?courseRating=${event.target.value}`;
+    const urlFilterAppendRating = `&courseRating=${event.target.value}`;
+
+    if (location.search) {
+      if (
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("subject")) &&
+        !filter.includes("courseRating")
+      ) {
+        console.log("Checker1");
+        setFilter(filter + urlFilterAppendRating);
+        navigate(`${location.pathname}${filter}${urlFilterAppendRating}`);
+        //-------^^DONE^^-------//
+      } else if (
+        (filter.includes("price[gte]") ||
+          filter.includes("price[lte]") ||
+          filter.includes("subject")) &&
+        filter.includes("courseRating")
+      ) {
+        console.log("Checker2");
+        setFilter(urlFilterRating);
+        navigate(`${location.pathname}${urlFilterRating}`);
+        //-------^^DONE^^-------//
+      }
+    } else setFilter(urlFilterRating);
+    navigate(`${location.pathname}${urlFilterRating}`);
   };
 
   function disableDates() {

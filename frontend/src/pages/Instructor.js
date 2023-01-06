@@ -11,6 +11,7 @@ import axios from 'axios';
 // components
 import CourseDetails from "../components/CourseDetails";
 import Loader from "../components/Loader";
+import InstructorSearch, { instructorSearch } from "../components/InstructorSearch";
 
 const Instructor = () => {
   const [accepted, setAccepted] = useState([]);
@@ -76,7 +77,7 @@ const Instructor = () => {
         
           <h3>My Courses</h3>
           <IFilterBar />
-
+            {!loading && <InstructorSearch/>}
           {!loading &&
             courses &&
             courses.map((course) => (

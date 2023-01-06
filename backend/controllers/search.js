@@ -58,7 +58,7 @@ const instructorSearch = async(req,res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such Instructor'})
     }
-    
+   
     const crs = await course.find({instructor: id});
     let i =0;
     let temp = [];

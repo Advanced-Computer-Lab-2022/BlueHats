@@ -259,6 +259,10 @@ function App() {
               path="/rateinstructor/corporateTrainee"
               element={<CorporateTraineeRateInstructor/>}
             />
+             <Route
+              path="/rateinstructor/individualTrainee"
+              element={<IndTraineeRateInstructor/>}
+            />
 
             <Route
               path="/requestcourse"

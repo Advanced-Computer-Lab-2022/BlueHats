@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 // components
-import CourseFullView from "../components/CourseFullView"
+import CourseFullView from "../components/CourseFV2"
 
 function CourseView () {
   const [course,setCourse] = useState([]);

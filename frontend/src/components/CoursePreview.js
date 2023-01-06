@@ -149,7 +149,7 @@ const CoursePreview = ({course}) => {
           data:data,
           headers:{'Content-Type':'application/json'}
         })
-        window.location.href=`/MyEnrolledCourses`
+        // window.location.href=`/MyEnrolledCourses`
       }
 
 

@@ -27,7 +27,7 @@ const [courses, setCourses] = useState([]);
 var loggedinUser = JSON.parse(localStorage.getItem('user'));
 const savedID = loggedinUser.id
 useEffect(() => {
-const data = {userID: savedID};
+const data = {id: savedID};
 axios({
   method: "PUT",
   url: `/api/instructor/myCourses`,
