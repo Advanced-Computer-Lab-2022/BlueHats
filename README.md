@@ -261,7 +261,6 @@ const payWithWallet = async (req, res) => {
  
     const updatedTrainee = await indTrainee.findOneAndUpdate({_id: userID} , {courses: newCourses});
 }
-```
  
  
  
