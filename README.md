@@ -497,7 +497,7 @@ If the query is empty, this request will get all courses NOT FILTERED
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required**. ID of instructor to fetch |
-| `acceptedContract`      | `boolean` | **Required**. acceptedContract of instructor to fetch |
+| `acceptedContract`      | `boolean` | **Required**. AcceptedContract of instructor to fetch |
 
 #### Get Instructor Courses
  
@@ -509,6 +509,230 @@ If the query is empty, this request will get all courses NOT FILTERED
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required**. ID of instructor to fetch |
 
+#### SignUp User
+ 
+```http
+  POST  /api/user/signup
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `firstname`      | `string` | **Required**. FirstName of user to fetch |
+| `lastname`      | `string` | **Required**. LastName of user to fetch |
+| `username`      | `string` | **Required**. Username of user to fetch |
+| `email`      | `string` | **Required**. Email of user to fetch |
+| `password`      | `string` | **Required**. Password of user to fetch |
+| `confirmpassword`      | `string` | **Required**. ConfirmPassword of user to fetch |
+| `gender`      | `string` | **Required**. Gender of user to fetch |
+
+#### Login User
+ 
+```http
+  POST  /api/user/login
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `username`      | `string` | **Required**. Username of user to fetch |
+| `password`      | `string` | **Required**. Password of user to fetch |
+
+#### Logout User
+ 
+```http
+  GET  /api/user/logout
+```
+
+####  User forgot password
+ 
+```http
+  POST  /api/user/forgotPassword
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required**. Email of user to fetch |
+
+####  Update user password
+ 
+```http
+  PATCH  /api/user/changePassword
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required**. Email of user to fetch |
+| `password`      | `string` | **Required**. Password of user to fetch |
+| `confirmpassword`      | `string` | **Required**. ConfirmPassword of user to fetch |
+
+####  Update user password
+ 
+```http
+  PATCH  /api/user/resetPassword
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `email`      | `string` | **Required**. Email of user to fetch |
+| `password`      | `string` | **Required**. Password of user to fetch |
+| `confirmpassword`      | `string` | **Required**. ConfirmPassword of user to fetch |
+
+####  Get Admins
+ 
+```http
+  GET  /api/admin/
+```
+####  Get One Admin
+ 
+```http
+  GET  /api/admin/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of admin to fetch |
+
+####  Add Admin
+ 
+```http
+  POST  /api/admin/
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `firstname`      | `string` | **Required**. FirstName of admin to fetch |
+| `lastname`      | `string` | **Required**. LastName of admin to fetch |
+| `username`      | `string` | **Required**. Username of admin to fetch |
+| `email`      | `string` | **Required**. Email of admin to fetch |
+| `password`      | `string` | **Required**. Password of admin to fetch |
+| `gender`      | `string` | **Required**. Gender of admin to fetch |
+
+####  Delete Admin
+ 
+```http
+  DELETE  /api/admin/:id
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of admin to fetch |
+
+####   Admin Refund Course
+ 
+```http
+  PUT  /api/admin/refund
+```
+ 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `courseID`      | `string` | **Required**. ID of course to fetch |
+| `refundID`      | `string` | **Required**. ID of refund to fetch |
+| `indTraineeID`      | `string` | **Required**. ID of indTrainee to fetch |
+
+####   Get all Corproate Trainee Requested Courses
+ 
+```http
+  PUT  /api/requestCourse/
+```
+
+####    Delete Corproate Trainee Accepted Courses Requests
+ 
+```http
+  DELETE  /api/requestCourse/accept/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of admin to fetch |
+####    Delete Corproate Trainee Rejected Courses Requests
+ 
+```http
+  DELETE  /api/requestCourse/reject/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of course to fetch |
+
+####    Get a Course Review
+ 
+```http
+  GET  /api/reviews/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of review to fetch |
+
+####    Delete a Course Review
+ 
+```http
+  DELETE  /api/reviews/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of review to fetch |
+
+####    Get a Course Review
+ 
+```http
+  GET  /api/reviews/viewcReviews/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of course to fetch |
+
+####    Get an Instructor Review
+ 
+```http
+  PUT  /api/reviews/viewiReviews/
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of instructor to fetch |
+
+####    Get an Instructor Review
+ 
+```http
+  PUT  /api/reviews/viewiReviews/
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of instructor to fetch |
+
+####    View All Course Reviews
+ 
+```http
+  GET  /api/reviews/viewall/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of course to fetch |
+
+####    Get All Course Request Status
+ 
+```http
+  GET  /api/requeststatus/
+```
+ ####    Delete a Course Request Status
+ 
+```http
+  DELETE  /api/requeststatus/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of request to fetch |
+
+
+ ####    Update a Course Request Status
+ 
+```http
+  PATCH  /api/requeststatus/update/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of request status to fetch |
+
+ ####    Get All Course Request Status
+ 
+```http
+  GET  /api/requeststatus/viewrequests/:id
+```
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. ID of corporate trainee to fetch |
  
  
 ## Tests
@@ -594,6 +818,8 @@ Main contributors to the project:\
 MIT License
  
 Copyright (c) [2023] [AMELIO©️]
+
+Apatch 2.0 licence for Stripe.
  
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
