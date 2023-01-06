@@ -11,19 +11,19 @@ Amelio was built as an integrated set of interactive online services that provid
 
 
 ## Table of Content
- 1. Build Status
- 2. Code style 
- 3. Screenshots 
- 4. Tech/Framework used 
- 5. Extra Features 
- 6. Code examples
- 7. Installation 
- 8. API reference 
- 9. Tests
- 10. How to use 
- 11. Contribute 
- 12. Credits
-## 13. Licence 
+1. Build Status
+2. Code style 
+3. Screenshots 
+4. Tech/Framework used 
+5. Extra Features 
+6. Code examples
+7. Installation 
+8. API reference 
+9. Tests
+10. How to use 
+11. Contribute 
+12. Credits
+13. Licence 
 
 ## Build status
 
